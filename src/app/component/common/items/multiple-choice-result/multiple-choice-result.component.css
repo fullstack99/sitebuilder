@@ -1,0 +1,52 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+.columns {
+    display: flex;
+}
+
+.multi-choice-container{
+    padding: 5px;
+}
+
+.single-text-container{
+    position: relative;
+    margin: 5px;
+    word-wrap: break-word;
+    max-width: 130px;
+}
+
+.option{
+    width: 14px;
+    height: 14px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+}
+
+.result-label{
+    display: inline-block;
+    padding: 5px;
+    min-width: 100px;
+    min-height: 34px;
+    word-wrap: break-word;
+}
+.result-option{
+    margin: 5px;
+}
+
+drop-down{
+    height: 40px;
+    display: block;
+    font-size: 24px;
+}

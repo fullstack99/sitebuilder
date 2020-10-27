@@ -1,0 +1,28 @@
+<div class="account-box">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a class="btn-close" (click)="onClose($event)">x</a>
+        </div>
+        <div class="dialog-title-container">
+            <span class="dialog-title"><h3>Confirm Email</h3></span>
+        </div>
+    </div>
+
+    <div class="dialog-body margin-top-10">
+        <div>
+          <div style="font-size: 16px;">Check your inbox to verify your email</div>
+          <div style="font-size: 16px; padding: 15px;">We have sent an email to</div>
+          <div class="form-group" style="font-size: 16px;">{{email}}</div>
+          <div class="form-group text-center">
+            <a (click)="verifyEmail()">
+              <img src="assets/images/envelope.png" style="width: 100px;"/>
+            </a>
+          </div>
+        </div>
+        <div class="form-groupr" style="padding-top: 15px;">
+          Verification is good for 30 minutes
+        </div>
+    </div>
+</div>

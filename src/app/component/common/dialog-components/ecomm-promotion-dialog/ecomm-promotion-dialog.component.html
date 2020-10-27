@@ -1,0 +1,94 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">		
+        <span class="dialog-title"><h3>Promotion Setup</h3></span>
+        <div class="columns">        
+            <ul class="canvas-nav">
+                <li>
+                    <div class="btn-back" (click)="clickCanvasTool('Back')"></div>
+                </li>
+                <li  [class.active]="isValid" class="disalble-over">
+                    <a (click)="clickCanvasTool('Save')"
+                        [class.disable]="!isValid">
+                        <img src="/assets/images/canvas/save.png"/>
+                        <div class="caption">Save</div>
+                    </a>
+                </li>                
+            </ul>
+            <a style="font-size: 18px; padding: 15px 0px 0px 30px; text-decoration: none;" (click)="openChooseItems($event)">Choose Item</a>
+        </div>        
+    </div>
+</div>   
+<div class="dialog-body">
+    <loading *ngIf="loading" [text]="'Saving...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <form [formGroup]="form" class="center-block" style="margin-left: 10px;">        
+        <div class="form-group required" style="max-width: 250px">            
+            <label>                
+                Name of Promotion
+            </label>
+            <input type="text" class="form-control" 
+                [class.empty]="!form.controls.name" formControlName="name"/>
+        </div>
+        <div class="form-group required" style="max-width: 150px">            
+            <label>                
+                Promotion Code
+            </label>
+            <input type="text" class="form-control" 
+                [class.empty]="!form.controls.code" formControlName="code"/>
+        </div>
+        <div class="form-group columns required" style="margin-left: 50px">
+            <label style="padding-top: 5px; min-width: 40px;">From&nbsp;</label>
+            <div style="width: 120px;">
+                <datetime [dateOnly]="true" formControlName="startDate"></datetime>
+            </div>
+        </div>
+        <div class="form-group columns required" style="margin-left: 50px">
+            <label style="padding-top: 5px; min-width: 40px;">To</label>
+            <div style="width: 120px;">
+                <datetime [dateOnly]="true" formControlName="endDate"></datetime>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left: -10px">
+            <radio-group formControlName="discountType">
+                <ng-template radioGroupOption="FreeShipping">
+                    <div>
+                        <span>Free Shipping</span>
+                    </div>                   
+                </ng-template>
+                <ng-template radioGroupOption="Percentage">
+                    <div>
+                        <span>% OFF&nbsp;</span>
+                        <input type="text" class="amount" placeholder="%" formControlName="amount" (keydown)="eventHandler($event)"/>
+                        <span>&nbsp;with minimum purchase of&nbsp;</span> 
+                        <input type="text" class="amount" placeholder="Amount" formControlName="minimum" (keydown)="eventHandler($event)"/>
+                    </div>
+                </ng-template>
+                <ng-template radioGroupOption="FixedPrice">
+                    <div>
+                        <span>$ &nbsp;OFF&nbsp;</span>
+                        <input type="text" class="amount" placeholder="Amount" formControlName="amount1" (keydown)="eventHandler($event)"/>
+                        <span>&nbsp;with minimum purchase of&nbsp;</span>
+                        <input type="text" class="amount" placeholder="Amount" formControlName="minimum1" (keydown)="eventHandler($event)"/>
+                    </div>
+                </ng-template>
+            </radio-group>
+        </div>
+        <div style="margin-left: -10px">
+            <label>During Check Out</label>            
+        </div>
+        <div class="form-group">
+            <radio-group formControlName="requireCodeEntry">
+                <ng-template [radioGroupOption]="false">
+                    <span>Shopper automatically gets promotion</span>
+                </ng-template>
+                <ng-template [radioGroupOption]="true">
+                    <span>Shopper enters Code to get promotion</span>
+                </ng-template>
+            </radio-group>
+        </div>        
+    </form>
+</div>

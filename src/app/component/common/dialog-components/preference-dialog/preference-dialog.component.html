@@ -1,0 +1,31 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>        
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    
+</div>
+<div class="content" [formGroup]="form">
+    <div class="item">
+        <div class="form-group item-title">
+			Update Profile Preference
+		</div>
+		<div class="item-content">
+			<div class="form-group">
+				<input type="text" name="email" class="form-control" placeholder="Contact Email" formControlName="email"/>
+			</div>
+			<div class="form-group">
+				<input type="text" name="name" class="form-control" placeholder="Name" formControlName="name"/>
+			</div>
+		</div>
+    </div>
+    <div class="item">
+		<div class="form-group item-title">Keep me on these lists:</div>
+		<div class="form-group radio-group-container">
+			<checkbox *ngFor="let keepMe of keepMes.controls; let i=index" [formControl]="keepMe">{{namelist[i]}}</checkbox>		
+		</div>		
+    </div>
+</div>
+
+<div class="bottom text-center">
+    <input [disabled]="form.invalid" class="btn submit" (click)="onSubmit()" type="button" value="Update" />
+</div>

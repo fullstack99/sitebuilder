@@ -1,0 +1,64 @@
+<loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class = 'video_editor_container' id="_video_editor_container"></div>
+<div class="import-container" [class.disable]="_loading">     
+    <div class="dialog-header">    
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container rows">		
+            <span class="dialog-title"><h3>Import Video:</h3></span>
+            <span class="subtitle">.mp4 OR .mov</span>
+        </div>	
+    </div>
+    <div class="dialog-body">
+        <a class="btn-desktop" (click)="_importFile.nativeElement.click()">
+            Desktop
+            <input #importFile type="file" (change)="uploadFiles($event)">
+        </a>
+    
+        <input 
+            [formControl]="videoUrl"
+            type="text"
+            class="form-control url"
+            placeholder="Enter URL of video on the web"
+            [class.disable]="_loading"/>
+        <!-- <div class="ribbon columns">
+            <div class="btn-left btr bt-angle-left" (click)="_ribbonPrev.next()"></div>
+            <div class="ribbon-body columns">
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex].imageUrl)"
+                        (click)="selectRibon(_importSources[_ribbonItemIndex].name)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex].name}}
+                </div>
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex + 1].imageUrl)"
+                        (click)="selectRibon(_importSources[_ribbonItemIndex+1].name)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex + 1].name}}
+                </div>
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex + 2].imageUrl)"
+                        (click)="selectRibon(_importSources[_ribbonItemIndex + 2].name)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex + 2].name}}
+                </div>
+            </div>
+            <div class="btn-right btr bt-angle-right" (click)="_ribbonNext.next()"></div>
+        </div> -->
+        <div style="margin-top: 50px;">
+            <div style="font-size: 16px;">
+                iOS/Android Users:
+            </div>
+            <div style="margin: 10px;">
+                Get Glogood App to transfer images to your account.
+            </div>
+            
+        </div>
+    </div>    
+</div>

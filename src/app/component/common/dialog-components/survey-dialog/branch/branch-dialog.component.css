@@ -1,0 +1,22 @@
+:host {
+    box-sizing: border-box;
+    background: transparent;
+    font-size: 16px;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+.font-16{
+    font-size: 16px;
+}
+p {
+    margin: 5 0 10 0px;
+}

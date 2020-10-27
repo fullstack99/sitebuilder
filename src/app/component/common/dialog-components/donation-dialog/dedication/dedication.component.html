@@ -1,0 +1,41 @@
+<div [formGroup]="form" class="form-group">
+	<checkbox [formControl]="dedicationEnabled"></checkbox>
+    <div class="section-title">
+      	<legend class="text">Dedication</legend>
+		<tooltip class="help-btn" text='?' [code]="'f.ded.120'">
+			<content>				
+				<div>
+					You may want to allow your donors to dedicate their donation to an individual.
+				</div>
+				<div class="content2">
+					Also you may wait to send an email acknowledging that doation and dedication.
+				</div>
+			</content>
+		</tooltip>
+    </div>    
+
+    <div class="box-3" #box style="display: none;">
+		<div class="form-group">
+			<div class="dedication-type-container">
+				<div class="dedication-text" *ngFor='let t of types'>
+					<label class='c-input c-radio'>
+						<input type="radio" name="dedicationType" value="{{t.type}}">
+						<span class="c-indicator"></span>
+					</label>        
+					<span>{{t.disp}}</span>
+				</div>
+			</div>
+			<input type="text"				
+				class="form-control"
+				placeholder="Enter Name Here"
+				id="input-dedication"
+				spellcheck="true">
+
+			<div class="columns send-email text-xs-center">				
+				<checkbox formControlName="sendEmailAcknowledgment"></checkbox>
+				<span>Send Email Acknowledgment</span>
+			</div>
+			<p class="text-xs-center">Doner will provide email</p>
+		</div>
+    </div>  
+</div>

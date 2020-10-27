@@ -1,0 +1,72 @@
+<!-- <a (click)="onClose()" class="btn-close">×</a> -->
+<div class="dialog-header">
+	<a (click)="onClose()" class="btn-close">×</a>
+</div>
+<div class="flex-column">
+    <div class="flex-row">
+        <div class="flex-column">
+            <div class="flex-row">
+                <div class="border">
+                    <canvas #colorPicker
+                        class="color-picker"
+                        [style.width]="_colorPickerWidth"
+                        [style.height]="_colorPickerHeight"
+                        (mousedown)="_colorPickerMouseDown.next($event)"
+                        (mousemove)="_colorPickerMouseMove.next($event)"
+                        ></canvas>
+                </div>
+                <div class="border last">
+                    <canvas #huePicker
+                        class="hue-picker"
+                        [style.width]="_huePickerWidth + 'px'"
+                        [style.height]="_huePickerHeight + 'px'"
+                        (mousedown)="_huePickerMouseDown.next($event)"
+                        (mousemove)="_huePickerMouseMove.next($event)"
+                        ></canvas>
+                </div>
+            </div>
+            <div class="flex-column">
+                <div class="picked-color"
+                    [style.background-color]="'#' + form.colorValue.hex"
+                    ></div>
+                <a (click)="addCustomColor()">Add to My Custom Colors</a>
+            </div>
+        </div>
+        <div class="form flex-column" [formGroup]="form">
+            <label class="flex-row">R    <input type="text" formControlName="r"   maxlength="3"/></label>
+            <label class="flex-row">G    <input type="text" formControlName="g"   maxlength="3"/></label>
+            <label class="flex-row">B    <input type="text" formControlName="b"   maxlength="3"/></label>
+            <label class="flex-row">HEX #<input type="text" formControlName="hex" maxlength="6"/></label>
+        </div>
+        <div class="more-colors">
+            <div class="heading">Color Picker</div>
+            <div class="colors">
+                <button *ngFor="let c of _standardColors"
+					class="color-btn"
+					[class.active]="form.colorValue.hex === c"
+                    [style.background-color]="'#' + c"
+                    [title]="'#' + c"
+                    (click)="colorButtonClick(c)"
+                    ></button>
+            </div>
+            <div class="heading">
+                My Custom Colors
+				<span class="btn-clear"
+					[class.deactive]="!visibleDeleteColorButton"
+					(click)="deleteCustomColor()">X</span>
+            </div>
+            <div class="colors">
+                <button *ngFor="let c of _customColors"
+					class="color-btn"
+					[class.active]="form.colorValue.hex === c"
+                    [style.background-color]="'#' + c"
+                    [title]="'#' + c"
+                    (click)="colorButtonClick(c)"
+                    ></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom">
+    <button class="submit" (click)="chooseColor()">Choose Color</button>
+</div>

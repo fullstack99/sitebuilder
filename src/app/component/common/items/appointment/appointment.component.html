@@ -1,0 +1,153 @@
+<div class="content" #reviewContainer>
+    <div class="form-group text-center" style="font-size: 24px;">{{scheduleInfo.companyName}}</div>
+    <div class="form-group service-container text-center" *ngIf="scheduleInfo.locationType=='CustomerComesToUs' && locations.length > 0">
+        <div *ngIf="locations.length==1 && location" style="width: 212px; word-wrap: break-word; text-align: center; margin: auto; font-size: 14px;">            
+            {{showLocationValue(location)}}
+        </div>
+        <div *ngIf="locations.length>1">
+            <drop-down
+                [selected]="location"
+                [elements]="locations"
+                [showValueFunc]="showLocationValue"
+                [defaultData]="'Choose Location'"
+                (changeSelected)="onLocationsChange($event)">
+            </drop-down>            
+        </div>
+        <a style="position: absolute; left: calc(100% + 10px); top: calc(50% - 10px);" (click)="openGoogleMapsDialog()">Map</a>
+    </div>
+    <div class="form-group service-container text-center">
+        <div>
+            <drop-down
+                *ngIf="services.length>1"
+                [selected]="service"
+                [defaultData]="'Choose Service'"
+                [elements]="services"
+                [showValueFunc]="showServiceValue"
+                (changeSelected)="onServicesChange($event)">
+            </drop-down>
+            <span *ngIf="services.length==1">{{showServiceValue(service)}}</span>            
+        </div>
+    </div>
+    <div class="form-group" *ngIf="scheduleInfo.providerType != 'SingleProviderHidden'">        
+        <div class="providers-ctrl columns">
+            <span *ngIf="enableProviders() && providers.length>1"
+                class="btn-left btr bt-angle-left bt-3x"
+                [class.active]="!isProviderBeginning"
+                (click)="providerSwiper.swiper.slidePrev()"></span>
+            <div class="providers-container">
+                <div  class="swiper-container" [swiper]="swiperProviderConfig" (indexChange)="indexProviderChanged($event)" #providerSwiper>
+                    <div class="swiper-wrapper">
+                        <div *ngFor="let item of providers; let i = index" class="swiper-slide provider-item">                            
+                            <div *ngIf="item.photo && item.photo.name" class="provider-image"
+                                [style.backgroundImage]="backgroundImage(item)">
+                            </div>
+                            <div>
+                                {{item.name}}
+                            </div>
+                            <div class="provider-details" style="font-size: 14px;">
+                                {{item.details}}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <span *ngIf="enableProviders() && providers.length>1"
+                class="btn-right btr bt-angle-right bt-3x"
+                [class.active]="!isProviderEnd"
+                (click)="providerSwiper.swiper.slideNext()"></span>
+        </div>
+    </div>
+    <div class="form-group">        
+        <div class="months-ctrl columns">
+            <span class="btn-left btr bt-angle-left active"
+                [class.active]="!isMonthBeginning"
+                (mousedown)="onMonthPrev($event)"></span>
+            <div class="months-container">
+                {{dates[activeDateIndex] | date: 'MMMM y'}}
+            </div>
+            <span class="btn-right btr bt-angle-right active"                
+                (mousedown) = "onMonthNext($event)"></span>
+        </div>
+
+        <div class="dates-ctrl columns">
+            <span class="btn-left btr bt-angle-left bt-3x active"
+                [class.active]="!isDateBeginning"
+                (mousedown)="onDatePrev($event)"></span>
+            <div class="dates-container columns">
+                <div *ngFor="let item of dates; let i = index" class="date-item" #dateSlide>
+                    <div class="text-center"> {{item.getDate()}} </div>
+                    <div class="thumb" [class.active]="i==activeDateIndex" (click)="onDateClick($event, item, i)">
+                        <div>                                    
+                            {{days[i]}}
+                        </div>                            
+                        <div>
+                            <span *ngIf="startTimes[i] == null && endTimes[i] == null">Closed</span>                                    
+                            <span *ngIf="startTimes[i] == false || endTimes[i] == false">AM</span>
+                            <span *ngIf="startTimes[i] != endTimes[i]"> - </span>
+                            <span *ngIf="startTimes[i] == true|| endTimes[i] == true">PM</span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <span class="btn-right btr bt-angle-right bt-3x active"                
+                (mousedown) = "onDateNext($event)"></span>
+        </div>
+    </div>
+    <div *ngIf="serviceTimes[activeDateIndex] && serviceTimes[activeDateIndex].length > 0" class="form-group">
+        <div class="form-group text-center">
+            <a>Choose Time</a>
+        </div>
+        <div class="choose-time-container">
+            <app-choose-time [inputTimes]="serviceTimes[activeDateIndex]" [scheduleType]="scheduleInfo.scheduleType" [scheduleTimes]="scheduleInfo.scheduleTimes" (outputTime)="onSelectTime($event)">                
+            </app-choose-time>            
+        </div>
+    </div>
+    <div *ngIf="serviceTimes[activeDateIndex] && serviceTimes[activeDateIndex].length > 0" class="form-group contact-container" [formGroup]="form">
+        <div class="form-group text-center">
+            <a>Contact Information</a> &nbsp;
+            <a>Sign In</a>
+        </div>
+        <div class="form-group contact-text">
+            <split-text-box                
+                formControlName="name"
+                label="Name"
+                [error]="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)"></split-text-box>
+        </div>
+        <div class="form-group contact-text">            
+            <split-text-box
+                formControlName="email"
+                label="Email for confirmation"
+                [error]="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"></split-text-box>
+        </div>
+        <div class="form-group contact-text">            
+            <split-text-box
+                formControlName="phone"
+                label="Phone"
+                [error]="form.controls.phone.invalid && (form.controls.phone.dirty || form.controls.phone.touched)"></split-text-box>
+        </div>
+        <div class="form-group contact-text">            
+            <split-text-box
+                formControlName="notes"
+                label="Note"></split-text-box>
+        </div>
+        <div *ngIf="form.valid" class="form-group text-center">
+            <div>
+                Appointment for:
+            </div>
+            <div>
+                {{showServiceValue(service)}}
+            </div>
+            <div>
+                {{form.value['startTime'] | date: 'fullDate'}}
+            </div>
+        </div>
+        <div class="form-group submit center-block">
+            <input
+                type="button"
+                value="Schdule"
+                [disabled]="form.invalid"
+                (mousedown)="onSubmit($event)"
+                class="btn btn-block btn-main center-block">
+        </div>
+    </div>
+</div>

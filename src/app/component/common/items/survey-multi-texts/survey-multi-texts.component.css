@@ -1,0 +1,42 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.option-container{
+    position: relative;
+    padding-left: 20px;
+}
+
+.text-container {
+    position: relative;
+    width: 130px;
+}
+
+.input-text-label {
+  width: 280px;
+  min-width: 280px;
+  margin: 5px 5px 5px 15px;
+}
+
+input[type="text"] {
+    margin: auto 5px auto auto;
+    padding: 0px;
+    width: 120px;
+    background-color: white;
+}
+    .remove{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 100;
+    }
+
+    .btn-more{
+        margin-left: 20px;
+    }

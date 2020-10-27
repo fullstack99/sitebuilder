@@ -1,0 +1,46 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;    
+    padding: 5px 20px 5px 5px;
+    font-size: 14px;
+    border: 1px solid #ffa500;
+    border-radius: 5px;
+    background: white;
+}
+.dialog-header{
+    height: 10px;
+    margin-right: -40px;
+}
+
+.reply-container{
+    width: 100%;
+}
+
+    .item{
+        margin-bottom: 5px;
+    }
+
+    .item span{
+        padding: 5px;    
+    }
+
+    .limit{
+        width: 80px;
+    }
+
+    button{
+        background:     #FFA500;
+        border-color:   #FFA500;
+        color: white;
+        width: 100px;
+        margin: auto;        
+    }
+
+    button:hover{
+        background:     #FFA500;
+        border-color:   #FFA500;
+        color: white;
+    }

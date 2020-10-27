@@ -1,0 +1,324 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+
+	<div class="dialog-title-container columns margin-top-10">
+		<span class="dialog-title"><h3 (click)="viewSelectShape()"> CHOOSE SHAPE &nbsp; &nbsp; <span class="btr bt-angle-down dropdown-caret"></span> </h3></span>
+	</div>
+</div>
+
+<div class="canvas-container" [formGroup]="shapeInfoForm">
+	<div class="canvas" (mousedown)="onCanvasMouseDown($event)">
+		<div class="select-shape" [hidden]="!_selectShape">
+			<div class="rows">
+				<div class="shape-name">Lines</div>
+
+				<div #line class="shape line" (mousedown)="selectShape('line')">
+				</div>
+				<div #line_r class="shape line" (mousedown)="selectShape('line_r')">
+				</div>
+				<div #line_lr class="shape line" (mousedown)="selectShape('line_lr')">
+				</div>
+			</div>
+
+			<div class="rows">
+				<div class="shape-name">Square, Rectangle, Oval</div>
+				<div class="shape-list columns">
+					<div #rect class="shape rect"
+						(mousedown)="selectShape('rect')">
+					</div>
+
+					<div #rect_round class="shape rect"
+						(mousedown)="selectShape('rect_round')">
+
+					</div>
+					<div #rect_quatre class="shape rect"
+						(mousedown)="selectShape('rect_quatre')">
+					</div>
+
+					<div #rect_oval class="shape rect"
+						(mousedown)="selectShape('rect_oval')">
+					</div>
+
+					<div #rect_round_lr class="shape rect"
+						(mousedown)="selectShape('rect_round_lr')">
+					</div>
+				</div>
+			</div>
+
+			<div class="rows">
+				<div class="shapeName">Block Arrows</div>
+				<div class="shape-list columns">
+					<div #arrow_r class="shape arrow"
+						(mousedown)="selectShape('arrow_r')">
+					</div>
+
+					<div #arrow_l class="shape arrow"
+						(mousedown)="selectShape('arrow_l')">
+					</div>
+
+					<div #arrow_u class="shape arrow"
+						(mousedown)="selectShape('arrow_u')">
+					</div>
+
+					<div #arrow_d class="shape arrow"
+						(mousedown)="selectShape('arrow_d')">
+					</div>
+
+					<div #arrow_lr class="shape arrow"
+						(mousedown)="selectShape('arrow_lr')">
+					</div>
+
+					<div #arrow_ud class="shape arrow"
+						(mousedown)="selectShape('arrow_ud')">
+					</div>
+				</div>
+			</div>
+
+			<div class="rows">
+
+				<div class="shapeName">Stars & Banners</div>
+
+				<div class="shape-list columns star-banner">
+					<div #star_explosion class="shape"
+						(mousedown)="selectShape('star_explosion')">
+					</div>
+
+					<div #star_8 class="shape"
+						(mousedown)="selectShape('star_8')">
+					</div>
+
+					<div #banner class="shape"
+						(mousedown)="selectShape('banner')">
+					</div>
+
+					<div #banner_flag class="shape"
+						(mousedown)="selectShape('banner_flag')">
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="rows">
+				<div class="shapeName">Callouts</div>
+				<div class="shape-list columns callout">
+					<div #callout_round_rect class="shape"
+						(mousedown)="selectShape('callout_round_rect')">
+					</div>
+
+					<div #callout_ellipse class="shape"
+						(mousedown)="selectShape('callout_ellipse')">
+					</div>
+
+					<div #callout_cloud class="shape"
+						(mousedown)="selectShape('callout_cloud')">
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="result" [hidden]="_selectShape">
+			<div #resultContainer
+				class="result-shape-container"
+				[hidden]="current_shape==''">
+
+				<svg id="shape-effect" width="0" height="0">
+					<defs>
+						<filter id="shape-filter" x="0" y="0">
+							<feGaussianBlur in="SourceGraphic" stdDeviation="0" />
+						</filter>
+					</defs>
+				</svg>
+
+				<div class="clone-shape" #cloneShape></div>
+
+				<div class="result-shape" #resultShape
+					(mouseenter)="onHoverShape($event)"
+					(mouseleave)="onLeaveShape($event)">
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="rows choose-line-style" *ngIf="isLine()">
+
+			<div class="choose-text"> Choose Line Style </div>
+
+			<radio-group [displayInline]="false" formControlName ="lineStyle">
+
+				<ng-template radioGroupOption="">
+					<div class="line-style">
+						<svg width="100%" height="100%" viewBox="0 0 300 20" preserveAspectRatio="none">
+							<line x1="0" y1="10" x2="300" y2="10"/>
+						</svg>
+					</div>
+				</ng-template>
+
+				<ng-template radioGroupOption="10,10">
+					<div class="line-style dash">
+						<svg width="100%" height="100%" viewBox="0 0 300 20" preserveAspectRatio="none">
+							<line x1="0" y1="10" x2="300" y2="10"/>
+						</svg>
+					</div>
+				</ng-template>
+
+				<ng-template radioGroupOption="5,5">
+					<div class="line-style dot">
+						<svg width="100%" height="100%" viewBox="0 0 300 20" preserveAspectRatio="none">
+							<line x1="0" y1="10" x2="300" y2="10"/>
+						</svg>
+					</div>
+				</ng-template>
+
+			</radio-group>
+
+		</div>
+
+		<div class="columns new-color" [hidden]="current_shape==''">
+
+			<div class="rows" *ngIf="!isLine()">
+
+				<radio-group [displayInline]="false" [formControl] ="whichColor">
+
+					<ng-template radioGroupOption="1">
+
+						<div class="columns colors">
+
+							<div class="text">Color</div>
+							<div class="color-box" [style.background-color]="shapeInfoForm.value.color"></div>
+							<a class="btn-close" (click)="clearColor(1)" [hidden]="whichColor.value != 1">×</a>
+
+						</div>
+
+					</ng-template>
+
+					<ng-template radioGroupOption="2">
+
+						<div class="columns colors">
+
+							<div class="text">Hover</div>
+							<div class="color-box" [style.background-color]="shapeInfoForm.value.hoverColor"></div>
+							<a class="btn-close" (click)="clearColor(2)" [hidden]="whichColor.value != 2">×</a>
+
+						</div>
+
+					</ng-template>
+
+					<ng-template radioGroupOption="3">
+
+						<div class="columns colors">
+							<div class="text">Border</div>
+							<div class="color-box" [style.background-color]="shapeInfoForm.value.borderColor"></div>
+							<a class="btn-close" (click)="clearColor(3)" [hidden]="whichColor.value != 3">×</a>
+						</div>
+
+					</ng-template>
+
+				</radio-group>
+
+			</div>
+
+			<div class="color-picker rows">
+
+				<div>
+					<span>Color Picker</span>
+					<span class="text more">
+						<a (click)="openColorPicker()">More</a>
+					</span>
+				</div>
+				<div class="colorPalette" #colorPalette></div>
+
+			</div>
+
+		</div>
+
+		<div class="adjusts" [hidden]="current_shape==''">
+
+			<div class="rows">
+
+				<div class="columns shape-adjust" *ngIf="isLine() || isRectangle()">
+
+					<div class="text">Thickness</div>
+					<slider formControlName="thickness" [min]="_rangeThickness[0]" [max]="_rangeThickness[1]"></slider>
+					<input type="text"
+						readonly="true"
+						value="{{getInt(shapeInfoForm.value.thickness)}}">
+
+				</div>
+
+				<div class="columns shape-adjust" *ngIf="isShape() || isRectangle()">
+
+					<div class="text">Glow</div>
+					<slider formControlName="glow" [min]="_rangeGlow[0]" [max]="_rangeGlow[1]"></slider>
+					<input type="text" readonly="true" value="{{getInt(shapeInfoForm.value.glow)}}">
+
+				</div>
+
+					<div class="columns shape-adjust" *ngIf="isShape()">
+					<div class="text">Border</div>
+					<slider formControlName="border" [min]="_rangeBorder[0]" [max]="_rangeBorder[1]"></slider>
+					<input type="text" readonly="true" value="{{getInt(shapeInfoForm.value.border)}}">
+
+				</div>
+
+				<div class="columns shape-adjust" *ngIf="!isLine()">
+
+					<div class="text">Shadow</div>
+					<slider formControlName="shadow" [min]="_rangeShadow[0]" [max]="_rangeShadow[1]"></slider>
+					<input type="text" readonly="true" value="{{getInt(shapeInfoForm.value.shadow)}}">
+
+				</div>
+
+				<div class="columns shape-adjust" *ngIf="isRectangle()">
+
+					<div class="text">Curve</div>
+					<slider formControlName="curve" [min]="_rangeCurve[0]" [max]="_rangeCurve[1]"></slider>
+					<input type="text" readonly="true" value="{{getInt(shapeInfoForm.value.curve)}}">
+
+				</div>
+
+			</div>
+
+			<div class="columns corner" *ngIf="isRectangle()">
+
+				<div class="choose-text"> Corners, click to add </div>
+
+				<div class="corner-body">
+					<div>
+						<checkbox formControlName="lTop" class='check-l-top'></checkbox>
+						<checkbox formControlName="rTop" class='check-r-top'></checkbox>
+					</div>
+
+					<div class="choose-corner"></div>
+
+					<div>
+						<checkbox formControlName="lBottom" class='check-l-bottom'></checkbox>
+						<checkbox formControlName="rBottom" class='check-r-bottom'></checkbox>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="form-group submit" [class.deactive]="_selectShape && current_shape==''">
+			<input
+				type="submit"
+				value="ADD"
+				(click)="onAdd()"
+				[class.active]="current_shape!=''"
+				[disabled]="current_shape==''"
+				class="btn btn-block btn-main center-block"/>
+		</div>
+
+	</div>
+
+</div>

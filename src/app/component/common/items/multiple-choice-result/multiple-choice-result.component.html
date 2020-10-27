@@ -1,0 +1,36 @@
+<div
+    *ngIf="info.type!='dropdown'"
+    class="multi-choice-container">
+	<div
+        #choiceLabel
+		class="result-label"
+        [innerHTML]="getHTML(info.label)">
+	</div>
+	<div class="rows" *ngIf="info.type!='dropdown'">
+        <div class="columns"
+            *ngFor="let value of info.values">
+            <div class="option" *ngIf="info.type=='check'">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox"/>
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div class="option" *ngIf="info.type=='option'">
+                <label class="c-input c-radio">
+                    <input type="radio" name="aaa">
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div
+                class="result-label result-option"
+                [innerHTML]="getHTML(value)">
+             </div>
+        </div>
+    </div>
+</div>
+<drop-down
+    *ngIf="info.type=='dropdown'"
+    [selected]="_selected"
+    [elements]="_values">
+</drop-down>
+

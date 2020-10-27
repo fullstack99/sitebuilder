@@ -1,0 +1,51 @@
+<loading *ngIf="loading" [text]="'Loading...'"></loading>
+
+<app-sub-menubar [tabs]="wsDetails" (selectedTab)="gotoTab($event)">
+</app-sub-menubar>    
+<div class="calendar-container">
+    <div class="calendar-control-bar columns">
+        <div class="drop-down-container">
+            <drop-down
+                [selected]="activeLocation"
+                [elements]="scheduleInfo.locations"
+                [showValueFunc]="showLocationValue"
+                [defaultData]="'Choose Location'"
+                (changeSelected)="onLocationsChange($event)">
+            </drop-down>
+        </div>
+        <div class="drop-down-container">
+            <drop-down
+                [selected]="activeProvider"
+                [elements]="scheduleInfo.providers"
+                [showValueFunc]="showProviderValue"
+                [defaultData]="'Choose Provider'"
+                (changeSelected)="onProvidersChange($event)">
+            </drop-down>
+        </div>
+        <div class="search-bar">
+            <span class="btr bt-search"></span>
+            <input class="search-box form-control" placeholder="Search by Customer"/>
+        </div>
+        
+    </div>        
+    <div class="calendar-content" *ngIf="!loading">
+        <jqxScheduler #scheduler
+            [date]="date"
+            [width]="'100%'"
+            [height]="contentHeight"
+            [contextMenu]="false"                
+            [source]="dataAdapter"
+            [showLegend]="false"
+            [view]="activeViewType"
+            [appointmentDataFields]="appointmentDataFields"
+            [resources]="resources"
+            [views]="views"           
+            [editDialog]="false"
+            (onDateChange)="onDateChange($event)"
+            (onViewChange)="onViewChange($event)"
+            (onAppointmentDoubleClick)="onAppointmentDoubleClick($event)"
+            (onCellClick)="onCellClick($event)"
+            (onCellDoubleClick)="onCellDoubleClick($event)">
+        </jqxScheduler>           
+    </div>        
+</div>  

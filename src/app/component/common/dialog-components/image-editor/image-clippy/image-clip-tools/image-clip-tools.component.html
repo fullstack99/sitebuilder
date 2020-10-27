@@ -1,0 +1,86 @@
+<nav class="navbar">
+    <div class="container-fluid canvas-toolbar">
+        <div class="tool-persist">
+            <ul class="canvas-nav">
+                <li>
+                    <div class="btn-back"
+                        (click)="onClickTool('Back')"></div>
+                </li>
+                <li [class.active]="canActiveTool('PlaceOnPage')">
+                    <a
+                        (click)="onClickTool('PlaceOnPage')">
+                        <div class="place">Place on Page</div>
+                    </a>
+                </li>
+                <li>
+                    <div class="rows outside">
+                        <div class="outside-title text-center">Show Outside Clip</div>
+                        <div class="columns">
+                            <div class="outside-radio columns">
+                                <label class="c-input c-radio">
+                                    <input type="radio"
+                                        name="outsideClip"
+                                        [formControl]="_outsideClip"
+                                        value="0">
+                                    <span class="c-indicator"></span>
+                                </label>
+                                <span class="radio-caption">
+                                    No
+                                </span>
+                            </div>
+                            <div class="outside-radio columns">
+                                <label class="c-input c-radio">
+                                    <input type="radio"
+                                        name="outsideClip"
+                                        [formControl]="_outsideClip"
+                                        value="0.25">
+                                    <span class="c-indicator"></span>
+                                </label>
+                                <span class="radio-caption">
+                                    Yes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tool-container">
+            <span class="btr bt-angle-left bt-2x"
+                    [class.active]="!isBeginning"
+                    (click)="usefulSwiper.swiper.slidePrev()"></span>
+            <div class="tools">
+                <div  class="swiper-container" [swiper]="swiperConfig" #usefulSwiper>
+                    <div class="swiper-wrapper">
+                        <div *ngFor="let tool of _tools" class="swiper-slide">
+                            <div class="tool" [class.active]="canActiveTool(tool.clipPath.name)">
+                                <a  (click)="onSetClipPath(tool.clipPath)">
+                                    <div class="shape"
+                                        [style.clip-path]="getClipPath(tool.clipPath)">
+                                        <div *ngIf="tool.clipPath.type == 'svg'"
+                                            class="clipboard-path">
+                                            <svg viewbox="0 0 20 20" width="20" height="20" preserveAspectRatio='xMinYMin'>
+                                                <defs>
+                                                    <clipPath id="svgPathTool">
+                                                        <path
+                                                            [attr.d] = "getSVGPath(tool.clipPath)"/>
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        {{ tool.name }}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="btr bt-angle-right bt-2x"
+                [class.active]="!isEnd"
+                (click) = "usefulSwiper.swiper.slideNext()"></span>
+        </div>
+    </div>
+</nav>

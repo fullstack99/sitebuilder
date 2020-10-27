@@ -1,0 +1,173 @@
+<!-- <div #textTool class="text-tool"
+	[hidden]="!selected"
+    (click)="$event.stopPropagation()">
+    <textarea id="text-tool"
+        text-tool
+        [text-tool-target]="'text-tool'"
+        [text-tool-type]="2"
+        [text-tool-width]="215"
+        [text-tool-showLink]="false"
+        [text-tool-input]="_fontStyle"
+        [text-tool-input-link]="_link"
+        (text-tool-output)="setFontStyle($event)"
+        (text-tool-output-Link)="setNavLink($event)"
+        >ABC</textarea>
+</div> -->
+
+<div class="multi-choice-container"
+    #multiChoiceContainer
+    (mousedown)="onContainerClick($event)">
+    <div
+        #choiceLabel
+        class="single-text-button"
+        (mousedown)="setActive($event, -1)">
+        <div
+            class="text-editor"
+            #textEditorElem
+            text-editor-tinymce
+            [text-editor-enabled]="editing && editEnable(-1)"
+            [text-editor-toolbar-width]="250"
+            [text-editor-hide-links]="false"
+            [text-editor-host]="_choiceLabel.nativeElement"
+            [text-editor-toolbar-type]="2"
+            [text-editor-fontsize-type] = "1"
+            (text-editor-input)="onEditorInput($event)"
+            (text-editor-input-text)="onEditorInput($event)"></div>
+        <div *ngIf="isEmpty(-1)"
+            class="placeholder">
+            Click to add Text
+		</div>
+		<span class="btr bt-angle-down btn-caret"></span>
+	</div>
+
+	<div class="drop-body"
+		[hidden]="!selected"
+		draggableList
+		(draggableList-newIndexes)="_linkIndexChange.next($event)">
+		<div #optionContainer
+			class="rows option-container">
+			<div class="single-text-container columns"
+				*ngFor="let value of info.values; let i=index"
+				draggableListItem
+				[draggableListItem-animate]="false"
+				(draggableListItem-dragStart)="_linkDragStart.next(i)"
+				(draggableListItem-dragEnd)="_linkDragEnd.next(i)"
+				(draggableListItem-drag)="_linkDrag.next([i, $event])">
+				<div
+					#textLabel
+					class="single-text-label"
+					(mousedown)="setActive($event, i)">
+					<div
+						class="text-editor"
+						#subTextEditorElem
+						text-editor-tinymce
+						[text-editor-enabled]="editing && editEnable(i)"
+						[text-editor-toolbar-width]="250"
+						[text-editor-hide-links]="false"
+						[text-editor-host]="_multiChoiceContainer.nativeElement"
+						[text-editor-toolbar-type]="2"
+						[text-editor-fontsize-type] = "1"
+						(text-editor-input)="onEditorInput($event,i)"
+						(text-editor-input-text)="onEditorInput($event,i)"
+						></div>
+					<div *ngIf="isEmpty(i)"
+						class="placeholder">
+						Click to add Text
+					</div>
+				</div>
+				<div
+					class="grip"
+					draggableListItemGrip
+					(mousedown)="$event.stopPropagation()"></div>
+				<div *ngIf="i>1" class="remove" (mousedown)="onRemove(i,$event)">x</div>
+			</div>
+		</div>
+		<div>
+			<a class="btn-more"
+				(mousedown)="onAdd($event)"
+			>MORE</a>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="multi-choice-container"
+    #multiChoiceContainer
+    (mousedown)="onContainerClick($event)">
+    <div
+        #choiceLabel
+        class="single-text-button"
+        (mousedown)="setActive($event, -1)">
+        <div
+            class="text-editor"
+            #textEditorElem
+            text-editor-tinymce
+            [text-editor-enabled]="editing && editEnable(-1)"
+            [text-editor-toolbar-width]="250"
+            [text-editor-hide-links]="false"
+            [text-editor-host]="_choiceLabel.nativeElement"
+            [text-editor-toolbar-type]="2"
+            [text-editor-fontsize-type] = "1"
+            (text-editor-input)="onEditorInput($event)"
+            (text-editor-input-text)="onEditorInput($event)"></div>
+        <div *ngIf="isEmpty(-1)"
+            class="placeholder">
+            Click to add Text
+		</div>
+		<span class="btr bt-angle-down btn-caret"></span>
+	</div>
+
+	<div class="drop-body"
+		[class.disable]="!selected"
+		draggableList
+		(draggableList-newIndexes)="_linkIndexChange.next($event)">
+		<div #optionContainer
+			class="rows option-container">
+			<div class="single-text-container columns"
+				*ngFor="let value of info.values; let i=index"
+				draggableListItem
+				[draggableListItem-animate]="false"
+				(draggableListItem-dragStart)="_linkDragStart.next(i)"
+				(draggableListItem-dragEnd)="_linkDragEnd.next(i)"
+				(draggableListItem-drag)="_linkDrag.next([i, $event])">
+				<div
+					#textLabel
+					class="single-text-label"
+					(mousedown)="setActive($event, i)">
+					<div
+						class="text-editor"
+						#subTextEditorElem
+						text-editor-tinymce
+						[text-editor-enabled]="editing && editEnable(i)"
+						[text-editor-toolbar-width]="250"
+						[text-editor-hide-links]="false"
+						[text-editor-host]="_multiChoiceContainer.nativeElement"
+						[text-editor-toolbar-type]="2"
+						[text-editor-fontsize-type] = "1"
+						(text-editor-input)="onEditorInput($event,i)"
+						(text-editor-input-text)="onEditorInput($event,i)"
+						></div>
+					<div *ngIf="isEmpty(i)"
+						class="placeholder">
+						Click to add Text
+					</div>
+				</div>
+				<div
+					class="grip"
+					draggableListItemGrip
+					(mousedown)="$event.stopPropagation()"></div>
+				<div *ngIf="i>1" class="remove" (mousedown)="onRemove(i,$event)">x</div>
+			</div>
+		</div>
+		<div>
+			<a class="btn-more"
+				(mousedown)="onAdd($event)"
+			>MORE</a>
+		</div>
+	</div>
+</div> -->
+
+<!-- <drop-down
+    [selected]="_selected"
+	[elements]="_values"
+	[editable]="true">
+</drop-down> -->

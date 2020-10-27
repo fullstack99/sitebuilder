@@ -1,0 +1,11 @@
+<div>
+    <app-register-form
+        [info]="info"
+        [isNew]="isNew"
+        [isFreelancer]="true"
+        [errorMessage]="errorMessage"
+        (validityChange)="validityChange.emit($event)"
+        (submitted)="onSubmit($event)"
+    >
+    </app-register-form>
+</div>

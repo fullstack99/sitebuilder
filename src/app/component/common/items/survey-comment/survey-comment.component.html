@@ -1,0 +1,49 @@
+<div *ngIf="editable"
+	[class.animation]="animation">
+	<div
+		#questionTitle
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="question-title content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+		(contenteditableModelChange) = "setItemResize()"
+		>
+	</div>
+	<div
+		#resizableContainer
+		class="resizable-container"
+    [class.editing]="editing"
+
+		resizable
+		[resizable-enabled]="true"
+		[resizable-showResizeBox]="editing"
+		[resizable-keepInParent]="false"
+		[resizable-minWidth] ="50"
+		[resizable-minHeight]="40"
+    [resizable-snapEnabled]="false"
+		[disp-measure]="true"
+		(resizable-resize)="onItemResize($event)"
+		(resizable-resizeEnd)="onItemResizeEnd($event)"
+		>
+	</div>
+</div>
+
+<div *ngIf="!editable"
+	[class.animation]="animation">
+	<div
+		#questionTitle
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label">
+	</div>
+	<textarea
+		#resultText
+    class="result-text form-control"
+    [(ngModel)]="info.value">
+	</textarea>
+</div>
+<div #cloneTitle
+	class="clone-title result wrap">
+</div>

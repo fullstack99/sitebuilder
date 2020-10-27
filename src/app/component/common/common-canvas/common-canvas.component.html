@@ -1,0 +1,180 @@
+<ruler-overlay
+    [show]="_showRulers"
+    [canvasBox]="_canvasBox"
+    [canvasScrollElem]="canvasScrollElem"
+    [canvasScrollTop]="_canvasScrollTop"
+    [clearGuidesCommand]="_clearGuidesCommand"
+    (guidesChange)="_guidesChange.next($event)"
+    ></ruler-overlay>
+<loading [hidden]="!loading"></loading>
+<div *ngIf="!loading" class="header-view" [style.width]="canvasScrollElem.clientWidth + 'px'">
+</div>
+<div *ngIf="!loading" class="footer-view" [style.width]="canvasScrollElem.clientWidth + 'px'" [style.top]="footerViewHeight">
+</div>
+<div #canvasScroll
+    class="canvas-scroll"
+    [class.disable-black]="loading"
+    (scroll)="_canvasScrollScroll.next($event)"
+    >
+    <div #canvas
+        id="common_canvas"
+        class="canvas"
+        background
+        [backgroundInfo]="backgroundInfo"
+        [containerWidth]="width"
+        [zIndex]="0"
+
+        [style.background-image]="_gridImage ? 'url(' + _gridImage + ')' : 'none'"
+        (mousedown)="onCanvasMouseDown($event)"
+        (mouseup)="_canvasMouseUp.next($event)"
+        (click)="onCanvasClick($event)"
+        [context-menu]="contextMenu()"
+        [context-menu-enabled]="!editingItem && editable"
+        [context-more-menu]="_contextMore"
+        [context-menu-left-enabled]="contextLEnable"
+        [context-menu-pageX]="contextLPageX"
+        [context-menu-pageY]="contextLPageY"
+        [extraTop]="extraTop"
+        [extraLeft]="extraLeft"
+        (context-menu-command)="contextMenuCommand($event)"
+        (context-menu-disappear)="contextMenuDisappear()"
+        (context-menu-shown)="contextMenuShown($event)"
+
+        (dragover)="onDragOver($event)"
+        (dragenter)="onDragEnter($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        >
+        <element-selector *ngIf="editable" (selectionEnd)="_selectionEnd.next($event)"></element-selector>
+        <ng-template [ngIf]="!editable">
+            <div *ngFor="let item of resultItems; let i=index">
+                <item
+                    (mousedown)="onItemMouseDown(item, $event)"
+                    (click)="onItemClick(item, $event)"
+
+                    [item]="item"
+                    [box]="item.content.box"
+                    [maxWidth]="maxWidth"
+                    [containerWidth]="width"
+                    [editable]="false"
+                    [readOnly]="readOnly"
+                    [editing]="editingItem === item && !item.locked"
+                    [selected]="currentState.selectedItems.indexOf(item) >= 0 && !item.locked"
+                    [items]="items"
+                    [animation]="animation"
+                    (itemChange)="_itemChange.next([item, $event])"
+                    (itemRemove)="onItemRemove(item)"
+                    (itemResize)="onItemResize(item, $event)"
+                    (contextLEnable)="onContextLEnable(item, $event)"
+                    (outLink)="onOutLink($event)"
+
+                    draggable
+                    [draggable-enabled]="draggable(item)"
+                    [draggable-keepInParent]="{
+                      top: true,
+                      bottom: false,
+                      left: true,
+                      right: true
+                    }"
+                    [draggable-scrollContainer]="canvasScroll"
+                    [draggable-snapEnabled]="true"
+                    [draggable-targetClass]="'glogood-grip item-grip'"
+                    (draggable-dragStart) = "onItemDragStart(item, $event)"
+                    (draggable-drag)="onItemDrag(item, $event)"
+                    (draggable-dragEnd)="_dragEnd.next([item, $event])"
+
+                    rotatable
+                    [rotatable-enabled]="selectedItem === item && editingItem !== item && rotatable(item.itemType) && !item.locked"
+                    [rotatable-showRotateBox]="selectedItem === item && editingItem !== item && rotatable(item.itemType) && !item.locked"
+                    [rotatable-degree]="getRotation(item)"
+                    (rotatable-rotate)="onItemRotate(item,$event)"
+                    (rotatable-rotateEnd)="_rotateEnd.next([item,$event])"
+
+                    resizable
+                    [resizable-enabled]="resizable(item)"
+                    [resizable-showResizeBox]="resizable(item)"
+                    [resizable-keepInParent]="true"
+                    [top]="resizable(item,true)"
+                    [bottom]="resizable(item,true)"
+                    [top-left]="resizable(item,true)"
+                    [top-right]="resizable(item,true)"
+                    [bottom-left]="resizable(item,true)"
+                    [bottom-rigtht]="resizable(item,true)"
+                    [resizable-minWidth] ="30"
+                    [resizable-minHeight]="20"
+                    [resizable-snapEnabled]="true"
+                    (resizable-resize)="onItemResize(item, $event)"
+                    (resizable-resizeEnd)="_resizeEnd.next([item, $event])"
+                    ></item>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="editable">
+            <item
+                *ngFor="let item of resultItems; let i=index"
+
+                (mousedown)="onItemMouseDown(item, $event)"
+                (click)="onItemClick(item, $event)"
+
+                [item]="item"
+                [box]="item.content.box"
+                [maxWidth]="maxWidth"
+                [containerWidth]="width"
+                [editable]="true"
+                [readOnly]="readOnly"
+                [editing]="editingItem === item && !item.locked"
+                [selected]="currentState.selectedItems.indexOf(item) >= 0 && !item.locked"
+                [items]="resultItems"
+                [animation]="animation"
+                [zoomable] = "zoomable"
+                (itemChange)="_itemChange.next([item, $event])"
+                (itemRemove)="onItemRemove(item)"
+                (itemResize)="onItemResize(item, $event)"
+                (contextLEnable)="onContextLEnable(item, $event)"
+                (itemFileDrop)="onFileDrop(item,$event)"
+                (fileDrop)="dropped($event)"
+                (outLink)="onOutLink($event)"
+
+                draggable
+                [draggable-enabled]="draggable(item)"
+                [draggable-keepInParent]="true"
+                [draggable-scrollContainer]="canvasScroll"
+                [draggable-snapEnabled]="true"
+                (draggable-dragStart) = "onItemDragStart(item, $event)"
+                (draggable-drag)="onItemDrag(item, $event)"
+                (draggable-dragEnd)="_dragEnd.next([item, $event])"
+
+                rotatable
+                [rotatable-enabled]="selectedItem === item && editingItem !== item && rotatable(item.itemType) && !item.locked"
+                [rotatable-showRotateBox]="selectedItem === item && editingItem !== item && rotatable(item.itemType) && !item.locked"
+                [rotatable-degree]="getRotation(item)"
+                (rotatable-rotate)="onItemRotate(item,$event)"
+                (rotatable-rotateEnd)="_rotateEnd.next([item,$event])"
+
+                resizable
+                [resizable-enabled]="resizable(item)"
+                [resizable-showResizeBox]="resizable(item)"
+                [resizable-keepInParent]="true"
+                [top]="resizable(item,true)"
+                [bottom]="resizable(item,true)"
+                [top-left]="resizable(item,true)"
+                [top-right]="resizable(item,true)"
+                [bottom-left]="resizable(item,true)"
+                [bottom-rigtht]="resizable(item,true)"
+                [resizable-minWidth] ="30"
+                [resizable-minHeight]="20"
+                [resizable-snapEnabled]="true"
+                (resizable-resize)="onItemResize(item, $event)"
+                (resizable-resizeEnd)="_resizeEnd.next([item, $event])"
+                ></item>
+        </ng-template>
+        <div *ngIf="resultItems.length == 0"
+            class="placeholder text-center">
+            <div *ngFor="let place of placeholder; let i=index">
+                {{place}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [draggable-targetClass]="'glogood-grip item-grip'" -->

@@ -1,0 +1,41 @@
+<div *ngIf="editable"
+    class="text-item text-editor editable"
+    [class.editing]="editing"
+
+    #textEditorElem
+    text-editor-tinymce
+    [text-editor-enabled]="editing"
+    [text-editor-host]="_elementRef.nativeElement"
+    [text-editor-item]="item"
+    [text-editor-toolbar-width]="400"
+    (text-editor-destroyed)="onEditorDestroyed($event)"
+	(text-editor-input-command)="onEditorInputCommand($event)"
+    (text-editor-input-text)="onEditorInput($event)"
+    (text-editor-has-link)="hasLink.emit($event)"
+    ></div>
+<div *ngIf="!editable"
+    class="text-item text-editor"
+    #textEditorElem>
+</div>
+<div class="text-item text-editor"
+    [ngStyle]="{
+      'word-break': 'break-all',
+      'position': 'absolute',
+      'top': '0px',
+      'left': '0px',
+      'width': '100%',
+      'z-index': '-100'
+    }"
+    style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: -100;"
+    #cloneTextElem>
+</div>
+<div class="placeholder"
+    *ngIf = "isEmpty() && !editing"
+	[class.bluePanel]="!item.content.backInfo.value || item.content.backInfo.value.backgroundColor.startColor==''"
+    border
+    [borderInfo]="item.content.borderInfo.value"
+    [defaultWidth]="true"
+    >
+    <div>Click to Add Text</div>
+    <img src="/assets/images/canvas/text-white.png"/>
+</div>

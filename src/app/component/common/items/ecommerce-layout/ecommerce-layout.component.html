@@ -1,0 +1,30 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>Choose a Layout Style</h3></span>
+    </div>
+</div>
+<div class="ecommerce-layout">
+    <div class="styles">
+        <div #usefulSwiper (mouseover)="usefulSwiper.swiper.update()" [swiper]="config" class="swiper-container" (indexChange)="onIndexChange($event)">
+            <div class="swiper-wrapper">
+                <div *ngFor="let item of styles; let i = index; let last = last" class="swiper-slide">
+                    <div class="service-item">
+                        <div *ngIf="!last" >Catalog Layout #{{i+1}}</div>
+                        <div *ngIf="last" >Single Item</div>
+                        <div class="service-thumb" (click)="onSubmit(i)"
+                            [style.backgroundImage]="backgroundImage(item)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next btr bt-angle-right bt-4x" [class.active]="!isEnd" (click) = "usefulSwiper.swiper.slideNext()"></div>
+            <div class="swiper-button-prev btr bt-angle-left bt-4x" [class.active]="!isBeginning" (click) = "usefulSwiper.swiper.slidePrev()"></div>
+        </div>
+    </div>
+</div>

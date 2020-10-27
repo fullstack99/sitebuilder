@@ -1,0 +1,28 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.resizable-container{
+    position: absolute;
+    border: 1px solid #8c8c8c;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-top: 10px;
+    min-height: 34px;
+}
+
+.resizable-container >>> .resize-box {
+  z-index: 99;
+}
+
+.result-text{
+    margin-top: 10px;
+    min-height: 34px;
+    width: calc(100% - 5px);
+}

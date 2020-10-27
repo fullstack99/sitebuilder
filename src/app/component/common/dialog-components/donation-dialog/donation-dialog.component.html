@@ -1,0 +1,113 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <span class="dialog-title"><h3>Fundraiser Setup</h3></span>
+        <div class="columns">
+            <div class="btn-back" (click)="onClose($event)"></div>
+            <div #placeButton class="place rows" [class.active]="form.valid" [class.disable-black]="!form.valid" (click)="onSubmit($event)">
+                <span>Place</span>
+                <span>on Page</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dialog-body">
+    <form [formGroup]="form" class="center-block">
+        <div class="form-group">
+            <label class="required">Name of Fundraiser Campaign</label>
+            <input #fundraisingName type="text" class="form-control fund-raising-name"
+                [class.empty]="!form.controls.name" formControlName="name"/>
+        </div>
+        <div class="form-group columns">
+            <label class="required date-for">From</label>
+            <div>
+                <datetime [dateOnly]="true" formControlName="startDate"></datetime>
+            </div>
+        </div>
+        <div class="form-group columns">
+            <label class="required date-for">To</label>
+            <div>
+                <datetime [dateOnly]="true" formControlName="endDate"></datetime>
+            </div>
+        </div>
+        <div class="form-group m-b-0"><label class="m-b-0 required">Choose Fundraiser Campaign Features</label></div>
+
+        <div class="form-group">
+            <label class="c-input c-radio">
+                <input
+                    formControlName="fundraisingLevelsEnabled"
+                    name="fundraisingLevelsEnabled"
+                    type="radio"
+                    [value]="true">
+                <span class="c-indicator"></span>
+            </label>
+            <div class="section-title">
+                <legend class="text "> Donation Level </legend>
+            </div>
+            <div class="box-3">
+                <donation-level
+                    *ngFor="let level of form.controls.fundraisingLevels.controls; let i=index; let last = last"
+                    [form]="level"
+                    [optionalFundraisingAmountEnabled] = "form.controls.optionalFundraisingAmountEnabled"
+                    [num]="i"
+                    [last]="last"
+                    >
+                </donation-level>
+            </div>
+        </div>
+
+        <div class='form-group'>
+            <label class="c-input c-radio">
+                <input
+                    formControlName="fundraisingLevelsEnabled"
+                    name="fundraisingLevelsEnabled"
+                    type="radio"
+                    [value]="false">
+                <span class="c-indicator"></span>
+            </label>
+            <div class="section-title">
+                <legend class="text "> I want to Donate </legend>
+            </div>
+            <div class="box-3">
+                <div class="form-group">
+                    <div class='alone'>
+                        <label class='dollar'>$</label>
+                        <input
+                            type="text"
+                            class="form-control form-control-amount"
+                            placeholder="Amount"
+                            (blur)="valueChange($event)"
+                            (keypress)="eventHandler($event)"
+                            currencyFormatter>
+                        <span>Donor enters amount.</span>
+                    </div>
+                    <p class="text-center">$5 minimum</p>
+                </div>
+            </div>
+        </div>
+        <fundraising-designation
+            [programDesignationsEnabled] = "form.controls.programDesignationsEnabled"
+            [programDesignations]="form.controls.programDesignations">
+        </fundraising-designation>
+        <fundraising-dedication
+            [dedicationEnabled] = "form.controls.dedicationEnabled"
+            [form]="form.controls.dedication">
+        </fundraising-dedication>
+        <fundraising-contact-info
+            [contactInfoEnabled]="form.controls.contactInfoEnabled"
+            [form]="form.controls.contactInfo">
+        </fundraising-contact-info>
+        <fundraising-donation-frequency
+            [fundraisingFrequencyEnabled]="form.controls.fundraisingFrequencyEnabled"
+            [fundraisingFrequencyType]="form.controls.fundraisingFrequencyType">
+        </fundraising-donation-frequency>
+        <fundraising-message-display
+            [thankYouBoxEnabled]="form.controls.thankYouBoxEnabled"
+            [form]="form.controls.thankYouBox"
+        ></fundraising-message-display>
+    </form>
+</div>

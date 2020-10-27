@@ -1,0 +1,17 @@
+<div [formGroup]="form" class="form-group">
+    <checkbox [formControl]="contactInfoEnabled"></checkbox>  
+  	<div class="section-title">
+  	  <legend class="text"> Contact Information </legend>
+  	</div>  	    
+  	<div class="box-3" #box style="display: none;">
+        <div class="contact-fields-container">
+            <a (click)="showWindow()">ADD OR EDIT INFORMATION</a>
+            <ul class="list-unstyled center-block">
+                <li *ngFor="let field of fields"
+                    [class.required]="field.isRequired">
+                    {{field.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

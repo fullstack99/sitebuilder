@@ -1,0 +1,91 @@
+h4 {
+    text-align: center;
+    font-size: 25px;
+}
+
+.small-title {
+    text-align: center;
+}
+
+.item-category {
+    width: 100px;
+}
+
+.content {
+    display: block;
+}
+    .section-title {
+        font-size: 18px;
+        color: #4c4c4c;
+    }
+
+    .check-out {
+        float: left;
+        width: 40%;
+        margin-right: 10%;
+    }
+        .shipping-address {
+            margin: 20px;
+        }
+            .shipping-address-detail {
+                display: grid;
+                margin-left: 20%;
+            }
+
+        .credit-card {
+            margin: 20px;
+        }
+            .credit-card-detail {
+                display: grid;
+                margin-left: 20%;
+            }
+                .card-info {
+
+                }
+                .card-line-1 {
+                    padding: 10px;
+                    margin-top: 10px;
+                }
+                    .card-line-1 > span {
+                        font-size: 20px;
+                        vertical-align: middle;
+                        font-style: italic;
+                    }
+                .card-line-2 {
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                }
+                    .card-line-2>a {
+                        margin-right: 10px;
+                    }
+
+                .card-code {
+                    width: 200px;
+                }
+        .review-items {
+            margin: 20px;
+        }
+
+        .review-item {
+            font-size: 15px !important;
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .item-title {
+            width: 127px;
+            height: 21px;
+            font-size: 15px;
+            overflow: hidden;
+            word-wrap: break-word;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+
+        .review-item > span {
+            margin-left: 5px;
+        }

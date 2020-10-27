@@ -1,0 +1,149 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+h4 {
+    margin: 0px;
+}
+
+.font-picker-container{
+    padding: 0px 35px;
+}
+
+.font-list-box {
+    flex-grow: 1;
+}
+    .font-list-box h4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        font-size: 19px;
+        margin-top: 50px;
+    }
+
+.my-fonts {
+    width: 220px;
+}
+    .my-fonts h4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        font-size: 19px;
+        margin-top: 50px;
+    }
+    .my-fonts .tip {
+        height: 34px;
+        margin: 40px 0;
+        align-items: center;
+    }
+    .my-fonts .my-fonts-list {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .my-fonts .font {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        padding: 0px 10px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+        .my-fonts .font > span {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .my-fonts .font .btn-remove {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: 10px;
+            color: #888;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .my-fonts .font .btn-remove:hover {
+            color: red;
+        }
+
+.font-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 321px;
+    height: 343px;
+}
+    .font-list .font {
+        display: flex;        
+        align-items: center;
+        height: 50px;
+        padding: 0px 0px 0px 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .font-list .font:hover {
+        background-color: #ffa500;
+    }
+
+.font-list-options {
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 34px;
+    margin: 40px 0;
+    align-items: center;
+    justify-content: space-around;
+}
+    .font-list-options .show-ctrl,
+    .font-list-options .sort-by-ctrl {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+        .font-list-options .show-ctrl > select,
+        .font-list-options .sort-by-ctrl > select {
+            width: 125px;
+            display: inline-block;
+            font-weight: normal;
+        }
+    .font-list-options .search-ctrl {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 124px;
+    }
+    .font-list-options select {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 124px;
+    }
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 28px 0px 21px 0px;
+}
+    .bottom .submit {
+        width: 200px;
+        height: 37px;
+        padding: 8px 20px;
+        font-size: 120%;
+        color: white;
+        background: #ffa500;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .bottom .submit:disabled {
+        background: #d8d6d3;
+    }

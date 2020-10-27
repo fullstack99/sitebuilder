@@ -1,0 +1,60 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <div class="dialog-title">
+			<h3>{{newEdit ? 'Event Setup' : 'Event Edit'}}</h3>
+		</div>
+        <div class="columns">
+            <div class="btn-back" (click)="onClose($event)"></div>
+            <div #placeButton class="place rows" [class.active]="isValid" [class.disable]="!isValid" (click)="onSubmit($event)">
+                <span>Place</span>
+                <span>on Page</span>
+            </div>
+		</div>
+		<div class="columns" style="margin-left: -5px; margin-right: -5px;">
+			<div class="progress-container columns">
+				<div *ngFor="let step of steps; let i=index" class="progress-item">
+					<span class="progress-item-name" [class.active]="step.valid" [class.visited]="step.visited" (click)="onStepChange(i)">{{step.name}}</span>
+					<span *ngIf="i < steps.length-1"
+						class="btr bt-angle-right" [class.active]="step.valid"></span>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="row dialog-body">
+	<loading *ngIf="loading" [text]="'Uploading...'"></loading>
+    <div class="content col-xs-12" [ngSwitch]="activeStepIndex">
+        <ng-template [ngSwitchCase]="0">
+            <event-info
+                [eventInfo]="eventInfo"
+                (eventInfoChange)="onEventInfoChange($event)"
+                (validityChange)="onStepValidityChange($event,0)"
+                [touchedBefore]="steps[0].touched && steps[0].visited"
+                (touchedChange)="onEventInfoTouched($event)"
+                ></event-info>
+        </ng-template>
+        <ng-template [ngSwitchCase]="1">
+            <event-activities
+                [eventActivities]="eventActivities"
+                (eventActivitiesChange)="onEventActivitiesChange($event)"
+                ></event-activities>
+        </ng-template>
+        <ng-template [ngSwitchCase]="2">
+            <event-contact-info
+                [eventContactInfo]="eventContactInfo"
+                (eventContactInfoChange)="onEventContactInfoChange($event)"
+                ></event-contact-info>
+        </ng-template>
+        <ng-template [ngSwitchCase]="3">
+			<event-feedback
+				[eventFeedback]="eventFeedback"
+				(eventFeedbackChange)="onEventFeedbackChange($event)"></event-feedback>
+		</ng-template>
+    </div>
+</div>

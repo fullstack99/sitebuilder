@@ -1,0 +1,23 @@
+:host {
+    box-sizing: border-box;
+	background: transparent;
+	font-size: 18px;
+}
+
+:host >>> *:not(a) {
+    color: #464646;
+}
+
+:host *{
+    box-sizing: border-box;
+}
+
+
+div {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	text-decoration: none;
+}

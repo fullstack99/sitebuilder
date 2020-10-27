@@ -1,0 +1,48 @@
+:host {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.smart-guide {
+    position: absolute;
+    border-width: 0;
+    border-left-width: 2px;
+    border-top-width: 2px;
+    border-style: solid;
+    border-color: #ff1493;
+    display: block;
+    z-index: 50;
+}
+.left, .right, .top, .bottom {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    color: #ff1493;
+    font-size: 12px;
+    opacity: 0.6;
+    z-index: 1000;
+}
+.left, .right {
+    height: 100%;
+    flex-direction: column;
+}
+.top, .bottom {
+    width: 100%;    
+}
+.left {
+    left: 7px;
+}
+.right {
+    right: 7px;
+}
+.top {
+    top: 7px;
+}
+.bottom {
+    bottom: 7px;
+}

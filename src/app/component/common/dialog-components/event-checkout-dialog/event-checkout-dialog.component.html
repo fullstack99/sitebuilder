@@ -1,0 +1,32 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <a (click)="onClose($event)" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container">
+		<div class="header-line columns">
+			<div>
+				<a (click)="goToBack($event)"> Back to</a>
+				&nbsp;&nbsp;&nbsp;
+				...
+				&nbsp;&nbsp;&nbsp;
+				<span> Home/ </span>
+				<a *ngIf="step == 'Checkout'" (click)="onChangeStep('AddToCart')">Cart</a>
+			</div>
+
+			<div *ngIf="step == 'AddToCart'">
+				<a (click)="onEditEvent($event)">Edit Event</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="dialog-body">
+	<event-add-to-cart *ngIf="step == 'AddToCart'"
+		[eventSetupInfo]="eventSetupInfo"
+		(goCheckout)="onChangeStep('Checkout')">
+	</event-add-to-cart>
+	<event-checkout *ngIf="step == 'Checkout'"
+		[eventSetupInfo]="eventSetupInfo"
+		>
+	</event-checkout>
+</div>

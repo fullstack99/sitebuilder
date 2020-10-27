@@ -1,0 +1,32 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+}
+
+.content{    
+    font-size: 16px;
+}
+    .item-title{
+        font-size: 20px;
+    }
+
+    .radio-group-container{
+        margin-left: 20px;
+    }
+
+    .chars-right{
+        text-align: right;
+        font-size: 12px;
+    }
+
+    .bottom .submit {
+        background: #ffa500;
+        color: white;
+        width: 150px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+    }
+        .bottom .submit:disabled{
+            background: #8c8c8c;
+        }

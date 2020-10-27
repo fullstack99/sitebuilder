@@ -1,0 +1,20 @@
+<div *ngIf="itemContent.info.value"    
+    class="result-button rows"
+    [class.selected]="selected"
+    #resultButtonContainer
+    [style.background-color]="itemContent.info.value.backColor"
+    [style.border-color]="itemContent.info.value.borderColor"
+    [style.border-style]="'solid'"
+    [style.border-width]="itemContent.info.value.border + 'px'"
+    [style.border-radius]="itemContent.info.value.corner + 'px'"
+    [style.box-shadow]="getShadow()"
+    (mouseenter)="onHoverButton($event)"
+    (mouseleave)="onLeaveButton($event)"
+    (click)="onClick()">
+    <div class="text-center result-text" #resultButton></div>
+</div>
+<div *ngIf="!itemContent.info.hasValue()"
+    class="placeholder"
+    >
+    <div>Click to Add Button</div>
+</div>

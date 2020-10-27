@@ -1,0 +1,133 @@
+<div *ngIf="editable"
+    #multiChoiceContainer
+    class="multi-choice-container"
+    [class.animation]="animation"
+    (mousedown)="onContainerMousedown($event)"
+    (click)="onContainerClick($event)"
+    >
+    <div *ngIf="editable"
+      #questionTitle
+      contenteditable
+      spellcheck="true"
+      contenteditableModel
+      class="question-title content-editable label-border wrap"
+      [(contenteditableModel)] = "info.label"
+      (contenteditableModelChange) = "setItemResize()">
+    </div>
+
+    <drop-down
+        *ngIf="info.type=='dropdown'"
+        [defaultData]="'Choose'"
+        [elements]="info.texts">
+    </drop-down>
+    <div #optionContainer
+        *ngIf="info.type!='dropdown' || editable"
+        class="rows option-container"
+        [class.option-dropdown]="info.type=='dropdown'"
+        >
+        <div class="editable columns"
+            style="position: relative"
+            *ngFor="let item of info.texts; let i=index"
+            >
+            <div class="option" *ngIf="info.type=='check'">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox"/>
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div class="option" *ngIf="info.type=='option'">
+                <label class="c-input c-radio">
+                    <input type="radio" name="option" [checked]="item.value">
+                    <span class="c-indicator" (click)="onSetOption(i)"></span>
+                </label>
+            </div>
+
+            <div
+              #textLabel
+              contenteditable
+              spellcheck="true"
+              class="single-text-container single-text-label content-editable label-border wrap"
+              [class.other]="item.type=='other'"
+              [contenteditableModel]="item.text"
+              [forceChange]="forceChange"
+              (contenteditableModelChange)= "onChangeTextLabel(i, $event)">
+            </div>
+
+            <div *ngIf="branches.length > 1 && info.type=='option'" [ngStyle]="{'position': 'relative', 'top': '10px', 'right': '-50px', 'z-index': '100'}">
+              <a (mousedown)="onMousedownLink($event)" (click)="onClickLink($event, item)" [ngStyle]="{'color': (item.link ? 'orange' : '#337ab7')}" >Link</a>
+            </div>
+
+            <div *ngIf="info.type!='dropdown'"
+                class="grip grip-vertical"
+
+                (mousedown)="$event.stopPropagation()"></div>
+            <div *ngIf="i>1" class="remove" (mousedown)="onRemove(i,$event)">x</div>
+        </div>
+    </div>
+    <div class="btn-more">
+        <a (mousedown)="onAdd($event)">MORE</a>
+        <a (mousedown)="onAdd($event, 'other')">OTHER</a>
+    </div>
+</div>
+
+<div *ngIf="!editable"
+    #multiChoiceContainer
+    class="multi-choice-container"
+    [class.animation]="animation">
+    <div
+		#questionTitle
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label">
+	</div>
+    <drop-down
+        *ngIf="info.type=='dropdown'"
+        [defaultData]="'Choose'"
+        [elements]="info.texts">
+    </drop-down>
+    <div #optionContainer
+        *ngIf="info.type!='dropdown'"
+        class="option-container rows"
+        [class.option-dropdown]="info.type=='dropdown'">
+        <div class="columns"
+            *ngFor="let item of info.texts; let i=index">
+            <div  *ngIf="info.type=='check'"
+                class="option">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox"/>
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div *ngIf="info.type=='option'"
+                class="option">
+                <label class="c-input c-radio">
+                    <input type="radio" name="option" [checked]="item.value">
+                    <span class="c-indicator" (click)="onSetOption(i)"></span>
+                </label>
+            </div>
+            <div
+                *ngIf="item.type=='other'"
+                #textLabel
+                contenteditable
+                spellcheck="true"
+                class="single-text-container single-text-label content-editable label-border wrap"
+                [class.other]="true"
+                [contenteditableModel]="item.text"
+                [forceChange]="forceChange"
+                (contenteditableModelChange)= "onChangeTextLabel(i, $event)">
+            </div>
+            <div
+                *ngIf="item.type!='other'"
+                #textLabel
+                spellcheck="true"
+                contenteditableModel
+                class="single-text-label result wrap"
+                [contenteditableModel]="item.text">
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="editable" #cloneTitle
+	class="clone-title result wrap">
+</div>

@@ -1,0 +1,47 @@
+:host {
+	box-sizing: border-box;    
+	height: 100%;    
+	background: transparent;
+}
+
+:host *{
+	user-select: none;
+}
+
+loading{
+    position: absolute;
+	top: 50px;
+	left: 50px;
+}
+
+.dialog-content{
+	position: relative;
+	margin-top: 15px;	
+	height: 280px;
+}
+
+.items-content{
+	height: 230px;
+	margin-bottom: 15px;
+	padding: 0 15px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.item-row{
+	line-height: 2;	
+}
+	.item-title,
+	.item-value{
+		margin-right: 5px;
+		text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+	}	
+	.item-value{
+		width: 210px;
+		max-width: 210px;				
+	}
+	.close {
+		padding-top: 3px;
+	}

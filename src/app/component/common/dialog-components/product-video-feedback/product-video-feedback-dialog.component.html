@@ -1,0 +1,20 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+        <a (mousedown)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>Product Video Feedback</h3></span>
+    </div>
+</div>
+<div class="dialog-content">
+    <common-canvas
+      [page]="_page"
+      [width]="850"
+      [minHeight]="300"
+      [height]="500"
+      [editable]="false"
+      >
+  </common-canvas>
+</div>

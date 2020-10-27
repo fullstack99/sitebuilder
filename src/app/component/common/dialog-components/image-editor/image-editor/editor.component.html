@@ -1,0 +1,69 @@
+<loading [hidden]="!_loading" [text]="'Saving...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class="action-buttons">
+  <div id="_back" class="button back" (click)="onClose()"><img src="/assets/images/canvas/back.png"/></div>
+  <button class="glogood-save-button"
+	style="width: 60px;"
+  	(click)="onSave()">
+    Place on Page
+  </button>
+</div>
+
+<div class="resize-button" [class.active]="enableResize" (click)="onClickResizeTool()">
+  <img src="/assets/images/resize.svg" title="Resize">
+</div>
+
+<div class="opacity-button" [class.active]="enableOpacity" (click)="onClickOpacityTool()">
+  <img src="/assets/images/opacity.svg" title="Opacity">
+</div>
+
+<div *ngIf="enableResize || enableOpacity" class="wh-container">
+  <div *ngIf="enableResize">
+    <span>W:&nbsp;&nbsp;</span>
+    <input type="number" name="width" min="5" [ngModel]="newWidth" (ngModelChange)="onChangeWidth($event)"/>
+    &nbsp;px
+    <span class="h-label">H:&nbsp;&nbsp;</span>
+    <input type="number" name="height" min="5" [ngModel]="newHeight" (ngModelChange)="onChangeHeight($event)"/>
+    &nbsp;px
+  </div>
+
+  <div *ngIf="enableOpacity" style="display: flex">
+    <div style="margin-right: 15px;">Opacity</div>
+    <slider
+      [formControl]="opacityControl"
+      [min]="0" [max]="100">
+    </slider>
+    <div style="margin-left: 15px; width: 28px; overflow: hidden;">
+      {{opacityControl.value}}
+    </div>
+  </div>
+
+  <div style="display: flex; margin-top: 20px">
+    <div style="display: flex; align-items: center; margin-right: 20px">
+      <svg class="svg_ic-menu" style="width: 22px; height: 22px;">
+        <use xlink:href="/assets/styles/svg/icon-d.svg#icon-d-ic-apply" class="normal"></use>
+        <use xlink:href="/assets/styles/svg/icon-b.svg#icon-b-ic-apply" class="active"></use>
+      </svg>
+      <span class="apply-button" style="margin-left: 5px; font-size: 12px; cursor: pointer;" (click)="onApply()">Apply</span>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <svg class="svg_ic-menu" style="width: 22px; height: 22px;">
+          <use xlink:href="/assets/styles/svg/icon-d.svg#icon-d-ic-cancel" class="normal"></use>
+          <use xlink:href="/assets/styles/svg/icon-b.svg#icon-b-ic-cancel" class="active"></use>
+      </svg>
+      <span class="cancel-button" style="margin-left: 5px; font-size: 12px; cursor: pointer;" (click)="onCancel()">Cancel</span>
+    </div>
+  </div>
+</div>
+
+<div #editorContainer id="tui-image-editor"></div>
+<!-- <div class="resize-container">
+  <div #resizeEle
+    class="resize-ele"
+    enableResize
+    [enableResize-enabled]="true"
+    [enableResize-showResizeBox]="true"
+    [enableResize-snapEnabled]="true"
+    (enableResize-resize)="onImageResize($event)"
+    >
+  </div>
+</div> -->

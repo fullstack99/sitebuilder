@@ -1,0 +1,156 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>Add a Slideshow</h3></span>
+    </div>
+</div>
+
+<div class="current-slide rows">
+    <div class="image-result-controls">
+        <div class="left">
+            <a (click)="openImageImportDialog()">IMPORT</a>
+        </div>
+        <div style="font-size: 12px">
+            <a  [class.active]="isActive('Link')"
+                (click)="openLinkingDialog($event)">LINK</a>
+        </div>
+        <div class="right">
+            <a (click)="openImageEditorDialog()">EDIT</a>
+            <a class="remove" (click)="_clearSlide.next()">X</a>
+        </div>
+    </div>
+    <div #result class="result slide"
+        [style.backgroundImage]="backgroundImage(_slides[_activeSlideIndex].image)"
+        (click)="openImageImportDialog()"
+        (dragover)="onDragOver($event)"
+        (dragenter)="onDragEnter($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        >
+        <loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+        <span *ngIf="!_loading && !_slides[_activeSlideIndex].image">Click to Add Image</span>
+        <span *ngIf="!_loading && !_slides[_activeSlideIndex].image">or Drag and Drop Here</span>
+    </div>
+</div>
+
+<div style="margin-bottom: 15px;">
+  <div class="title">Controls</div>
+</div>
+
+<div class="thumbnails-row columns">
+    <div class="option">
+        <label class='c-input c-radio'>
+            <input type="radio" name="{{headerfooter}}slideControl"
+                [formControl]="_guideType" value="thumbnails">
+            <span class="c-indicator"></span>
+        </label>
+    </div>
+    <div class="thumbnails-ctrl columns">
+        <span class="btn-left btr bt-angle-left"
+                [class.active]="!isBeginning"
+                (click)="onPrev()"></span>
+        <div class="thumbnails">
+            <div class="swiper-container" [swiper]="swiperConfig" (indexChange)="indexChanged($event)" #usefulSwiper>
+                <div class="swiper-wrapper" #swiperWrapper>
+                    <div *ngFor="let item of _slides; let i = index" class="swiper-slide">
+                        <div class="thumb"
+                            [style.backgroundImage]="backgroundImage(item.image)"
+                            [class.active]="_activeSlideIndex == i"
+                            (click)="onGoto(i)"
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="thumbnails-cover"></div>
+            </div>
+            <div class="columns thumbnails-change"
+                #thumbnails
+                draggableListInline
+                (draggableList-newIndexes)="_slideIndexChange.next($event)"
+                >
+                <div *ngFor="let thumnIndex of _thumbIndexes; let i = index; let last = last"
+                    class="thumb"
+                    [class.last]="last"
+                    [style.backgroundImage]="backgroundImage(_slides[_activeIndex + i].image)"
+                    draggableListItemInline
+                    (draggableListItem-dragStart)="_thumbDragStart.next(i)"
+                    (draggableListItem-dragEnd)="_thumbDragEnd.next(i)"
+                    (draggableListItem-drag)="_thumbDrag.next([i, $event])"
+                    >
+                    <div class="grip"
+                        draggableListItemGripInline
+                        (mousedown)="onGripDown($event)"
+                        ></div>
+                </div>
+            </div>
+        </div>
+        <span class="btn-right btr bt-angle-right"
+            [class.active] = "!isEnd"
+            (click) = "onNext()"></span>
+    </div>
+</div>
+
+<div class="slide-show-control rows">
+    <div class="rows">
+        <div class="dots-container columns">
+            <div class="option">
+                <label class='c-input c-radio'>
+                    <input type="radio" name="{{headerfooter}}slideControl"
+                        [formControl]="_guideType" value="dots">
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div class="dots-row columns">
+                <div *ngFor="let slide of _slides, let i = index"
+                    class="dot"
+                    [class.active]="i === _activeSlideIndex"
+                    (click)="_gotoSlide.next(i)"></div>
+            </div>
+        </div>
+        <div class="none columns">
+            <div class="option">
+                <label class='c-input c-radio'>
+                    <input type="radio" name="{{headerfooter}}slideControl"
+                        [formControl]="_guideType" value="">
+                    <span class="c-indicator"></span>
+                </label>
+            </div>
+            <div class="none-text">NONE</div>
+        </div>
+    </div>
+</div>
+<div class="speed columns">
+    <div class="title">Speed</div>
+    <slider leftLabel="STOP" rightLabel="FAST" [formControl]="_animationSpeed">
+    </slider>
+    <div>({{speed}})</div>
+</div>
+<div class="form-group animation columns">
+    <div class="title">Animation</div>
+    <div class="columns">
+        <select class="animation-ctrl form-control" [formControl]="_animationType">
+            <option [value]="'None'">None</option>
+            <optgroup *ngFor="let group of _animations" [label]="group.text">
+                <option *ngFor="let option of group.options" [value]="option.value">
+                    {{option.text}}
+                </option>
+            </optgroup>
+        </select>
+        <!-- <a (click)="playAnimate()">Animate It</a> -->
+    </div>
+</div>
+<div class="form-group">
+    <input
+        type="button"
+        value="Place On Page"
+        class="btn btn-block btn-main"
+        [class.active]="isActive('Change')"
+        [disabled]="!isActive('Change')"
+        style="width: 150px"
+        (click)="onSubmit()"
+        />
+</div>

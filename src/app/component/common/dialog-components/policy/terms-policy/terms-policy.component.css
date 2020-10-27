@@ -1,0 +1,93 @@
+:host {
+  box-sizing: border-box;
+  height: 100%;
+  background: transparent;
+}
+
+.policy-container {
+  height: 100%;
+}
+
+.data-container {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+}
+
+.transition {
+  transition: all 0.25s ease-in-out
+}
+
+.flipIn {
+  animation: flipdown 0.5s ease both
+}
+
+
+ul {
+  list-style: none;
+  perspective: 900;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  position: relative;
+  padding: 5px 40px 0 0;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.item-title {
+  font-size: 16px;
+  color: orange;
+  transition: 0.4s;
+}
+
+.item-content {
+  padding: 5px;
+  max-height: 100%;
+  transform: translate(0, 0);
+  /* transition: all 0.25s ease-in-out; */
+}
+
+input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+}
+
+input[type=checkbox]:checked ~.item-content {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.2s ease-out;
+  /* transform: translate( 0 , 50% ); */
+}
+
+.expandBtn {
+  position: absolute;
+  top: 5px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  transform: rotate(45deg);
+}
+
+input[type=checkbox]:checked ~.expandBtn {
+  transform: rotate(-135deg);
+}
+
+input[type=checkbox]:checked ~.item-title {
+  color: inherit;
+}
+

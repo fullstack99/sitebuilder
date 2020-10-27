@@ -1,0 +1,17 @@
+<canvas-tools
+    [isSaving] = "isSaving"
+    [serviceTool] = "'PhotoItem'"
+    [serviceToolStr] = "['Import', 'Photos']"
+    [serviceToolActiveStr] = "['Add', 'Photos']"
+    [serviceToolActive] = "serviceToolActive"
+    [serviceLevel] = "14"
+    [slidesPerView] = "7"
+    [pageCanvas]="pageCanvas"
+    (command)="setCommand($event)"
+>
+</canvas-tools>
+<page-canvas
+    [allowHeader] = "true"
+    [page] = "page"
+    [placeholder]="[['#1 Choose Import Photos'],['#2 Choose a tool above','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for more content']]">
+</page-canvas>

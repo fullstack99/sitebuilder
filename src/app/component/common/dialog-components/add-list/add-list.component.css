@@ -1,0 +1,37 @@
+:host {
+    position: relative;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+ :host * {
+    box-sizing: border-box;
+}
+
+ :host>* {
+    margin-bottom: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+input[type="text"] {
+    display: block;
+    width: 80%;
+}
+
+input.ng-invalid.ng-touched {
+    background-color: #ffa4a4;
+    border-color: #ffa4a4;
+    float: left;
+}
+
+.list-item {    
+    display: flex;
+    align-items: center;
+}
+
+.text-right{
+    text-align: right;
+}

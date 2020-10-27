@@ -1,0 +1,83 @@
+:host {
+    box-sizing: border-box;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+        user-select: none;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+.ecommerce-layout {
+    width: 100%;
+}
+
+.service-item {
+    height: 100%;
+}
+
+.service-thumb {
+    width: 340px;
+    height: 210px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%;
+}
+
+.styles {
+    display: flex;
+    align-items: center;
+}
+
+swiper {
+	width: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 260px;
+}
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+	.swiper-container >>>.swiper-pagination-bullet {
+		width: 12px;
+		height: 12px;
+		margin-right: 5px;
+		border: 1px solid #8c8c8c;
+		border-radius: 50%;
+		background: white;
+		cursor: pointer;
+		opacity: initial;
+	}
+
+	.swiper-container >>>.swiper-pagination-bullet-active {
+		background: #8c8c8c!important;
+    }
+
+    .swiper-button-next {
+        background-image: none!important;
+    }
+
+    .swiper-button-prev {
+        left: 3px;
+        background-image: none!important;
+    }

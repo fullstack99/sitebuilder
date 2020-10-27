@@ -1,0 +1,43 @@
+<div class="draggable-list columns"
+	[class.rows]="!displayInline"
+	[class.columns]="displayInline"
+	draggableList
+	[draggableListEnable]="!displayInline"	
+	draggableListInline	
+	[draggableListInlineEnable]="displayInline"
+    (draggableList-newIndexes)="onDragEnd($event)">
+  	<div *ngFor="let count of expandablesCountArray let i=index"
+		class="draggable-list-item"
+		draggableListItem
+		[draggableListItemEnable]="!displayInline"
+		[draggableListItem-animate]="false"
+		draggableListItemInline
+		[draggableListItemInlineEnable]="displayInline"		
+		(draggableListItem-dragStart)="detectChanges()"
+		(draggableListItem-drag)="detectChanges()"
+		(draggableListItem-dragEnd)="detectChanges()">
+		<div class="drag-grip"
+			draggableListItemGrip
+			[draggableListItemGripEnable]="!displayInline"
+			draggableListItemGripInline
+			[draggableListItemGripInlineEnable]="displayInline"
+			>
+			<div class="grip-dots">....</div>
+		</div>
+		<div class="expandable-container">
+			<expandable-input 
+				#expandable
+				[useSplitBoxForRoot]="true"
+				[children]="[]"
+				[numberOfDefaultChildren]="1"
+				[rootName]="'Option #' + (i + 1)"
+				[itemTitle]="'Detail'"
+				[error]="isError(i)"
+				(focused)="onColumnChanged(i)"
+				(rootChange)="onRootChange(i, $event)"
+				(childChange)="onChildChange(i, $event)"
+				(childDelete)="onChildDelete(i, $event)"
+				(childSequenceChange)="onChildSequenceChange(i, $event)"></expandable-input>
+		</div>
+  	</div>
+</div>

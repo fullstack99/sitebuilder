@@ -1,0 +1,48 @@
+:host {    
+    display: block;
+    position: relative;
+    height: 100%;
+    background: transparent;
+}
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.dialog-body{    
+    overflow: auto;
+    margin-top: 0px;
+}
+    .form-group {
+        position: relative;
+    }
+
+    .required::before {
+        position: absolute;
+        top: -3px;
+        left: -10px;
+        content: "*";
+        color: red;
+    }
+
+    input.amount{
+        width: 60px;
+        outline: 0;
+        border-width: 1px;
+        border-radius: 3px;
+        padding: 3px;
+        height: 24px;
+    }
+
+    radio-group >>> li {
+        margin-bottom: 5px;
+    }
+

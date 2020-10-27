@@ -1,0 +1,72 @@
+<div class="service-container" [formGroup]="form">
+    <div class="rows result-image-container">
+        <div class="image-result-controls">
+            <div class="left">
+                <a (click)="openImportDialog()">IMPORT</a>
+            </div>
+            <div class="right">
+                <a (click)="openImageEditor()">EDIT</a>
+                <a class="remove" (click)="removeImage()">X</a>
+            </div>
+        </div>
+        <div #photoEle
+            class="photo rows"
+            [style.backgroundImage]="backgroundImage()"
+            (click)="openImportDialog()"
+            (dragover)="onDragOver($event)"
+            (dragenter)="onDragEnter($event)"
+            (dragleave)="onDragLeave($event)"
+            (drop)="onDrop($event)">
+            <span *ngIf="loading" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></span>
+            <span *ngIf="!loading && !form.value.photo">Click to Add Image</span>
+            <span *ngIf="!loading && !form.value.photo">or Drag and Drop Here</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea
+            formControlName="description"
+            class="form-control"
+            placeholder="Why should the customer hire you?&#10;&#10;Provide details about you and your experience."
+            rows="5"
+            maxlength="500"></textarea>
+        <div class="chars-right">
+            {{500 - form.value.description.length}} characters
+        </div>
+    </div>
+    <div class="text-center">
+        What services do you provide?
+    </div>
+    <div class="form-group text-center">
+        check all that apply
+    </div>
+    <div class="columns" style="justify-content: space-between;">
+        <div>
+            <div class="columns" style="align-items: center;" *ngFor="let item of expertise1; let i=index">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox" name="menuItemCheck" [value]="item" (change)="onItemCheckChange($event, item)" [checked]="isItemChecked(item)"/>
+                    <span class="c-indicator"></span>
+                </label>
+                <span class="btn-item-content-data">{{item.description}}</span>
+            </div>
+        </div>
+        <div>
+            <div class="columns" style="align-items: center;" *ngFor="let item of expertise2; let i=index">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox" name="menuItemCheck" [value]="item" (change)="onItemCheckChange($event, item)" [checked]="isItemChecked(item)"/>
+                    <span class="c-indicator"></span>
+                </label>
+                <span class="btn-item-content-data">{{item.description}}</span>
+            </div>
+            <div class="columns" style="align-items: center;" *ngFor="let item of others; let i=index">
+                <label class='c-input c-checkbox'>
+                    <input type="checkbox" name="menuItemCheck" [value]="item" (change)="onOtherItemCheckChange($event, item)" [checked]="isOtherItemChecked(item)"/>
+                    <span class="c-indicator"></span>
+                </label>
+                <span class="btn-item-content-data">Other</span>
+                <input type="text" name="other" class="form-control" style="margin: 5px; width: 100px; height: 25px;" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.description"/>
+                <div *ngIf="i==0"><a (mousedown)="onMoreOther($event)" style="color: green;">+</a></div>
+                <div *ngIf="i>0"><a class="btn-close" (mousedown)="onRemoveOther($event, item, i)">x</a></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="gallery-themes-container columns">
+    <ul class="nav nav-pills nav-categories">
+        <li role="presentation" class="arrow left">
+            <i class="btr bt-angle-left bt-4x"
+                [class.active]="_activeIndex > 0"
+                (click)="_prev.next()"></i>
+        </li>
+        <li>
+            <div class="gallery-themes">
+                <ul class="nav nav-pills nav-categories">                    
+                    <li
+                        *ngFor="let item of dispRange; let i = index; let last = last"
+                        class="gallery-theme"
+                        [class.blank]="_galleryThemes[i+_activeIndex].gImages.length==0"
+                        (click)="_selectTheme.next(item)">
+                        <div class="place-holder text-center"> Blank </div>
+                        <div 
+                            *ngFor="let image of _galleryThemes[i+_activeIndex].gImages; let j = index"
+                            class="gallery-image">
+                        </div>
+                    </li>
+                </ul>
+            </div>            
+        </li>
+        <li role="presentation" class="arrow">        
+            <i class="btr bt-angle-right bt-4x"
+                [class.active]="_activeIndex < (_galleryThemes.length-dispRange.length)"
+                (click) = "_next.next()"></i>        
+        </li>
+    </ul>
+</div>

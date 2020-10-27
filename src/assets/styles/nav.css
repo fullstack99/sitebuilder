@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.nav-main {
+	background: white;
+}
+  	.nav-main .navbar-brand {
+    	padding-top: 10px;
+    }
+
+	.nav-main .nav > li > a{
+		color: #464646;
+		font-size: 18px;
+		font-family: lato;
+	}
+	.nav-main .nav > li > a:hover,
+	.nav-main .btn-link:hover,
+	.nav-main .nav > li.active a {
+		color: orange;
+		background: white;
+		border-color: white;
+	}
+
+@media only screen and (max-width: 400px) {
+	.nav-main .hidden-xxs {
+		display: none;
+	}
+}
+
+.img-logo {
+	width: 160px;
+	height: 28px;
+	display: block;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+

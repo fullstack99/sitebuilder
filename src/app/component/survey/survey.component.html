@@ -1,0 +1,18 @@
+<canvas-tools
+    [serviceTool] = "'SurveyItem'"
+    [serviceToolStr] = "['Add', 'Survey']"
+    [serviceToolActiveStr] = "['Edit', 'Survey']"
+    [serviceToolActive] = "serviceToolActive"
+    [serviceLevel] = "19"
+    [slidesPerView] = "4"
+    [pageOption]="pageOption"
+    [isSaving]="isSaving"
+    [pageCanvas]="pageCanvas"
+    (command)="setCommand($event)">
+</canvas-tools>
+<page-canvas
+    [allowHeader] = "true"
+    [page] = "page"
+    [forService] = "'survey'"
+    [placeholder]="[['#1 Choose Add Survey'],['#2 Choose a tool above','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for more content']]">
+</page-canvas>

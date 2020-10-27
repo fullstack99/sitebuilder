@@ -1,0 +1,100 @@
+<div class="dialog-header">
+  <div class="btn-feedback columns">
+      <img src="/assets/images/logo-0.png"/>
+      <a (click)="openFeedbackDialog()">FEEDBACK</a>
+      <a (click)="onClose($event)" class="btn-close">×</a>
+  </div>
+  <div class="dialog-title-container rows">
+      <div class="dialog-title"><h3> Branching</h3></div>
+  </div>
+</div>
+
+<div class="dialog-body">
+  <div class="content">
+
+      <div class="form-group text-center">
+        <p>
+          You might want a Survey where respondents answer different questions. &nbsp; For example:
+        </p>
+      </div>
+
+      <div class="form-group text-center">
+        <p [ngStyle]="{'font-size': '18px'}">
+          What is your skill level?
+        </p>
+        <div class="radio-group" [ngStyle]="{'max-width': '120px', 'margin': 'auto'}">
+          <radio-group>
+              <ng-template radioGroupOption="beginner">Beginner</ng-template>
+              <ng-template radioGroupOption="intermediate">Intermediate</ng-template>
+              <ng-template radioGroupOption="advanced">Advanced</ng-template>
+          </radio-group>
+        </div>
+      </div>
+
+      <div class="columns form-group">
+        <div class="text-center" [ngStyle]="{'min-width': '30%'}">
+          <p>
+            <label class="c-input c-radio">
+              <input type="radio" checked>
+              <span class="c-indicator"></span>
+              Beginner
+            </label>
+          </p>
+          <p>
+            <i class="btb bt-arrow-down"></i>
+          </p>
+          <p>
+            Main Survey
+          </p>
+        </div>
+
+        <div class="text-center" [ngStyle]="{'min-width': '40%'}">
+          <p>
+            <label class="c-input c-radio">
+              <input type="radio" checked>
+              <span class="c-indicator"></span>
+              Intermediate
+            </label>
+          </p>
+          <p>
+            <i class="btb bt-arrow-down"></i>
+          </p>
+          <p>
+            Branch A
+          </p>
+          <p>
+            Questions
+          </p>
+        </div>
+
+        <div class="text-center" [ngStyle]="{'min-width': '30%'}">
+          <p>
+            <label class="c-input c-radio">
+              <input type="radio" checked>
+              <span class="c-indicator"></span>
+              Advanced
+            </label>
+          </p>
+          <p>
+            <i class="btb bt-arrow-down"></i>
+          </p>
+          <p>
+            Branch B
+          </p>
+          <p>
+            Questions
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="button"
+          value="ADD BRANCHING"
+          class="btn btn-block btn-main"
+          style="max-width: 200px;"
+          (click)="onAdd()"
+          />
+      </div>
+  </div>
+</div>

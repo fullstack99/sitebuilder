@@ -1,0 +1,52 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {    
+    "outDir": "../out-tsc/spec",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "baseUrl": "./",
+    "types": [
+      "jasmine",
+      "node",
+      "jquery",
+      "kendo-ui",
+      "webfontloader"
+    ],
+    "paths": {
+      "@app/*": ["app/*"],
+      "@app-environments/*": ["environments/*"],
+      "@app-assets/*": ["assets/*"],
+      "@app-shared/*": ["app/shared/*"],
+      "@app-models/*": ["app/models/*"],
+      "@app-lib/*": ["app/component/common/lib/*"],
+      "@app-ui/*": ["app/component/common/ui-components/*"],
+      "@app-dialogs/*": ["app/component/common/dialog-components/*"],
+      "@app-directives/*": ["app/component/common/directives/*"],
+      "@app-pipes/*": ["app/component/common/pipes/*"], 
+      "@app-auth/*": ["app/auth/*"],
+      "@app-dashboard/*": ["app/component/dashboard/*"],
+      "@app-items/*": ["app/component/common/items/*"],
+      "@app-common/*": ["app/component/common/*"]
+    }
+  },  
+  "files": [
+    "test.ts",
+    "../node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxscheduler.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ]  
+}

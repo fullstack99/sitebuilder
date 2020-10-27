@@ -1,0 +1,98 @@
+<div class="placeholder" *ngIf="info.links.length==0">
+    <div>Click to Add Navigation</div>
+</div>
+
+<div class="nav-container nav-container-mobile" *ngIf="mobilePageView" (clickOutside)="focusout($event)">
+    <button
+        type="button"
+        class="nav-mobile-button"
+        (click)="onClickNavBarButton()">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <ul #mobileMenu *ngIf="_viewMobileMenu" class="nav-list" [style.left]="5 - item.content.box.left + 'px'">
+        <ng-template ngFor let-link [ngForOf]="info.links" let-i="index" let-last="last">
+            <li>
+                <a
+                    [style.color]="info.fontStyle.color"
+                    [style.text-decoration]="info.fontStyle.underline || editable && link.link && link.link.type ? 'underline' : 'unset'"
+                    [style.text-decoration-color]="info.fontStyle.underline || editable && link.link && link.link.type ? '#8c8c8c' : 'white'"
+                    (click)="onNavClick(i)">
+                    <span #textEditor>{{link.text}}</span>
+                    <span *ngIf="hasSubLink(i)" class="caret"></span>
+                </a>
+                <ul *ngIf="_viewSubNavList == i" class="nav-sub-list">
+                    <li *ngFor="let sublink of link.sublinks; let j=index"
+                        (click)="onNavClick(i,j)">
+                        <a href="#"
+                          [style.text-decoration]="info.fontStyle.underline || editable && sublink.link && sublink.link.type ? 'underline' : 'unset'"
+                          [style.text-decoration-color]="info.fontStyle.underline || editable && sublink.link && sublink.link.type ? '#8c8c8c' : 'white'">
+                            {{sublink.text}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ng-template>
+    </ul>
+</div>
+
+<div #linksContainer *ngIf="!mobilePageView" class="nav-container nav-container-tablet" [class.nav-container-tablet-side]="info.layout == 'side'" [class.nav-container-tablet-top]="info.layout != 'side'" (clickOutside)="focusout($event)">
+    <ul class="nav-list">
+        <ng-template ngFor let-link [ngForOf]="info.links" let-i="index" let-last="last">
+            <li #navlink
+                [style.background-color]="info.design.backColor"
+                [style.border-color]="info.design.borderColor"
+                [style.border-style]="info.design.borderStyle"
+                [style.border-width]="info.design.borderWidth+'px'"
+                [style.border-top-left-radius]="getBorderRadius('lTop')+'px'"
+                [style.border-top-right-radius]="getBorderRadius('rTop')+'px'"
+                [style.border-bottom-left-radius]="getBorderRadius('lBottom')+'px'"
+                [style.border-bottom-right-radius]="getBorderRadius('rBottom')+'px'"
+                [style.font-family]="info.fontStyle.fontFamily"
+                [style.font-size]="info.fontStyle.fontSize"
+                [style.color]="info.fontStyle.color"
+                [style.backgroud-color]="info.fontStyle.backgroundColor"
+                [style.font-weight]="info.fontStyle.bold ? 'bold' : 'normal'"
+                [style.font-style]="info.fontStyle.italic ? 'italic' : 'normal'">
+                <a  class="columns"
+                    (mouseenter)="onHoverButton(i,$event)"
+                    (mouseleave)="onLeaveButton(i,$event)"
+                    (click)="onNavClick(i)">
+                    <span
+                        [style.color]="info.fontStyle.color"
+                        [style.font-weight]="info.fontStyle.bold ? 'bold' : 'normal'"
+                        [style.font-style]="info.fontStyle.italic ? 'italic' : 'normal'"
+                        [style.text-decoration]="info.fontStyle.underline || editable && link.link && link.link.type ? 'underline' : 'unset'"
+                        [style.text-decoration-color]="info.fontStyle.underline || editable && link.link && link.link.type ? '#8c8c8c' : 'white'">{{link.text}}</span>
+                    <span *ngIf="hasSubLink(i)" class="caret" [style.color]="info.fontStyle.color"></span>
+                </a>
+                <ul *ngIf="hasSubLink(i)" class="nav-sub-list" [class.active]="_viewSubNavList == i">
+                    <li *ngFor="let sublink of link.sublinks; let j=index"
+                        (mouseover)="onSubLinkMouseOver($event)"
+                        (click)="onNavClick(i,j)">
+                        <a
+                            [style.color]="info.subFontStyle.color"
+                            [style.font-family]="info.subFontStyle.fontFamily"
+                            [style.font-size]="info.subFontStyle.fontSize"
+                            [style.font-weight]="info.subFontStyle.bold ? 'bold' : 'normal'"
+                            [style.font-style]="info.subFontStyle.italic ? 'italic' : 'normal'"
+                            [style.text-decoration]="info.subFontStyle.underline || editable && sublink.link && sublink.link.type ? 'underline' : 'unset'"
+                            [style.text-decoration-color]="info.fontStyle.underline || editable && sublink.link && sublink.link.type ? '#8c8c8c' : 'white'">
+                            {{sublink.text}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="!last"
+                class="btn-between"
+                [style.backgroundImage]="getImageURL()"
+                [style.width]="getSpacing('width')"
+                [style.height]="info.imageInfo.size+'px'"
+                (click)="_viewSubNavList = -1">
+            </li>
+        </ng-template>
+    </ul>
+</div>
+
+<!-- [style.backgroundSize]="info.imageInfo.size+'px ' + info.imageInfo.size+'px'" -->

@@ -1,0 +1,23 @@
+
+<div class="tool-container" [class.mobile]="viewMode == 2">
+    <span class="btr bt-angle-left bt-4x"
+            [class.active]="!isBeginning"
+            (click)="toolSwiper.swiper.slidePrev()"></span>
+    <div class="tools">
+        <div  class="swiper-container" [swiper]="swiperConfig" (indexChange)="indexChanged($event)" #toolSwiper>            
+            <div class="swiper-wrapper">                        
+                <div *ngFor="let tool of _tools" class="swiper-slide">                            
+                    <div 
+                        class="{{ tool.item_class }}"
+                        [style.backgroundImage]="backgroundImage(tool.url)"
+                        (click)="onToolClick(tool)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="btr bt-angle-right bt-4x"
+        [class.active]="!isEnd"            
+        (click) = "toolSwiper.swiper.slideNext()"></span>
+</div>
+

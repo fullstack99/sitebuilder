@@ -1,0 +1,247 @@
+<div class="dialog-header" (click)="stopEditing($event)">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>SITE NAVIGATION</h3></span>
+    </div>
+</div>
+<ul class="nav nav-pills nav-categories" *ngIf="isEdit">
+    <li role="presentation">
+        <div class="btn-back" (click)="onClose()"></div>
+    </li>
+    <li role="presentation" class="place">
+        <a class="text-center"
+            [class.active]="isActive('change')"
+            (click)="onSubmit()">
+            <div class="caption">PLACE</div>
+            <div class="caption">ON PAGE</div>
+        </a>
+    </li>
+    <li role="presentation" class="place">
+        <a (click)="_undo.next()">
+            <span class="font-icon btb bt-reply"></span>
+            <div class="caption">UNDO</div>
+        </a>
+    </li>
+    <li role="presentation" class="place">
+        <a (click)="_redo.next()">
+            <span class="font-icon btb bt-forward"></span>
+            <div class="caption">REDO</div>
+        </a>
+    </li>
+    <li role="presentation" class="place">
+        <a  [class.active]="isActive('link')"
+            (click)="openLinkingDialog()">
+            <span class="font-icon btb bt-link"></span>
+            <div class="caption">Link</div>
+        </a>
+    </li>
+    <li role="presentation" class="place">
+        <a
+            [class.active]="isActive('image')"
+            (click)="openImageDialog()">
+            <span class="font-icon btb bt-camera"></span>
+            <div class="caption">IMAGE</div>
+        </a>
+    </li>
+    <li role="presentation" class="place">
+        <a  [class.active]="isActive('design')"
+            (click)="openDesignDialog()">
+            <img class="img-responsive" src="/assets/images/canvas/design.png" style="width: 34px;">
+            <div class="caption">COLOR</div>
+        </a>
+    </li>
+    <li role="presentation">
+        <div class="columns layout">
+            <radio-group class="ctrl-body" [formControl]="_layout">
+                <ng-template radioGroupOption="top">Top</ng-template>
+                <ng-template radioGroupOption="side">Side</ng-template>
+            </radio-group>
+        </div>
+        <div class="caption text-center">LAYOUT</div>
+    </li>
+    <li role="presentation">
+        <div class="columns slider">
+            <slider [formControl]="_spacing" [min]="_minSpacing" [max]="_maxSpacing">
+            </slider>
+        </div>
+        <div class="caption text-center">SPACING</div>
+    </li>
+    <li role="presentation">
+        <div class="value">{{_spacingValue}}</div>
+    </li>
+</ul>
+<div class="which-themes">
+    <a [class.active]="!isEdit"
+        (click)="gotoThemes()"> THEMES </a>
+    <a *ngIf="isEdit"
+        [class.active]="isEdit"> EDIT </a>
+</div>
+
+<navigation-theme *ngIf="!isEdit"
+    (selectedTheme)="selectedTheme($event)">
+</navigation-theme>
+<div #textTool class="text-tool"
+    (click)="$event.stopPropagation()">
+    <textarea id="text-tool"
+        text-tool
+        [text-tool-target]="'text-tool'"
+        [text-tool-type]="2"
+        [text-tool-width]="215"
+        [text-tool-showLink]="true"
+        [text-tool-input]="_fontStyle"
+        [text-tool-input-elem]="_selectedElem"
+        [text-tool-input-link]="_link"
+        (text-tool-output)="setFontStyle($event)"
+        (text-tool-output-Link)="setNavLink($event)"
+        >ABC</textarea>
+</div>
+<div #canvasContainer class="canvas-container" [hidden]="!isEdit">
+    <div class="canvas" (click)="stopEditing($event)">
+        <div
+            #linksContainer
+            class="links-container"
+            [class.top]="currentState && currentState.layout == 'top'"
+            [class.columns]="currentState && currentState.layout == 'top'"
+            [class.side]="currentState && currentState.layout == 'side'"
+            [class.rows]="currentState && currentState.layout == 'side'"
+            draggableList
+            [draggableListEnable]="currentState && currentState.layout == 'side'"
+            draggableListInline
+            [draggableListInlineEnable]="currentState && currentState.layout == 'top'"
+            (draggableList-newIndexes)="_navLinkIndexChange.next($event)"
+            (click)="stopEditing($event)">
+            <ng-template ngFor let-link [ngForOf]="currentState.navLinks" let-i="index" let-last="last">
+                <div
+                    #navlink
+                    class="navlink rows"
+                    [class.editing]="currentState && currentState.selectedNavLink == i"
+                    [class.empty]="checkEmpty(link.text)"
+
+                    draggableListItem
+                    [draggableListItemEnable]="currentState && currentState.layout == 'side'"
+                    draggableListItemInline
+                    [draggableListItemInlineEnable]="currentState && currentState.layout == 'top'"
+                    [draggableListItem-animate]="false"
+                    (draggableListItem-dragStart)="_navLinkDragStart.next(i)"
+                    (draggableListItem-dragEnd)="_navLinkDragEnd.next(i)"
+                    (draggableListItem-drag)="_navLinkDrag.next([i, $event])">
+                    <div class="navtext content-editable"
+                        #navText
+                        [style.background-color]="currentState.design.design.backColor"
+                        [style.border-color]="currentState.design.design.borderColor"
+                        [style.border-style]="currentState.design.design.borderStyle"
+                        [style.border-width]="currentState.design.design.borderWidth + 'px'"
+                        [style.border-top-left-radius]="getBorderRadius('lTop')+'px'"
+                        [style.border-top-right-radius]="getBorderRadius('rTop')+'px'"
+                        [style.border-bottom-left-radius]="getBorderRadius('lBottom')+'px'"
+                        [style.border-bottom-right-radius]="getBorderRadius('rBottom')+'px'"
+                        [style.font-family]="currentState.navFontStyle.fontFamily"
+                        [style.font-size]="currentState.navFontStyle.fontSize"
+                        [style.color]="currentState.navFontStyle.color"
+                        [style.backgroud-color]="currentState.navFontStyle.backgroundColor"
+                        [style.font-weight]="currentState.navFontStyle.bold ? 'bold' : 'normal'"
+                        [style.font-style]="currentState.navFontStyle.italic ? 'italic' : 'normal'"
+                        [style.text-decoration]="currentState.navFontStyle.underline || link.link && link.link.type ? 'underline' : 'unset'"
+                        [style.text-decoration-color]="currentState.navFontStyle.underline || link.link && link.link.type ? '#8c8c8c' : 'white'"
+
+                        contenteditable
+                        spellcheck="true"
+                        [(contenteditableModel)] = "link.text"
+                        (focus)="startEditingLinkAt(i, $event)"
+                        (click)="startEditingLinkAt(i,$event)"
+                        (mouseenter)="onHoverButton($event)"
+                        (mouseleave)="onLeaveButton($event)">
+                    </div>
+                    <!-- <div class="placeholder" (click)="startEditingLinkAt(i,$event)">Click to Add Text</div> -->
+                    <div [style.visibility]="i == 0 ? 'hidden' : 'visible'"
+                        class="btn-remove-link"
+                        (click)="removeNavLinkAt(i,$event)"
+                        >×</div>
+                    <div class="grip"
+                        draggableListItemGripInline
+                        [draggableListItemGripInlineEnable]="currentState && currentState.layout == 'top'"
+                        draggableListItemGrip
+                        [draggableListItemGripEnable]="currentState && currentState.layout == 'side'"
+                        (mousedown)="$event.stopPropagation()"
+                        ></div>
+                    <div class="sub-list-disp"
+                        [style.width]="_linkWidth + 'px'">
+                        <a [class.active]="hasSubLink(i)"
+                            (click)="dispSubList(i, $event)"> SUB-LISTING </a>
+                    </div>
+                    <div *ngIf="_linkWidth > 0 && hasSubLink(i) && currentState.subdisp!==i"
+                        class="has-sub-list"
+                        [style.width]="_linkWidth + 'px'">
+                        <a class="active"
+                            (click)="dispSubList(i, $event)"> SUB-LISTING </a>
+                    </div>
+
+                    <div class="sub-list"
+                        [class.active] = "currentState.subdisp == i"
+                        draggableList
+                        (draggableList-newIndexes)="dragging ? _subNavLinkIndexChange.next($event) : return;"
+                        >
+                        <div class="sub-list-item"
+                            #subNavlink
+                            *ngFor="let sublink of link.sublinks; let j=index"
+                            [class.editing]="subEnable(i, j)"
+                            [class.empty]="!sublink.text"
+                            draggableListItem
+                            (draggableListItem-dragStart)="_subNavLinkDragStart.next(j)"
+                            (draggableListItem-dragEnd)="_subNavLinkDragEnd.next(j)"
+                            (draggableListItem-drag)="_subNavLinkDrag.next([j, $event])">
+                            <div class="text-editor content-editable subTextEditor"
+                                #subNavText
+                                [style.font-family]="currentState.subNavFontStyle.fontFamily"
+                                [style.font-size]="currentState.subNavFontStyle.fontSize"
+                                [style.color]="currentState.subNavFontStyle.color"
+                                [style.backgroud-color]="currentState.subNavFontStyle.backgroundColor"
+                                [style.font-weight]="currentState.subNavFontStyle.bold ? 'bold' : 'normal'"
+                                [style.font-style]="currentState.subNavFontStyle.italic ? 'italic' : 'normal'"
+                                [style.text-decoration]="currentState.subNavFontStyle.underline || sublink.link && sublink.link.type ? 'underline' : 'unset'"
+								[style.text-decoration-color]="currentState.subNavFontStyle.underline || sublink.link && sublink.link.type ? '#8c8c8c' : 'white'"
+                            	(click)="subStartEditingLinkAt(i,j,$event)"
+                                contenteditable
+                                spellcheck="true"
+                                [(contenteditableModel)] = "sublink.text"
+                                ></div>
+                            <!-- <div class="subplaceholder">Click to Add Text</div> -->
+                            <div class="grip v-grip"
+                                draggableListItemGrip
+                                (mousedown)="$event.stopPropagation();"
+                                (click)="$event.stopPropagation();"
+                                ></div>
+                            <div
+                                [style.visibility]="j == 0 ? 'hidden' : 'visible'"
+                                class="btn-remove-sub-link"
+                                (click)="removingSubLinkAt(i,j,$event)"
+                                >×</div>
+                        </div>
+                        <div>
+                            <a class="btn-more"
+                            (click)="addSubNavLink(i,$event)">MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!last"
+                    class="btn-between center-block"
+                    [style.backgroundImage]="getImageURL()"
+                    [style.minWidth]="currentState.image.image.size + 'px'"
+                    [style.minHeight]="currentState.image.image.size + 'px'"
+                    [style.width]="getSpacing('width')"
+                    [style.height]="getSpacing('height')"
+                    [style.marginTop]="_imageMarginTop + 'px'">
+                </div>
+            </ng-template>
+            <div class="btn-more">
+                <a (click)="addNavLink($event)">MORE</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [style.backgroundSize]="currentState.image.image.size+'px '+ currentState.image.image.size+'px'" -->

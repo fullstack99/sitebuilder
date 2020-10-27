@@ -1,0 +1,47 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">		
+        <span class="dialog-title"><h3>Merge Lists</h3></span>
+    </div>    
+</div>
+<div class="merge-list columns">
+    <div class="merge-left">
+        <div><h4>Merge this Lists(s)</h4></div>
+        <div *ngFor="let item of list; let i = index" class="left-item">
+            <checkbox (change)="onCheck($event, item)"></checkbox>
+            <span>{{item}}</span>
+        </div>
+    </div>
+
+    <div class="merge-right">
+        <div><h4>...with this one</h4></div>        
+        <div *ngFor="let item of list; let i = index" class="right-item">
+            <label class='c-input c-radio'>
+                <input type="radio"
+                    [formControl] = "toList"
+                    value="{{i}}">
+                <span class="c-indicator"></span>
+            </label>
+            <span>{{item}}</span>
+        </div>
+
+        <div class="new-item" *ngFor="let item of newLists; let i = index" >
+            <label class='c-input c-radio'>
+                <input type="radio"
+                    [formControl] = "toList"
+                    value="{{list.length + i}}"/>
+                <span class="c-indicator"></span>
+            </label>
+            <input [(ngModel)] = "newLists[i]" (ngModelChange) = "isValid()" type="text" class="form-control" placeholder="Name of New List"/>
+        </div>
+
+        <a class="more" (click)= "onMore()">MORE</a>
+    </div>    
+</div>
+<div class="text-center">
+    <input #button class="btn addcontact-btn" (click)="onSubmit()" type="button" value="MERGE">
+</div>

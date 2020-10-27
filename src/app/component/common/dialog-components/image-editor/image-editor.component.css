@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: transparent;
+    height: 100%;
+}
+    :host >>> * {
+        box-sizing: border-box;
+    }
+
+.btn-close, .btn-close:hover, .btn-close:active, .btn-close:visited {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: red;
+    font-size: 20px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.page-title {
+    margin: 0px 0px 20px 0px;
+    flex-shrink: 0;
+}
+
+image-browser {
+    flex-grow: 1;
+}
+
+.blank_image{
+    margin-top: 20px;
+    text-align: center;
+}
+    .blank_image .images{
+        margin-top: 50px;
+        align-items: center;
+    }
+        .blank_image .images img{
+            height: 200px;
+        }

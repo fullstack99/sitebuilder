@@ -1,0 +1,34 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>		
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container columns margin-top-10">		
+		<span class="dialog-title">
+			<h3>Choose Option-Details</h3>			
+		</span>
+	</div>
+</div>
+<div class="dialog-content">
+	<loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+	<div class="form-group">
+		<input type="text" class="form-control" [formControl]="search" placeholder="search" spellcheck="true">
+	</div>
+	<div class="items-content">		
+		<div class="item-row columns" *ngFor="let item of filteredOptions; let i=index;">
+			<label class='c-input c-radio'>
+				<input type="radio" [formControl]="selectedOption" [value]="item">
+				<span class="c-indicator"></span>
+			</label>
+			<div class="row-content columns">
+				<div class="item-title"> {{item.name}} </div>
+				<div class="item-value">{{getOptionValues(i)}}</div>
+				<div>
+					<a class="close" (click)="onDeleteOption(i)">&times;</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	

@@ -1,0 +1,108 @@
+<loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div>
+    <div class="promotions-tool-container">
+        <ul class="canvas-nav">
+            <li>
+                <div class="btn-back" (click)="clickCanvasTool('Back')"></div>
+            </li>
+            <li  [class.active]="isSaving" class="disalble-over">
+                <a (mousedown)="clickCanvasTool('Save')"
+                    [class.disable]="!isSaving">
+                    <img src="/assets/images/canvas/save.png"/>
+                    <div class="caption">Save</div>
+                </a>
+            </li>
+            <li class="service-tool text-center">
+                <a class="text-center" (click)="clickCanvasTool('Promotion')">
+                    <div class="caption">
+                        <div>Setup</div>
+                        <div>Promotion</div>
+                    </div>                    
+                </a>            
+            </li>
+        </ul>
+    </div>
+    <div class="promotions-container">
+        <div class="glogood-table-container">
+            <div #tableHeader class="glogood-table-header">
+                <table class="table">
+                    <thead>
+                        <tr>                            
+                            <th class="item-field-2" (click)="onSort(0)">
+                                Code &nbsp;
+                                <span *ngIf="activeOrderKey == 0" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[0].order" [class.bt-long-arrow-up]="!orderKeys[0].order"></span>
+                            </th>
+                            <th class="item-title" (click)="onSort(1)">
+                                Name &nbsp;
+                                <span *ngIf="activeOrderKey == 1" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[1].order" [class.bt-long-arrow-up]="!orderKeys[1].order"></span>
+                            </th>
+                            <th class="item-field-3" (click)="onSort(2)">
+                                Start &nbsp;
+                                <span *ngIf="activeOrderKey == 2" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[2].order" [class.bt-long-arrow-up]="!orderKeys[2].order"></span>
+                            </th>
+                            <th class="item-field-3" (click)="onSort(3)">
+                                Stop &nbsp;
+                                <span *ngIf="activeOrderKey == 3" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[3].order" [class.bt-long-arrow-up]="!orderKeys[3].order"></span>
+                            </th>
+                            <th class="item-field-2" (click)="onSort(4)">
+                                Free<br/>Ship &nbsp;
+                                <span *ngIf="activeOrderKey == 4" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[4].order" [class.bt-long-arrow-up]="!orderKeys[4].order"></span>
+                            </th>
+                            <th class="item-field-2" (click)="onSort(5)">
+                                %Off
+                                <span *ngIf="activeOrderKey == 5" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[4].order" [class.bt-long-arrow-up]="!orderKeys[4].order"></span>
+                            </th>
+                            <th class="item-field-2">
+                                $Off
+                                <span *ngIf="activeOrderKey == 5" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[5].order" [class.bt-long-arrow-up]="!orderKeys[5].order"></span>
+                            </th>
+                            <th class="item-field-2" (click)="onSort(6)">
+                                Auto Code Req.
+                                <span *ngIf="activeOrderKey == 6" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[6].order" [class.bt-long-arrow-up]="!orderKeys[3].order"></span>
+                            </th>
+                            <th class="item-field-x"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div #tableBody class="glogood-table-body">
+                <table class="table">                
+                    <tr *ngFor="let item of items; let i = index" class="item-row">                        
+                        <td class="item-field-2">
+                            {{ item.code }}                            
+                        </td>
+                        <td class="item-title">                            
+                            <a (click)="editItem(item)">
+                                {{ item.name }}
+                            </a>
+                        </td>
+                        <td class="item-field-3">
+                            {{ item.startDate | date:'MM.dd.yyyy' }}
+                        </td>
+                        <td class="item-field-3">
+                            {{ item.endDate | date:'MM.dd.yyyy' }}
+                        </td>
+                        <td class="item-field-2">
+                            {{ item.discountType }}
+                        </td>
+                        <td class="item-field-2">
+                            {{ item.discountType == 'Percentage' ? item.amount + '%' : '' }}
+                        </td>
+                        <td class="item-field-2">
+                            {{ item.discountType == 'FixedPrice' ? item.amount : '' | currency:'USD':'symbol':'1.2-2'}}
+                        </td>
+                        <td class="item-field-2">
+                            {{ item.requireCodeEntry }}
+                        </td>                       
+                        <td class="item-field-x">
+                            <a (click)="removeItem(item.uid, i)" class="remove-btn">
+                                &times;
+                            </a>
+                        </td>
+                    </tr>                
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>

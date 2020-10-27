@@ -1,0 +1,27 @@
+<!-- <form [formGroup]="form">
+  <div formArrayName="expandables">
+  <div draggableListInline class="draggable-list"
+                           (draggableList-newIndexes)="onDragEnd($event)">
+      <div *ngFor="let expandable of expandablesArray.controls; let i=index"
+         [formGroupName]="i"
+         class="draggable-list-item"
+         draggableListItemInline
+         (mousemove)="detectChanges()"
+         (mouseup)="detectChanges()"
+         (draggableListItem-dragStart)="detectChanges()"
+         (draggableListItem-drag)="detectChanges()"
+         (draggableListItem-dragEnd)="detectChanges()"
+         [class.inline]="displayInline">
+        <div class="drag-grip inline"
+          draggableListItemGripInline>
+          <div class="grip-dots">....</div>
+        </div>
+        <div class="inline expandable-container">
+          <ng-template 
+             [ngTemplateOutlet]="expandableTemplate" 
+             [ngOutletContext]="{itemNumber: i }"></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->

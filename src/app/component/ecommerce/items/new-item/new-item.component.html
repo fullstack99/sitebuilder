@@ -1,0 +1,290 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span class="dialog-title"><h3>Item Setup</h3></span>
+    </div>
+</div>
+<div class="content center-block">
+    <loading *ngIf="loading" [text]="'Saving...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <div [formGroup]="form">
+		<!-- <a *ngIf="isValid" class="save animated bounceIn" style="animation-duration: 1.5s" (click)="onSubmit()"> -->
+		<button  class="save" [class.disable]="!isValid" (click)="onSubmit($event)">
+            <img class="img-responsive" src="/assets/images/canvas/save.png"/>
+            <div class="btn-caption" (click)="$event.preventDefault()">SAVE</div>
+        </button>
+        <div class="form-group">
+            <div class="large-control center-block">
+                <input type="text" class="form-control main-control title-control" placeholder="Item Title" spellcheck="true" [formControl]="form.controls['title']" />
+                <label class="required">*</label>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 30px;">
+            <div
+                class="text-editor-block large-control center-block"
+                style="padding-right: 10px;"
+                (click)="onTextEditorClick($event)"
+                (focusout)="onTextFocusOut()">
+                <div #textEditor
+                    class="editable text-editor form-control"
+                    text-editor-tinymce
+                    [text-editor-enabled]="textEditorEnabled"
+                    [text-editor-toolbar-width]="400"
+					[text-editor-hide-links]="true"
+					[text-editor-input-stop]="descriptionChars == 750"
+                    (text-editor-input)="onTextEditorInput($event)"
+                    (text-editor-input-text)="onTextEditorInput($event)"
+                    (text-editor-destroyed)="onEditorDestroyed($event)"
+                >
+                </div>
+                <div *ngIf="isEmpty" class="text-editor-placeholder center">
+                    Item Description
+				</div>
+			</div>
+			<div style="position: absolute; right: 100px;">
+				{{750 - descriptionChars}}
+				characters available
+			</div>
+        </div>
+
+        <div class="form-group">
+            <div class="keywords large-control center-block" style="padding-right: 10px;">
+                <tags-input [input_keywords]="keywords.value" (keywords)="setKeywords($event)" [placeholder]="'Keywords or Tags used for SEO'"></tags-input>
+                <tooltip text="?" code="eco.s.110" height="250">
+                    <p>
+                        Keywords are the words people use searching for the item that you are setting up.
+                    </p>
+                    <p>
+                        4-8 simple words are ideal.
+                    </p>
+                    <p>
+                        When you search with those words, what do you get?
+                    </p>
+                </tooltip>
+            </div>
+            <div class="caption keyword-comma">
+                Separate words with comma
+                <a class="action-link"
+                	(click)="onOpenKeywordsLookUp($event)">
+                    {{ 'Lookup' | uppercase }}
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="slideshow">
+                <slideshow-gallery [slides]="slides" [invalid]="form.controls['images'].touched && form.controls['images'].invalid" (result)="result($event)"></slideshow-gallery>
+                <label class="required">*</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="item-price columns" style="justify-content: space-around;">
+                <div  class="medium-control" style="padding-right: 10px;">
+                    <split-text-box *ngIf="isVisiblePrice()" [isCurrency]="true" [formControl]="form.controls['price']" [error]="form.controls['price'].touched && form.value['price']==0" label="Item Price"></split-text-box>
+                    <split-text-box *ngIf="!isVisiblePrice()" [value]="'multi'" label="Item Price"></split-text-box>
+                    <label class="required">*</label>
+                </div>
+                <div class="price-comparison-control">
+					<split-text-box [isCurrency]="true" [formControl]="form.controls['priceComparison']" label="Price Comparison"></split-text-box>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="item-price columns" style="justify-content: space-around;">
+                <div class="medium-control" style="padding-right: 10px;">
+					<split-text-box *ngIf="!isMultipleItemCode()" class="item-code-control" [formControl]="form.controls['itemCode']" label="Item Code"></split-text-box>
+					<split-text-box *ngIf="isMultipleItemCode()" [value]="'multi'" label="Item Code"></split-text-box>
+                    <div class="link-container">
+                        <a (click)="generateCode()" class="action-link generate-code-link">
+                        {{ 'Generate' | uppercase }}
+                        </a>
+                    </div>
+                    <label class="required">*</label>
+                </div>
+                <div class="barcode-upc-control">
+                    <split-text-box [formControl]="form.controls['barCode']" class="medium-control" label="Barcode-UPC etc."></split-text-box>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="setup-item">
+                <label>Add Item Options like color, size or material</label>
+                <div class="left-shift">
+                    <!-- <radio-group [displayInline]="true" class="inline" (change)="initialProductOptions()" [formControl]="form.controls['addOptions']"> -->
+                    <radio-group [displayInline]="true" class="inline" [formControl]="form.controls['addOptions']">
+                        <!-- <ng-template [radioGroupOption]="false" [disabled]="form.value['productOptions'] && form.value['productOptions'].length > 0"> -->
+						<ng-template [radioGroupOption]="false">
+                            No
+                        </ng-template>
+                        <ng-template [radioGroupOption]="true">
+                            Yes
+                        </ng-template>
+                    </radio-group>
+                    <a *ngIf="form.value['addOptions']" class="action-link" (click)="onOpenOptionLookUp($event)">
+                        {{ 'Lookup' | uppercase }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="form.value['addOptions']" class="form-group">
+            <product-item-options
+                [isNew]="isNew"
+                [subCode]="form.value['itemCode']"
+                [price]="form.value['price']"
+                [productOptions]="form.value['productOptions']"
+                [productInventories]="form.value['productInventories']"
+                [currentOptionIndex]="currentOptionIndex"
+                (productOptionChanged)="productOptionChanged.next($event)"
+                (columnChanged)="onColumnChanged($event)"></product-item-options>
+        </div>
+
+        <div class="form-group">
+            <div class="setup-item">
+                <label class="block">Will this item be:</label>
+                <div class="left-shift">
+                    <label class="inline radio-inline-label">
+                        Picked-Up
+                    </label>
+                    <div class="inline">
+                        <radio-group [displayInline]="true" class="radio-group" [formControl]="form.controls['shippingPickup']">
+                            <ng-template [radioGroupOption]="false">
+                                No
+                            </ng-template>
+                            <ng-template [radioGroupOption]="true">
+                                Yes
+                            </ng-template>
+                        </radio-group>
+                    </div>
+                </div>
+                <div class="left-shift">
+                    <label class="inline radio-inline-label">
+                        Delivered
+                    </label>
+                    <radio-group [displayInline]="true" class="radio-group inline" [formControl]="form.controls['shippingDelivered']">
+                        <ng-template [radioGroupOption]="false">
+                            No
+                        </ng-template>
+                        <ng-template [radioGroupOption]="true">
+                            Yes
+                        </ng-template>
+                    </radio-group>
+                </div>
+                <div class="left-shift">
+                    <label class="inline radio-inline-label">
+                        Shipped
+                    </label>
+                    <radio-group [displayInline]="true" class="radio-group inline" [formControl]="form.controls['shipped']">
+                        <ng-template [radioGroupOption]="false">
+                            No
+                        </ng-template>
+                        <ng-template [radioGroupOption]="true">
+                            Yes
+                        </ng-template>
+                    </radio-group>
+                </div>
+
+                <div *ngIf="form.value['shipped']" class="left-shift columns" style="align-items: center">
+                    <input class="form-control" style="width: 60px" placeholder="Weight" [formControl]="form.controls['shippingWeight']" />
+                    <div style="margin-left: 10px; margin-right: 40px;">
+                        <drop-down [selected]="'lb'" [elements]="['lb']"></drop-down>
+                    </div>
+                    <input class="form-control" style="width: 140px;" placeholder="Harmonized code" [formControl]="form.controls['shippingHarmonizedCode']" />
+                    <a class="action-link">
+                        LOOKUP
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="!form.value['addOptions'] || !form.value['productInventories']">
+            <div class="setup-item">
+                <label>
+                    Will Inventory be tracked by GloGood?
+                </label>
+                <div class="columns left-shift" style="align-items: center">
+                    <radio-group [displayInline]="true" class="radio-group inline" [formControl]="form.controls['trackInventory']">
+                        <ng-template [radioGroupOption]="false">
+                            No
+                        </ng-template>
+                        <ng-template [radioGroupOption]="true">
+                            Yes
+                        </ng-template>
+                    </radio-group>
+                    <split-text-box *ngIf="form.value['trackInventory']" [formControl]="form.controls['trackInventoryAmount']" label="Quantity" class="quantity-control inline"></split-text-box>
+                </div>
+
+                <div *ngIf="form.value['trackInventory']" class="setup-item">
+                    <radio-group class="inline" [formControl]="form.controls['trackRemove']">
+                        <ng-template [radioGroupOption]="true">
+                            When sold out remove from site.
+                        </ng-template>
+                        <ng-template [radioGroupOption]="false">
+                            When sold out keep selling.
+                        </ng-template>
+                    </radio-group>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="setup-item">
+                <Label>
+                    When do you want to show the Item online?
+                </Label>
+                <div class="left-shift">
+                    <radio-group class="radio-group inline" [formControl]="form.controls['onlineTime']">
+                        <ng-template [radioGroupOption]="1">
+                            Now
+                        </ng-template>
+                        <ng-template [radioGroupOption]="2">
+                            Hide
+                        </ng-template>
+                        <ng-template [radioGroupOption]="3">
+                            Schedule
+                        </ng-template>
+                    </radio-group>
+                    <datetime *ngIf="form.value['onlineTime'] === 3" #scheduleTime [formControl]="form.controls['activeDate']" class="inline schedule-time-control" name="schedule-time"></datetime>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="setup-item">
+                <div>
+                    <label>Will Taxes be charged on this Item?</label>
+                </div>
+                <div class="left-shift">
+                    <radio-group [displayInline]="true" class="radio-group" [formControl]="form.controls['isTaxable']">
+                        <ng-template [radioGroupOption]="false">
+                            No
+                        </ng-template>
+                        <ng-template [radioGroupOption]="true">
+                            Yes
+                        </ng-template>
+                    </radio-group>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input
+                type="button"
+                value="SAVE"
+                class="btn btn-block btn-main"
+                style="max-width: 150px;"
+                [class.active]="isValid"
+                [disabled]="!isValid"
+                (click)="onSubmit($event)"
+                />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<loading *ngIf="_loading"></loading>
+<div *ngIf="source==2" class="columns search-list" [class.disable]="_loading">
+    <div class="videos" #videosContainer
+        (scroll)="_videosContainerScroll.next()">
+        <div *ngFor="let v of _youTubeVideos; let i=index"
+            class="item"
+            [class.active]="v==activeVideo"
+            >
+            <div class="frame">
+                <video-list-item
+                    [source]="source"
+                    [video]="v"
+                    (selectedVideo)="selectVideo($event)"
+                    (dbSelectedVideo)="dbSelectVideo($event)"></video-list-item>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="source==3" class="columns search-list" [class.disable]="_loading">
+    <div class="videos" #videosContainer
+        (scroll)="_videosContainerScroll.next()">
+        <div *ngFor="let v of _vimeoVideos; let i=index"
+            class="item"
+            [class.active]="v==activeVideo"
+            >
+            <div class="frame">
+                <video-list-item
+                    [source]="source"
+                    [video]="v"
+                    (selectedVideo)="selectVideo($event)"
+                    (dbSelectedVideo)="dbSelectVideo($event)"></video-list-item>
+            </div>
+        </div>
+    </div>
+</div>

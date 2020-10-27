@@ -1,0 +1,313 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+h3 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+[contentEditable=true]:empty:before {
+    content:attr(placeholder)
+}
+
+.submit{
+    margin: 60px 10px 0px 10px;
+}
+.submit.deactive{
+    margin: 30px 10px 0px 10px!important;
+}
+
+svg{
+    overflow: visible;
+}
+
+input[type="submit"]{
+    width: 150px;
+}
+
+input[type="submit"].active{
+    background:     #FFA500;
+    border-color:   #FFA500;
+}
+
+.canvas-container {
+    position: relative;
+    width: 100%;
+    flex: 0 0 auto;
+    padding-top: 10px;
+    overflow: hidden;
+}
+    .canvas-container .canvas {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        cursor: default;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+        .canvas-container .canvas * {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+.result{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: 15px !important;
+    margin-bottom: 10px !important;
+}
+.result .result-shape-container{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+    .result .result-shape-container .result-shape{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    .result .result-shape-container .clone-shape{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+.colorPalette{
+    width: 160px;
+    height: 40px;
+}
+
+.color-box{
+    width:25px;
+    height: 25px;
+    border: 1px solid;
+}
+
+.new-color{
+    margin-top: 10px;
+}
+    .new-color .colors{
+        position: relative;
+        align-items: center;
+        height: 30px;
+    }
+    .new-color .color-picker{
+        position: relative;
+        margin-left: 30px;
+    }
+    .new-color .color-picker > div{
+        margin-bottom: 10px;
+    }
+    .new-color .text{
+        width: 50px;
+    }
+    .new-color >>> .btn-close{
+        position: absolute;
+        top: -4px;
+        right: -15px;
+        color: red;
+        text-decoration: none;
+    }
+
+.adjusts{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+    .shape-adjust{
+        margin-left: 60px;
+        height: 35px;
+    }
+    .shape-adjust > div{
+        display: inline-block;
+        width: 70px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .shape-adjust slider{
+        margin-top: 0px;
+        width: 150px;
+        min-width: 100px;
+    }
+    .adjusts input[type="text"]{
+        width: 30px;
+        border: none;
+    }
+
+
+.text {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.more{
+    position: absolute;
+    right: 0px;
+    text-align: right;
+}
+
+.canvas .select-shape{
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+    .canvas .select-shape .shapeName{
+        margin-top: 10px;
+    }
+    .canvas .select-shape .shape.line{
+        width: 150px;
+        height: 25px;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+    .canvas .select-shape .shape-list{
+        margin-top: 10px;
+        padding: 0px 10px 0px 10px;
+    }
+    .canvas .shape{
+		line-height: 0;
+		overflow: hidden;
+        cursor: pointer;
+    }
+        .canvas .shape g{
+            stroke: black;
+            fill: white;
+            fill-rule: evenodd;
+            stroke-width: 5px;
+        }
+        .canvas .shape.arrow g{
+            stroke-width: 5px;
+        }
+
+        .canvas line {
+			stroke: black;
+            stroke-width: 2;
+        }
+
+        .canvas .shape.banner{
+            width: 80px!important;
+        }
+        .canvas .shape.banner-flag{
+            width: 60px!important;
+        }
+
+        .canvas .shape.rect{
+            width: 35px;
+            height: 35px;
+            margin: auto;
+        }
+            
+		.canvas .shape.arrow{
+			margin: auto;
+			width: 40px;
+			height: 40px;
+		}
+        .canvas .select-shape .shape-list.star-banner .shape{
+            margin: 0px 10px 0px 0px;
+            width: 45px;
+            height: 45px;
+        }
+        .canvas .select-shape .shape-list.callout .shape{
+            margin: 0px 10px 0px 0px;
+            width: 45px;
+            height: 45px;
+        }
+
+        .canvas .choose-line-style {
+            width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .canvas .choose-line-style .choose-text{
+            margin-top: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px;
+            color: #8c8c8c;
+        }
+        .canvas .choose-line-style radio-group >>> li{
+            margin-top: 15px;
+        }
+
+        .canvas .choose-line-style .line-style{
+            width: 200px;
+            height: 10px;
+            margin-top:5px;
+            margin-bottom: 5px;
+            margin-left: auto;
+			margin-right: auto;
+			line-height: 0;
+            cursor: pointer;
+        }
+
+        .canvas .choose-line-style .line-style.dash line{
+            stroke-dasharray: 10,10;
+        }
+
+        .canvas .choose-line-style .line-style.dot line{
+            stroke-dasharray: 5,5;
+        }
+
+        .adjusts .corner{
+            margin-top: 15px;
+            padding-left: 60px;
+            height: 38px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .adjusts .corner .choose-text{
+                word-wrap: break-word;
+                width: 140px;
+            }
+        .adjusts .corner-body{
+            position: relative;
+            margin-top: 16px;
+        }
+            .adjusts .corner-body .choose-corner{
+                width: 50px;
+                height: 50px;
+                border: 1px solid;
+            }
+            .adjusts .corner-body checkbox{
+                position: absolute;
+                font-size: 20px;
+            }
+            .adjusts .corner-body .check-l-top{
+                left: -14px;
+                top: -14px;
+            }
+            .adjusts .corner-body .check-r-top{
+                right: -24px;
+                top: -14px;
+            }
+            .adjusts .corner-body .check-l-bottom{
+                left: -14px;
+            }
+            .adjusts .corner-body .check-r-bottom{
+                right: -24px;
+            }

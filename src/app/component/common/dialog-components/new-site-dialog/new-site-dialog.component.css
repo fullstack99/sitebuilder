@@ -1,0 +1,37 @@
+:host {
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+[hidden] { display: none !important;}
+loading{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 80px);
+}
+
+.dialog-container {
+    position: relative;
+    margin: 10px;    
+}    
+
+    .submit input{
+        background:     #FFA500;
+        border-color:   #FFA500;
+        color: white;
+        width: 150px;
+        font-size: 120%;
+        margin-bottom: 10px;
+    }

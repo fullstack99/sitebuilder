@@ -1,0 +1,43 @@
+<div #appContainer
+    class="app-container"
+    [inactivity]="!timedOut"
+    [inactivityTimeout]="86400"
+    (inactivityCallback)="handleInactivity()"
+    (inactivityTimeoutWarning)="handleInactivityWarning($event)"
+    (inactivityReset)="handleInactivityReset()"
+    (dragover)="onDragOver($event)"
+    (dragenter)="onDragEnter($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    (click)="onClickAppContainer($event)">
+    <header></header>
+    <router-outlet></router-outlet>
+    <div [hidden]="!willTimeout" class="timeout rows animated bounceIn">
+        <div class="timeout-title columns">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <h3>Time out!</h3>
+        </div>
+        <div *ngIf="loggedIn$ | async" class="timeout-body">
+            <p *ngFor="let t of idleState">{{t}}</p>
+        </div>
+        <button *ngIf="!(loggedIn$ | async) && timedOut" type="button" class="btn btn-default" (click)="onRefresh()">Refresh</button>
+        <button type="button" class="btn btn-default" (click)="onLogin()" *ngIf="timedOut">Login</button>
+    </div>
+    <app-canvas-view
+        [page]="currentRefreshPage"
+        [loading]="true"
+    >
+    </app-canvas-view>
+    <!-- <div *ngIf="refreshing" class="progress-ele">
+        <div #progressEle class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        </div>
+    </div> -->
+    <div
+		#cookieNotice
+		*ngIf="enableNotice && visibleNotice"
+		class="cookie-notice"
+		(click)="onClickCookieNotice($event)">
+		<span class="glogood-close-button" (click)="onCloseCookieNotice($event)">x</span>
+		By using this website, you agree to our use of cookie. We use cookies to provide you with a great experience and to help our website run effectively
+    </div>
+</div>

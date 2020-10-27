@@ -1,0 +1,177 @@
+<div id="button-dialog">
+  <div class="dialog-header">
+    <div class="btn-feedback columns">
+      <img src="/assets/images/logo-0.png"/>
+      <a (click)="openFeedbackDialog()">FEEDBACK</a>
+      <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+      <span class="dialog-title"><h3>BUTTON</h3></span>
+    </div>
+  </div>
+  <div class="canvas-container" [formGroup]="buttonInfoForm">
+    <div class="canvas">
+      <div class="rows" (click)="setDisableEditor()">
+          <div class="result-button text-center" #resultButton
+              [style.padding-left]="buttonInfoForm.value.wPadding + 'px'"
+              [style.padding-right]="buttonInfoForm.value.wPadding + 'px'"
+              [style.padding-top]="buttonInfoForm.value.hPadding + 'px'"
+              [style.padding-bottom]="buttonInfoForm.value.hPadding + 'px'"
+
+              [style.background-color]="buttonInfoForm.value.backColor"
+              [style.border-color]="buttonInfoForm.value.borderColor"
+              [style.border-style]="'solid'"
+              [style.border-width]="buttonInfoForm.value.border + 'px'"
+              [style.border-radius]="buttonInfoForm.value.corner + 'px'"
+              [style.box-shadow]="getShadow(buttonInfoForm.value)"
+              (mouseenter)="onHoverButton($event)"
+              (mouseleave)="onLeaveButton($event)"
+              (click)="setDisableEditor()"
+          >
+          <div class="text-editor text-center"
+            #textEditor
+            (click)="onTextEditorClick($event)"
+            text-editor-tinymce
+            [text-editor-enabled]="textEditorEnabled"
+            [text-editor-toolbar-width]="250"
+            [text-editor-hide-links]="true"
+            [text-editor-toolbar-type]="1"
+            (text-editor-input-text)="onEditorInput($event)"
+            (text-editor-destroyed)="onEditorInput($event)">
+          </div>
+        </div>
+        <div class="disp-add-text center-block"> Click to Add Text </div>
+      </div>
+
+      <div class="columns new-color" (click)="setDisableEditor()">
+            <div class="rows">
+                <div class="columns colors">
+                    <label class='c-input c-radio'>
+                        <input type="radio" name="{{headerfooter}}color"
+                            [formControl]="whichColor" value="1">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Color</div>
+                    <div class="color-box"
+                        [style.background-color]="buttonInfoForm.value.backColor">
+                    </div>
+                    <a class="btn-close" (click)="clearColor(1)"
+                        [hidden]="whichColor.value != '1'">×</a>
+                </div>
+                <div class="columns colors">
+                    <label class='c-input c-radio'>
+                        <input type="radio" name="{{headerfooter}}color"
+                            [formControl]="whichColor" value="2">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Hover</div>
+                    <div class="color-box"
+                        [style.background-color]="buttonInfoForm.value.hoverColor">
+                    </div>
+                    <a class="btn-close" (click)="clearColor(2)"
+                        [hidden]="whichColor.value != '2'">×</a>
+                </div>
+                <div class="columns colors">
+                    <label class='c-input c-radio'>
+                        <input type="radio" name="{{headerfooter}}color"
+                            [formControl]="whichColor" value="3">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Border</div>
+                    <div class="color-box"
+                        [style.background-color]="buttonInfoForm.value.borderColor">
+                    </div>
+                    <a class="btn-close" (click)="clearColor(3)"
+                        [hidden]="whichColor.value != '3'">×</a>
+                </div>
+            </div>
+            <div class="color-picker rows">
+                <div class="columns" style="justify-content: space-between;">
+                    <span>Color Picker</span>
+                    <a (click)="openColorPicker()">More</a>
+                </div>
+                <div class="colorPalette" #colorPalette></div>
+            </div>
+        </div>
+
+        <div class="columns adjusts" (click)="setDisableEditor()">
+            <div class="rows">
+              <div *ngFor="let item of _sampleInfo; let i=index"
+                class="columns sample-button-selector">
+                    <label class='c-input c-radio'>
+                        <input type="radio"
+                          name="{{headerfooter}}amount"
+                          value="{{i}}"
+                          [formControl]="whichAmount"
+                          (click)="selectButton(i)">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="sample-button"
+                      [style.width]="item.width+'px'"
+                      [style.height]="item.height+'px'"
+                      [style.background-color]="item.backColor"
+                      [style.border-color]="item.borderColor"
+                      [style.border-style]="'solid'"
+                      [style.border-width]="item.border+'px'"
+                      [style.border-radius]="item.corner+'px'"
+                      [style.box-shadow]="getShadow(item)"
+                      [innerHTML]="getButtonText(item.text)"
+                      >
+                    </div>
+                </div>
+            </div>
+            <div class="rows button-adjusts">
+                <div class="columns button-adjust">
+                    <div class="text">Width</div>
+                    <slider formControlName="wPadding"
+                        [min]="_rangeWPadding[0]" [max]="_rangeWPadding[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Height</div>
+                    <slider formControlName="hPadding"
+                        [min]="_rangeHPadding[0]" [max]="_rangeHPadding[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Corner</div>
+                    <slider formControlName="corner"
+                        [min]="_rangeCorner[0]" [max]="_rangeCorner[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Glow</div>
+                    <slider formControlName="glow"
+                        [min]="_rangeGlow[0]" [max]="_rangeGlow[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Border</div>
+                    <slider formControlName="border"
+                        [min]="_rangeBorder[0]" [max]="_rangeBorder[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Shadow</div>
+                    <slider formControlName="shadow"
+                        [min]="_rangeShadow[0]" [max]="_rangeShadow[1]">
+                    </slider>
+                </div>
+                <div class="columns button-adjust">
+                    <div class="text">Bevel</div>
+                    <slider formControlName="bevel"
+                        [min]="_rangeBevel[0]" [max]="_rangeBevel[1]">
+                    </slider>
+                </div>
+            </div>
+        </div>
+        <div class="form-group submit center-block">
+              <input
+                  type="button"
+                  value="ADD"
+                  (click)="onAdd()"
+                  class="btn btn-block btn-main center-block">
+        </div>
+      </div>
+  </div>
+</div>

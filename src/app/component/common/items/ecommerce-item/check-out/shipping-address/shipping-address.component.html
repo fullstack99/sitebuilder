@@ -1,0 +1,91 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">		
+        <span class="dialog-title">
+            <h3>Shipping Address</h3>
+        </span>
+    </div>	
+</div>
+<div class="address-details">
+    <form [formGroup]="form" autocomplete="on">
+        <div class="spilt-box">
+            <split-text-box formControlName="firstName" label="First Name"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="lastName" label="Last Name"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="address1" label="Address 1"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="address2" label="Address 2"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="city" label="City"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <drop-down 
+                class="dropdown"
+                [selected]="'State'"
+                [elements]="['Texas','California','Georgia','Virginia','Arizona','Florida','Colorado','Alaska']">
+            </drop-down>
+        </div>
+        
+        <div class="spilt-box">
+            <split-text-box formControlName="postalCode" label="Postal Code"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <!-- <split-text-box formControlName="countryId" label="Country"></split-text-box> -->
+            <drop-down
+                class="dropdown"
+                [selected]="'Country'"
+                [elements]="['United Status', 'Canada', 'Germany', 'Brazil', 'Korea', 'China']">
+            </drop-down>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="email" label="Email for order confirmation"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box formControlName="confirmEmail" label="Confirm Email"></split-text-box>
+        </div>
+
+        <div class="spilt-box phone-item">
+            <split-text-box formControlName="phone" label="Phone (optional)"></split-text-box>
+            <tooltip text="?" code="bl.u.110" height="250">
+                <h3> Signup for Updates </h3>
+                <p>
+                    Visitors can get Blog updates by submitting their emails.
+                </p>
+                <p>
+                    The emails will be added to your Contacts.
+                </p>
+                <p>
+                    When you have a new Posting you can nofity your contacts.
+                </p>
+            </tooltip>
+        </div>        
+        <div class="form-group">
+            <input
+                type="button"
+                value="Continue"
+                class="btn btn-block btn-main"
+                style="max-width: 150px;"
+                [class.active]="isValid"
+                [disabled]="!isValid"
+                (click)="onSubmit()"
+                />
+        </div>
+    </form>
+</div>

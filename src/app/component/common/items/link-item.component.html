@@ -1,0 +1,46 @@
+<div [ngSwitch]="item.itemType" class="item-container">
+     <ng-template ngSwitchCase="ButtonItem">
+        <button-item
+            [item]="item">
+        </button-item>
+    </ng-template>
+    <ng-template ngSwitchCase="GalleryItem">
+        <gallery-item
+            [item]="item">
+        </gallery-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ImageItem">
+        <image-item
+            [item]="item">
+        </image-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ShapeItem">
+        <shape-item
+            [item]="item">
+        </shape-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SlideShowItem">
+        <slideshow-item
+            [item]="item">
+        </slideshow-item>
+    </ng-template>
+    <ng-template ngSwitchCase="VideoItem">
+        <video-item
+            [item]="item">
+        </video-item>
+    </ng-template>
+    <ng-template ngSwitchCase="TextItem">
+        <link-text-item
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value"
+            [item]="item">
+        </link-text-item>
+    </ng-template>
+    <div *ngIf="hasItemLink" class="setting-button">
+        <span class="btn-link">L</span>
+    </div>
+</div>

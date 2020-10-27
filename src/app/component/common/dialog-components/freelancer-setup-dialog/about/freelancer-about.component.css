@@ -1,0 +1,61 @@
+:host {
+    position: relative;
+    box-sizing: border-box;    
+    background: transparent;
+    font-size: 16px;
+    color: #555;
+    overflow: hidden;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.service-container{
+    max-width: 400px;
+    width: 100%;    
+    margin: auto;    
+}
+    .service-container .title{
+        font-size: 20px;
+        text-align: center;
+    }
+    .service-container .text{
+        font-size: 18px;        
+    }
+
+.chars-right{
+    text-align: right;
+    font-size: 12px;
+}
+
+.result-image-container{
+    width: 180px;
+    margin: auto;
+    margin-bottom: 15px
+}
+    .photo {
+        position: relative;
+        justify-content: center;
+        width: 180px;
+        height: 140px;
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+        margin: auto;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        cursor: pointer;
+    }
+        .photo > span {
+            align-self: center;
+            font-size: 16px;
+            color: #8c8c8c;
+            cursor: pointer;
+        }
+
+    .spinner i{
+        color: #ffa500;
+    }
+    

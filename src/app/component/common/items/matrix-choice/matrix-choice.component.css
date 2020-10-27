@@ -1,0 +1,87 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.matrix-choice-container{
+    padding: 5px;
+    overflow: auto;
+}
+
+.first-text-label{
+    min-width: 137px!important;
+}
+.h-container{
+    position: relative;
+}
+  .h-container .single-text-container:not(:first-child) {
+    min-width: 100px;
+    max-width: 100px;
+  }
+  .h-container .matrix-text-label {
+    min-width: 100px;
+    max-width: 100px;
+  }
+
+.v-container{
+    position: relative;
+}
+    .h-container .remove{
+        position: absolute;
+        top: -5px;
+        right: 0px;
+        z-index: 100;
+        cursor: pointer;
+    }
+    .v-container .remove{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 100;
+        cursor: pointer;
+    }
+
+    .h-container .btn-more{
+         margin-top: 20px;
+    }
+    .v-container .btn-more{
+        /* margin-left: 20px; */
+    }
+
+.option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100%;
+}
+
+.drop{
+    margin: auto;
+    position: relative;
+}
+    .drop .remove{
+        position: absolute;
+        font-size: 14px;
+        cursor: pointer;
+        top: 7px;
+        right: 10px;
+    }
+
+drop-down{
+    width: 90px;
+    height: 34px;
+}
+
+drop-down >>> .bt-angle-down {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+}
+
+.v-row:hover {background: #F0F0F0}

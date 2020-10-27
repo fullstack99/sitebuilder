@@ -1,0 +1,64 @@
+<div class="video-item-container" (click)="onClick()">
+    <div class="video-item-image">
+        <a>
+            <img src="{{video.thumbnailUrl}}" class="img-fluid">
+        </a>
+        <a class="play" (click)="onPlay($event)">
+            <i class="bts bt-play bt-lg"></i>
+        </a>
+    </div>
+    <div class="video-item-desc">
+        <div class="title" *ngIf="source==2">
+            {{video.title}}
+        </div>
+        <div class="title" *ngIf="source==3">
+            {{video.name}}
+        </div>
+        <div class="channel">
+            <a *ngIf="source==2" href="http://youtube.com/channel/{{video.channelId}}" target="_blank">
+                {{video.channelTitle}}
+            </a>
+            <a *ngIf="source==3" href="https://player.vimeo.com/{{video.link}}" target="_blank">
+                {{video.link}}
+            </a>
+        </div>
+        <div class="date">
+            <ng-template [ngIf]="source==2">
+                {{video.publishedAt}}
+            </ng-template>
+            <ng-template [ngIf]="source==3">
+                {{video.modified_time}}
+            </ng-template>
+        </div>
+        <div class="hidden-sm-down description">
+            {{video.description}}
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="source==3" class="video-item-container" (click)="onClick()">
+    <div class="video-item-image">
+        <a>
+            <img src="{{video.thumbnailUrl}}" class="img-fluid">
+        </a>
+        <a class="play" (click)="onPlay($event)">
+            <i class="bts bt-play bt-lg"></i>
+        </a>
+    </div>
+    <div class="video-item-desc">
+        <div class="title">
+            {{video.name}}
+        </div>
+        <div class="channel">
+            <a href="https://player.vimeo.com/{{video.link}}" target="_blank">
+                {{video.link}}
+            </a>
+        </div>
+        <div class="date">
+            {{video.modified_time}}
+        </div>
+        <div class="hidden-sm-down description">
+            {{video.description}}
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,119 @@
+:host {
+    display: flex;    
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+    .flex-column > *:first-child {
+        margin-top: 0px;
+    }
+    .flex-column > * {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .flex-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+.flex-row {
+    display: flex;
+}
+
+.border {
+	border: 1px solid black;
+	height: 202px;
+}
+.border.last {
+    border-left: none;
+}
+.color-picker-wrap .hue-picker {
+    width: 20px;
+}
+.color-picker-wrap .color-picker {
+    width: 200px;
+    height: 200px;
+}
+.form {
+    margin: 0px 10px;
+}
+    .form label.flex-row {
+        justify-content: space-between;
+        align-items: center;
+        width: 122px;
+        margin: 5px 10px;
+        font-weight: normal;
+    }
+        .form label input {
+            display: inline-block;
+            width: 80px;
+            padding: 3px 6px;
+            border: 1px solid #ccc;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .form label input:focus {
+            box-shadow: none;
+            outline: none;
+            border-color: #ffa500;
+        }
+.more-colors {
+}
+    .more-colors .heading {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 8px;
+        background-color: #eee;
+        border-bottom: 1px solid #e2e2e2;
+        font-weight: bold;
+        margin: 2px 0px;
+    }
+        .more-colors .heading .btn-clear {
+            color: #333;
+			text-decoration: none;
+			cursor: pointer;
+		}
+			.more-colors .heading .btn-clear.deactive {
+				visibility: hidden;
+			}
+    .more-colors .colors {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+    .more-colors .color-btn {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        margin: 1px;
+        border: 1px solid #ccc;
+	}
+		.more-colors .color-btn.active {
+			outline: 1px solid;
+		}
+
+.picked-color {
+    width: 50px;
+    height: 50px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+}
+    .bottom .submit {
+        width: 200px;
+        font-size: 120%;
+        background: #ffa500;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 20px;
+    }

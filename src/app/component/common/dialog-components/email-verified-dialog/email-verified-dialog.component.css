@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  position: relative;
+  height: 100%;
+  background: transparent;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+loading{
+  position: absolute;
+  opacity: 1;
+  z-index: 1000;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+}
+
+.dialog-title{
+  font-size: 22px;
+}
+
+.dialog-body{
+  overflow: auto;
+  padding: 15px;
+}

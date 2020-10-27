@@ -1,0 +1,41 @@
+<div class="form-group">
+  	<checkbox [formControl]="programDesignationsEnabled"></checkbox>
+    <div class="section-title">   
+		<legend class="text"> Program Designation </legend>      
+		<tooltip class="help-btn" text='?' [code]="'f.set.100'">
+			<content>				
+				<div>
+					If you have more than one Fundraising program this is where to list them.
+				</div>
+				<div class="content2">
+					Your donor will be able to chose the progrm for their donation.
+				</div>				
+			</content>
+		</tooltip>
+	</div>
+	<div class="box-3" #box style="display: none;">
+		<div class="form-group">        
+			<drop-down
+				[selected]="selected"
+				[elements]="programDesignations.value"
+				[viewElements]="false"
+				(changeSelected)="changeSelected($event)"> 
+			</drop-down>
+			<div class="expand">
+				<expandable-input
+					[children]="expandable_elements"
+					[itemTitle]="'Enter Name of Program'"
+					[numberOfDefaultChildren]=1
+					[rootName]=""
+					[useSplitBoxForRoot]=false
+					[jsonFlag]=true
+					[isFocused]="programDesignationsEnabled.value"
+					(rootChange)="rootChange($event)"
+					(childJsonChange)="childChange($event)"
+					(childDelete)="childDelete($event)"
+					>
+				</expandable-input>
+			</div>
+		</div>
+	</div>	
+</div>

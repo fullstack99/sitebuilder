@@ -1,0 +1,96 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">		
+        <span class="dialog-title"><h3>Contact Details</h3></span>
+    </div>    
+</div>
+<div class="contact-details">
+    <div class="contact-left">
+        <h5>
+            {{newContactDetails.email}}
+        </h5>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'firstName')" [value]="newContactDetails.firstName" label="First Name"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'lastName')" [value]="newContactDetails.lastName" label="Last Name"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'company')" [value]="newContactDetails.company" label="Company - Org"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'address1')" [value]="newContactDetails.address1" label="Address 1"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'address2')" [value]="newContactDetails.address2" label="Address 2"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'city')" [value]="newContactDetails.city" label="City"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'provinceId')" [value]="newContactDetails.provinceId" label="State"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'countryId')" [value]="newContactDetails.countryId" label="Country"></split-text-box>
+        </div>
+
+        <div class="spilt-box">
+            <split-text-box (keyup)="onInput($event, 'postalCode')" [value]="newContactDetails.postalCode" label="Postal Code"></split-text-box>
+        </div>
+
+    </div>
+
+    <div class="contact-right">
+        <h5>
+            ADDED: {{newContactDetails.createDate | date: 'dd/MM/yyyy'}}
+        </h5>
+
+        <h4> Contacts Results </h4>
+        <div class="results">
+            <span>Emails Sent</span>
+            <span>0</span>
+        </div>
+
+        <div class="results">
+            <span>Opened</span>
+            <span>0</span>
+        </div>
+
+        <div class="results">
+            <span>Unopened</span>
+            <span>0</span>
+        </div>
+
+        <div class="results">
+            <span>Bounced</span>
+            <span>0</span>
+        </div>
+
+        <div class="results">
+            <span>Unsubscribed</span>
+            <span>0</span>
+        </div>
+
+        <div class="arrow-button-container">
+            <app-arrow-button class="all-check" [on]="showAddList.value">
+                <a (click)="showAddList.setValue(!showAddList.value)">Email Lists</a>
+            </app-arrow-button>            
+        </div>
+        <add-list [emailList] = "emailList" [checkedEmailList] = "checkedEmailList" (submit)="onList($event)" *ngIf="showAddList.value"></add-list>
+        <div class="bottom text-center">
+            <input [disabled]="!isValid.value" class="btn submit" (click)="onSubmit()" type="button" value="SAVE" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,953 @@
+{
+	"description": "",
+	"title": "",
+	"keywords": "",
+	"items": [
+		{
+			"id": 0,
+			"siteId": 0,
+			"uid": "944c810f-fd21-f3a4-3fc8-ee41f7290bbd",
+			"itemType": "EcommerceItem",
+			"content": {
+				"info": {
+					"value": {
+						"layoutType": 0,
+						"productUids": [],
+						"initViewNum": 8,
+						"showNavigation": true
+					}
+				},
+				"box": {
+					"left": 30,
+					"right": 1070,
+					"top": 20,
+					"bottom": 459
+				},
+				"rotate": 0,
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"link": null,
+				"mBox": {
+					"left": 0,
+					"right": 320,
+					"top": 0,
+					"bottom": 100
+				},
+				"mView": 1
+			},
+			"hf": 0,
+			"locked": false,
+			"global": false,
+			"sequence": 100,
+			"listingUid": "850ced3d-6e9e-42ee-90b6-6b1c0363d44d",
+			"service": 20,
+			"containerUid": ""
+		},
+		{
+			"id": 1,
+			"siteId": 0,
+			"uid": "c5e41b1e-150d-4221-84de-79270b64334f",
+			"itemType": "HFItem",
+			"content": {
+				"placeholder": "Header Panel",
+				"box": {
+					"left": 10,
+					"right": 1088,
+					"top": 10,
+					"bottom": 51
+				},
+				"items": [],
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"visible": false,
+				"mBox": {
+					"left": 10,
+					"right": 300,
+					"top": 10,
+					"bottom": 120
+				},
+				"mView": 1
+			},
+			"hf": 1,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "a69ac13c-e7b7-40c3-91c1-45668f4aad0e",
+			"service": 20,
+			"containerUid": null
+		},
+		{
+			"id": 2,
+			"siteId": 0,
+			"uid": "18379a71-3e1c-4e78-aea8-b6446cc76766",
+			"itemType": "HFItem",
+			"content": {
+				"placeholder": "Header Panel",
+				"box": {
+					"left": 0,
+					"right": 1068,
+					"top": 1653,
+					"bottom": 1763
+				},
+				"items": [],
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"visible": false,
+				"mBox": {
+					"left": 10,
+					"right": 300,
+					"top": 10,
+					"bottom": 120
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "a69ac13c-e7b7-40c3-91c1-45668f4aad0e",
+			"service": 20,
+			"containerUid": null
+		},
+		{
+			"id": 3,
+			"siteId": 0,
+			"uid": "319febb7-b4d9-48e3-8358-7422fe6923ca",
+			"itemType": "NavItem",
+			"content": {
+				"info": {
+					"value": {
+						"links": [
+							{
+								"text": "Home",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "babaaf3a-9859-d4c3-cf3b-8ada243efd21",
+									"listingUid": null,
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "transparent"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Garden Arbors",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "4a2291f2-246a-68cf-cc67-05a326e2a118",
+									"listinƒgUid": "",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Garden Fencing",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "bdd15b8c-87f9-b80b-4892-0379ef33927e",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Gates",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "f7b45fef-2868-b8b2-292c-818d5810d641",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Pergola",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "3fa2ae32-e5a4-1b7c-3ab1-0f59f85463c8",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Picket Fencing",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "6cccfe41-3637-ac4e-a9ba-5e550c403aeb",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Planter Boxes",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "9438d261-ea62-1ec7-6c0a-1ce20622603e",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Oblisk",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "12148d30-a2f4-e8dd-81ee-65aeb22572ad",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Treillage",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "a5477125-842d-62e3-9514-e8cc82417989",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Catalog",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "8e58a494-4a69-1491-b8e0-4aef590d57a4",
+									"listingUid": null,
+									"type": "lookup"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "transparent"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							},
+							{
+								"text": "Contact Us",
+								"fontStyle": {
+									"fontSize": "14px",
+									"fontFamily": "Arial",
+									"bold": false,
+									"italic": false,
+									"underline": false,
+									"color": "black",
+									"backgroundColor": "white"
+								},
+								"link": {
+									"pageUid": "84bba8c4-85c2-f4d1-1f52-1c07aa5084c3",
+									"type": "page"
+								},
+								"sublinks": [
+									{
+										"text": "",
+										"fontStyle": {
+											"fontSize": "14px",
+											"fontFamily": "Arial",
+											"bold": false,
+											"italic": false,
+											"underline": false,
+											"color": "black",
+											"backgroundColor": "white"
+										},
+										"link": null,
+										"sublinks": []
+									},
+									{
+										"text": "",
+										"fontStyle": null,
+										"link": null,
+										"sublinks": []
+									}
+								]
+							}
+						],
+						"layout": "top",
+						"minWidth": 1679,
+						"minHeight": 31,
+						"spacing": 0,
+						"fontStyle": {
+							"fontSize": "16px",
+							"fontFamily": "Arial",
+							"bold": false,
+							"italic": false,
+							"underline": false,
+							"color": "#808080",
+							"backgroundColor": "white"
+						},
+						"subFontStyle": {
+							"fontSize": "14px",
+							"fontFamily": "Arial",
+							"bold": false,
+							"italic": false,
+							"underline": false,
+							"color": "black",
+							"backgroundColor": "white"
+						},
+						"design": {
+							"backColor": "transparent",
+							"hoverColor": "transparent",
+							"borderColor": "#ffffff",
+							"borderStyle": "solid",
+							"borderWidth": 0,
+							"amount": 0,
+							"lTop": true,
+							"rTop": true,
+							"lBottom": true,
+							"rBottom": true
+						},
+						"imageInfo": {
+							"size": 14
+						}
+					}
+				},
+				"box": {
+					"left": 5,
+					"right": 1095,
+					"top": 0,
+					"bottom": 31
+				},
+				"rotate": 0,
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"link": null,
+				"mBox": {
+					"left": 280,
+					"right": 315,
+					"top": 10,
+					"bottom": 35
+				},
+				"mView": 1
+			},
+			"hf": 1,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "850ced3d-6e9e-42ee-90b6-6b1c0363d44d",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 4,
+			"siteId": 0,
+			"uid": "a9f8a396-a019-4739-bc05-c4c8798876cf",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 433,
+					"right": 556,
+					"top": 27,
+					"bottom": 51
+				},
+				"text": "<p><span style=\"color: rgb(255, 0, 0);\" data-mce-style=\"color: #ff0000;\">SPECIALS&nbsp; ALERT</span></p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 5,
+			"siteId": 0,
+			"uid": "e4448214-e4d0-48f8-8aae-ecb1e9c3a754",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 53,
+					"right": 180,
+					"top": 24,
+					"bottom": 48
+				},
+				"text": "<p><span style=\"color: rgb(0, 204, 255);\" data-mce-style=\"color: #00ccff;\">Download Catalog</span></p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 6,
+			"siteId": 0,
+			"uid": "921a61b3-061a-425f-b809-50e86078ccee",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 63,
+					"right": 177,
+					"top": 69,
+					"bottom": 93
+				},
+				"text": "<p>BrattleWorks&nbsp;&nbsp;®</p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 7,
+			"siteId": 0,
+			"uid": "aa51212e-637a-45ba-ac30-c4411fa66a86",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 326,
+					"right": 630,
+					"top": 71,
+					"bottom": 95
+				},
+				"text": "<p>©&nbsp; &nbsp;Copyright 2019&nbsp; BrattleWorks Company Inc.</p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 8,
+			"siteId": 0,
+			"uid": "7df7908b-f837-457d-bd6d-cd97f61b1ff3",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 703,
+					"right": 953,
+					"top": 76,
+					"bottom": 100
+				},
+				"text": "<p>Garden Fencing&nbsp; &nbsp; All Rights&nbsp; &nbsp; &nbsp;Reserved</p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 9,
+			"siteId": 0,
+			"uid": "7dfa07ce-9675-404e-bfb6-90132de25d31",
+			"itemType": "TextItem",
+			"content": {
+				"box": {
+					"left": 857,
+					"right": 939,
+					"top": 26,
+					"bottom": 50
+				},
+				"text": "<p><span style=\"color: rgb(0, 204, 255);\" data-mce-style=\"color: #00ccff;\">Contact Us</span></p>",
+				"padding": "3px 5px",
+				"borderInfo": {},
+				"backInfo": {},
+				"mBox": {
+					"left": 0,
+					"right": 300,
+					"top": 0,
+					"bottom": 80
+				},
+				"mView": 1
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "425423f6-72fc-4606-ab0c-9bac204e5687",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 10,
+			"siteId": 0,
+			"uid": "7f57564d-d357-4b3a-99d1-04ed7211d6c8",
+			"itemType": "ImageItem",
+			"content": {
+				"box": {
+					"left": 14,
+					"right": 178,
+					"top": 64,
+					"bottom": 135
+				},
+				"link": null,
+				"image": {
+					"name": "logo3.png",
+					"location": "https://bw.glogood.com/components/7f57564d-d357-4b3a-99d1-04ed7211d6c8/image",
+					"createDate": "1557510841"
+				},
+				"borderInfo": {},
+				"backInfo": {},
+				"rotate": 0,
+				"mBox": {
+					"left": 0,
+					"right": 320,
+					"top": 0,
+					"bottom": 100
+				},
+				"mView": 1,
+				"alt": ""
+			},
+			"hf": 0,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "850ced3d-6e9e-42ee-90b6-6b1c0363d44d",
+			"service": 17,
+			"containerUid": null
+		},
+		{
+			"id": 11,
+			"siteId": 0,
+			"uid": "4c84d719-4f4e-41ce-9830-34a82b475d28",
+			"itemType": "HFItem",
+			"content": {
+				"placeholder": "Header Panel",
+				"box": {
+					"left": 10,
+					"right": 320,
+					"top": 10,
+					"bottom": 80
+				},
+				"items": [],
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"visible": false,
+				"mBox": {
+					"left": 10,
+					"right": 300,
+					"top": 10,
+					"bottom": 120
+				},
+				"mView": 3
+			},
+			"hf": 1,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "a69ac13c-e7b7-40c3-91c1-45668f4aad0e",
+			"service": 20,
+			"containerUid": null
+		},
+		{
+			"id": 12,
+			"siteId": 0,
+			"uid": "84985615-b630-49a8-8d8f-a7d32fcc185b",
+			"itemType": "HFItem",
+			"content": {
+				"placeholder": "Header Panel",
+				"box": {
+					"left": 10,
+					"right": 320,
+					"top": 3662,
+					"bottom": 3732
+				},
+				"items": [],
+				"borderInfo": {},
+				"backInfo": {
+					"value": {}
+				},
+				"visible": false,
+				"mBox": {
+					"left": 10,
+					"right": 300,
+					"top": 10,
+					"bottom": 120
+				},
+				"mView": 3
+			},
+			"hf": 2,
+			"locked": false,
+			"global": true,
+			"sequence": 100,
+			"listingUid": "a69ac13c-e7b7-40c3-91c1-45668f4aad0e",
+			"service": 20,
+			"containerUid": null
+		}
+	],
+	"background": {},
+	"listingUid": "a69ac13c-e7b7-40c3-91c1-45668f4aad0e",
+	"siteId": 0,
+	"id": 0,
+	"uid": "ce930460-42d7-9d8a-2b9b-c54ace68e804",
+	"version": 0,
+	"unplacedGlobalItems": [],
+	"service": 20,
+	"serviceObject": {
+		"layoutType": 0,
+		"productUids": [],
+		"initViewNum": 8,
+		"showNavigation": true,
+		"uid": "ce930460-42d7-9d8a-2b9b-c54ace68e804"
+	},
+	"removedImages": [],
+	"hasImages": true,
+	"linkUids": [
+		"babaaf3a-9859-d4c3-cf3b-8ada243efd21",
+		"4a2291f2-246a-68cf-cc67-05a326e2a118",
+		"bdd15b8c-87f9-b80b-4892-0379ef33927e",
+		"f7b45fef-2868-b8b2-292c-818d5810d641",
+		"3fa2ae32-e5a4-1b7c-3ab1-0f59f85463c8",
+		"6cccfe41-3637-ac4e-a9ba-5e550c403aeb",
+		"9438d261-ea62-1ec7-6c0a-1ce20622603e",
+		"12148d30-a2f4-e8dd-81ee-65aeb22572ad",
+		"a5477125-842d-62e3-9514-e8cc82417989",
+		"8e58a494-4a69-1491-b8e0-4aef590d57a4",
+		"84bba8c4-85c2-f4d1-1f52-1c07aa5084c3"
+	],
+	"num": 0,
+	"mobileView": false,
+	"usingGlobalHeader": true,
+	"usingGlobalFooter": true,
+	"usingGlobalBody": false,
+	"display": "Laptop"
+}

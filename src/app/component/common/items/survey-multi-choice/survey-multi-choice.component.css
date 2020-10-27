@@ -1,0 +1,53 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.multi-choice-container .btn-more {
+  width: 140px;
+  margin-left: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.option-container{
+    position: relative;
+    padding-left: 20px;
+}
+     .single-text-container:not(.content-editable):hover {
+       background: #F0F0F0
+    }
+    /* .single-text-container:nth-child(even) {background: #F8F8F8}
+    .single-text-container:nth-child(odd) {background: #FFF} */
+
+    .option{
+        position: relative;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+.option-container.option-dropdown{
+    margin-left: 20px;
+}
+
+drop-down {
+    margin-top: 5px;
+    margin-left: 10px;
+    height: 30px;
+    width: 180px;
+}
+    .option-container.option-dropdown .remove{
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+    .option-container:not(.option-dropdown) .remove{
+        position: absolute;
+        z-index: 100;
+        right: 5px;
+        top: 5px;
+    }

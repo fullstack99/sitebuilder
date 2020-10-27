@@ -1,0 +1,34 @@
+<div class="items-container"    
+    #itemContainer>
+    <loading *ngIf="_loading"></loading>    
+    <div 
+        class="items"
+        [class.disable-black]="_loading"
+        virtualScroll
+        [items]="pages"
+        [childWidth]="280"
+        [childHeight]="134"
+        (update)="viewPortItems = $event"
+        (change)="onListChange($event)">        
+        <div class="item" *ngFor="let item of viewPortItems; let i = index">
+            <div class="frame">                         
+                <img *ngIf="item" [src]="backgroundImage(item.uid)">
+                <span *ngIf="!item"> Start from Blank</span>
+            </div>
+            <div *ngIf="item" class="links">
+                <a (click)="onCopy(item, startNumber+i)">Copy</a>
+                <a *ngIf="item.status != 1" (click)="onEdit(item)">Edit</a>                        
+                <a class="links-number">{{startNumber+i}}</a>
+                <a *ngIf="item.status != 1" (click)="onEdit(item, true)">Setup</a>
+
+                <a (click)="onRemove(item, startNumber+i)"
+                    class="btn-close">
+                    <b>×</b>
+                </a>
+            </div>
+            <div *ngIf="!item" class="links">                    
+                <a class="editor" (click)="onCreate()">Editor</a>
+            </div>
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,22 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+}
+:host *{
+    box-sizing: border-box;
+}
+:host radio-group {
+    max-width: 450px;
+}
+    :host radio-group > ul {
+        max-width: 70px;
+    }
+
+.participant-contact-info-list {
+    display: flex;
+    justify-content: center;
+}
+    .participant-contact-info-list participant-contact-info {
+        max-width: 300px;
+        margin: 0px 20px;
+    }

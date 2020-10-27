@@ -1,0 +1,50 @@
+<div class="policy-container" (click)="onContainerClick($event)">
+  <div class="dialog-header">
+      <div class="btn-feedback columns">
+          <img src="/assets/images/logo-0.png"/>
+          <a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+          <a (click)="onClose($event)" class="btn-close">×</a>
+      </div>
+      <div class="dialog-title-container rows">
+          <span class="dialog-title">
+            <h3>{{whichPolicy == 'terms' ? 'Terms Policy' : whichPolicy == 'privacy' ? 'Privacy Policy' : 'Contact Us'}}</h3>
+          </span>
+      </div>
+  </div>
+  <div class="data-container">
+    <ul *ngIf="whichPolicy != 'contact'; else _contact_us">
+      <li *ngFor="let item of terms">
+          <input type="checkbox" checked>
+          <span class="expandBtn"></span>
+          <span class="item-title">{{item.title}}</span>
+          <div class="item-content">
+            <p *ngFor="let c of item.content">
+              {{c}}
+            </p>
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #_contact_us>
+  <div style="font-size: 20px; padding: 50px 80px 15px 80px;">
+    <div>
+      Email: &nbsp;
+      <a href="mailto:info@glogood.com">info@glogood.com</a>
+    </div>
+    <br/>
+    <br/>
+    <div>
+      Phone: &nbsp;617.491.3500
+    </div>
+    <div style="font-size: 16px; padding-left: 45px;">
+      M - F &nbsp;&nbsp;&nbsp;&nbsp;9 - 5 &nbsp;EST.
+    </div>
+    <br/>
+    <br/>
+    <div class="text-center" style="font-size: 18px;">
+      We welcome your input
+    </div>
+  </div>
+</ng-template>

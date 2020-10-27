@@ -1,0 +1,29 @@
+:host {
+  box-sizing: border-box;
+  background: transparent;
+  border-bottom-right-radius: 30px;
+  height: 100%;
+}
+
+:host *{
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.dialog-title-container{
+  margin-top: 10px;
+}
+
+.dialog-body {
+  padding: 15px;
+  overflow-y: auto;
+  height: 500px;
+}
+
+loading {
+  position: absolute;
+  opacity: 1;
+  z-index: 1000;
+  left: calc(50% - 100px);
+  top: calc(50% - 50px);
+}

@@ -1,0 +1,26 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    /*background-color: white;*/
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;  
+}
+
+.single-text-container{    
+    margin: 5 5 5 10px;
+}
+    .single-text-label{
+        min-width: 200px!important;       
+    }   
+
+.end-title{
+    margin: 5px;
+    font-size: 18px;
+}
+    .content-editable.edit{
+        font-size: 14px;
+    }
+    

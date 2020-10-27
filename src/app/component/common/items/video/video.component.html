@@ -1,0 +1,49 @@
+<!-- <div class="video-item-container">
+    <div #placeHolder class="place-holder" [style.backgroundImage]="backgroundImage()">
+        <img #placeImage crossorigin="anonymous">
+    </div>
+    <div class="result" #result [class.disable] = "info && loading">
+        <div class="selectable" *ngIf="editable"></div>
+    </div>
+</div> -->
+
+
+<div class="video-item-container">	
+	<div #placeHolder
+		class="place-holder"
+		[ngStyle]="{
+			'background-image': info && info.thumbnail ? backgroundImage() : null
+		}">
+		<img #placeImage crossorigin="anonymous">
+		<div *ngIf="!info || !info.url">			
+			<div>No Video</div>
+		</div>
+    </div>
+	<div *ngIf="info && info.url"
+		#result
+		[ngClass]="{
+			'result': true,
+			'disable': info && loading
+		}">
+		<div
+			*ngIf="editable"
+			class="selectable"></div>
+        <ng-container *ngIf="info.type == 1">
+			<video #myvid
+				id="my-video"
+				class="video-js vjs-big-play-centered mini-play"
+				style="margin: auto;"
+				crossorigin="anonymous"
+				[poster]="poster">
+              <source [src]="info.url">
+            </video>
+        </ng-container>
+
+        <ng-container *ngIf="info.type == 2">
+			<iframe
+				style="width: 100%; height: 100%"
+				[src]="transformUrl(info.url)">
+            </iframe>
+        </ng-container>
+    </div>
+</div>

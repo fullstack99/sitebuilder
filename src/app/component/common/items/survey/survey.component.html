@@ -1,0 +1,216 @@
+<div #surveyContainer
+    *ngIf="readOnly"
+    class="survey-container">
+    <ng-template [ngIf]="info.pageOption == 'single'">
+        <div *ngFor="let branch of info.branches; let i = index"
+            class="branch"
+            draggableList
+            (draggableList-newIndexes)="_linkIndexChange.next([i,$event])">
+            <div class="row">
+                <div [id]="'branch_' + branch.name" class="branch-name text-center">
+                  {{ branch.name == 'Main' ? '' : 'Branch ' + branch.name }}
+                </div>
+            </div>
+            <div *ngFor="let question of branch.questions; let j=index; let last = last"
+                class="row question"
+                [class.end]="last"
+                draggableListItem
+                [draggableListItem-animate]="false"
+                (draggableListItem-dragStart)="_linkDragStart.next([i,j])"
+                (draggableListItem-dragEnd)="_linkDragEnd.next([i,j])"
+                (draggableListItem-drag)="_linkDrag.next([i,j, $event])">
+                <div *ngIf="!last" class="question-no">
+                    {{j+1}}
+                    <span *ngIf="branch.name!='Main'">{{branch.name}}</span>
+                </div>
+                <!-- <div *ngIf="last" class="question-no">
+                    {{i+1}}
+                    <span *ngIf="branch.name!='Main'">{{branch.name}}</span>
+                </div> -->
+                <div *ngIf="editable && !last"
+                    class="grip"
+                    draggableListItemGrip
+                    (mousedown)="$event.stopPropagation()"></div>
+                <div class="col-sm-12" style="padding-left: 24px" *ngIf="!last">
+                    <question-item
+                        [question]="question"
+                        [no]="j"
+                        [qlength]="branch.questions.length"
+                        [readOnly]="readOnly"
+                        [editable]="editable"
+                        [containerWidth]="containerWidth"
+                        (add)="addQuestion(i)"
+                        (edit)="openSurveyDialog(i,j,1)"
+                        (remove)="removeQuestion(i,j)">
+                    </question-item>
+                </div>
+            </div>
+        </div>
+        <div class="form-group submit">
+            <input
+                type="button"
+                value="SUBMIT"
+                class="btn btn-block btn-main center-block"
+                (click)="onSubmit($event)">
+        </div>
+        <!-- <div *ngIf="info.branches[0].questions.length>0"
+            class="row question end">
+            <div class="question-no">
+            </div>
+            <div class="col-sm-10">
+                <question-item
+                    [question]="info.branches[0].questions[info.branches[0].questions.length-1]"
+                    [no]="info.branches[0].questions.length-1"
+                    [qlength]="info.branches[0].questions.length"
+                    [readOnly]="readOnly"
+                    [containerWidth]="containerWidth"
+                    (add)="addQuestion(0)"
+                    (edit)="openSurveyDialog(0,info.branches[0].questions.length-1,1)"
+                    (remove)="removeQuestion(0,info.branches[0].questions.length-1)">
+                </question-item>
+            </div>
+        </div> -->
+    </ng-template>
+
+    <ng-template [ngIf]="info.pageOption == 'multiple'">
+        <div class="branch">
+            <div class="row">
+                <div class="branch-name text-center">
+                    <span *ngIf="info.branches[_activeQuestionIndex[0]].name!='Main'">Branch</span>
+                    {{info.branches[_activeQuestionIndex[0]].name}}
+                </div>
+            </div>
+            <div class="row question">
+                <div class="col-sm-12" style="padding-left: 24px">
+                    <question-item
+                        [question]="getQuestion()"
+                        [no]="getQuestionNo()"
+                        [qlength]="info.branches[_activeQuestionIndex[0]].questions.length"
+                        [editable]="editable"
+                        [readOnly]="readOnly"
+                        [containerWidth]="containerWidth"
+                        (add)="addQuestion(_activeQuestionIndex[0])"
+                        (edit)="openSurveyDialog(_activeQuestionIndex[0],_activeQuestionIndex[1],1)"
+                        (remove)="removeQuestion(_activeQuestionIndex[0],_activeQuestionIndex[1])">
+                    </question-item>
+                </div>
+            </div>
+            <div class="columns submit">
+                <a *ngIf="isPrev && isNext"
+                   (click)="_prev.next()">BACK</a>
+                <a *ngIf="isPrev && !isNext"
+                   (click)="_goto.next([0,0])">START</a>
+                <input *ngIf="isNext"
+                    type="button"
+                    value="Next"
+                    (click)="_next.next()"
+                    class="btn btn-block btn-main center-block">
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+<div #surveyContainer
+    *ngIf="!readOnly"
+    class="survey-container">
+        <div *ngFor="let branch of info.branches; let i = index"
+            class="branch">
+            <!--<div *ngIf="branch.name!='Main'"
+                class="row">
+                <div class="branch-name text-center">Branch {{branch.name}}</div>
+            </div>-->
+            <div *ngFor="let question of branch.questions; let j=index; let last = last"
+                class="row question"
+                [class.end]="last">
+                <div class="col-sm-12" style="padding-left: 24px" *ngIf="!last">
+                    <question-item
+                        [question]="question"
+                        [no]="j"
+                        [qlength]="branch.questions.length"
+                        [readOnly]="readOnly"
+                        [containerWidth]="containerWidth">
+                    </question-item>
+                </div>
+            </div>
+        </div>
+        <div class="form-group submit">
+            <input
+                type="button"
+                value="SUBMIT"
+                class="btn btn-block btn-main center-block"
+                (click)="onSubmit($event)">
+        </div>
+        <!-- <div *ngIf="info.branches[0].questions.length>0"
+            class="row question end">
+            <div class="col-sm-12">
+                <question-item
+                    [question]="info.branches[0].questions[info.branches[0].questions.length-1]"
+                    [no]="info.branches[0].questions.length-1"
+                    [qlength]="info.branches[0].questions.length"
+                    [readOnly]="readOnly"
+                    [containerWidth]="containerWidth">
+                </question-item>
+            </div>
+        </div>     -->
+</div>
+
+
+<!-- <ng-template [ngIf]="_pageOption == 'multi'">
+    <div
+        class="branch"
+        draggableList
+        (draggableList-newIndexes)="_linkIndexChange.next([i,$event])"> -->
+
+        <!--<div *ngIf="branch.name!='Main'"
+            class="row">
+            <div class="branch-name text-center">Branch {{branch.name}}</div>
+        </div>-->
+
+            <!-- <div *ngFor="let question of _branches[_activePageIndex.value].questions; let j=index; let last = last"
+            class="row question"
+            [class.end]="last"
+            draggableListItem
+            [draggableListItem-animate]="false"
+            (draggableListItem-dragStart)="_linkDragStart.next([_activePageIndex.value,j])"
+            (draggableListItem-dragEnd)="_linkDragEnd.next([_activePageIndex.value,j])"
+            (draggableListItem-drag)="_linkDrag.next([_activePageIndex.value,j, $event])">
+            <div class="col-sm-1">
+                <div *ngIf="!last" class="question-no">
+                    {{j+1}}
+                    <span *ngIf="_branches[_activePageIndex.value].name!='Main'">{{_branches[_activePageIndex.value].name}}</span>
+                </div>
+                <div *ngIf="last" class="question-no">
+                    {{_activePageIndex.value+1}}
+                    <span *ngIf="_branches[_activePageIndex.value].name!='Main'">{{_branches[_activePageIndex.value].name}}</span>
+                </div>
+                <div *ngIf="!last"
+                    class="grip"
+                    draggableListItemGrip
+                    (mousedown)="$event.stopPropagation()"></div>
+            </div>
+            <div class="col-sm-11">
+                <question-item
+                    [question]="question"
+                    [no]="j"
+                    [qlength]="_branches[_activePageIndex.value].questions.length"
+                    [readOnly]="readOnly"
+                    [containerWidth]="containerWidth"
+                    (add)="addQuestion(_activePageIndex.value)"
+                    (edit)="openSurveyDialog(_activePageIndex.value,j,1)"
+                    (remove)="removeQuestion(_activePageIndex.value,j)">
+                </question-item>
+            </div>
+        </div>
+    </div>
+    <div class="form-group submit">
+        <input *ngIf="_activePageIndex.value<_branches.length-1"
+            type="button"
+            value="NEXT"
+            (click)="_next.next()"
+            class="btn btn-block btn-main center-block">
+        <input *ngIf="_activePageIndex.value==_branches.length-1"
+            type="button"
+            value="SUBMIT"
+            class="btn btn-block btn-main center-block">
+    </div>
+</ng-template> -->

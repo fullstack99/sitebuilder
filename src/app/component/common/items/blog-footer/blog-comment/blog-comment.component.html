@@ -1,0 +1,31 @@
+<div class="comment-container">
+	<div class="comment-header">
+		<span><b>{{comment.firstName}} &nbsp; {{comment.lastName}}</b></span>
+		<!-- <span>{{ comment.date | date:'MM/dd/y HH:mm a z':'+0100'}}</span> -->
+		<span>{{ comment.date | date:'MM/dd/y'}}</span> &nbsp;
+		<span>{{ comment.date | date:'shortTime'}}</span>
+	</div>
+	<div class="comment-content">
+		{{comment.comment}}
+	</div>
+	<div class="comment-footer row">
+		<div *ngIf="replies.length > 0" class="col-sm-6 reply-arrow">
+			<app-arrow-button *ngIf="replies.length > 0" [on]="showReply">
+				<span (click)="onToggleShowReply()"><b>Reply</b> &nbsp; {{replies.length}}</span>
+			</app-arrow-button>
+		</div>
+		<div class="col-sm-6 reply">
+			<a (click)="openReply()">Reply</a>
+		</div>
+	</div>
+	<div *ngIf="showReply && replies.length > 0" class="comment-reply">
+		<div *ngFor="let item of replies">
+			<div class="comment-reply-name">
+				<span><b>{{item.firstName}} &nbsp; {{item.lastName}}</b></span>				
+			</div>
+			<div class="comment-reply-content">
+				{{item.comment}}
+			</div>
+		</div>
+	</div>
+</div>

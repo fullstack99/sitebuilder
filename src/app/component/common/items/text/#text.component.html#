@@ -1,0 +1,8 @@
+<textarea class="text-editor" 
+    text-editor
+    [text-editor-enabled]="editing"
+    [text-editor-host]="_elementRef.nativeElement"
+    [text-editor-text]="item.text"
+    (text-editor-destroyed)="onEditorDestroyed($event)"
+    (text-editor-input)="onEditorInput($event)"
+    ></textarea>

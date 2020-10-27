@@ -1,0 +1,47 @@
+<h4>Order Confirmation # xxxxxxxxxx</h4>
+<div class="small-title">An email confirmation has been sent.</div>
+
+<div class="content">
+	<div class="check-out">
+		<div class="shipping-address">
+			<div class="section-title">Shipping Address</div>
+			<div class="shipping-address-detail">
+				<span>{{shippingAddress.firstName}} {{shippingAddress.lastName}}</span>
+				<span>{{shippingAddress.address1}}</span>
+				<span>{{shippingAddress.address2}}</span>
+				<span>{{shippingAddress.countryId}}</span>
+			</div>
+		</div>
+		<div class="credit-card">
+			<div class="section-title">Credit-Debit Card</div>
+			<div class="credit-card-detail">
+				<div class="card-info">
+					<div class="card-img"></div>
+					<div class="card-info-text">
+						<img src="assets/images/master-card.gif" width="50px" />
+						Master Card ending xxx
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="review-items">
+			<div class="section-title">Order # xxxxxxxxxxxxxxxxxx</div>
+			<div class="review-item">
+				<div class="item-title">
+					1  {{detail.title}}
+				</div>
+				<span *ngFor="let item of optionValues"> {{item.name}} </span>
+			</div>
+		</div>		
+		<div class="form-group">
+			<input
+				type="button"
+				value="Home"
+				class="btn btn-block btn-main"
+				style="max-width: 150px;"
+				[class.active]="true"				
+				(click)="onSubmit()"
+				/>
+		</div>
+	</div>
+</div>

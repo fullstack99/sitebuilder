@@ -1,0 +1,33 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+}
+
+:host * {
+    box-sizing: border-box;    
+}
+
+:host >>> *:not(a) {
+    color: #464646;
+}
+
+label {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+textarea {
+    height: 120px;
+}
+
+.chars-left {
+    color: #d8d6d3;
+    padding-left: 10px;
+}
+
+input[type="submit"]{    
+    width: 200px;    
+}
+textarea:read-only { 
+    background-color: white;
+}

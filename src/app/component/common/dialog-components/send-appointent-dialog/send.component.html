@@ -1,0 +1,28 @@
+<div class="dialog-header">    
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>		
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container rows">		
+		<span class="dialog-title"><h3>Appointment</h3></span>
+		<span class="subtitle">{{ showProviderValue }}</span>		
+		<span class="subtitle">{{ showServiceValue }}</span>
+		<span class="subtitle">{{date | date:'medium'}}</span>
+	</div>
+</div>    
+<div class="dialog-container" [formGroup]="form">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Name" formControlName="name"/>
+	</div>
+	<div class="form-group">
+		<input type="email" class="form-control" placeholder="Email for confirmation" formControlName="email"/>
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Phone" formControlName="phone"/>
+	</div>		
+	<div class="columns" style="justify-content: space-around">
+		<div class="text-center"><a (click)="onSendEmail()">Send email</a></div>
+		<div class="text-center"><a (click)="onCancelAppointment()">Cancel</a></div>		
+	</div>
+</div>

@@ -1,0 +1,69 @@
+.k-widget.k-tooltip {
+    border-color:white;
+    background-color:white;
+    color: #8c8c8c;
+}
+
+.k-i-close {
+  color: red;
+  margin-right: 5px;
+}
+
+.tooltip-content {
+    padding: 15px 30px 15px 15px;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+.content2{
+    margin-top: 5px;
+}
+
+.tooltip-footer{
+    display: flex;
+    margin: 10px -15px 10px 20px;
+    font-size: 14px;
+    justify-content: space-between;
+    color: #8c8c8c;
+}
+    .helpful{
+
+    }
+    .yes-no{
+        display: flex;
+    }
+    .comments-button{
+        
+    }
+
+.tooltip-code{
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-right: -15px;
+
+}
+
+.comment {
+    display: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.comment input {
+    height: 40px;    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+    box-sizing: border-box;
+    padding: 0px 5px;
+    margin: 5px 0px;
+    width: 100%;
+}
+
+.tooltip-footer a.comments,
+a.submit {
+    color: #ffa500;
+    text-decoration: none;
+}

@@ -1,0 +1,80 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+    font-size: 16px;
+    color: #464646;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.location-container{
+    max-width: 350px;
+    width: 100%;
+    padding-left: 20px;
+    margin: auto;
+}
+
+.company-name,
+.location-type{
+    margin-left: 30px;
+    width: 235px;
+}
+    .location-container .title{
+        font-size: 20px;
+        text-align: center;
+    }
+    .location-container .form-container{
+        position: relative;
+        width: 235px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .btn-close{
+        position: absolute;
+        right: 5px;
+        top: -25px;
+        color: red;
+        font-size: 18px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+input[type="text"] {
+    display: block;
+    width: 100%;
+}
+
+.angle-button{
+    position: relative;
+    height: 55px;
+    cursor: pointer;
+}   
+    .angle-button .bt-angle-right{
+        margin-left: 25px;
+    }
+    .more-button{
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        color: orange;
+    }
+        .more-button:hover{
+            color: orange;
+        }
+
+.form-group{
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.required::before {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    content: "*";
+    color: red;
+}

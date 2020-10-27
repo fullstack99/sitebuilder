@@ -1,0 +1,26 @@
+:host {
+    box-sizing: border-box;
+    height: 100%;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+	}
+
+	.dialog-title-container{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.dialog-container{
+		font-size: 16px;
+		padding: 5px;
+	}
+
+		.option-container {
+			padding-left: 30px;
+		}
+
+		.submit {
+			max-width: 180px;
+		}

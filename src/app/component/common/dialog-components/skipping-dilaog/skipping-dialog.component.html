@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">        
+        <div class="btn-feedback">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        </div>
+        <a (mousedown)="onClose()" class="btn-close">×</a>        
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center title">
+            <h4> Skipping  </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="skip-left col-sm-6">
+            <p class="skip-body-title font-18">
+                Skip from Here…
+            </p>
+            <div class="skip-body-content font-16">
+                <p> Choose a </p>
+                <p> Multi-Choice Answer </p>
+                <p> Then Click Skipping </p>
+            </div>            
+        </div>
+        <div class="col-sm-1">
+            <p class="skip-body-title line line-1">
+                &nbsp;
+            </p>
+            <p>
+                <span class="font-icon btb bt-sign-in bt-2x">                    
+                </span>
+            </p>
+            <p class="skip-body-title line line-2">
+                &nbsp;
+            </p>
+        </div>
+        <div class="skip-right col-sm-5">
+            <p class="skip-body-title font-18">
+                ...to Here
+            </p>
+            <div class="radio-group">
+                <radio-group [formControl]="_branch">
+                    <ng-template radioGroupOption="current">
+                        Question # &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="linking-details">
+                            <input type="text" size="5" [formControl]="_question"/>
+                        </span>
+                    </ng-template>
+                    <ng-template radioGroupOption="end">
+                        End Survey # &nbsp;&nbsp;
+                        <span>
+                            <input type="text" size="5" [formControl]="_end"/>
+                        </span>
+                    </ng-template>
+                    <ng-template radioGroupOption="A">Start Branch A</ng-template>
+                    <ng-template radioGroupOption="B">Start Branch B</ng-template>
+                    <ng-template radioGroupOption="C">Start Branch C</ng-template>                    
+                </radio-group>
+            </div>
+        </div>        
+    </div>   
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <button
+                type="button"            
+                (click)="onSubmit()"
+                class="btn btn-block btn-main center-block">
+                Create Skip
+            </button>
+        </div>        
+    </div>
+</div>

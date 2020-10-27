@@ -1,0 +1,88 @@
+<div class="clip-container">
+    <image-clip-tools
+        [clipPath]="clipPath"
+        (command)="onSetCommand($event)"
+        (setClipPath)="onSetClipPath($event)"
+        (setOutsideClip)="onSetOutsideClip($event)"></image-clip-tools>
+    <loading *ngIf="_loading" [text]="'Saving...'"></loading>
+    <div
+        class="clip-workspace"
+        [class.disable]="_loading">
+        <div *ngIf="image"
+            #clipbox
+            class="box box-shadow"
+            [style.width]="pWidth * 100 + 20 + 'px'"
+            [style.height]="pHeight * 100 + 20 + 'px'" >
+            <div #shadowboard
+                class="shadowboard inside-10"
+                [style.backgroundImage]="backgroundImage()"
+                [style.opacity]="getOpacity()"></div>
+
+            <div #clipboard
+                class="clipboard inside-10"
+                [style.backgroundImage]="backgroundImage()"
+                [style.clip-path]="getClipPath()"></div>
+            <div *ngIf="clipPath && clipPath.type == 'svg'" #clipboardPath
+                class="clipboard-path">
+                <svg viewbox="0 0 300 300" width="300" height="300" preserveAspectRatio='xMinYMin'>
+                    <defs>
+                        <clipPath id="svgPath">
+                            <path
+                                [attr.d] = "getSVGPath()"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <!-- <div *ngIf="clipPath && clipPath.type == 'svg'"
+                class="clipboard-path">
+                <svg viewbox="0 0 300 300" width="300" height="300" preserveAspectRatio='xMinYMin'>
+                    <g stroke="black" fill="none">
+                        <path
+                            fill="none"
+                            stroke="#000000"
+                            stroke-width="5"
+                            [attr.d] = "getSVGPath()"/>
+                    </g>
+                </svg>
+            </div>         -->
+            <div *ngIf="clipPath"
+                #handles
+                class="handles">
+                <clip-handle *ngFor="let v of clipPath.value; let i=index"
+                    class="handle"
+                    [left]="getXPosition(v.x)"
+                    [top]="getYPosition(v.y)"
+                    [removal]="removalHandler(i)"
+                    (removeHandler)="onRemoveHandler(i)"
+                    draggable
+                    [draggable-enabled]="true"
+                    [draggable-keepInParent]="{
+                      top: true,
+                      bottom: true,
+                      left: true,
+                      right: true
+                    }"
+                    [draggable-snapEnabled]="true"
+                    [draggable-cursor]="'grab'"
+                    (draggable-dragStart) = "onDragStart(i,$event)"
+                    (draggable-drag)="onDrag(i,$event)"
+                    (draggable-dragEnd)="onDragEnd(i,$event)">
+                </clip-handle>
+            </div>
+        </div>
+        <div *ngIf="!image"
+            class="blank_image rows">
+            <h1>
+                Edit Your Images Here
+            </h1>
+            <h4>
+                Choose My Images, Stock Images, Clip Art or Site's Images
+            </h4>
+            <div class="images">
+                <img class="apple" src="/assets/images/apple.png"/>
+                <img class="peach" src="/assets/images/peach.png"/>
+                <img class="grape" src="/assets/images/grape.png"/>
+            </div>
+        </div>
+    </div>
+</div>

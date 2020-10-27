@@ -1,0 +1,54 @@
+:host {
+	display: block;
+	margin: auto;
+	width: 100%;
+	max-width: 320px;    
+}
+	.error {
+		padding: 16px;
+		width: 300px;
+		color: white;
+		background-color:tomato;
+	}
+
+.disable {
+	pointer-events: none;
+	opacity: 0.2;
+	background-color: #CCC;
+}
+
+input {
+	width: 220px;        
+}
+
+.alert{
+	width: 215px;
+	margin-top: 5px;
+}
+
+.pwd-container {
+	display: flex;
+}
+	.pwd-container span {
+		margin-left: 10px;
+		margin-right: -10px;
+		margin-top: auto;
+		margin-bottom: 5px;
+	}
+
+.forgot-pwd{        
+	margin-left: 106px;
+	margin-top: -10px;
+	text-decoration: none;
+	color: #8c8c8c;
+}	
+
+.social-btn-container{
+	display: flex;
+}
+	.social-btn-container img{
+		width: 30px;
+	}
+	.social-btn-container .social-btn{
+		margin: 5px 5px 0px 5px;
+	}

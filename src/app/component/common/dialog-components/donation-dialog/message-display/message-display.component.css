@@ -1,0 +1,15 @@
+checkbox {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+}
+
+.allow-comment{
+    position: relative;
+    margin: 10px 0px 10px 0px;
+}
+    .allow-comment checkbox{
+        position: relative;
+        left: 0px;
+        top: 3px;
+    }

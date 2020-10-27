@@ -1,0 +1,120 @@
+:host {
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    
+    .dialog-container{
+        overflow-y: auto;        
+        height: 600px;
+    }
+    .swiper-container {
+        width: 100%;
+    }
+        .swiper-slide {		
+            text-align: center;
+            font-size: 16px;
+            background: #fff;       
+        }
+    
+        .btr{
+            cursor: pointer;                
+        }
+        .btr.bt-3x{
+            height: 50px;
+            margin-top: 25px;
+        }
+    
+    drop-down >>> .btn-toggle > .filter-option,
+    drop-down >>> .btn-item span{
+        word-wrap: break-word!important;
+        white-space: normal!important;
+    }
+    
+    .content{
+        justify-content: center;
+    }
+    
+    .service-container{
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .contact-container{
+        max-width: 300px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+        .contact-text{
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+    .providers-ctrl{
+        width: 250px;
+        margin: auto;
+    }
+    .months-ctrl{
+        align-items: center;
+    }
+    
+    .dates-container,
+    .providers-container{
+        width: calc(100% - 60px);
+        margin: auto;
+    }
+    
+    .months-container{
+        width: 150px;    
+        margin-left: 10px;
+    }
+    
+        .swiper-slide.date-item{
+            width: 90px;
+        }        
+            .provider-image{
+                width: 100px;
+                height: 100px;
+                border: 1px solid #8c8c8c;
+                border-radius: 5px;
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin: auto;
+            }
+            .provider-details{
+                word-wrap: break-word;
+                text-align: left;                
+            }
+    
+        .thumb{
+            border: 1px solid #464646;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .thumb.active{
+            border-color: #FFA500;
+        }
+    
+    .choose-time-container{
+        width: 120px;
+        height: 150px;
+        margin: auto;
+        overflow-y: auto;
+    }   
+    
+    .submit input{
+        background:     #FFA500;
+        border-color:   #FFA500;
+        width: 150px;
+        font-size: 16px;    
+    }
+    
+    .font-20{
+        font-size: 20px;
+    }    

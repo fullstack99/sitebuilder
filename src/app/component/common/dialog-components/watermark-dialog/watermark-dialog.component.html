@@ -1,0 +1,143 @@
+<div>
+    <div class="dialog-header">    
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns">		
+            <span class="dialog-title"><h3>Add Watermark</h3></span>
+        </div>	
+    </div>
+    
+    <div class="position">
+        <div class="adjust-result">
+            <div class="result-image-container">
+                <div class="result-image" *ngIf="!image">
+                    <span>First Photo</span>
+                    <span>Will Go Here</span>
+                </div>
+                <div class="result-image" *ngIf="image" [style.backgroundImage]="backgroundImage(image)">
+					<!-- <img #resultImage class="image-watermark"
+						[src]="imageSrcUrl(_imageWatermark.value)"
+						/> -->
+                    <div #resultImage class="image-watermark" [style.backgroundImage]="backgroundImage(_imageWatermark.value)"></div>
+                    <div #setText class="text-watermark"></div>
+                </div>
+            </div>
+            <div class="disp-remove center-block"> 
+                <a (click)="removeWatermark()">REMOVE  WATERMARK</a>
+            </div>
+        </div>
+    
+        <div class="arrow-panel">
+            <div class="columns arrows">
+                <div 
+                    [class.active]="_position.value =='top left'"
+                    (click)="setWatermarkPosition('top left')">
+                    <i class="bts bt-angle-up top-left"></i>
+                </div>
+                <div 
+                    [class.active]="_position.value =='top center'" 
+                    (click)="setWatermarkPosition('top center')">
+                    <i class="bts bt-angle-up"></i>
+                </div>
+                <div 
+                    [class.active]="_position.value =='top right'" 
+                    (click)="setWatermarkPosition('top right')">
+                    <i class="bts bt-angle-up top-right"></i>
+                </div>
+            </div>
+            <div class="columns arrows">
+                <div 
+                    [class.active]="_position.value =='left'" 
+                    (click)="setWatermarkPosition('left')">
+                    <i class="bts bt-angle-left"></i>
+                </div>
+                <div 
+                    [class.active]="_position.value =='center'" 
+                    (click)="setWatermarkPosition('center')">
+                    <i class="bts bt-radio-unchecked"></i>
+                </div>
+                <div 
+                    [class.active]="_position.value =='right'" 
+                    (click)="setWatermarkPosition('right')">
+                    <i class="bts bt-angle-right"></i>
+                </div>
+            </div>
+            <div class="columns arrows">
+                <div 
+                    [class.active]="_position.value =='bottom left'" 
+                    (click)="setWatermarkPosition('bottom left')">
+                    <i class="bts bt-angle-down bottom-left"></i>
+                </div>
+                <div 
+                [class.active]="_position.value =='bottom center'" 
+                    (click)="setWatermarkPosition('bottom center')">
+                    <i class="bts bt-angle-down"></i>
+                </div>
+                <div 
+                    [class.active]="_position.value =='bottom right'" 
+                    (click)="setWatermarkPosition('bottom right')">
+                    <i class="bts bt-angle-down bottom-right"></i>
+                </div>
+            </div>
+            <span class="rows">Watermark</span>
+            <span>Position</span>
+        </div>
+    </div>
+    
+    <div class="rows watermark-textBox">
+		<a class="remove"
+			(click)="onClearText($event)"
+			style="position: absolute; right: 10px; top: -10px;	color: red;">X</a>
+        <!--<input type="text" class="form-control" placeholder="Type Watermark Text" />-->        
+        <div 
+            (click)="onTextEditorClick()"
+            class="text-editor-block">
+            <div text-editor-tinymce
+                #watermarkTextBox                
+                [text-editor-enabled]="textEditorEnabled"
+                [text-editor-host]="getEditorHost()"
+                [text-editor-toolbar-width]="250"
+                [text-editor-hide-links]="true"
+                [text-editor-toolbar-type]="2"
+                [text-editor-fontsize-type] = "1"
+                (text-editor-input-text)="onTextEditorInputText($event)"
+                (text-editor-input)="onTextEditorInput($event)"
+                (text-editor-destroyed)="onTextEditorInput($event)"
+               >
+            </div>
+            <div *ngIf="isTextEmpty && !textEditorEnabled"
+                class="text-editor-placeholder">
+                Type Watermark Text
+            </div>
+        </div>
+    </div>
+    
+    <div class="image-watermark-controls">
+        <div class="buttons columns">    					
+            <div class="right">
+                <a (click)="openImportDialog()">IMPORT</a>
+                <a (click)="editImageWatermark()">EDIT</a>
+                <a class="remove" (click)="_imageWatermark.setValue({name: '', location: ''})">X</a>
+            </div>
+        </div>
+        <div class="result-image-container">
+            <div class="result-image" *ngIf="_imageWatermark.value.name == ''"
+                (click)="openImportDialog()">
+                <div class="empty-text">
+                    <span>Click to Add</span>
+                    <span>Watermark Image</span>
+                </div>
+            </div>
+            <div class="result-image" *ngIf="_imageWatermark.value.name != ''">
+				<img [src]="imageSrcUrl(_imageWatermark.value)"/>
+            </div>
+        </div>
+    </div>   
+    
+    <div class="bottom">
+        <input [class.disabled]="!isValid" class="btn submit" (click)="onSubmit()" type="button" value="ADD" />
+    </div>
+</div>

@@ -1,0 +1,34 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.option-container{
+    margin-top: 5px;
+    position: relative;
+}
+
+.text-container{
+    position: relative;
+    max-width: 200px;
+}
+    .remove{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .btn-more{
+        margin-left: 20px;
+    }
+
+drop-down{
+    width: 80px;
+    height: 34px;
+    margin: 0 5px auto 20px;
+}

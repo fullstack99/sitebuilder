@@ -1,0 +1,258 @@
+<loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div *ngIf="!info.viewDetail && !checkOut" class="columns" style="width:100%; overflow-y: none;" #reviewContainer>
+    <div *ngIf="info.layoutType != 3 && isNav && info.showNavigation" class="ecommerce-item-nav">
+        <ng-container *ngFor="let listing of info.listings; let l=index">
+            <div *ngIf="info.listings[l].length>0" class="group-item">
+                <div class="group-item-title">
+                    {{ l==0 ? "Departments" : l==1 ? "Collections" : "Brands"}}
+                </div>
+                <div class="item-nav-list" *ngFor="let listing of info.listings[l]; let i = index">
+					<a [class.active]="info.activeListingUid == listing.uid && !listing.isTitle"
+						[class.isTitle]="listing.isTitle"
+						(click)="onActiveListing(listing, $event)">{{listing.description}}</a>
+					<div class="item-nav-sublist"
+						*ngFor="let subListing of listing['subListing']; let j = index">
+						<a [class.active]="info.activeListingUid == subListing.uid && !subListing.isTitle"
+							(click)="onActiveListing(subListing, $event)">{{subListing.description}}</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+    <div *ngIf="info.layoutType != 3 && !isNav && info.showNavigation" class="ecommerce-item-nav">
+        <div class="m-b-1">
+            <span class="title-1">Catalog Navigation</span>
+            <span class="title-2">(optional)</span>
+        </div>
+        <div class="group-items">
+            <div class="group-title m-b-1">Group Items by</div>
+            <div class="group-item">
+                <div class="group-item-title">Departments</div>
+                <div class="item-nav-list" *ngFor="let item of navIns.departments">
+                    <span>{{item}}</span>
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="nav-title">Collections</div>
+                <div class="item-nav-list" *ngFor="let item of navIns.collections">
+                    <span>{{item}}</span>
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="nav-title">Brands</div>
+                <div class="item-nav-list" *ngFor="let item of navIns.brands">
+                    <span>{{item}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="group-title">Setup navigation after your items are setup.</div>
+        <div class="group-title rows">
+            <span>go to MY ITEMS</span>
+            <a class="nav-f-title" (click)="gotoNavigation($event)">Catalog Navigation</a>
+        </div>
+    </div>
+
+	<div *ngIf="info.layoutType != 3"
+		#gridContainer
+		class="ecomm-item-body"
+		[class.ecomm-item-body-nav]="info.showNavigation"
+		>
+		<div #productsContainer
+			class="ecomm-grid"
+			(scroll)="productsContainerScroll.next()">
+			<kendo-sortable
+				[data]="viewItems"
+				[navigatable]="true"
+				(dragStart)="onDragStart($event)"
+				(dragOver)="onDragOver($event)"
+				(dragEnd)="onDragEnd($event)"
+				itemClass="{{itemClass}}">
+                <ng-template let-item="item" let-i="index">
+					<div class="ecomm-grid-item"
+						[draggable]="true"
+						[class.list-view]="info.layoutType == 1"
+						[class.only-image-show]="info.layoutType == 2"
+						(mousedown)="$event.stopPropagation()"
+						(click)="onClickItem($event, i, item)">
+						<div *ngIf="editable" class="ecomm-grid-item-top columns">
+							<div class="glogood-grip"></div>
+							<div class="setup-link">
+								<ng-container *ngIf="item && item.title == ''; else elseTemplate">
+									<a (click)="openCataloguePage($event, item)">ITEM SETUP</a>
+								</ng-container>
+								<ng-template #elseTemplate>
+									<a (click)="openCataloguePage($event, item)">EDIT</a>
+								</ng-template>
+							</div>
+							<div *ngIf="item && item.title != ''" class="details-link">
+								<a (click)="onViewItemDetails($event, item)">DETAILS</a>
+							</div>
+							<div class="remove-link">
+								<a (click)="removeItem($event, item)">X</a>
+							</div>
+						</div>
+                        <div class="ecomm-grid-item-content" [class.columns]="info.layoutType == 1" [class.rows]="info.layoutType != 1">
+							<div *ngIf="item && item.title != ''" class="grid-item-image" [style.backgroundImage]="backgroundImage(item)">
+							</div>
+							<div *ngIf="item && item.title == ''" class="blank-text">Item</div>
+							<div *ngIf="info.layoutType < 2 && item && item.title != ''" class="grid-item-details" [class.columns]="info.layoutType == 1">
+								<div class="product-title-container">
+									<div>
+										<!-- <span *ngIf="item.title == ''">Title</span> -->
+										{{item.title}}
+									</div>
+									<div class="product-price">
+										<!-- <span *ngIf="item.price == 0">Price</span> -->
+										<span>{{ getPrice(item) }}</span>
+									</div>
+									<div *ngIf="item.promotion != ''">
+										<span>{{item.promotion}}</span>
+									</div>
+								</div>
+								<div *ngIf="info.layoutType == 1"
+									class="grid-item-description">
+									<div innerHTML="{{item.description}}">
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </ng-template>
+            </kendo-sortable>
+        </div>
+        <div *ngIf="isMore" class="ecomm-item-more">
+            <a (mousedown)="$event.stopPropagation()" (click)="appendEmptyProducts($event, 1)">MORE</a>
+        </div>
+    </div>
+
+    <div *ngIf="info.layoutType == 3 && info.products && info.products.length > 0" class="ecomm-grid-single-item">
+		<div *ngIf="editable" class="ecomm-grid-item-top columns">
+			<div class="setup-link">
+				<ng-container *ngIf="info.products[0] && info.products[0].title == ''; else elseTemplate">
+					<a (mousedown)="$event.stopPropagation()" (click)="openCataloguePage($event, info.products[0], true)">ITEM SETUP</a>
+				</ng-container>
+				<ng-template #elseTemplate>
+					<a (mousedown)="$event.stopPropagation()" (click)="openCataloguePage($event, info.products[0], true)">EDIT</a>
+				</ng-template>
+
+			</div>
+			<div *ngIf="info.products[0] && info.products[0].title != ''" class="details-link">
+				<a (mousedown)="$event.stopPropagation()" (click)="onViewItemDetails($event, info.products[0])">DETAILS</a>
+			</div>
+			<div class="add-item">
+				<a (mousedown)="$event.stopPropagation()" (click)="onAddItem($event)">MORE</a>
+			</div>
+			<div class="remove-link">
+				<a (mousedown)="$event.stopPropagation()" (click)="removeItem($event, info.products[0])">X</a>
+			</div>
+		</div>
+        <div class="ecomm-grid-item-content rows">
+			<div class="grid-item-image" [style.backgroundImage]="backgroundImage(info.products[0])">
+				<span *ngIf="info.products[0] && !isImage(info.products[0].images[0])">Image Here</span>
+			</div>
+			<div class="grid-item-details">
+				<div>
+					<span *ngIf="!info.products[0] || info.products[0].title == ''">Title</span>
+					<span *ngIf="info.products[0] && info.products[0].title != ''">{{info.products[0].title}}</span>
+				</div>
+				<div>
+					<span *ngIf="!info.products[0] || info.products[0].title == ''">Price</span>
+					<span *ngIf="info.products[0] && info.products[0].title != ''">{{getPrice(info.products[0])}}</span>
+				</div>
+				<div>
+					<span *ngIf="info.products[0] && info.products[0].promotion">{{info.products[0].promotion}}</span>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+<!-- <div *ngIf="!info.viewDetail && info.layoutType != 3" class="ecomm-pagination" (mousedown)="$event.stopPropagation()" (click)="$event.stopPropagation()">
+    <ul style="display:none">
+        <li *ngFor="let item of info.products | paginate: { itemsPerPage: itemsPerPage, currentPage: info.page }"></li>
+    </ul>
+	<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+	<div ngClass="{
+			all-page-view: true,
+			active: info.products && info.products.length > itemsPerPage
+			disable: info.products && info.products.length <= itemsPerPage
+		}"
+		(click)="onViewAllItems($event)">All</div>
+</div> -->
+
+<div *ngIf="info.viewDetail && !checkOut"
+	#detailViewContainer
+	class="ecommerce-details"
+	(mousedown)="$event.stopPropagation()">
+    <div class="header-line">
+        <a (click)="goBack($event)"> Back to</a>
+        <div>...</div>
+        <div class="item-category">
+            <span> Home/ </span>
+            <span>{{info.activeProduct.listing}}</span>
+        </div>
+        <a (mousedown)="$event.stopPropagation()" (click)="openItemSetup($event, null, info.activeProduct.uid, info.activeProduct)">EDIT ITEM</a>
+    </div>
+    <div class="ecommerce-details-body columns">
+        <div class="ecommerce-details-image">
+            <image-enlarger
+                class="image-show"
+                [images]="info.activeProduct.images"
+                [smallImage]="info.activeProduct.images[imageIndex]"
+                [largeImage]="info.activeProduct.images[imageIndex]"
+                [contentDetailEle]="itemDetailContent"
+                ></image-enlarger>
+        </div>
+        <div #itemDetailContent
+            class="ecommerce-details-content">
+            <div class="form-group">
+                {{info.activeProduct.title}}
+            </div>
+            <div class="price-details columns">
+                <div class="text-center">
+                    {{ getPrice(info.activeProduct) }}
+                </div>
+                <div *ngIf="info.activeProduct.priceComparison" class="comparision-price text-center">
+                    {{info.activeProduct.priceComparison | currency:'USD':'symbol':'1.2-2'}}
+                </div>
+                <div *ngIf="info.activeProduct.priceComparison" class="sale">
+                    SALE
+                </div>
+            </div>
+            <div class="ecommerce-details-options">
+                <div *ngFor="let option of info.activeProduct.productOptions | orderBy: 'sequence'; let i = index" class="ecommerce-details-option-container">
+                    <drop-down *ngIf="option.name!='' && option.productOptionValues && option.productOptionValues.length > 0"
+                        class="dropdown"
+                        [defaultData]="option.name"
+                        [selected]="selectedOptionValues[i]"
+                        [elements]="option.productOptionValues"
+                        [showValueFunc]="showValue"
+                        (changeSelected)="changeSelected($event, i)">
+                    </drop-down>
+                </div>
+            </div>
+            <div class="form-group add-cart columns">
+                <div>Qty &nbsp;&nbsp;</div>
+                <div class="qty">
+                    <input type="number" class="form-control" [formControl]="qty" min="0" />
+                </div>
+                <div class="add-cart-button" (click)="onAddCart()">
+                    <span class="btb bt-shopping-cart bt-2x cart-icon"></span>
+                    <span class="cart-text">Add to Cart</span>
+                </div>
+            </div>
+            <div class="item-description" [innerHTML]="info.activeProduct.description">
+            </div>
+        </div>
+    </div>
+</div>
+
+<check-out
+    *ngIf="checkOut"
+    [detail]="info.activeProduct"
+    [qty]="qty.value"
+    [optionValues]="selectedOptionValues"
+    (back)="onViewGrid()"></check-out>

@@ -1,0 +1,70 @@
+<div class="resize-box" [class.enabled]="enabled">
+	<span
+		*ngIf="top_left"
+		class="handle top left"
+		(mousedown)="startResize('top left', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('top left', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="top"
+		class="handle top side"
+		(mousedown)="startResize('top', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('top', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="top_right"
+		class="handle top right"
+		(mousedown)="startResize('top right', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('top right', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="right"
+		class="handle right side"
+		(mousedown)="startResize('right', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('right', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="bottom_right"
+		class="handle bottom right"
+		(mousedown)="startResize('bottom right', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('bottom right', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="bottom"
+		class="handle bottom side"
+		(mousedown)="startResize('bottom', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('bottom', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="bottom_left"
+		class="handle bottom left"
+		(mousedown)="startResize('bottom left', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('bottom left', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<span
+		*ngIf="left"
+		class="handle left side"
+		(mousedown)="startResize('left', $event)"
+		(mouseup)="stopResize($event)"
+		(touchstart)="startResize('right', $event)"
+		(touchend)="stopResize($event)"
+		(click)="stopResize($event)"></span>
+	<div *ngIf="disp_measure && _dpiShow" class="resize-box-height" [style.right]="_dpiHMarginRight + 'px'">
+		{{_height}}px({{_dpiHeight}}'')
+	</div>
+</div>
+<div *ngIf="disp_measure && _dpiShow" class="resize-box-width">{{_width}}px({{_dpiWidth}}'')</div>

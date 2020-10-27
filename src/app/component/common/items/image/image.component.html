@@ -1,0 +1,19 @@
+<div *ngIf="!this.itemContent.image"
+    class="placeholder"
+    [class.bluePanel]="!itemContent.backInfo.value || itemContent.backInfo.value?.backgroundColor.startColor == ''"    
+    border
+    [borderInfo]="itemContent.borderInfo.value"
+    >
+    <div>Click to Add Image</div>
+    <img src="/assets/images/canvas/camera-white.png"/>
+    <div>or Drag and Drop Here</div>    
+</div>
+<div *ngIf="this.itemContent.image"
+    #resultImage
+	class="result-img"
+	[class.has-link]="itemContent && itemContent.link"
+    border
+    [borderInfo]="itemContent.borderInfo.value"
+    
+    (click)="onClick()">
+</div>

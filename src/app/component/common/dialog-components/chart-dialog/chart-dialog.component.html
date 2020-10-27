@@ -1,0 +1,21 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    	
+</div>
+<div fxLayout="column">        
+    <div class="report-container">
+        <div [ng2-highcharts]="chartOptions"></div>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="50">
+            <drop-down
+				[selected]="selectedChartType"
+				[elements]="chartTypes"
+				(changeSelected)="onSelectChartType($event)"> 
+			</drop-down>
+        </div>        
+    </div> 
+</div>

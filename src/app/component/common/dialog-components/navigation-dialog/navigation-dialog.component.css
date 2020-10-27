@@ -1,0 +1,429 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+[hidden] { display: none!important;}
+
+.mce-edit-focus {
+    outline:none!important;
+}
+
+a {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.toolbar {
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    margin: 0px 20px;
+    border-color: #d3d3d3;
+    border-style: solid;
+    border-width: 1px 0px;
+}
+.which-themes{
+    margin-top:10px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: auto;
+}
+    .which-themes > a{
+        margin: 0px 10px 0px 10px;
+        color: #8c8c8c;
+    }
+    .which-themes > a.active, .which-themes > a:hover, .which-themes > a:visited{
+        color: #ffa500!important;
+    }
+.canvas-container {
+    position: relative;
+    margin-top: 30px;
+    height: 350px;
+    width: 100%;
+    flex: 0 0 auto;
+    overflow: scroll;
+}
+
+    .canvas-container .canvas {
+        position: relative;
+        /* min-height: 768px;        */
+        width: 100%;
+        height: 100%;
+        margin-top: 20px;
+        cursor: default;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+		overflow: visible;
+		background: #ececec;
+    }
+        .canvas-container .canvas * {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .links-container {
+            position: absolute;
+            display: flex;
+            margin: 20px 50px 20px 20px;
+        }
+        .links-container.top {
+            /* align-items: center; */
+        }
+
+            .links-container .navlink {
+                position: relative;
+                align-items: center;
+                padding: 2px;
+            }
+                .links-container .navlink .navtext{
+                    position: relative;
+                    outline: none;
+                    white-space: nowrap;
+                    width: 100%;
+                    min-width: 115px;
+                    min-height: 30px;
+                    padding: 5px;
+                    cursor: text;
+                    text-decoration-color: #8c8c8c;
+                }
+
+                .links-container .navlink .navtext::before {
+                    content: "";
+                    position: absolute;
+                    top: -2px;
+                    bottom: -2px;
+                    left: -2px;
+                    right: -2px;
+                    border: 2px dashed rgb(255, 165, 0);
+                    z-index: 50;
+                    pointer-events: none;
+                }
+
+                .links-container .navlink.editing .navtext::before {
+                    border: 2px solid rgb(255, 165, 0);
+                }
+
+                .content-editable:empty:not(:focus):after{
+                    content: "Click to add Text";
+                    font-size: 14px;
+                }
+
+                .links-container .navlink .text-container{
+                    width: 100%;
+                    height: 100%
+                }
+
+                .links-container .navlink .text-editor {
+                    text-align: center;
+                    padding: 5px 5px;
+                    min-width: 115px;
+                    word-wrap: normal;
+                    cursor: text;
+                    outline: none;
+                }
+                .links-container .navlink .btn-remove-link {
+                    position: absolute;
+                    top: -25px;
+                    right: 0px;
+                    display: block;
+                    color: red;
+                    font-size: 20px;
+                    font-weight: bold;
+                    line-height: 1;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                .links-container .navlink .placeholder {
+                    position: absolute;
+                    /* top: calc(50% - 15px); */
+                    top: 12px;
+                    left: calc(50% - 50px);
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .links-container .navlink.empty .placeholder {
+                    display: flex;
+                    cursor: text;
+                }
+                .links-container .navlink.empty.editing .placeholder {
+                    display: none;
+                }
+                .links-container .sub-list-item .subplaceholder {
+                    position: absolute;
+                    left: 0px;
+                    right: 0px;
+                    top: 0px;
+                    bottom: 0px;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .links-container .sub-list-item.empty .subplaceholder {
+                    display: flex;
+                    cursor: text;
+                }
+                .links-container .sub-list-item.empty.editing .subplaceholder {
+                    display: none;
+                }
+                .links-container .navlink .grip {
+                    position: relative;
+                    width: 12px;
+                    height: 5px;
+                    margin: 10px auto 0px auto;
+                    background-image: url('/assets/images/canvas/grip.png');
+                    background-size: contain;
+                    background-position: 50%;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                    cursor: move;
+                    cursor: -moz-grab;
+                    cursor: -webkit-grab;
+                    cursor: grab;
+                }
+
+                .links-container .navlink.editing .sub-list-disp {
+                    display: block;
+                }
+                .links-container .navlink.editing .has-sub-list{
+                    display: none;
+                }
+                .links-container .navlink .sub-list-disp{
+                    display: none;
+                    margin-top: 10px;
+                    font-size: 12px !important;
+                }
+                .links-container .navlink .has-sub-list{
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px !important;
+                }
+                    .links-container .navlink .has-sub-list a{
+                        color: #ffa500;
+                    }
+                    .links-container .navlink .sub-list-disp a.active{
+                        color: #ffa500;
+                    }
+
+                .links-container .sub-list{
+                    display: none;
+                }
+
+                .links-container .sub-list.active{
+                    display: -webkit-flex; /* Safari */
+                    display: flex;
+                    -webkit-flex-direction: column; /* Safari 6.1+ */
+                    flex-direction: column;
+                    position: relative;
+                    min-width: 115px;
+                    margin-top: 5px;
+                }
+
+                    .sub-list .sub-list-item{
+                        position: relative;
+                        border: 1px solid #8c8c8c;
+                        margin-top: 5px;
+                        min-height: 30px;
+                    }
+                    .sub-list .sub-list-item.editing{
+                        border-color: orange;
+                    }
+                    .sub-list .sub-list-item .text-editor {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: none;
+                        width: 100%;
+                        height: 100%;
+                        cursor: text;
+                    }
+                    .sub-list .sub-list-item .placeholder {
+                        display: flex;
+                    }
+
+                    .links-container .navlink .grip.v-grip {
+                        position: absolute;
+                        top: 2px;
+                        right: -14px;
+                        -webkit-transform: rotate(90deg);
+                        -moz-transform: rotate(90deg);
+                        -ms-transform: rotate(90deg);
+                        -o-transform: rotate(90deg);
+                        transform: rotate(90deg);
+                    }
+                    .links-container .navlink .btn-remove-sub-link {
+                        position: absolute;
+                        top: 4px;
+                        right: -27px;
+                        display: block;
+                        color: red;
+                        font-size: 20px;
+                        font-weight: bold;
+                        line-height: 1;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+                    .sub-list .btn-more{
+                        margin-top: 5px;
+                        font-size: 12px;
+                    }
+
+        .links-container.top .btn-more{
+            margin-left: 10px;
+            position: relative;
+        }
+            .links-container.top .btn-more a{
+                position: absolute;
+                top: 20px;
+            }
+
+        .links-container.side .btn-more{
+            margin-top: 20px;
+            position: relative;
+        }
+            .links-container.side .btn-more a{
+                position: absolute;
+                right: 0px;
+            }
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100%;
+}
+    .bottom .submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 110px;
+        height: 30px;
+        font-size: 120%;
+        color: white;
+        background: #ffa500;
+        border: none;
+        border-radius: 5px;
+    }
+
+.btn-between {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    min-height: 75px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0px 20px;
+    padding: 0px 20px;
+    border-color: #d3d3d3;
+    border-style: solid;
+    border-width: 1px 0px;
+}
+    .nav > li{
+        margin: 0px 5px;
+    }
+    .nav .btn-back{
+        margin-top: 10px;
+    }
+    .nav .place{
+        display: flex;
+        align-items: center;
+    }
+    .nav > li > a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+    }
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        text-decoration: none;
+        background-color: #ffa500;
+    }
+    .nav > li > a.active {
+        background-color: #ffa500;
+        color: white;
+    }
+    .nav > li > a > .font-icon {
+        display: flex;
+        width: 34px;
+        height: 34px;
+        justify-content: center;
+        align-items: center;
+        color: #9b9b9b;
+        font-size: 20px;
+    }
+    .nav .layout{
+        margin:0px 10px 0px 10px;
+    }
+        .nav radio-group{
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .nav radio-group >>> ul{
+            display: flex;
+        }
+            .nav radio-group >>> ul li{
+                padding: 0px 10px 0px 10px;
+            }
+    .nav .slider{
+        margin-left: 10px;
+    }
+        .nav .value{
+            margin-top: 14px;
+            width: 20px;
+        }
+
+        .nav slider{
+            margin-top: 20px;
+            margin-bottom: 15px;
+            min-width: 120px;
+        }
+
+.themes .theme{
+    display: flex;
+    position: relative;
+    margin-left: 25px;
+}
+    .themes .links-container{
+        position: relative!important;
+        margin: 30px 50px 20px 0px!important;
+    }
+    .themes .theme .option{
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+.text-tool{
+    position: absolute;
+    z-index: 100;
+}

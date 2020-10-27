@@ -1,0 +1,176 @@
+<div class="service-container">
+    <div class="form-group title"> Add Services {{'#' + (activeIndex +1) }}</div>
+    <div class="columns">
+        <div class="angle-button">
+            <span class="btr bt-angle-left bt-3x"
+                [class.active]="activeIndex > 0"
+                (click)="prev($event)"></span>
+        </div>
+        <div #formContainer
+            class="form-container">
+            <div
+                [formGroup]="dispForms[activeIndex]"
+                class="center-block">
+                <a (click)="removeForm($event)" class="btn-close">×</a>
+                <div class="form-content">
+                    <div class="form-group field-item required">
+                        <split-text-box
+                            formControlName="title"
+                            label="Title of Service"
+                            [error]="dispForms[activeIndex].controls.title.invalid && (dispForms[activeIndex].controls.title.dirty || dispForms[activeIndex].controls.title.touched)"
+                            ></split-text-box>
+                    </div>
+                    <div class="form-group field-item">
+                        <textarea
+                            formControlName="description"
+                            class="form-control"
+                            placeholder="Description of Service (optional)"
+                            maxlength="100"></textarea>
+                        <div class="chars-right">
+                            {{100 - dispForms[activeIndex].controls.description?.value?.length}} characters
+                        </div>
+                    </div>
+                    <div class="form-group field-item required">
+                        <div class="field-item-title">
+                            <label>
+                                Service Marketing SEO
+                            </label>
+                            <tooltip text="?" code="sm.s.410">
+                                <p>
+                                    Page Title appears in a search URL that is read by searchers.
+                                </p>
+                                <p>
+                                    Use key words about the page that encourages clicking.
+                                </p>
+                            </tooltip>
+                        </div>
+                        <div>
+                            <tags-input
+                                [placeholder]="'Enter up to 8'"
+                                [input_keywords]="getTagInput(dispForms[activeIndex].controls.keywords.value)"
+                                [isRequired]="true"
+                                [error]="dispForms[activeIndex].controls.keywords.invalid && (dispForms[activeIndex].controls.keywords.dirty || dispForms[activeIndex].controls.keywords.touched)"
+                                (keywords)="onSetKeywords($event)"
+                                >
+                            </tags-input>
+                            <div class="chars-right keywords">
+                                Separate words with comma
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group field-item">
+                        <div class="field-item-title">Will the Service have the time duration?</div>
+                        <div class="columns center-items field-item-content">
+                            <radio-group [displayInline]="true" formControlName="durationCtrl">
+                                <ng-template radioGroupOption="0">
+                                    No
+                                </ng-template>
+                                <ng-template radioGroupOption="1">
+                                    Yes
+                                </ng-template>
+                            </radio-group>
+                            <div *ngIf="dispForms[activeIndex].controls.durationCtrl.value == '1'" class="columns">
+                                <drop-down
+                                    [selected]="getHours(dispForms[activeIndex].controls.duration.value)"
+                                    [elements]="hrs"
+                                    [defaultData]="'hrs'"
+                                    [isDialogue]="true"
+                                    (changeSelected)="onHrChange($event)">
+                                </drop-down>
+                                <drop-down
+                                    [selected]="getMinutes(dispForms[activeIndex].controls.duration.value)"
+                                    [elements]="mins"
+                                    [defaultData]="'mins'"
+                                    [isDialogue]="true"
+                                    (changeSelected)="onMinChange($event)">
+                                </drop-down>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group field-item">
+                        <div class="field-item-title">Will the Service have a customer limit?</div>
+                        <div class="columns center-items field-item-content">
+                            <radio-group [displayInline]="true" formControlName="customerLimitCtrl">
+                                <ng-template radioGroupOption="0">
+                                    No
+                                </ng-template>
+                                <ng-template radioGroupOption="1">
+                                    Yes
+                                </ng-template>
+                            </radio-group>
+                            <div *ngIf="dispForms[activeIndex].controls.customerLimitCtrl.value == '1'">
+                                <input type="text" class="form-control" formControlName="customerLimit" placeholder="Limit"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group field-item">
+                        <div class="field-item-title">When do you want to show service online?</div>
+                        <div class="columns center-items field-item-content">
+                            <radio-group formControlName="showService">
+                                <ng-template radioGroupOption="1">
+                                    Now
+                                </ng-template>
+                                <ng-template radioGroupOption="0">
+                                    Hide
+                                </ng-template>
+                                <ng-template radioGroupOption="2">
+                                    Schedule
+                                </ng-template>
+                            </radio-group>
+                            <div *ngIf="dispForms[activeIndex].controls.showService.value == '2'" class="m-l-10 bottom-self">
+                                <datetime formControlName="activeDate"></datetime>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group field-item">
+                        <div class="field-item-title">Show price/hourly rate on the Calendar?</div>
+                        <div>
+                            <radio-group [displayInline]="true" formControlName="priceCtrl">
+                                <ng-template radioGroupOption="0">
+                                    No
+                                </ng-template>
+                                <ng-template radioGroupOption="1">
+                                    Yes
+                                </ng-template>
+                            </radio-group>
+                            <div *ngIf="dispForms[activeIndex].controls.priceCtrl.value == '1'" class="columns center-items m-t-10">
+                                <input type="text" class="form-control m-r-20" formControlName="price" placeholder="Price"/>
+                                <input type="text" class="form-control m-r-20" formControlName="itemCode" placeholder="Item Code" readonly/>
+                                <a (click)="generateCode()">Generate</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="locations && locations.length > 1" class="form-group field-item">
+                        <div class="field-item-title">Is this service available at all locations?</div>
+                        <div>
+                            <radio-group [displayInline]="true" formControlName="locationsCtrl" (change)="onLocationCtrlChange($event, dispForms[activeIndex])">
+                                <ng-template radioGroupOption="0">
+                                    No
+                                </ng-template>
+                                <ng-template radioGroupOption="1">
+                                    Yes
+                                </ng-template>
+                            </radio-group>
+                            <div *ngIf="dispForms[activeIndex].controls.locationsCtrl.value == '0' && locations" class="choose-container">
+                                <div>Choose</div>
+                                <div *ngFor="let item of locations" class="option">
+                                    <label class='c-input c-checkbox'>
+                                        <input type="checkbox" name="locationCheck" [value]="item.uid" (change)="onLocationsChange($event, dispForms[activeIndex], item.uid)" [checked]="isLocationChecked(dispForms[activeIndex], item.uid)"/>
+                                        <span class="c-indicator"></span>
+                                    </label>
+                                    <span>{{showLocationValue(item)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="angle-button" (click) = "next($event)">
+            <span class="more-button"> More </span>
+            <span class="btr bt-angle-right bt-3x"
+                [class.active]="activeIndex + 1 < dispForms.length"></span>
+        </div>
+    </div>
+</div>

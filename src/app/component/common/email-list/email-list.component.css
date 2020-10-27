@@ -1,0 +1,321 @@
+:host {
+    display: block;
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;
+}
+
+.email-list-container{
+    height: 100%;
+    position: relative;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+a.items-menu {
+    color: #000000;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 16px;
+    text-decoration: unset;
+}
+
+a.items-menu-selected {
+    color: #ffa500;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 16px;
+    text-decoration: unset;
+}
+
+.nav-item {
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    margin-top: -20px;
+}
+
+.nav > li{
+    width: 90px;
+    height: 55px;
+    margin: 0px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.nav > li.active{    
+    border: 3px solid orange;
+    border-radius: 5px;
+}
+
+.nav > li.add-contact {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.nav>li>a {
+    text-decoration: none;
+    text-align: center;
+    font-size: 11px;
+    color: #8c8c8c;
+    background-color: white;
+    cursor: pointer;
+}
+
+.nav>li>a.active:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav>li>a.disable {
+    pointer-events: none;      
+}
+
+.nav>li>a>.font-icon {        
+    font-size: 20px;
+}
+.nav>li>a>.caption{
+    margin-top: 5px;
+}
+
+.edit-contact {
+    width: 130px;
+    height: 18px;
+    font-size: 16px;
+}
+
+.show-contact {
+    margin-left: 13px;
+    color: #656565;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.title {
+    display: flex;
+    height: 40px;
+    padding: 10px 0px 0px 10px;
+}
+
+.title>checkbox {
+    float: left;
+    margin-right: 25px;
+    margin-top: 6px;
+}
+
+.title>span {
+    float: left;
+    color: #656565;
+    margin-right: 78px;
+    margin-left: 7px;
+    margin-top: 10px;
+}
+
+drop-down{
+    width: 100%;
+    max-width: 150px;
+}
+
+drop-down >>> button {
+    font-size: 16px;
+}
+
+app-arrow-button{
+    width: 100%;
+    max-width: 110px;
+}
+
+    app-arrow-button >>> .arrow-button a{
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+.addDate .dateFromTo {
+    padding: 10px 10px 10px 10px;
+    background-color: white;
+    -webkit-box-shadow: 0px 7px 11px 8px #8c8c8c;
+    -moz-box-shadow: 0px 7px 11px 8px #8c8c8c;
+    box-shadow: 0px 4px 10px 2px #8c8c8c;
+    width: 250px;
+    height: 150px;
+    position: fixed;
+    display: grid;
+    float: left;
+    z-index: 2;
+    margin-top: 5px;
+    margin-left: -45px;
+}
+
+.grid {
+    width: 100%;
+    height: 300px;
+}
+
+.content-details {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: calc(100% - 70px);
+    padding: 10px 0px 0px 15px;
+}
+
+.content-lists {
+    position: relative;
+    float: left;
+    width: 80%;
+    height: 100%;    
+    padding: 10px 0px 0px 15px;
+}
+
+.email-item {
+    color: #03527c;
+}
+
+.lists {
+    width: 100%;
+    height: 90%;
+    overflow-y: overlay;
+}
+
+.list {
+    display: block;
+    float: left;
+    height: 40px;
+    padding: 10px 0px 0px 10px;
+    width: 100%;
+}
+
+.list>span {
+    float: left;
+    color: #656565;
+    margin-right: 11px;
+    margin-left: 12px;
+    margin-top: 10px;
+    font-size: 13px;
+    width: 130px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list>a {
+    float: left;
+    margin-right: 30px;
+    margin-top: 10px;
+    font-size: 13px;
+    width: 150px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list>checkbox {
+    float: left;
+    margin-right: 25px;
+    margin-top: 6px;
+}
+
+.list>input {
+    float: left;
+    color: #656565;
+    margin-right: 23px;
+    margin-top: 2px;
+    font-size: 13px;
+    width: 130px;
+}
+
+.email-list {
+    width: 20%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid gray;
+}
+
+.email-list .list-title {
+    width: 100%;
+    float: left;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.email-list .list-title > span {
+    font-size: 25px;
+    float: left;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.email-list .list-title > a {
+    margin-left: 25%;
+    color: #ffa500;
+    margin-left: 33%;
+}
+
+.email-list .list-item {
+    width: 100%;    
+    height: 35px;
+    align-items: center;
+}
+    .email-list .list-item > span {
+        min-width: 100px;
+        word-wrap: break-word;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .email-list .list-item .remove-item {
+        float: right;        
+        color: red;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: none;        
+    }
+
+.more {
+    float: right;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+.test {
+    border: 0px solid white !important;
+    background-color: white;
+    height: 10px;
+}
+
+kendo-grid>>>.k-header {
+    font-size: 16px!important;
+}
+
+kendo-grid>>>kendo-grid-list {
+    font-size: 16px!important;
+}
+
+kendo-grid>>>.k-grid-header-wrap {
+    border-bottom: 0px solid white !important;
+    border-right: 0px !important;
+}
+
+kendo-grid>>>.k-grid-header {
+    background-color: white !important;
+}
+
+kendo-grid>>>.k-grid-norecords>td{
+    padding-top: 100px;
+    text-align: center;
+    font-size: 36px;
+    color: #8c8c8c;
+}

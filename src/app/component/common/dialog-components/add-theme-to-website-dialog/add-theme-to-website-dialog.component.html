@@ -1,0 +1,45 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container text-center">
+		<span class="dialog-title"><h3>Adding a Theme to an Existing Website</h3></span>
+	</div>
+</div>
+<div class="dialog-container">
+	<div class="form-group">
+		The theme you are about to Save has a Header and/or Footer that displays automatically on all pages.
+	</div>
+	<div class="form-group">
+		Your current Header and/or Footer will be replaced;
+	</div>
+	
+	<div class="option-container">
+		<div class="form-group columns open">
+			<label class='c-input c-radio'>
+				<input type="radio" name="chooseOption"
+					[formControl]="chooseOptionControl" value="keep">
+				<span class="c-indicator"></span>
+			</label>
+			<div class="text">Keep Current</div>
+		</div>
+		<div class="form-group columns block">
+			<label class='c-input c-radio'>
+				<input type="radio" name="chooseOption"
+					[formControl]="chooseOptionControl" value="replace">
+				<span class="c-indicator"></span>
+			</label>
+			<div class="text">Replace Current</div>
+		</div>
+	</div>
+
+	<div class="form-group submit center-block">
+		<input
+			type="button"
+			value="SAVE"
+			(click)="onSubmit()"
+			class="btn btn-block btn-main center-block">
+	</div>
+</div>

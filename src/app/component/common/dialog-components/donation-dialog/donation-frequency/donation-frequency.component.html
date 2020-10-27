@@ -1,0 +1,16 @@
+<div class="form-group">
+	<checkbox [formControl]="fundraisingFrequencyEnabled"></checkbox>
+	<div class="section-title">
+		<legend class="text">Donation Frequency</legend>
+	</div>
+	<div class="box-3" #box style="display: none;">
+		<div class="form-group frequency-types-container">
+			<span class="frequency-text" *ngFor="let t of frequencyTypes">
+				{{t}}
+			</span>
+		</div>
+		<div class="form-group">
+			<p class="text-xs-center font12">Donor makes choice</p>
+		</div>
+	</div>	
+</div>

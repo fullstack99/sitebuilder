@@ -1,0 +1,122 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container columns">
+		<span class="dialog-title"><h3>BORDERS</h3></span>
+	</div>
+</div>
+
+<div class="dialog-container" [formGroup]="borderInfoForm">
+	<div class="rows">
+		<div class="result-border">
+			<div class="center-block" #resultBorder
+				[style.border-color]="borderInfoForm.value.borderColor"
+				[style.border-style]="'solid'"
+				[style.border-width]="borderInfoForm.value.borderWidth + 'px'"
+				[style.border-top-left-radius]="getBorderRadius(borderInfoForm.value, 'lTop')"
+				[style.border-top-right-radius]="getBorderRadius(borderInfoForm.value, 'rTop')"
+				[style.border-bottom-left-radius]="getBorderRadius(borderInfoForm.value, 'lBottom')"
+				[style.border-bottom-right-radius]="getBorderRadius(borderInfoForm.value, 'rBottom')"
+				[style.box-shadow]="getShadow(borderInfoForm.value)">
+			</div>
+		</div>
+		<div class="disp-remove-border center-block">
+      <span> REMOVE BORDER </span>
+      <a (click)="removeBorder()" style="color: red; text-decoration: none">&nbsp;X</a>
+    </div>
+	</div>
+
+	<div class="columns adjusts">
+		<div class="rows">
+			<div *ngFor="let item of _sampleInfo; let i=index"
+				class="columns sample-border-selector">
+				<label class='c-input c-radio'>
+					<input type="radio"
+						name="{{headerfooter}}whichBorderAmount"
+						value="{{i}}"
+						[formControl]="whichAmount"
+						(click)="selectBorder(i)">
+					<span class="c-indicator"></span>
+				</label>
+				<div class="sample-border"
+					[style.border-color]="item.borderColor"
+					[style.border-style]="'solid'"
+					[style.border-width]="item.borderWidth+'px'"
+					[style.box-shadow]="getShadow(item)"
+					[style.border-top-left-radius]="getBorderRadius(item,'lTop')"
+					[style.border-top-right-radius]="getBorderRadius(item,'rTop')"
+					[style.border-bottom-left-radius]="getBorderRadius(item,'lBottom')"
+					[style.border-bottom-right-radius]="getBorderRadius(item,'rBottom')"
+					>
+				</div>
+			</div>
+		</div>
+		<div class="rows border-adjusts">
+			<div class="color-picker rows">
+				<div class="columns" style="justify-content: space-between;">
+					<span>Color Picker</span>
+					<a (click)="openColorPicker()">More</a>
+				</div>
+				<div class="colorPalette" #colorPalette></div>
+			</div>
+			<div class="columns border-adjust">
+				<div class="text">Thickness</div>
+				<slider formControlName="borderWidth"
+					[min]="_rangeWidth[0]" [max]="_rangeWidth[1]">
+				</slider>
+				<input type="text"
+						name="shadow"
+						readonly="true"
+						value="{{borderInfoForm.value.borderWidth}}">
+			</div>
+			<div class="columns border-adjust">
+				<div class="text">Shadow</div>
+				<slider formControlName="shadow"
+					[min]="_rangeShadow[0]" [max]="_rangeShadow[1]">
+				</slider>
+				<input type="text"
+						name="shadow"
+						readonly="true"
+						value="{{borderInfoForm.value.shadow}}">
+			</div>
+			<div class="columns border-adjust">
+				<div class="text">Curve</div>
+				<slider formControlName="amount"
+					[min]="_rangeAmount[0]" [max]="_rangeAmount[1]">
+				</slider>
+				<input type="text"
+						name="curve"
+						readonly="true"
+						value="{{borderInfoForm.value.amount}}">
+			</div>
+			<div class="columns border-adjust corner">
+				<div class="choose-text"> Choose Corners For Curves </div>
+				<div class="corner-body">
+					<div>
+						<checkbox formControlName="lTop" class='check-l-top'></checkbox>
+						<checkbox formControlName="rTop" class='check-r-top'></checkbox>
+					</div>
+					<div class="choose-corner"></div>
+					<div>
+						<checkbox formControlName="lBottom" class='check-l-bottom'></checkbox>
+						<checkbox formControlName="rBottom" class='check-r-bottom'></checkbox>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<input
+			type="button"
+			value="ADD"
+			class="btn btn-block btn-main"
+			style="max-width: 150px;"
+			[class.active]="true"
+			(click)="onAdd()"
+			/>
+	</div>
+</div>

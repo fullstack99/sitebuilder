@@ -1,0 +1,32 @@
+<div>
+    <div class="toolbar">
+        <div class="button back" (click)="onBackClick()"><img src="/assets/images/canvas/back.png"/></div>        
+    </div>
+    <div style="border: 1px solid #8c8c8c; padding: 15px;">
+        <div>
+            <div>There are many good sources for stock images for your project.</div>
+            <div>Some free. Some paid. Here are some to get you started.</div>
+            <div>Download to your computer. Import in My Images.</div>
+        </div>
+        <br/>
+        <div>
+            <div>Free</div>
+            <div class="urls-container">
+                <div *ngFor="let item of freeUrls; let i = index">
+                    <span>{{item.name}} &nbsp; : &nbsp;</span>
+                    <a [href]="item.url" target="_blank">{{item.url}}</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>Paid</div>
+            <div class="urls-container">
+                <div *ngFor="let item of paidUrls; let i = index">
+                    <span>{{item.name}} &nbsp; : &nbsp;</span>
+                    <a [href]="item.url" target="_blank">{{item.url}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

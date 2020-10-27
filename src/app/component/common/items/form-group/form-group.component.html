@@ -1,0 +1,17 @@
+<div [class.disable]="readOnly && selected">
+    <item *ngFor="let i of itemContent.items"
+        [item]="i"
+        [readOnly]="readOnly"
+        [containerWidth]="containerWidth"
+        >
+    </item>
+	<div
+		*ngIf="formType != 'S'" 
+		class="submit">
+      <input
+          type="button"
+          value="SUBMIT"
+          class="btn btn-block btn-main center-block">
+    </div>
+</div>
+

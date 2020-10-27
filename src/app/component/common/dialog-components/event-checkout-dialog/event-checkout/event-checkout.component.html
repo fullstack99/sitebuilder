@@ -1,0 +1,75 @@
+<div class="event-checkout"
+	(mousedown)="$event.stopPropagation()">
+	<div class="event-checkout-content">
+		<div class="text-center">
+			<h3>Checkout</h3>
+		</div>
+		<div class="columns" style="padding: 15px 0;">
+			<div>
+				<div class="form-group">
+					<div class="form-group content-title-2">
+						1.&nbsp;&nbsp;For Confirmation
+					</div>
+					<div class="form-group" style="max-width: 268px; padding-left: 30px;">
+						<input type="text" class="form-control" placeholder="Name"/>
+					</div>
+					<div class="form-group" style="max-width: 268px; padding-left: 30px;">
+						<input type="text" class="form-control" placeholder="Email"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-group content-title-2">
+						2.&nbsp;&nbsp;<a>Add</a> Credit-Debit Card
+					</div>
+					<div style="padding-left: 30px;">
+						<div class="form-group">
+							OR <img src="assets/images/paypal.png" width="100px" /> <span>Express</span>
+						</div>
+						<div class="columns" style="align-items: center;">
+							<a>Add</a>&nbsp;&nbsp;
+							<input type="text"
+								class="form-control card-code"
+								placeholder="Gift Card or Promo Code"
+								style="max-width: 200px;"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-group content-title-2">
+						3. Review Items
+					</div>
+					<div style="padding-left: 30px;">
+						1 x Admission
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="form-group content-title-1">
+					<input
+						type="submit"
+						value="Place Order"
+						class="btn btn-block btn-main"
+						style="max-width: 150px; margin-left: 0;"
+						/>
+				</div>
+				<div class="form-group">
+ 					<div class="columns" style="max-width: 250px;">
+						<div>Items</div>
+						<div>$65</div>
+						<div class="content-title-2">$65</div>
+					</div>
+				</div>
+				<div>
+					Total befor tax:&nbsp;&nbsp;$65
+				</div>
+				<div class="form-group">
+					Est. tax:
+				</div>
+				<div class="form-group content-title-1" style="color: red; padding-left: 30px;">
+					Total &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $65.00
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

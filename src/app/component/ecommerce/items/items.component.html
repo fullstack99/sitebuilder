@@ -1,0 +1,14 @@
+<div class="items-container">
+	<div class="items-menu-container">
+		<a class="new-item" (click)="onAddItem($event)">
+			ADD ITEM
+		</a>
+		<app-sub-menubar [tabs]="tabs" [tabId]="activeTab.id" [mobileMaxWidth]="300" (selectedTab)="onSelectTab($event)">
+		</app-sub-menubar>
+	</div>
+	<div class="items-content">
+		<items-grid *ngIf="activeTab.id == 0" [newItem]="newItem"></items-grid>
+		<inventory-grid *ngIf="activeTab.id == 1" [newItem]="newItem"></inventory-grid>
+		<catalog-navigation *ngIf="activeTab.id == 2" [newItem]="newItem"></catalog-navigation>
+	</div>
+</div>

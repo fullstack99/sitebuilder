@@ -1,0 +1,23 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    height: 100%;
+}
+
+.google-maps-container{    
+    position: relative;
+    width: calc(100% - 10px);
+    height: calc(100% - 60px);
+}
+
+.address{
+    width: calc(100% - 24px);
+}
+
+agm-map {
+    height: calc(100% - 65px);
+    width: 100%;
+}

@@ -1,0 +1,167 @@
+<div class="service-container">
+    <div class="form-group title"> Choose Type of Provider </div>
+    <div class="form-group columns">
+        <label class='c-input c-radio'>
+            <input type="radio" name="providerType"
+                [formControl]="providerTypeCtrl" value="0">
+            <span class="c-indicator"></span>
+        </label>
+        <div class="text">Just Me!</div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value == 0 || providerTypeCtrl.value == 1" class="form-group field-item">
+        <div class="m-l-20">Do you want to appear on the Calendar?</div>
+        <div class="m-l-40">
+            <radio-group [displayInline]="true" [formControl]="providerTypeCtrl">
+                <ng-template radioGroupOption="0">
+                    No
+                </ng-template>
+                <ng-template radioGroupOption="1">
+                    Yes
+                </ng-template>
+            </radio-group>
+        </div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value == 2 || providerTypeCtrl.value == 3" class="form-group columns">
+        <label class='c-input c-radio'>
+            <input type="radio" name="providerType"
+                [formControl]="providerTypeCtrl" value="2">
+            <span class="c-indicator"></span>
+        </label>
+        <div class="text">Customer can choose Provider</div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value==3" class="form-group columns">
+        <label class='c-input c-radio h-22'>
+            <input type="radio" name="providerType"
+                [formControl]="providerTypeCtrl" value="3">
+            <span class="c-indicator"></span>
+        </label>
+        <div class="text">No Provider choice. But I want to schedule appointments by Provider</div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value > 1" class="form-group title"> Add Providers {{'#' + (activeIndex +1) }}</div>
+    <div class="columns">
+        <div *ngIf="providerTypeCtrl.value > 1" class="angle-button">
+            <span class="btr bt-angle-left bt-3x"
+                [class.active]="activeIndex > 0"
+                (click)="prev($event)"></span>
+        </div>
+        <div #formContainer
+            class="form-container">
+            <div
+                [formGroup]="dispForms[activeIndex]"
+                class="center-block">
+                <a *ngIf="providerTypeCtrl.value > 1" (click)="removeForm($event)" class="btn-close">×</a>
+                <div class="form-content">
+                    <div *ngIf="providerTypeCtrl.value==1 || providerTypeCtrl.value==2" class="rows result-image-container">
+                        <div class="image-result-controls">
+                            <div class="left">
+                                <a (click)="openImportDialog()">IMPORT</a>
+                            </div>
+                            <div class="right">
+                                <a (click)="openImageEditor()">EDIT</a>
+                                <a class="remove" (click)="removeImage()">X</a>
+                            </div>
+                        </div>
+                        <div #photoEle
+                            class="photo rows"
+                            [style.backgroundImage]="backgroundImage(dispForms[activeIndex])"
+                            (click)="openImportDialog()"
+                            (dragover)="onDragOver($event)"
+							(dragenter)="onDragEnter($event)"
+							(dragleave)="onDragLeave($event)"
+							(drop)="onDrop($event)">
+                            <span *ngIf="_loading" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></span>
+                            <span *ngIf="!_loading && !dispForms[activeIndex].controls.photo.value">Click to Add Image</span>
+                            <span *ngIf="!_loading && !dispForms[activeIndex].controls.photo.value">or Drag and Drop Here</span>
+                        </div>
+                    </div>
+                    <div *ngIf="providerTypeCtrl.value > 0" class="form-group required">
+                        <split-text-box
+                            formControlName="name"
+                            label="Name"
+                            [error]="dispForms[activeIndex].controls.name.invalid && (dispForms[activeIndex].controls.name.dirty || dispForms[activeIndex].controls.name.touched)"></split-text-box>
+                    </div>
+                    <div *ngIf="providerTypeCtrl.value > 0" class="form-group">
+                        <textarea
+                            formControlName="details"
+                            class="form-control"
+                            placeholder="Details (optional)"
+                            maxlength="100"></textarea>
+                        <div class="chars-right">
+                            {{100 - dispForms[activeIndex].controls.details?.value?.length}} characters
+                        </div>
+                    </div>
+                    <div *ngIf="isVisibleLocationsDropdown" class="form-group field-item">
+                        <div class="item-title">Choose Locations of this Provider</div>
+                        <div class="m-l-20">
+                            <drop-down
+                                [selected]="getSelectedFirstLocation(dispForms[activeIndex])"
+                                [elements]="locations"
+                                [enableMultipleSelect]="true"
+                                [multipleSelected]="getSelectedLocations(dispForms[activeIndex])"
+                                [showValueFunc]="showLocationValue"
+                                [defaultData]="'Choose Locations'"
+                                [defaultSelectAllData]="'All Locations'"
+                                [isDialogue]="true"
+                                (changeSelected)="onLocationsChange($event)">
+                            </drop-down>
+                        </div>
+                    </div>
+                    <div *ngIf="providerTypeCtrl.value > 1 && services && services.length > 1" class="form-group field-item">
+                        <div class="item-title">Does provider perform all services?</div>
+                        <div class="m-l-20">
+                            <!-- <drop-down
+                                [selected]="getSelectedFirstService()"
+                                [elements]="services"
+                                [enableMultipleSelect]="true"
+                                [multipleSelected]="getSelectedServices()"
+                                [showValueFunc]="showServiceValue"
+                                [defaultData]="'All'"
+                                (change)="onServicesChange($event)">
+                            </drop-down> -->
+                            <radio-group [displayInline]="true" formControlName="servicesCtrl" (change)="onServiceCtrlChange($event, dispForms[activeIndex])">
+                                <ng-template radioGroupOption="0">
+                                    No
+                                </ng-template>
+                                <ng-template radioGroupOption="1">
+                                    Yes
+                                </ng-template>
+                            </radio-group>
+                        </div>
+                        <div *ngIf="dispForms[activeIndex].controls.servicesCtrl.value == '0' && services" class="choose-container">
+                            <div>Choose</div>
+                            <div *ngFor="let item of services" class="option">
+                                <label class='c-input c-checkbox'>
+                                    <input type="checkbox" name="serviceCheck" [value]="item.uid" (change)="onServicesChange($event, dispForms[activeIndex], item.uid)" [checked]="isServiceChecked(dispForms[activeIndex], item.uid)"/>
+                                    <span class="c-indicator"></span>
+                                </label>
+                                <span>{{showServiceValue(item)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="providerTypeCtrl.value > 1" class="angle-button" (click)="next($event)">
+            <span class="more-button"> More </span>
+            <span class="btr bt-angle-right bt-3x"
+                [class.active]="activeIndex + 1 < dispForms.length"></span>
+        </div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value < 2" class="form-group columns">
+        <label class='c-input c-radio'>
+            <input type="radio" name="providerType"
+                [formControl]="providerTypeCtrl" value="2">
+            <span class="c-indicator"></span>
+        </label>
+        <div class="text">Customer can choose Provider</div>
+    </div>
+    <div *ngIf="providerTypeCtrl.value != 3" class="form-group columns">
+        <label class='c-input c-radio h-22'>
+            <input type="radio" name="providerType"
+                [formControl]="providerTypeCtrl" value="3">
+            <span class="c-indicator"></span>
+        </label>
+        <div class="text">No Provider choice. But I want to schedule appointments by Provider</div>
+    </div>
+</div>

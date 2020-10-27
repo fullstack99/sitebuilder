@@ -1,0 +1,108 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.image-import-container{
+    width: 100%;
+    height: 100%;   
+}
+
+    .subtitle {
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 16px;
+    }
+
+    .dialog-body{
+        padding: 0px 15px 0px 15px;
+    }   
+
+        .import-button a{
+            margin: 10px;
+            font-size: 16px;            
+            text-decoration: none;
+        }
+        input[type="file"] {
+            display: none;
+        }       
+
+        .ribbon {
+            margin-top: 30px;
+            margin-left: -4px;
+            margin-right: auto;
+            align-items: center;
+        }
+            .ribbon .btn-left,
+            .ribbon .btn-right {
+                position: relative;
+                top: -10px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+            .ribbon .ribbon-body .ribbon-item {
+                width: 40px;
+                height: 60px;
+                margin: 0 10px;
+                font-size: 10px;
+                text-align: center;
+                cursor: pointer;
+            }
+                .ribbon .ribbon-body .ribbon-item .img {
+                    width: 40px;
+                    height: 40px;
+                    background-position: 50%;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+.bottom {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 100%;
+}
+    .bottom .submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 190px;
+        height: 30px;
+        font-size: 120%;
+        color: white;
+        background: #ffa500;
+        border: none;
+        border-radius: 5px;
+    }
+
+/* ===================== FILE INPUT ===================== */
+
+file-drop >>> .drop-zone{
+    height: 50px;
+    border: 2px dotted #ffa500;    
+}
+
+file-drop >>> .content{
+    height: 50px;
+    color: #8c8c8c;
+}

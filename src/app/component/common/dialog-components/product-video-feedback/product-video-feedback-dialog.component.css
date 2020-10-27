@@ -1,0 +1,54 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+[hidden] { display: none!important;}
+
+.dialog-header {
+  margin-bottom: 15px;
+  min-height: 50px;
+}
+
+.dialog-content {
+  height: calc(100% - 70px);
+}
+
+common-canvas{
+  height: 100%;
+  width: 780px;
+}
+    .blank{
+        display: inline-block;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 42px;
+        color: #8c8c8c;
+    }
+
+    common-canvas >>> .canvas-scroll {
+      border: 1px dotted;
+      height: 100%;
+    }
+
+    common-canvas >>> .canvas-scroll .canvas {
+      border-top: 1px transparent solid !important;
+      border-left: 1px transparent dotted !important;
+      border-right: 1px transparent dotted !important;
+      border-bottom: 1px transparent solid !important;
+    }

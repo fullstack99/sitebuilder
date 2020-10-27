@@ -1,0 +1,54 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    
+</div>
+<div class="font-picker-container columns">
+    <div class="rows font-list-box">
+        <h4>Google Fonts</h4>
+        <div class="columns font-list-options">
+            <input type="text"
+                class="search-ctrl form-control" 
+                [formControl]="_searchCtrl"
+                placeholder="Search"/>
+            <select class="form-control"
+                [formControl]="_categoryCtrl">
+                <option value="all"         selected>All fonts</option>
+                <option value="display"             >Display</option>
+                <option value="handwriting"         >Handwriting</option>
+                <option value="monospace"           >Monospace</option>
+                <option value="serif"               >Serif</option>
+                <option value="sans-serif"          >Sans Serif</option>
+            </select>
+        </div>
+        <div class="font-list"
+            #fontList
+            (scroll)="_fontListScroll.next($event)">
+            <div *ngFor="let font of _loadedFonts"
+                class="font"
+                [style.font-family]="font.family"
+                (click)="_addMyFont.next(font)">
+                {{font.family}}
+            </div>
+        </div>
+    </div>
+    <div class="rows my-fonts">
+        <h4>My Fonts</h4>
+        <div class="rows tip">
+            <div>Choose Font</div>
+            <div>Adds it Here then OK</div>
+        </div>
+        <div class="my-fonts-list" #myFonts>
+            <div *ngFor="let font of _myFonts" class="font">
+                <span [style.font-family]="font.family">{{font.family}}</span>
+                <a class="btn-remove" (click)="_removeMyFont.next(font)">×</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom">
+    <button class="submit" [disabled]="_myFonts.length==0" (click)="onClose()">OK</button>
+</div>

@@ -1,0 +1,13 @@
+<loading *ngIf="loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class="event-calendar-container"
+	(scroll)="onScroll($event)">
+	<ng-container *ngFor="let item of events; let i = index">
+		<event-report [eventSetupInfo]="item"
+			(eventSetupInfoChange)="changeEventSetupInfo($event, i)"
+			(outLink)="outLink.emit($event)">
+		</event-report>
+	</ng-container>
+	<!-- <div *ngIf="!eventCalendar.allView">
+		<a>View More Events</a>
+	</div> -->
+</div>

@@ -1,0 +1,73 @@
+f.k-datetimepicker .k-picker-wrap .k-icon {
+    margin: 8px 2px;
+}
+
+.k-picker-wrap .k-icon {
+    margin: 8px 2px;
+}
+
+.k-textbox:focus,
+.k-autocomplete.k-state-focused,
+.k-picker-wrap.k-state-focused,
+.k-numeric-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-multiselect.k-header.k-state-focused {
+  background-color: #fff;
+  background-image: none;
+  background-position: 50% 50%;
+  border-color: #ffa500;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.k-widget.k-tooltip {
+    border-color: #fff;
+    background-color: #fff;
+    color: #464646;
+    border: 1px solid #d8d6d3;
+    margin: 20px auto 0;
+    border-radius: 0.625rem;
+}
+
+.k-window{ 
+  padding: 10 10 10 10;
+  border-radius: 15px !important;
+}
+/* .k-window-titleless {
+    padding-top: 10px!important;
+} */
+
+.k-splitbar:active{
+    background: orange!important;
+}
+
+.k-calendar .k-state-selected, .k-calendar .k-weekend.k-state-selected, .k-drag-clue, .k-event, .k-panelbar .k-group>.k-item>.k-link.k-state-selected, .k-panelbar>.k-item>.k-link.k-state-selected:not(.k-state-active), .k-panelbar>.k-item>.k-link.k-state-selected:not(.k-state-expanded), .k-treeview .k-in.k-state-selected {
+    color: #fff;
+    background-color: orange!important;
+    border-color: orange!important;
+}
+
+.k-grid-header .k-header { 
+    vertical-align: middle!important;
+}
+
+.k-grid td {
+    vertical-align: top!important;
+}
+
+.k-grid a, .k-grid a:hover {
+    color: #337ab7!important;
+}
+
+.k-drag-clue, .k-grid-add-row, .k-grid-footer, .k-grid-header, .k-grid-toolbar, .k-grouping-header {
+    color: #656565;
+    background-color: white!important;
+}
+
+.k-grid tr.k-alt{
+    background-color: white!important;
+}
+    .k-grid tr:hover{
+        background-color: antiquewhite!important;
+        cursor: pointer;
+    }

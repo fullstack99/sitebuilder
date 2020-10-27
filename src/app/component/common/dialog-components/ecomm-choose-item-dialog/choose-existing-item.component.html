@@ -1,0 +1,55 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns margin-top-10">		
+        <span class="dialog-title">
+            <h3 *ngIf="category == -1">{{diagMode == 'single' ? 'Choose Existing Item' : 'Choose Existing Items' }}</h3>
+            <h3 *ngIf="category == 4">Choose Items by Department</h3>
+            <h3 *ngIf="category == 5">Choose Items by Collection</h3>
+            <h3 *ngIf="category == 6">Choose Items by Vendor/Brand</h3>
+        </span>
+    </div>
+</div>
+<div class="choose-existing-item">
+    <div class="content">
+        <loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+        <div class="search">
+            <input type="text" class="form-control" [formControl]="search" placeholder="search" style="width: 250px; margin: auto;">
+        </div>
+		<div #productsContainer
+			class="items-content"
+			(scroll)="productsContainerScroll.next()">
+            <div class="item-row" *ngFor="let item of filteredItems; let i=index;">
+                <label *ngIf="diagMode=='single'" class='c-input c-radio'>
+                    <input type="radio" [formControl]="selectedItem" value="{{i}}">
+                    <span class="c-indicator"></span>
+                </label>
+                <label *ngIf="diagMode=='multiple'" class='c-input c-checkbox'>
+                    <input type="checkbox" name="itemCheck" [value]="item.uid" (change)="onItemCheckChange($event, item.uid)" [checked]="isItemChecked(item.uid)"/>
+                    <span class="c-indicator"></span>
+                </label>
+                <div class="row-content">
+                    <div *ngIf="category != -1"  class="item-description"> {{item.title}} </div>
+                    <div *ngIf="category == -1"  class="item-img" [style.backgroundImage]="backgroundImage(item.images[0])"></div>
+                    <p *ngIf="category == -1" class="item-title">
+                        {{item.title}}
+                    </p>
+                </div>
+            </div>
+        </div>      
+        <div class="form-group">
+            <input
+                type="button"
+                value="OK"
+                class="btn btn-block btn-main"
+                style="max-width: 150px;"
+                [class.active]="diagMode=='single' && selectedItem.valid || diagMode=='multiple' && selectedItemUids.length > 0"
+                [disabled]="diagMode=='single' && selectedItem.invalid || diagMode=='multiple' && selectedItemUids.length == 0"
+                (click)="onSubmit()"
+                />
+        </div>
+    </div>
+</div>

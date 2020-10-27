@@ -1,0 +1,126 @@
+<div *ngIf="imgs.length != 0"
+	#reviewContainer
+	class="content columns">
+    <div class="left" *ngIf="!mobilePageView && layout == 'side'">
+        <kendo-sortable
+            [data] = "imgs"
+            [animation] = "true"
+            [emptyText]="''"
+            [itemStyle] = "mobilePageView ? itemStyles[1] : itemStyles[0]"
+            (dragEnd)="onDragEnd($event)">
+            <ng-template let-item="item" let-i="index">
+                <div class="item-image" [class.selected]="activeIndex==i" [style.backgroundImage]="backgroundImage(item.image)" (mousedown)="selectImg($event, i)"></div>
+            </ng-template>
+        </kendo-sortable>
+    </div>
+	<div class="right"
+		[class.mobile]="mobilePageView"
+		[class.center]="layout == 'top'">
+        <div class="main columns">
+            <div class="previous">
+				<i class="btl bt-angle-left bt-2x"
+					[class.active]="activeIndex > 0"
+					(mousedown)="onArrowMouseDown($event)"
+					(click)="previous($event)"></i>
+            </div>
+            <div class="result rows">
+                <div *ngIf="editable" class="links">
+                    <a (mousedown)="onEditor(imgs[activeIndex].image, $event)">Edit</a>
+                    <span class="image-index">{{activeIndex+1}}</span>
+                    <a (mousedown)="onRemoveImg(activeIndex, $event)" class="btn-close"><b>×</b></a>
+                </div>
+                <div class="result-image" [style.backgroundImage]="backgroundImage(imgs[activeIndex].image)">
+                    <div #resultImage class="img-watermark"></div>
+                    <div #setText class="text-watermark"></div>
+                </div>
+            </div>
+            <div class="next">
+				<i class="btl bt-angle-right bt-2x"
+					[class.active]="activeIndex < imgs.length - 1"
+					(mousedown)="onArrowMouseDown($event)"
+					(click)="next($event)"></i>
+            </div>
+        </div>
+        <div class="img-desc" *ngIf="isLabel == 'Hide Label'">
+            <!-- <input type="text" class="form-control" placeholder="Describe Image" [(ngModel)]="imgs[activeIndex].desc"/> -->
+            <textarea (focusout)="saveLabel()" class="form-control" [(ngModel)]='imgs[activeIndex].desc' rows="3" cols="50">
+            </textarea>
+        </div>
+    </div>
+
+	<div *ngIf="mobilePageView || layout == 'top'" 
+		class="thumbnails-ctrl columns"
+		[style.max-width]="imgs.length * 85 + 40 + 'px'">
+        <span class="btn-left btr bt-angle-left"
+            [class.active]="!isBeginning"
+            (mousedown)="onArrowMouseDown($event)"
+            (click)="onPrev($event)"></span>
+        <div class="thumbnails">
+			<div
+				class="swiper-container"
+				[swiper]="swiperConfig"
+				(indexChange)="indexChanged($event)"
+				#usefulSwiper>
+                <div class="swiper-wrapper" #swiperWrapper>
+                    <div *ngFor="let item of imgs; let i = index" class="swiper-slide">
+                        <div class="thumb"
+                            [style.backgroundImage]="backgroundImage(item.image)"
+                            [class.active]="activeIndex == i"
+                            (mousedown)="onArrowMouseDown($event)"
+                            (click)="selectImg($event, i)"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="thumbnails columns thumbnails-change"
+                    #thumbnails
+                    draggableListInline
+                    (draggableList-newIndexes)="_imageIndexChange.next($event)"
+                    >
+                    <div class="thumb"
+                        [style.backgroundImage]="backgroundImage(imgs[activeIndex])"
+                        draggableListItemInline
+                        (draggableListItem-dragStart)="_thumbDragStart.next(0)"
+                        (draggableListItem-dragEnd)="_thumbDragEnd.next(0)"
+                        (draggableListItem-drag)="_thumbDrag.next([0, $event])"
+                        >
+                        <div class="grip"
+                            draggableListItemGripInline
+                            (mousedown)="gripDown($event)"
+                            ></div>
+                    </div>
+                    <div class="thumb"
+                        [style.backgroundImage]="backgroundImage(imgs[activeIndex + 1])"
+                        draggableListItemInline
+                        (draggableListItem-dragStart)="_thumbDragStart.next(1)"
+                        (draggableListItem-dragEnd)="_thumbDragEnd.next(1)"
+                        (draggableListItem-drag)="_thumbDrag.next([1, $event])"
+                        >
+                        <div class="grip"
+                            draggableListItemGripInline
+                            (mousedown)="gripDown($event)"
+                            ></div>
+                    </div>
+                    <div class="thumb last"
+                        [style.backgroundImage]="backgroundImage(imgs[activeIndex + 2])"
+                        draggableListItemInline
+                        (draggableListItem-dragStart)="_thumbDragStart.next(2)"
+                        (draggableListItem-dragEnd)="_thumbDragEnd.next(2)"
+                        (draggableListItem-drag)="_thumbDrag.next([2, $event])"
+                        >
+                        <div class="grip"
+                            draggableListItemGripInline
+                            (mousedown)="gripDown($event)"
+                            ></div>
+                    </div>
+                </div> -->
+                <div class="thumbnails-cover"></div>
+            </div>
+        </div>
+        <span class="btn-right btr bt-angle-right"
+            [class.active]="!isEnd"
+            (mousedown)="onArrowMouseDown($event)"
+            (click) = "onNext($event)"></span>
+    </div>
+</div>

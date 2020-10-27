@@ -1,0 +1,152 @@
+:host {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    margin-top: 8px;
+}
+
+.hidden{
+    display: none;
+}
+
+.action-buttons {
+  display: flex;
+  position: absolute;
+  height: 64px;
+  z-index: 10;
+  background: white;
+  width: 120px;
+  border-bottom: 1px solid lightgray;
+}
+
+.button.back {
+    height: 50px;
+    cursor: pointer;
+}
+
+.button.back img{
+    height: 100%;
+}
+
+.glogood-save-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2px 5px;
+    height: 45px;
+    border-radius: 5px;
+    padding: 2px;
+    background: orange;
+    color: white;
+    outline: none;
+}
+  .glogood-save-button img,
+  .opacity-button img {
+    width: 20px;
+  }
+
+  .opacity-button img {
+    opacity: 0.5;
+  }
+
+.resize-button,
+.opacity-button {
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  top: 12px;
+  left: calc(50% + 180px);
+  width: 40px;
+  height: 39px;
+  border-radius: 3px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.opacity-button {
+  left: calc(50% + 220px);
+}
+
+.resize-button.active,
+.opacity-button.active {
+  background: orange;
+}
+
+.resize-button img[title]:hover:after,
+.opacity-button img[title]:hover:after {
+    content: attr(title);
+    position: absolute;
+    display: inline-block;
+    background-color: #2f2f2f;
+    color: #fff;
+    padding: 5px 8px;
+    font-size: 11px;
+    font-weight: lighter;
+    border-radius: 3px;
+    max-height: 23px;
+    top: -22px;
+    left: 0;
+    min-width: 24px;
+}
+
+.wh-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: calc(100% - 2px);
+  left: 1px;
+  top: 75px;
+  z-index: 10;
+  height: 135px;
+  width: calc(100% - 2px);
+  background: white;
+}
+
+.wh-container input {
+  width: 80px;
+}
+
+.wh-container .h-label {
+  margin-left: 15px;
+}
+
+.glogood-apply-button {
+  border-radius: 10px;
+  background: orange;
+  color: white;
+  outline: none;
+  margin-top: 15px;
+}
+
+.glogood-apply-button:disabled {
+  background: lightgray;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.resize-container {
+  display: none;
+    position: absolute;
+    top: 65px;
+    height: calc(100% - 280px);
+    overflow: auto;
+    width: 100%;
+    z-index: 10000;
+    background: white;
+    border: 1px solid lightgrey;
+}
+
+.resize-ele {
+  position: absolute;
+  background-size: 100% 100%;
+  z-index: 10001;
+}

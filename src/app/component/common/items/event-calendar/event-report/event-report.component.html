@@ -1,0 +1,44 @@
+<div class="event-container">
+	<a class="event-setup-btn" (click)="openEventSetup($event)" (mousedown)="onMouseDownButton($event)">Edit Event</a>
+	<div class="event-date">
+		<div><b>{{this.month | uppercase}}</b></div>
+		<div>{{date}}</div>
+	</div>
+	<div class="event-content">
+		<div class="event-title">
+			<h4 (click)="onOutLink()">{{eventSetupInfo.title}}</h4>
+		</div>
+		<div class="event-time">
+			{{startTime}}&nbsp;TO&nbsp;{{endTime}}&nbsp;&nbsp;{{day | uppercase}}&nbsp;{{date}}&nbsp;{{month | uppercase}}&nbsp;{{year}}
+		</div>
+		<div>
+			<div class="event-content-buttons">
+				<a (click)="onViewDescription($event)" (mousedown)="onMouseDownButton($event)" style="padding-top: 2px;">
+					{{ visibleDescription ? 'Hide' : 'More'}}
+				</a>
+				<a (click)="openEventCheckoutDialog($event)" (mousedown)="onMouseDownButton($event)" class="signup-btn" style="padding-top: 2px;">Sign Up</a>
+				<a (click)="onClickCalendar($event)" (mousedown)="onMouseDownButton($event)">
+					<img src="/assets/images/canvas/calendar.svg"/>
+				</a>
+				<a class="event-social-icon" (mousedown)="onMouseDownButton($event)" href="https://www.facebook.com/" target="_blank">
+					<img src="/assets/images/canvas/Social Icons/facebook.png"/>
+				</a>
+				<a class="event-social-icon" (mousedown)="onMouseDownButton($event)" href="https://twitter.com/" target="_blank">
+					<img src="/assets/images/canvas/Social Icons/twitter.png"/>
+				</a>
+				<a class="event-social-icon" (mousedown)="onMouseDownButton($event)" href="https://www.linkedin.com/" target="_blank">
+					<img src="/assets/images/canvas/Social Icons/linkedin.png"/>
+				</a>
+				<a class="event-social-icon" (mousedown)="onMouseDownButton($event)" href="https://gmail.com/" target="_blank">
+					<img src="/assets/images/canvas/Social Icons/envelope-reply.png"/>
+				</a>
+			</div>
+			<div *ngIf="visibleDescription" class="event-description">
+				{{eventSetupInfo.description}}
+			</div>
+		</div>
+	</div>
+	<div *ngIf="backgroundImage" class="event-image">
+		<img src="{{backgroundImage}}"/>
+	</div>
+</div>

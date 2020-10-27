@@ -1,0 +1,192 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (mousedown)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>Gallery Grid</h3></span>
+    </div>
+</div>
+
+<ul class="nav nav-pills nav-categories">
+    <li role="presentation">
+        <div class="btn-back" (mousedown)="onClose($event)"></div>
+    </li>
+    <li role="presentation" class="place">
+        <a class="text-center"
+            [class.active]="isActive('Change')"
+            (mousedown)="onSubmit($event)">
+            <div class="caption">PLACE</div>
+            <div class="caption">ON PAGE</div>
+        </a>
+    </li>
+    <li role="presentation">
+        <a (mousedown)="onUndo($event)">
+            <span class="font-icon btb bt-reply"></span>
+            <div class="caption">Undo</div>
+        </a>
+    </li>
+    <li role="presentation">
+        <a (mousedown)="onRedo($event)">
+            <span class="font-icon btb bt-forward"></span>
+            <div class="caption">Redo</div>
+        </a>
+    </li>
+    <li role="presentation">
+		<a  [class.active]="isActive('Link')"
+			style="height: 55px;"
+            (mousedown)="openLinkingDialog($event)">
+            <span class="font-icon btb bt-link"></span>
+            <div class="caption">Link</div>
+        </a>
+    </li>
+    <li role="presentation" style="margin-left: auto; margin-right: auto;">
+        <div class="columns" style="margin-bottom: 2px;">
+            <div style="width: 55px; margin-right: 10px;">Images</div>
+            <div>
+				<input 
+					class="form-control"
+                    type="number"
+                    [min]="_minImages"
+                    [max]="_maxImages"
+					[formControl]="_images"
+					(keypress)="$event.stopPropagation(); $event.preventDefault();"
+                    style="padding: 6px 2px; height: 22px; border-color: orange;"/>
+            </div>
+        </div>
+        <div class="columns" style="margin-bottom: 2px;">
+            <div style="width: 55px; margin-right: 10px;">Rows</div>
+            <div>
+				<input
+					class="form-control"
+                    type="number"
+                    [min]="_minRows"
+                    [max]="_maxRows"
+					[formControl]="_rows"
+					(keypress)="$event.stopPropagation(); $event.preventDefault();"
+                    style="padding: 6px 2px; height: 22px; border-color: orange;"/>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="title" style="width: 55px; margin-right: 10px;">Columns</div>
+            <div>
+                <input class="form-control"
+                    type="number"
+                    [min] = "_minCols"
+                    [max] = "_maxCols"
+					[formControl]="_cols"
+					(keypress)="$event.stopPropagation(); $event.preventDefault();"
+                    style="padding: 6px 2px; height: 22px; border-color: orange;"/>
+            </div>
+        </div>
+    </li>
+    
+	<li role="presentation"
+		style="margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0;">
+        <div class="text-center animate-title"><a (click)="playAnimate()"> Animate It </a></div>
+        <select class="form-control animation-ctrl" [formControl]="_animationType">
+            <option [value]="'None'">None</option>
+            <optgroup *ngFor="let group of _animations" [label]="group.text">
+                <option *ngFor="let option of group.options" [value]="option.value">
+                    {{option.text}}
+                </option>
+            </optgroup>
+        </select>
+        <div class="columns slider" style="margin-left: 10px; margin-top: 5px;">
+            <div class="title">Spacing</div>
+            <slider [formControl]="_space" [min]="_minSpace" [max]="_maxSpace">
+            </slider>
+        </div>
+    </li>
+</ul>
+
+<div class="canvas-container">
+    <div class="canvas columns">
+        <div class="current-slide rows">
+            <div class="image-result-controls">
+                <div class="left">
+                    <a (click)="openImageImportDialog()">IMPORT</a>
+                </div>
+                <div style="font-size: 12px">
+                    <a  [class.active]="isActive('Link')"
+                        (click)="openLinkingDialog($event)">LINK</a>
+                </div>
+                <div class="right">
+                    <a (click)="openImageEditorDialog()">EDIT</a>
+                    <a class="remove" (click)="onRemoveImage()">X</a>
+                </div>
+            </div>
+            <div #result class="result slide"
+                *ngIf="b_images[b_selectedItem]"
+                [style.backgroundImage] = "b_images[b_selectedItem] ? backgroundImage(b_images[b_selectedItem].image) : ''"
+                (click)="openImageImportDialog()"
+                (dragover)="onDragOver($event)"
+                (dragenter)="onDragEnter($event)"
+                (dragleave)="onDragLeave($event)"
+                (drop)="onDrop($event)">
+                <loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+                <p *ngIf="!_loading && !b_images[b_selectedItem].image">Click to Add Image</p>
+                <p *ngIf="!_loading && !b_images[b_selectedItem].image">or Drag and Drop Here</p>
+			</div>
+			<!-- <div #description
+				class="description"
+				contenteditable
+                spellcheck="true"
+				>
+                <textarea
+                    #description
+                    type="text"
+                    name="description"
+                    placeholder="Optional Image Description"
+					class="form-control"
+					rows="3"
+					[formControl]="_description">
+				</textarea>
+			</div> -->
+			<div #description
+				class="description"
+            	(click)="onTextEditorClick($event)"
+				text-editor-tinymce
+				[text-editor-enabled]="textEditorEnabled"
+				[text-editor-toolbar-width]="250"
+				[text-editor-hide-links]="true"
+				[text-editor-toolbar-type]="1"
+				(text-editor-input-text)="onEditorInput($event)"
+				(text-editor-input-command)="onEditorInputCommand($event)"
+				>
+			</div>
+        </div>
+        <div class="thumbnail-container">
+            <div class="thumbnails"
+                #thumbnails>
+                <kendo-sortable
+                    [data] = "b_images"
+                    [animation] = "true"
+                    [emptyText]="''"
+                    [itemStyle] = "{
+                        'float':'left',
+                        'cursor': 'move'
+                        }"
+                    (dragEnd)="onDragEnd($event)"
+                    (dragStart)="onDragStart($event)">
+                        <ng-template let-item="item" let-i="index" >
+                            <div class="thumb"
+                                [class.active]="b_selectedItem == i"
+                                [style.backgroundImage] = "backgroundImage(item.image)"
+                                [style.margin] = "getValue(_space.value) + 'px'"
+                                (click)="_selectItem.next(i)"
+                                (mouseover)="playAnimateThumb($event)"
+                                >
+                                <div class="grip"></div>
+                            </div>
+                        </ng-template>
+                </kendo-sortable>
+            </div>
+        </div>
+    </div>
+</div>
+<gallery-theme
+    (selectedTheme)="selectTheme($event)">
+</gallery-theme>
+    

@@ -1,0 +1,96 @@
+<form
+    [formGroup]="form"
+    class="center-block">
+    <div class="form-group">
+        <input
+            type="text"
+            class="form-control event-name"
+            [class.empty]="!form.value.name"
+            placeholder="Name of Event"
+			formControlName="title"/>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group">
+        <textarea
+            class="form-control"
+            [class.empty]="form.value.description==''"
+            formControlName="description"
+            placeholder="Event Description - optional"
+            maxlength="300"></textarea>
+        <div class="chars-left">
+            {{300 - form.value?.description?.length}}
+            characters available
+		</div>
+		<div style="width: 280px">
+			<checkbox formControlName="displayDescription">Show description on Event Calendar only</checkbox>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="slideshow">
+			<slideshow-gallery [slides]="[{image: form.value.image, link: null}]" [maxSlidesNum]="1" [invalid]="form.controls['image'].touched && form.controls['image'].invalid" (result)="onEventImageResult($event)"></slideshow-gallery>
+		</div>
+		<div>
+			<checkbox formControlName="displayImage">Show image on Event Calendar only</checkbox>
+		</div>
+	</div>
+    <div class="form-group columns">
+        <label class="date-for">From</label>
+        <div>
+            <datetime formControlName="startDate"></datetime>
+		</div>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group columns">
+        <label class="date-for">To</label>
+        <div>
+            <datetime formControlName="endDate"></datetime>
+		</div>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="address1"
+            label="Where address 1"
+			[error]="form.controls.address1.invalid && (form.controls.address1.dirty || form.controls.address1.touched)"></split-text-box>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="address2"
+            label="Where address 2"></split-text-box>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="city"
+            label="City"
+			[error]="form.controls.city.invalid && (form.controls.city.dirty || form.controls.city.touched)"></split-text-box>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="state"
+            label="State"
+            [error]="form.controls.state.invalid && (form.controls.state.dirty || form.controls.state.touched)"></split-text-box>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="postalCode"
+            label="Postal Code"
+			[error]="form.controls.postalCode.invalid && (form.controls.postalCode.dirty || form.controls.postalCode.touched)"></split-text-box>
+		<label class="required">*</label>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="contact"
+            label="Event Contact Name"
+            [error]="form.controls.contact.invalid && (form.controls.contact.dirty || form.controls.contact.touched)"></split-text-box>
+    </div>
+    <div class="form-group">
+        <split-text-box
+            formControlName="email"
+            label="Your Account Email Address"></split-text-box>
+    </div>
+	<div class="form-group" style="text-align: right; font-size: 16px;">
+        <a (click)="onAddEmail()">Or, use a different email</a>
+    </div>
+</form>

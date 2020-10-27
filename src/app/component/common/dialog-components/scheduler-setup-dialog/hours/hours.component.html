@@ -1,0 +1,125 @@
+<div class="service-container">
+    <div class="form-group m-b-50">
+        <div class="form-group-title">Are appointments scheduled for:</div>
+        <div class="m-l-20">
+            <div class="form-group columns">
+                <div class="columns center-items">
+                    <label class='c-input c-radio'>
+                        <input type="radio" name="scheduleType" 
+                            [formControl]="scheduleTypeCtrl" value="ExactTime">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Exact Times &nbsp;</div>
+                </div>
+                <div class="m-l-20" [class.disable]="scheduleTypeCtrl.value=='BlocksOfTime'">
+                    <drop-down
+                        [selected]="getScheduleTime(0)"
+                        [elements]="etimes"
+                        [defaultData]="'Choose Exact Time'"
+                        [isDialogue]="true"
+                        (changeSelected)="onETimesChange($event)">
+                    </drop-down>
+                </div>
+            </div>
+            <div class="form-group columns">
+                <div class="columns center-items">
+                    <label class='c-input c-radio'>
+                        <input type="radio" name="scheduleType"
+                            [formControl]="scheduleTypeCtrl" value="BlocksOfTime">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Blocks of Time</div>
+                </div>
+                <div class="m-l-20 m-r-10" [class.disable]="scheduleTypeCtrl.value=='ExactTime'">                        
+                    <drop-down
+                        [selected]="getScheduleTime(1)"
+                        [elements]="btimes"
+                        [defaultData]="'Choose Block of Time'"
+                        [isDialogue]="true"
+                        (changeSelected)="onBTimesChange($event)">
+                    </drop-down>                    
+                </div>
+                <tooltip text="?" code="sm.s.410">
+                    <p>
+                        Appointments are scheduled between 8am - 12noon.
+                    </p>
+                    <p>
+                        This is a 4-hour block of time. 
+                    </p>
+                </tooltip>
+            </div>            
+        </div>
+    </div>
+
+    <div class="form-group columns enter-hours-for" *ngIf="!(info.locationType == 'WeGoToCustomerLocation' && (info.providerType == 'SingleProviderHidden' || info.providerType == 'SingleProviderDisplay'))">
+        <div class="enter-hours-for-options">
+            <!-- <div class="form-group columns" *ngIf="isVisibleSameHoursBoth">
+                <label class='c-input c-radio'>
+                    <input
+                        type="radio"
+                        name="hourTypeCtrl"
+                        [formControl]="hourTypeCtrl"
+                        [value]="-1">
+                    <span class="c-indicator"></span>
+                </label>
+                <span>Same Hours for Both</span>                
+            </div> -->
+            <div class="form-group columns" *ngIf="isVisibleLocationOption">
+                <label class='c-input c-radio'>
+                    <input 
+                        type="radio"
+                        name="hourTypeCtrl"
+                        [formControl]="hourTypeCtrl"
+                        [value]="0">
+                    <span class="c-indicator"></span>
+                </label>
+                <span>Enter Hours for: &nbsp;&nbsp;</span>
+                <span *ngIf="locations.length == 1" class="address">{{showLocationValue(locations[0])}}</span>
+                <span *ngIf="locations.length > 1">Locations</span>
+            </div>
+            <div class="columns">
+                <label *ngIf="isVisibleLocationOption" class='c-input c-radio'>
+                    <input
+                        type="radio"
+                        name="hourTypeCtrl"
+                        [formControl]="hourTypeCtrl"
+                        [value]="1">
+                    <span class="c-indicator"></span>
+                </label>
+                <span>Enter Hours for: &nbsp;&nbsp;</span>
+                <span *ngIf="(info.providerType == 'SingleProviderHidden' || info.providerType == 'SingleProviderDisplay')">Just Me!</span>
+                <span *ngIf="(info.providerType != 'SingleProviderHidden' && info.providerType != 'SingleProviderDisplay') && providers.length > 1">Providers</span>
+                <span *ngIf="(info.providerType != 'SingleProviderHidden' && info.providerType != 'SingleProviderDisplay') && providers.length == 1">{{showProviderValue(providers[0])}}</span>
+            </div>        
+            <div *ngIf="visibleSameCheck" class="p-l-30">
+                <checkbox [formControl]="sameCheck">{{hourTypeCtrl.value==0 ? 'Same hours as provider' : 'Same hours as location'}}</checkbox>            
+            </div>
+        </div>
+
+        <div *ngIf="isVisibleDropdown" class="enter-hours-for-dropdown">
+            <drop-down
+                [selected]="getSelectedFirstElement()"
+                [elements]="getElements()"
+                [enableMultipleSelect]="true"
+                [multipleSelected]="getSelectedElements()"
+                [showValueFunc]="getShowValue()"
+                [defaultData]="getDefaultData()"
+                [defaultSelectAllData]="getDefaultSelecteAllData()"
+                [isDialogue]="true"
+                (changeSelected)="onDropdownChange($event)">
+            </drop-down>
+        </div>
+    </div>   
+
+    <div class="form-group">
+        <div *ngIf="(info.providerType == 'SingleProviderHidden' || info.providerType == 'SingleProviderDisplay') && info.locationType == 'WeGoToCustomerLocation'" class="form-group-title m-b-25">
+            Enter Hours for: Just Me!
+        </div>
+        <ng-template
+            [ngIf]="isVisibleDateTimeList()">
+            <div class="m-l-7" *ngFor="let day of days; let i=index">
+                <day-time [day]="day" [defaultData]="getDefaultHourData()" [timeInfo]="hourInfo.times[day]" [timeRefresh]="timeRefresh" [n]="i" (infoChange)="onHourChange($event, day, i)"></day-time>                  
+            </div>
+        </ng-template>        
+    </div>    
+</div>

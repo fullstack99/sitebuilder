@@ -1,0 +1,53 @@
+<div class="comment-setup">    
+    <div class="dialog-header">    
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>		
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns">		
+            <span class="dialog-title"><h3>Comment Setup</h3></span>
+        </div>
+    </div>
+
+    <div class="comment-item">
+        <h4>Allow blog comments?</h4>
+        <div class="radio-group">
+            <radio-group [formControl]="_allowComment">
+                <ng-template [radioGroupOption]="true">Yes</ng-template>
+                <ng-template [radioGroupOption]="false">No</ng-template>
+            </radio-group>
+        </div>
+    </div>
+
+    <div *ngIf="_allowComment.value" class="comment-item">
+        <h4>How to manage comments?</h4>
+        <div class="radio-group">
+            <radio-group [formControl]="_review">
+                <ng-template [radioGroupOption]="false">Just publish, no review</ng-template>
+                <ng-template [radioGroupOption]="true">Review before publishing</ng-template>
+            </radio-group>
+        </div>
+    </div>
+
+    <div *ngIf="_allowComment.value" class="comment-item">
+        <h4>Send email alert for comments?</h4>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="last-comment">
+                    <radio-group [formControl]="_emailAlert">
+                        <ng-template [radioGroupOption]="true">Yes</ng-template>
+                        <ng-template [radioGroupOption]="false">No</ng-template>
+                    </radio-group>
+                </div>
+            </div>
+            <div *ngIf="_emailAlert.value" class="email-comment col-lg-8 col-md-8 col-sm-12">
+                <input type="text" [formControl] = "_email" class="form-control" placeholder="Email"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <input [disabled]="!isValid()" class="btn submit" (click)="onSubmit()" type="button" value="CONTINUE" />
+    </div>
+</div>

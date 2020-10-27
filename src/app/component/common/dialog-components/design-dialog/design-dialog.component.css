@@ -1,0 +1,155 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+.result{
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.canvas-container {
+    position: relative;
+    height: 75%;
+    width: 100%;
+    flex: 0 0 auto;
+    margin: 10 0 0 0px;
+    overflow: hidden;
+}
+    .canvas-container .canvas {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        cursor: default;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;        
+    }
+        .canvas-container .canvas * {
+            -moz-user-select: none; 
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .canvas-container .canvas > div{
+            margin-top: 20px;
+        }
+        .canvas-container .canvas .text {
+            font-size: 16px;
+        }        
+
+.colorPalette{
+    width: 200px;
+    height: 40px;
+}
+
+.color-box{
+    width:25px;
+    height: 25px;
+    border: 1px solid;
+}
+
+.new-color{
+    margin-left: 20px;    
+    
+}
+    .new-color .colors{
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .new-color .color-picker{
+        margin-left: 30px;
+    }
+    .new-color .color-picker > div{
+        margin-bottom: 5px;
+    }
+    .new-color .text{
+        width: 60px;
+    }
+    .new-color >>> .btn-close{
+        position: absolute;
+        color: red;
+        top: -4px;
+        right: -15px;
+    }
+.border-width-control{
+    width: 210px;    
+    margin-right: 0px;
+    margin-left: auto;
+}
+    .border-width-control slider{
+         min-width: 170px;
+    }
+    .border-width-control input{
+        width: 30px;        
+        margin-left: 10px;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+.corner{
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 30px;
+    color:#8c8c8c;
+    width: 180px;
+    height: 60px !important;
+    border: 1px solid #8c8c8c;
+}
+    .corner .choose-corner{
+        margin-top: 10px;
+        text-align: center;
+    }
+    .corner checkbox{
+        position: absolute;
+        font-size: 20px;
+    }
+    .corner .check-l-top{
+        left: -14px;
+        top: -14px;
+    }
+    .corner .check-r-top{
+        right: -24px;
+        top: -14px;
+    }
+    .corner .check-l-bottom{
+        left: -14px;
+        bottom: -14px;
+    }
+    .corner .check-r-bottom{
+        right: -24px;
+        bottom: -14px;
+    }
+
+.c-radio .c-indicator {
+    top: 1px;
+}
+
+.submit input{
+    background:     #FFA500;
+    border-color:   #FFA500;
+    width: 200px;
+    font-size: 120%;
+    margin:auto;
+}
+    
+.more{
+    position: absolute;
+    right: 10px;
+    text-align: right;
+}
+
+[hidden] { display: none !important;}

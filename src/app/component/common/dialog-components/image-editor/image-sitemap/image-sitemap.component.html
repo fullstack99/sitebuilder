@@ -1,0 +1,41 @@
+<div class="toolbar">
+    <div class="button back" (click)="onBackClick()"><img src="/assets/images/canvas/back.png"/></div>    
+</div>
+
+<div class="columns image-navigator"
+    #imageNavigator>
+    <div class="tree-container">
+        <div *ngFor="let sitemap of _orderedSitemaps; let i = index" class="item">
+            <div>
+                <span>{{sitemap.description}}</span>
+            </div>
+            <div class="page"
+                *ngFor="let page of sitemap.pages; let j = index"
+                [class.selected]="_selectedPage && _selectedPage.uid == page.uid"
+                (click)="selectPage(page.uid)">                
+                <span *ngIf="!page.title"
+                    class="btl bt-file bt-lg"></span>
+                <span *ngIf="page.title"
+                    class="check">
+                </span>                
+                <span class="page-num"> {{getcalcNum(page)+1}} </span>
+            </div>
+        </div>
+    </div>
+    <loading *ngIf="_loading"></loading>
+    <div class="images"
+        #imagesContainer
+        [class.disable]="_loading">
+        <div *ngFor="let img of _sortedImageItems; let i = index" class="item">
+            <div class="frame">
+                <div class="image"
+                    [style.backgroundImage]="getBackground(img)"></div>
+                <div class="image-name">{{getImageName(img)}}</div>
+            </div>
+            <div class="links">
+                <a (click)="onPlaceOnPage(img)">PLACE ON PAGE</a>
+                <a (click)="onOpenInEditor(img)">OPEN IN EDITOR</a>
+            </div>
+        </div>
+    </div>
+</div>

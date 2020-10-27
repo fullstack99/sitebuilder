@@ -1,0 +1,39 @@
+<div [formGroup]="form" class="columns" style="justify-content: space-between;">
+    <div class="admission-message">
+		<h4>Admission</h4>
+		<div class="caption">
+			<a (click)="showMessage()">MESSAGE</a>
+		</div>
+		<div style="margin-top: 5px;">
+			<input
+				type="text"
+				class="form-control"
+				formControlName="participantsLimit"
+				placeholder="No Limit"/>
+			<div class="caption">Participants</div>
+		</div>
+    </div>
+    <div class="admission-fee">
+        <div class="fee" formGroupName="fee" *ngIf="!form.value.fee.earlyPrice">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                placeholder="Free"/>
+            <a (click)="showPrice()" class="caption">EARLY BIRD</a>
+        </div>
+        <div class="fee-early" *ngIf="form.value.fee.earlyPrice">
+            <div>
+                Early Bird Price &nbsp; ${{form.value.fee.earlyPrice}}
+            </div>
+            <div class="rows" *ngIf="form.value.fee.earlyPriceEndDate">
+                <span>Until Date : </span>
+                <span class="fee-early-date">{{showDate(form.value.fee.earlyPriceEndDate)}}</span>
+            </div>
+            <div *ngIf="form.value.fee.price">
+                Regular Price &nbsp; ${{form.value.fee.price}}
+            </div>
+            <div class="fee-early-remove text-center"><a (click)="removeEarlyBird()"> REMOVE EARLY BIRD </a></div>
+        </div>
+    </div>
+</div>

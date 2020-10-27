@@ -1,0 +1,97 @@
+<div class="current-slide rows" [class.no-guides]="maxSlidesNum == 1">
+    <div class="image-result-controls">
+        <div class="left">
+            <a (click)="openImageImportDialog()">IMPORT</a>
+        </div>
+        <!-- <div style="font-size: 12px">
+            <a (click)="_openLinkingDialog.next()">LINK</a>
+        </div> -->
+        <div class="right">
+            <a (click)="openImageEditorDialog()">EDIT</a>
+            <a class="remove" (click)="_clearSlide.next()">X</a>
+        </div>
+    </div>
+    <!-- <div class="slide"
+        (click)="_openImportDialog.next()"
+        [style.backgroundImage]="backgroundImage(_activeSlide.image)">
+        <span *ngIf="!_activeSlide.image">Click to Add Image</span>
+    </div> -->
+
+	<div #result
+		class="result slide"
+        [style.backgroundImage] = "backgroundImage(slides[activeSlideIndex].image)"
+        [style.backgroundColor] = "invalid ? '#ffa4a4' : 'white'"
+        (click)="openImageImportDialog()"
+        (dragover)="onDragOver($event)"
+        (dragenter)="onDragEnter($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        >
+        <loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+        <span *ngIf="!_loading && !slides[activeSlideIndex].image">Click to Add Image</span>
+        <span *ngIf="!_loading && !slides[activeSlideIndex].image">or Drag and Drop Here</span>
+
+    </div>
+</div>
+<div *ngIf="maxSlidesNum > 1" class="guides rows">
+    <div class="thumbnails-row">
+        <div class="thumbnails-ctrl columns">
+			<div
+				class="btn-left btr bt-angle-left"
+				[class.active]="dispSlideIndex > 0"
+				(click)="_prevSlide.next()"></div>
+            <div class="thumbnails columns"
+                #thumbnails
+                draggableListInline
+                (draggableList-newIndexes)="slideIndexChangeSub.next($event)"
+                >
+                <div class="thumb"
+                    [class.active]="activeSlideIndex == dispSlideIndex"
+                    [style.backgroundImage]="backgroundImage(slides[dispSlideIndex].image)"
+                    (mousedown)="_gotoSlide.next(dispSlideIndex)"
+                    draggableListItemInline
+                    (draggableListItem-dragStart)="thumbDragStartSub.next(0)"
+                    (draggableListItem-dragEnd)="thumbDragEndSub.next(0)"
+                    (draggableListItem-drag)="thumbDragSub.next([0, $event])"
+                    >
+                    <div class="grip"
+                        draggableListItemGripInline
+                        (mousedown)="$event.stopPropagation()"
+                        ></div>
+                </div>
+                <div class="thumb"
+                    [class.active]="activeSlideIndex == dispSlideIndex + 1"
+                    [style.backgroundImage]="backgroundImage(slides[dispSlideIndex + 1]?.image)"
+                    (mousedown)="_gotoSlide.next(dispSlideIndex + 1)"
+                    draggableListItemInline
+                    (draggableListItem-dragStart)="thumbDragStartSub.next(1)"
+                    (draggableListItem-dragEnd)="_thumbDragEnd.next(1)"
+                    (draggableListItem-drag)="thumbDragSub.next([1, $event])"
+                    >
+                    <div class="grip"
+                        draggableListItemGripInline
+                        (mousedown)="$event.stopPropagation()"
+                        ></div>
+                </div>
+                <div class="thumb last"
+                    [class.active]="activeSlideIndex == dispSlideIndex + 2"
+                    [style.backgroundImage]="backgroundImage(slides[dispSlideIndex + 2]?.image)"
+                    (mousedown)="_gotoSlide.next(dispSlideIndex + 2)"
+                    draggableListItemInline
+                    (draggableListItem-dragStart)="thumbDragStartSub.next(2)"
+                    (draggableListItem-dragEnd)="_thumbDragEnd.next(2)"
+                    (draggableListItem-drag)="thumbDragSub.next([2, $event])"
+                    >
+                    <div class="grip"
+                        draggableListItemGripInline
+                        (mousedown)="$event.stopPropagation()"
+                        ></div>
+                </div>
+            </div>
+			<div
+				class="btn-right btr bt-angle-right"
+				[class.active]="dispSlideIndex < 6"
+				(click)="_nextSlide.next()"></div>
+        </div>
+    </div>
+</div>

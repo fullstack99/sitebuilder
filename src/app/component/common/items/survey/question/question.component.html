@@ -1,0 +1,15 @@
+<div class="question-container">
+    <span *ngIf="readOnly && editable">
+        <a class="edit" [class.end]="no == qlength -1" (click)="editQuestion()">Edit</a>
+    </span>
+    <span *ngIf="no < qlength -1 && readOnly && editable">
+        <a class="remove" (click)="removeQuestion()">X</a>
+    </span>
+    <a [id]="getAnchor()"></a>
+    <item *ngFor="let item of question.items; let k = index"
+        [item]="item"
+        [readOnly]="readOnly"
+        [containerWidth]="containerWidth"
+        ></item>
+    <span *ngIf="editable && no == qlength - 2 && readOnly"><a class="bottom-right" (click)="addQuestion()">ADD QUESTION</a></span>
+</div>

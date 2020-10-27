@@ -1,0 +1,28 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container text-center">
+		<span class="dialog-title"><h3>Choose</h3></span>
+	</div>
+</div>
+<div class="dialog-container">
+	<div class="form-group columns open">
+		<label class='c-input c-radio'>
+			<input type="radio" name="chooseOption"
+				[formControl]="chooseOptionControl" value="open">
+			<span class="c-indicator"></span>
+		</label>
+		<div class="text">open</div>
+	</div>
+	<div class="form-group columns block">
+		<label class='c-input c-radio'>
+			<input type="radio" name="chooseOption"
+				[formControl]="chooseOptionControl" value="block">
+			<span class="c-indicator"></span>
+		</label>
+		<div class="text">block</div>
+	</div>
+</div>

@@ -1,0 +1,223 @@
+:host {
+    box-sizing: border-box;
+    align-items: center;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+        user-select: none;
+        text-decoration: none;
+    }
+
+.dialog-title-container{
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.result.slide{
+    position: relative;
+    animation-timing-function: linear;
+    flex-direction: column;
+}
+
+loading{
+    position: absolute;
+    top: 50px;
+    z-index: 1000;
+}
+
+.current-slide {
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+    .current-slide .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 290px;
+        height: 160px;
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+        color: #8c8c8c;
+        cursor: pointer;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+    .thumbnails-row .option,
+    .slide-show-control .option{
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .thumbnails-row {
+        position: relative;
+        margin-right: auto;
+    }
+        .thumbnails-row .thumbnails-ctrl {
+            width: 265px;
+            height: 40px;
+        }
+            .thumbnails-row .thumbnails-ctrl .btn-left,
+            .thumbnails-row .thumbnails-ctrl .btn-right {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 17px;
+                color: #8c8c8c;
+                font-size: 22px;
+                cursor: pointer;
+            }
+            .thumbnails-row .thumbnails-ctrl .btn-left.active,
+            .thumbnails-row .thumbnails-ctrl .btn-right.active {
+                color: #82ff1e;
+            }
+            .thumbnails-row .thumbnails-ctrl .thumbnails {
+                position: relative;
+                width: 230px;
+            }
+                .thumbnails-row .thumbnails-ctrl .thumbnails .thumb,
+                .thumbnails-row .thumbnails-ctrl .thumbnails .thumbnails-change .thumb {
+                    position: relative;
+                    width: 70.1px;
+                    height: 100%;
+                    border: 1px solid #8c8c8c;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    background-color: white;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                }
+                .thumbnails-row .thumbnails-ctrl .thumbnails .thumb.active,
+                .thumbnails-row .thumbnails-ctrl .thumbnails .thumbnails-change .thumb.active {
+                    border-color: #ffa500;
+                }
+
+    .slide-show-control .title{
+        width: 80px;
+        margin-right: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+        .dots-container{
+            height: 30px;
+            margin-top: 20px;
+        }
+        .dots-row {
+            position: relative;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+            .dots-row .dot {
+                width: 10px;
+                height: 10px;
+                margin-right: 5px;
+                border: 1px solid #8c8c8c;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .dots-row .dot.active {
+                background-color: #8c8c8c;
+            }
+        .none{
+            margin-top: 10px;
+        }
+        .none .option{
+        }
+        .none .none-text{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+.speed {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-right: auto;
+    align-items: center;
+}
+    .speed .title{
+        width: 80px;
+        margin-right: 10px;
+    }
+    .speed div:last-child{
+        margin: auto auto auto 10px;
+    }
+
+.animation {
+    margin-left: 10px;
+    margin-right: auto;
+    align-items: center;
+}
+    .animation .title {
+        width: 80px;
+        margin-right: 10px;
+    }
+    .animation .columns {
+        align-items: center;
+        justify-content: center;
+    }
+    .animation .animation-ctrl {
+        width: 200px;
+        margin-right: 5px;
+    }
+
+slider{
+    width: 280px;
+}
+
+.swiper-container{
+    height: 40px;
+}
+    .swiper-pagination{
+        margin-top: 20px;
+        margin-left: 54px;
+    }
+        .swiper-pagination >>> .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            border: 1px solid #8c8c8c;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            opacity: initial;
+            outline: none;
+        }
+
+        .swiper-pagination >>> .swiper-pagination-bullet.swiper-pagination-bullet-active {
+            background: #8c8c8c;
+        }
+
+.thumbnails-row .thumbnails-ctrl .thumbnails-change{
+    position: absolute;
+    top: 0px;
+    width: 230px;
+    height: 40px;
+}
+.thumbnails-row .thumbnails-ctrl .thumbnails-change .thumb{
+    margin-right: 8px;
+}
+.thumbnails-row .thumbnails-ctrl .thumbnails-change .thumb.last {
+    margin-right: 0px;
+}
+.thumbnails-row .thumbnails-ctrl .thumbnails-change .thumb.dragging {
+    top: 3px;
+    box-shadow: 2px 2px 4px 1px rgba(140, 140, 140, 0.35);
+    z-index: 100;
+}
+    .thumbnails-row .thumbnails-ctrl .thumbnails-change .thumb .grip {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: calc(50% - 6px);
+        width: 12px;
+        height: 5px;
+        background-image: url('/assets/images/canvas/grip.png');
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+        cursor: grab;
+    }

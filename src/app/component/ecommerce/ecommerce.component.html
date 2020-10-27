@@ -1,0 +1,17 @@
+<canvas-tools
+    [isSaving] = "isSaving"
+    [serviceTool] = "'EcommerceItem'"
+    [serviceToolStr] = "['Choose', 'Layout']"
+    [serviceToolActiveStr] = "['Edit', 'Layout']"
+    [serviceToolActive] = "serviceToolActive"
+    [showEcommNavMenu] = "showEcommNavMenu"
+    [pageCanvas]="pageCanvas"
+    (command)="setCommand($event)"
+    >
+</canvas-tools>
+<page-canvas
+    [allowHeader] = "true"
+    [page] = "page"
+    [placeholder]="[['#1 Choose Layout'],['#2 Choose a tool above','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for more content']]"
+    >
+</page-canvas>

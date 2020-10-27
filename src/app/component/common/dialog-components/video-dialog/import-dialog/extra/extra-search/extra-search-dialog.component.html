@@ -1,0 +1,41 @@
+<a (mousedown)="onClose()" class="btn-close">×</a>
+<form #f="ngForm">
+    <div class="columns search-bar">
+        <div class="extra-logo">            
+            <img *ngIf="source==2" src="/assets/images/youtube-logo1.png"/>
+            <img *ngIf="source==3" src="/assets/images/canvas/vimeo.png"/>
+        </div>
+        <div class="search-container">            
+            <input [formControl]="search"                
+                class="form-control"
+                placeholder="Search..."
+                (keypress)="onKeypress($event)"
+                tabindex="1">
+        </div>
+        <div class="fa-search-container" (click)="searchVideo()" tabindex="2">           
+            <i class="fa fa-search"></i>                    
+        </div>
+    </div>
+    <div class="extra-navigator">        
+        <video-list
+            [refresh]="refresh"
+            [source]="source"
+            [query]="search.value"
+            [fromAccount]="fromAccount"
+            (selectedVideo)="selectVideo($event)"
+            (dbSelectedVideo)="dbSelectVideo($event)">
+        </video-list>        
+    </div>
+    <div class="submit center-block">
+        <input
+            type="submit"
+            value="ADD"
+            (click)="onAdd()"
+            class="btn btn-block btn-main center-block">
+    </div>
+</form>
+
+<!-- <div class="col-xs-4">
+    <video-detail [video]="selectedYouTube">                    
+    </video-detail>
+</div> -->

@@ -1,0 +1,15 @@
+<canvas-tools
+    [serviceTool] = "'AppointmentItem'"
+    [serviceToolStr] = "['Setup', 'Scheduler']"
+    [serviceToolActiveStr] = "['Edit', 'Scheduler']"
+    [serviceToolLarge]="true"
+    [isSaving] = "isSaving"
+    [serviceToolActive] = "serviceToolActive"
+    [pageCanvas]="pageCanvas"
+    (command)="setCommand($event)">
+</canvas-tools>
+<page-canvas
+    [allowHeader] = "true"
+    [page] = "page"
+    [placeholder]="[['#1 Choose Setup Scheduler'],['#2 Choose a tool above','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for more content']]">
+</page-canvas>

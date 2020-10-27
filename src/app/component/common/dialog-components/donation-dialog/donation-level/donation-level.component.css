@@ -1,0 +1,50 @@
+:host *{
+    box-sizing: border-box;
+}
+.level{
+    display: flex;
+    width: 300px;
+    height: 40px;
+    position: relative;
+}
+
+checkbox {
+    width: 20px;
+    height: 20px;
+    top: 7px;
+    position: relative;
+}
+
+.other {
+    margin-left: 20px;
+}
+
+.dollar, .other{
+    padding: 6px;
+}
+    .last .dollar{
+        margin-left: 20;
+    }
+    .last > span {
+        font-size: 11px;
+        padding: 10px 5px;
+    }
+    
+.form-control-amount{
+    width: 65px;    
+    padding: 6px;
+    color: #8c8c8c;
+}
+.form-control-half {
+    margin-left: 5px;    
+}
+
+tooltip{
+    position: absolute;
+    right: -10px;
+}
+
+.content2-level{
+    position: relative;
+    text-align: center;
+}

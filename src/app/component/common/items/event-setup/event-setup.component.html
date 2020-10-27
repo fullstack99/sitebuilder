@@ -1,0 +1,322 @@
+<div class="review-container" #reviewContainer>
+    <div class="review-body" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxFlex="100">
+            <div class="form-group text-center">
+                <label class="event-name">
+                    {{ eventInfo.title }}
+                </label>
+            </div>
+			<div *ngIf="!eventInfo.displayDescription"
+				class="form-group">
+                <div class="review-section-description">
+                    {{eventInfo.description}}
+                </div>
+			</div>
+
+			<div *ngIf="!eventInfo.displayImage" 
+				class="form-group event-image"
+				[style.backgroundImage] = "backgroundImage(eventInfo.image)"
+				>
+			</div>
+
+			<div class="form-group">
+				<div class="review-section-title">
+                    Date & Time
+				</div>
+				<div class="review-section-content">
+                    <div class="columns"><span class="date-for">From</span><span>{{showDate(eventInfo.startDate)}}</span></div>
+					<div class="columns"><span class="date-for">To</span><span>{{showDate(eventInfo.endDate)}}</span></div>
+				</div>
+				<div class="review-section-link">
+					<a (click)="onAddEventToCalendar()">add to calendar</a>
+				</div>
+			</div>
+			
+            <div class="form-group">
+                <div class="review-section-title">
+                    Where
+                </div>
+                <div class="review-section-content">
+                    {{eventInfo.address1}}
+                </div>
+                <div class="review-section-content">
+                    {{eventInfo.address2}}
+                </div>
+                <div class="review-section-content">
+                    {{eventInfo.city}}&nbsp;&nbsp;{{eventInfo.state}}&nbsp;&nbsp;{{eventInfo.postalCode}}
+                </div>
+				<div class="review-section-link">
+                    <a (click)="openGoogleMapsDialog()">view map</a>
+                </div>
+			</div>
+			
+            <div *ngIf="eventInfo.contact || eventInfo.email" class="form-group">
+                <div class="review-section-title">
+                    Contact
+				</div>
+				<div class="review-section-content">
+                    {{eventInfo.contact}}
+                </div>
+                <div class="review-section-content">
+                    {{eventInfo.email}}
+                </div>
+            </div>
+		</div>
+		
+		<div *ngIf="eventContactInfo.addWhoseComing"
+			fxFlex="100" class="form-group text-center">
+			<a style="text-decoration: none;" (click)="openParticipantsDialog()"> Who is Coming </a>
+		</div>
+
+		<ng-container *ngIf="eventActivities.eventType=='SimpleEvent' || eventActivities.eventType=='EventWithActivitiesSingleFee'">
+			<div *ngIf="eventActivities.admission.fee.eventFeeType=='RegularEventFee'"
+				fxFlex="100" class="form-group text-center">
+				<span *ngIf="!eventActivities.admission.fee.price">
+					Free
+				</span>
+				<span *ngIf="eventActivities.admission.fee.price">
+					Free ~ ${{eventActivities.admission.fee.price}}
+				</span>
+			</div>
+		</ng-container>
+		
+        <!-- <div fxFlex="100">
+            <div class="form-group"
+                *ngIf="eventActivities.eventType=='SimpleEvent' || eventActivities.eventType=='EventWithActivitiesSingleFee'"
+                >
+                <div class="review-section-title">
+                    Admission
+                    <ng-template
+                        [ngIf]="detectExistMessage(eventActivities.admission.message)">
+                        <span class="space-50"></span>
+                        <a class="message" (click)="showMessage(eventActivities.admission.message)"> MESSAGE </a>
+                    </ng-template>
+                </div>
+                <div class="review-section-content">
+                    <div fxLayout="row wrap" fxLayoutAlign=" center" class="m-l-40">
+                        <ng-container
+								*ngIf="eventActivities.admission.fee.eventFeeType=='RegularEventFee'">
+							<ng-container
+								*ngIf="eventActivities.admission.fee.eventFeeType=='RegularEventFee'">
+								<div class="free"
+									*ngIf="eventActivities.admission.fee.price">
+										$Free ~ ${{eventActivities.admission.fee.price}}
+								</div>
+							</ng-container>
+
+							<ng-container *ngIf="signedUp">
+								<div class="free"
+									*ngIf="!eventActivities.admission.fee.price">
+										$Free
+								</div>
+								<div class="free"
+									*ngIf="eventActivities.admission.fee.price">
+										${{eventActivities.admission.fee.price}}
+								</div>
+
+								<div class="text-center height-60">
+									<div>Tickets</div>
+									<drop-down
+										[selected]="0"
+										[elements]="tickets"
+										>
+									</drop-down>
+								</div>
+							</ng-container>
+						</ng-container>
+						
+                        <ng-template [ngIf]="eventActivities.admission.fee.eventFeeType=='EarlyBirdEventFee'">
+                            <div class="m-l-20">
+                                <div>
+                                    Early Bird Price
+                                    <ng-template
+                                        [ngIf]="eventActivities.admission.fee.earlyPrice">
+                                            ${{eventActivities.admission.fee.earlyPrice}}
+                                    </ng-template>
+                                </div>
+                                <div>
+                                    Until Date &nbsp;{{showDate(eventActivities.admission.fee.earlyPriceEndDate)}}
+                                </div>
+                                <div>
+                                    Regular Price &nbsp; ${{eventActivities.admission.fee.price}}
+                                </div>
+
+                            </div>
+                            <div class="text-center height-60 m-l-20">
+                                <div>Tickets</div>
+                                <drop-down
+                                    [selected]="0"
+                                    [elements]="tickets"
+                                    >
+                                </drop-down>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+		</div> -->
+		
+        <!-- EventWithActivitiesSingleFee -->
+        <!-- <div fxFlex="100">
+            <div class="form-group"
+                *ngIf="eventActivities.eventType=='EventWithActivitiesSingleFee'">
+                <div class="review-section-title">
+                    Choose Activity
+                </div>
+                <div class="review-section-content">
+                    <ng-template ngFor let-activity [ngForOf]="eventActivities.activities">
+                        <div class="under-line" *ngIf="activity.name">
+                            <div fxLayout="row wrap" fxLayoutAlign=" center">
+                                <div>
+                                    <checkbox></checkbox>
+                                </div>
+                                <div class="activity-name">
+                                        {{activity.name}}
+                                </div>
+                                <div *ngIf="detectExistMessage(activity.message)">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a class="message" (click)="showMessage(activity.message)"> MESSAGE </a>
+                                </div>
+                            </div>
+                            <div fxLayout="column wrap">
+                                <div class="date-container m-l-40">
+                                    <div class="columns"><span class="date-for">From</span><span>{{showDate(activity.startDate)}}</span></div>
+                                    <div class="columns"><span class="date-for">To</span><span>{{showDate(activity.endDate)}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div> -->
+        <!-- EventWithActivitiesMultiFee -->
+        <!-- <div fxFlex="100">
+            <div class="form-group"
+                *ngIf="eventActivities.eventType=='EventWithActivitiesMultiFee'">
+                <div class="review-section-title">
+                    Choose Activity
+                </div>
+                <div class="review-section-content">
+                    <ng-template ngFor let-activity [ngForOf]="eventActivities.activities">
+                        <div class="under-line" *ngIf="activity.name">
+                            <div fxLayout="column wrap" fxLayoutAlign=" start">
+                                <div>
+                                    <div fxLayout="row wrap" fxLayoutAlign="start">
+                                        <div class="activity-name">
+                                            {{activity.name}}
+                                        </div>
+                                        <div *ngIf="detectExistMessage(activity.message)">
+                                            &nbsp;&nbsp;&nbsp;
+                                            <a class="message" (click)="showMessage(activity.message)">
+                                                MESSAGE
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="column wrap">
+                                        <div class="date-container m-l-40">
+                                            <div class="columns"><span class="date-for">From</span><span>{{showDate(activity.startDate)}}</span></div>
+                                            <div class="columns"><span class="date-for">To</span><span>{{showDate(activity.endDate)}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row wrap" class="m-l-40">
+                                    <div class="free"
+                                        *ngIf="activity.fee.eventFeeType=='RegularEventFee'">
+                                        <div *ngIf="!activity.fee.price"> $FREE </div>
+                                        <div *ngIf="activity.fee.price"> ${{activity.fee.price}} </div>
+                                    </div>
+                                    <div class="text-center">
+                                       <div>Tickets</div>
+                                        <drop-down
+                                            [selected]="0"
+                                            [elements]="tickets"
+                                            >
+                                        </drop-down>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div> -->
+        <!-- EventWithParticipantTypes -->
+        <!-- <div fxFlex="100">
+            <div class="form-group"
+                *ngIf="eventActivities.eventType=='EventWithParticipantTypes'">
+                <div class="review-section-title">
+                    Choose Activity
+                </div>
+                <div class="review-section-content">
+                    <ng-template
+                        ngFor let-activity [ngForOf]="eventActivities.participantTypes">
+                        <div  *ngIf="activity.name" class="under-line activity-name">
+                            <div fxLayout="column wrap" fxLayoutAlign=" start">
+                                <div fxLayout="row wrap" fxLayoutAlign="start">
+                                    <div>
+                                        {{activity.name}}
+                                    </div>
+                                    <div *ngIf="detectExistMessage(activity.admission.message)">
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="message" (click)="showMessage(activity.admission.message)"> MESSAGE </a>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="activity.admission.fee.eventFeeType=='EarlyBirdEventFee'" fxLayout="column wrap" fxLayoutAlign="start">
+                                    <div fxLayout="column wrap" fxLayoutAlign="start" class="m-l-20">
+                                        <div>
+                                            Early Bird Price &nbsp;${{activity.admission.fee.earlyPrice}}
+                                        </div>
+                                        <div>
+                                            Until Date &nbsp; {{showDate(activity.admission.fee.earlyPriceEndDate)}}
+                                        </div>
+                                        <div
+                                            *ngIf="activity.admission.fee.eventFeeType=='EarlyBirdEventFee'">
+                                            Regular Price  &nbsp; ${{activity.admission.fee.price}}
+                                        </div>
+                                    </div>
+                                    <div class="text-center height-60 m-l-20">
+                                        <div class="text-center">Tickets</div>
+                                        <drop-down
+                                            [selected]="0"
+                                            [elements]="tickets"
+                                            >
+                                        </drop-down>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="activity.admission.fee.eventFeeType=='RegularEventFee'" fxLayout="row wrap" fxLayoutAlign="start center" class="m-l-20">
+                                    <div *ngIf="!activity.admission.fee.price">
+                                        $FREE
+                                    </div>
+                                    <div *ngIf="activity.admission.fee.price">
+                                        ${{activity.admission.fee.price}}
+                                    </div>
+                                    <div class="text-center height-60 m-l-20">
+                                        <div class="text-center">Tickets</div>
+                                        <drop-down
+                                            [selected]="0"
+                                            [elements]="tickets"
+                                            >
+                                        </drop-down>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div> -->
+        
+        <div fxFlex="100" class="form-group">
+            <input
+                type="submit"
+                value="Sign Up"
+				class="btn btn-block btn-main"
+				(click)="openEventCheckoutDialog()"/>
+        </div>
+    </div>
+</div>
+

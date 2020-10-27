@@ -1,0 +1,87 @@
+:host {    
+    width: 100%;
+    background: transparent;
+}
+
+.result-container{
+    min-width: 100px;
+    min-height: 100px;
+    display: flex;
+}
+.result{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: auto;
+}
+.image-size-control{
+    position: relative;
+    margin-top: 10px;    
+    height: 50px;
+}
+    .image-size-control .slider-box{        
+        width: 200px;
+    }
+        .image-size-control .slider-box slider{        
+            width: 150px;
+        }
+        .image-size-control .slider-box input{
+            width: 30px;            
+            margin-left: 10px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    .image-size-control a{
+        position: absolute;
+        left: 10px;
+        bottom: 0px;
+    }
+
+.image-navigator {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    height: 280px;
+    margin: 5px 0px 10px 0px;
+}
+    .image-navigator .images {
+        display: flex;
+        flex-wrap: wrap;        
+        overflow-y: auto;
+    }        
+        .image-navigator .images .item {
+            display: flex;
+            flex-direction: column;
+            width: 90px;
+            height: 50px;
+            margin: 10px;
+        }        
+            .image-navigator .images .item .frame {
+                position: relative;                
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;                
+            }
+                .image-navigator .images .item .frame .image {
+                    display: flex;
+                    align-items: center;
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 10px;
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;                    
+                }
+.c-radio{
+    position: absolute;
+    left: 0px;    
+}
+
+.import{
+    padding-top: 20px;
+    padding-left: 20px;
+}
+    .import input[type="file"] {
+        display: none;
+    }

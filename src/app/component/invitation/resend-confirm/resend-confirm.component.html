@@ -1,0 +1,34 @@
+<div class="dialog-header">    
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>		
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>        
+</div>    
+<div class="data-container">
+	<div class="confirm-text text-center">
+		You have just Edited an active Invitation
+	</div>
+	<div class="confirm-text text-center">
+		Send your Guests an update?
+	</div>
+	<div class="form-group confirm-options columns">
+		<div class="columns">			
+			<label class='c-input c-radio'>
+				<input type="radio" name="confirm" [value]="true" [formControl]="confirm"/>
+				<span class="c-indicator"></span>
+			</label>
+			<div class="text">Yes</div>
+		</div>
+		<div class="columns">			
+			<label class='c-input c-radio'>
+				<input type="radio" name="confirm" [value]="false" [formControl]="confirm"/>
+				<span class="c-indicator"></span>
+			</label>
+			<div class="text">No</div>
+		</div>			
+	</div>
+	<div class="bottom text-center">
+		<button class="submit" (click)="onSubmit()">Submit</button>
+	</div>
+</div>

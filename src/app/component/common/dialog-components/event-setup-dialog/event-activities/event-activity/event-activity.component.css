@@ -1,0 +1,96 @@
+:host {
+    display: block;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 10px 10px 0 20px;
+}
+
+    :host *{
+        box-sizing: border-box;
+    }
+
+    :host.ready-to-drag, :host.dragging {
+        background-color: #d8d6d3;
+    }
+    :host.dragging {
+        box-shadow: 3px 3px 10px 0px #8c8c8c;
+        left: -3px;
+    }
+        :host.dragging .drag-grip {
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+            cursor: grabbing;
+        }
+
+.drag-grip {
+	position: absolute;
+	z-index: 50;
+	top: 75px;
+    left: 5px;
+	width: 12px;
+	height: 5px;
+	background-image: url('/assets/images/canvas/grip.png');
+	background-size: contain;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+	cursor: grab;
+}
+
+.message {
+    margin: auto;
+    max-width: 100px;
+}
+
+.activity-date{
+    padding: 10px 0 0 15px;
+    font-size: 14px;
+}
+
+.activity-message{
+    flex: auto;
+    padding: 0 10px;
+    min-width: 300px;
+}
+
+.activity-fee{
+    position: relative;
+    padding-left: 10px;
+}
+
+.fee{
+	position: relative;
+	max-width: 90px;
+}
+.fee::before {
+    content: "$";
+    position: absolute;
+    left: -15px;
+    font-size: 18px;
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+
+.caption {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-remove, .btn-remove:hover, .btn-remove:active, .btn-remove:visited {
+    position: absolute;
+    color: red;
+    font-size: 20px;    
+    top: 0px;
+    right: 4px;
+    line-height: 1;
+    text-decoration: none;
+}

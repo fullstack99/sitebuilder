@@ -1,0 +1,39 @@
+<div class="social-bar">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns">
+            <span class="dialog-title"><h3>Add Social Bar</h3></span>
+        </div>
+    </div>
+
+    <div class="social-body">
+        <div class="show-bar">
+            <div class="menu-bar">
+                <div class="item-bar"
+                    *ngFor="let item of socialInfo.ribbons"
+                    [style.backgroundImage]="backgroundRibbon(item)">
+                </div>
+            </div>
+            <a (click)="deleteItem()" class="delete-item">×</a>
+        </div>
+        <div class="type-option">
+            <radio-group [formControl]="_type">
+                <ng-template [radioGroupOption]="'color'">color</ng-template>
+                <ng-template [radioGroupOption]="'gray'">gray</ng-template>
+            </radio-group>
+        </div>
+        <div class="content">
+            <div  class="item" *ngFor="let item of _defaultRibbons; let i = index" (click)="addItem(i)">
+                <div [style.backgroundImage]="backgroundImage(item.color)"></div>
+                <span>{{item.name}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <input [disabled]="socialInfo.ribbons.length==0" class="btn submit" (click)="onSubmit()" type="button" value="ADD" />
+    </div>
+</div>

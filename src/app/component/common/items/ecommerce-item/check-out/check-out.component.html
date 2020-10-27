@@ -1,0 +1,129 @@
+<div *ngIf="!orderd" >
+	<h4>Checkout</h4>
+
+	<div class="header-line">
+		<div class="btn-back" (click)="backPage()"></div>
+		<div>...</div>
+		<div class="item-category">
+			<a (click)="backPage()">
+				<span> Home/ </span>
+				<span>Cart/</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="check-out">
+			<div class="shipping-address">
+				<h5> 1. 
+					<a (click)="openShippingAddressDialog()">
+						<ng-container *ngIf="isShippingAddress(); else elseTemplate">
+							Add
+						</ng-container>
+						<ng-template #elseTemplate>
+							Edit
+						</ng-template>
+					</a>
+					Shipping Address
+				</h5>
+				<div class="shipping-address-detail">
+				<span>{{shippingAddress.firstName}} {{shippingAddress.lastName}}</span>
+				<span>{{shippingAddress.address1}}</span>
+				<span>{{shippingAddress.address2}}</span>
+				<span>{{shippingAddress.countryId}}</span>
+				</div>
+			</div>
+			<div class="credit-card">
+				<h5> 2. 
+					<a (click)="openCreditCardsDialog()">
+						<ng-container *ngIf="isCreditCards(); else elseTemplate">
+							Add
+						</ng-container>
+						<ng-template #elseTemplate>
+							Edit
+						</ng-template> 
+					</a> 
+					Credit-Debit Card
+				</h5>
+				<div class="credit-card-detail" *ngIf="!isCreditCards()">
+					<div class="card-info">
+						<div class="card-img"></div>
+						<div class="card-info-text">
+							<img src="assets/images/master-card.gif" width="50px"/>
+							Master Card ending xxx
+						</div>
+					</div>
+					<div class="card-info">
+						<a>Billing Address</a> same as shipping
+					</div>
+				</div>
+				<div class="card-line-1">OR <img src="assets/images/paypal.png" width="100px" /> <span>Express</span></div>
+				<div class="card-line-2"><a>Add</a> <input type="text" class="form-control card-code" placeholder="Gift Card or Promo Code" /></div>
+			</div>
+			<div class="review-items">
+				<h5>3. Review Items</h5>
+				<div class="review-item">
+					<div class="image-picture" [style.backgroundImage]="backgroundImage(detail.images[0])">
+						<span *ngIf="!detail.images || detail.images[0].location == '' || detail.images[0].name == ''" class="font-icon btr bt-camera"></span>
+					</div>
+					<div class="review-item-details">
+						<div class="item-title">
+							{{detail.title}}
+						</div>
+						<div class="item-options">
+							<span *ngFor="let item of optionValues; let last=last;">
+								{{item.name}} &nbsp;								
+							</span>
+						</div>
+						<div class="item-qty">
+							Qty <input type="number" class="form-control" [formControl]="_qty" /> {{getPrice(detail)}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="place-order">
+				<input [class.active]="true" class="btn submit" (click)="onSubmit()" type="button" value="Place Order" />
+			</div>
+		</div>
+		<div class="total">
+			<div class="place-order">
+				<input [class.active]="true" class="btn submit" (click)="onSubmit()" type="button" value="Place Order" />
+			</div>
+			<div class="total-check-out">
+				<div class="calc-list">
+					<div class="list-name">Items:</div>
+					<div class="price">						
+						<span>{{getPrice(detail, _qty.value)}}</span>
+					</div>
+				</div>
+				<div class="calc-list">
+					<div class="list-name">Shipping & handling:</div>
+					<div class="price bottom-border-1">
+						<span>$</span>
+						<span></span>
+					</div>
+				</div>
+				<div class="calc-list">
+					<div class="list-name">Total before tax:</div>
+					<div class="price">						
+						<span>{{getPrice(detail, _qty.value)}}</span>
+					</div>
+				</div>
+				<div class="calc-list">
+					<div class="list-name">Est. tax:</div>
+					<div class="price">
+						<span>$</span>
+						<span></span>
+					</div>
+				</div>
+				<div class="calc-total">
+					<div class="list-name">Total</div>
+					<div class="price">						
+						<span>{{getPrice(detail, _qty.value)}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<order-confirm *ngIf="orderd" [detail]="detail" [shippingAddress]="shippingAddress" [optionValues]="optionValues" (goHome)="goHome()"></order-confirm>

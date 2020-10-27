@@ -1,0 +1,28 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    
+</div>
+
+<div class="dialog-content">
+	<div>
+		<span class="sort-by">Sort By :</span>
+		<span class="clear-sort"><a (click)="onClear()">CLEAR SORT</a></span>
+	</div>
+	<div class="columns">
+		<div class="options" *ngFor="let option of options; let i=index">
+			<drop-down
+				[selected]="getSelectedOptionValue(option)"
+				[elements]="getOptionValues(option)"
+				[defaultData]="'Options'"				
+				(changeSelected)="changeSelected($event, option.sequence)"
+			>
+			</drop-down>
+		</div>		
+	</div>
+	<div (click)="onDeleteAllOptions()">
+		<span class="x-label">X</span> &nbsp; &nbsp; <a>Delte All Options</a>
+	</div>
+</div>

@@ -1,0 +1,204 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+h4 {
+    font-size: 26px;
+    margin: 30px 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.result.slide{
+    position: relative;
+    animation-timing-function: linear;
+    flex-direction: column;
+}
+
+loading{
+    position: absolute;
+    top: 50px;
+}
+
+.current-slide {
+	margin-bottom: 10px;
+	width: 100%;
+	max-width: 300px;
+	height: calc(100% - 70px);
+	max-height: 180px;
+}
+
+.current-slide.no-guides {
+	height: 100%;
+}
+    .current-slide .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% - 20px);
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+        color: #8c8c8c;
+        cursor: pointer;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+.guides {}
+    .guides .thumbnails-row {
+        position: relative;
+    }
+        .guides .thumbnails-row .btn-show {
+            position: absolute;
+            left: -50px;
+            top: 15px;
+            font-size: 10px;
+        }
+        .guides .thumbnails-row .thumbnails-ctrl {
+            width: 300px;
+        }
+            .guides .thumbnails-row .thumbnails-ctrl .btn-left,
+            .guides .thumbnails-row .thumbnails-ctrl .btn-right {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 17px;
+                color: #8c8c8c;
+                font-size: 22px;
+                cursor: pointer;
+			}
+			.guides .thumbnails-row .thumbnails-ctrl .btn-left.active,
+            .guides .thumbnails-row .thumbnails-ctrl .btn-right.active {
+                color: #82ff1e;
+			}
+
+            .guides .thumbnails-row .thumbnails-ctrl .thumbnails {
+                position: relative;
+            }
+                .guides .thumbnails-row .thumbnails-ctrl .thumbnails .thumb {
+                    position: relative;
+                    width: 85px;
+                    height: 50px;
+                    border: 1px solid #8c8c8c;
+                    border-radius: 5px;
+                    margin-right: 5px;
+                    cursor: pointer;
+                    background-color: white;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                }
+                .guides .thumbnails-row .thumbnails-ctrl .thumbnails .thumb.active {
+                    border-color: #ffa500;
+                }
+                .guides .thumbnails-row .thumbnails-ctrl .thumbnails .thumb.last {
+                    margin-right: 0;
+                }
+                .guides .thumbnails-row .thumbnails-ctrl .thumbnails .thumb.dragging {
+                    top: 3px;
+                    box-shadow: 2px 2px 4px 1px rgba(140, 140, 140, 0.35);
+                    z-index: 100;
+                }
+                    .guides .thumbnails-row .thumbnails-ctrl .thumbnails .thumb .grip {
+                        position: absolute;
+                        top: calc(100% + 5px);
+                        left: calc(50% - 6px);
+                        width: 12px;
+                        height: 5px;
+                        background-image: url('/assets/images/canvas/grip.png');
+                        background-size: contain;
+                        background-position: 50%;
+                        background-repeat: no-repeat;
+                        cursor: -moz-grab;
+                        cursor: -webkit-grab;
+                        cursor: grab;
+                    }
+    .guides .dots-row {
+        position: relative;
+        margin: 20px 0;
+    }
+        .guides .dots-row .btn-hide {
+            position: absolute;
+            left: -45px;
+            top: -1px;
+            font-size: 10px;
+        }
+        .guides .dots-row .dot {
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            border: 1px solid #8c8c8c;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .guides .dots-row .dot.active {
+            background-color: #8c8c8c;
+        }
+
+.speed {
+    width: 100%;
+    padding: 0 22px;
+    margin-bottom: 20px;
+}
+    .speed slider {
+        margin-left: 40px;
+    }
+
+.animation {
+    width: 100%;
+    padding: 0 22px;
+    margin-bottom: 20px;
+}
+    .animation .title {
+        margin-bottom: 5px;
+    }
+    .animation .columns {
+        align-items: center;
+        justify-content: center;
+    }
+    .animation .animation-ctrl {
+        width: 200px;
+        margin-right: 5px;
+    }
+
+.btn-close, .btn-close:hover, .btn-close:active, .btn-close:visited {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    display: block;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.btn-feedback {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    display: flex;
+    align-items: center;
+    color: #8c8c8c;
+    font-size: 10px;
+}
+.btn-feedback:hover {
+    text-decoration: none;
+}
+    .btn-feedback img {
+        width: 30px;
+        height: 30px;
+	}

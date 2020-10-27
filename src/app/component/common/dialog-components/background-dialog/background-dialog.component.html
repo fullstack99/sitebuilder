@@ -1,0 +1,334 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container columns margin-top-10">
+		<span class="dialog-title"><h3>{{title}}</h3></span>
+	</div>
+</div>
+
+<app-sub-menubar *ngIf="background_info.backgroundImage" [tabs]="tabs" [tabId]="activeTab.id" [mobileMaxWidth]="300" (selectedTab)="_selectTab.next($event)">
+</app-sub-menubar>
+
+<div class="canvas-container">
+	<form #f="ngForm" novalidate>
+	<div class="canvas">
+		<div [hidden]="activeTab.name != 'Colors'">
+			<div class="rows">
+				<div class="result-background center-block"
+					#resultBackgroundColor
+					[style.background]="getBackgroundColor()">
+				</div>
+				<div class="disp-remove center-block">
+					<span>Remove</span> &nbsp;&nbsp; <a (click)="setDefaultBackgroundInfo(0)">X</a>
+				</div>
+			</div>
+			<div class="color-picker center-block rows">
+				<div class="colorPalette" #colorPalette></div>
+				<div class="color-picker-control">
+					<span class="text">
+						<a (click)="setNoneColor(0)">NONE</a>
+					</span>
+					<span class="text more">
+						<a (click)="openColorPicker(0)">MORE</a>
+					</span>
+				</div>
+			</div>
+			<div class="rows adjusts center-block">
+				<div>Gradient</div>
+				<div class="columns adjust">
+					<div class="text">Horizontal</div>
+					<slider [formControl]="horizontal"
+						[min]="_rangeHorizontal[0]" [max]="_rangeHorizontal[1]">
+					</slider>
+					<input type="text"
+							readonly="true"
+							value="{{background_info.backgroundColor ? background_info.backgroundColor.horizontal : 0}}">
+				</div>
+				<div class="columns adjust">
+					<div class="text">Vertical</div>
+					<slider [formControl]="vertical"
+						[min]="_rangeVertical[0]" [max]="_rangeVertical[1]">
+					</slider>
+					<input type="text"
+							readonly="true"
+							value="{{background_info.backgroundColor ? background_info.backgroundColor!.vertical : 0}}">
+				</div>
+			</div>
+		</div>
+		<div [hidden]="activeTab.name == 'Colors' || activeTab.name == 'Video'">
+			<div *ngIf="activeTab.name == 'Tiling'"
+				class="small-image-title">
+				Repeat a Small Images as Background
+			</div>
+			<div class="columns image-adjusts">
+				<div class="rows adjust-item" *ngIf="activeTab.name == 'Image' || activeTab.name == 'Parallax' || activeTab.name == 'Tiling'">
+					<ul class="list-unstyled center-block image-adjust-ul">
+						<li
+							[class.active]="activeTab.name != 'Tiling' && imageAdjustItem.value == 'opacity' || activeTab.name == 'Tiling' && tilingAdjustItem.value == 'opacity'"
+							(click)="setAdjustItem('opacity')">
+							<span>Opacity</span>
+						</li>
+						<li
+							[class.active]="activeTab.name != 'Tiling' && imageAdjustItem.value == 'behind' || activeTab.name == 'Tiling' && tilingAdjustItem.value == 'behind'"
+							(click)="setAdjustItem('behind')">
+							<span>Color Behind Image</span>
+						</li>
+						<li *ngIf="activeTab.name=='Image'"
+							[class.active]="imageAdjustItem.value == 'position'"
+							(click)="setAdjustItem('position')">
+							<span>Position Of Image</span>
+						</li>
+						<li *ngIf="activeTab.name=='Image'"
+							[class.active]="imageAdjustItem.value == 'scroll'"
+							(click)="setAdjustItem('scroll')">
+							<span>Scrolling</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="rows adjust-result">
+					<div class="image-result-controls">
+						<div class="left">
+							<a (click)="openImportDialog()">IMPORT</a>
+						</div>
+						<div class="right">
+							<a (click)="openImageEditor()" style="color: #337ab7;">EDIT</a>
+						</div>
+					</div>
+					<div class="result-image-container">
+						<div class="result-image-behindColor" #resultImageBehindColor>
+						</div>
+						<div #resultImage
+							class="result-image rows"
+							(dragover)="onDragOver($event)"
+							(dragenter)="onDragEnter($event)"
+							(dragleave)="onDragLeave($event)"
+							(drop)="onDrop($event)"
+							(click)="openImportDialog()">
+							<loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+							<p *ngIf="!_loading && dispAddImageText()">Click to Add Image</p>
+							<p *ngIf="!_loading && dispAddImageText()">or Drag and Drop Here</p>
+							<p *ngIf="!_loading && dispAddImageText()">1920 x 1280 pixels</p>
+						</div>
+					</div>
+					<div class="disp-remove center-block">
+						<span>Remove</span> &nbsp;&nbsp; <a (click)="setDefaultBackgroundInfo(1)">X</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="image-tools">
+				<div *ngIf="imageAdjustItem.value == 'opacity' && (activeTab.name == 'Image' || activeTab.name == 'Parallax')"
+					class="image-opacity rows">
+					<div class="text">Opacity</div>
+					<div class="columns">
+						<slider [formControl]="opacity"
+							[min]="_rangeOpacity[0]" [max]="_rangeOpacity[1]">
+						</slider>
+						<input type="text"
+							name="shadow"
+							readonly="true"
+							value="{{background_info.backgroundImage.imageOpacity}}">
+					</div>
+				</div>
+
+				<div *ngIf="tilingAdjustItem.value == 'opacity' && activeTab.name == 'Tiling'"
+					class="image-opacity rows">
+					<div class="text">Opacity</div>
+					<div class="columns">
+						<slider [formControl]="tilingOpacity"
+							[min]="_rangeOpacity[0]" [max]="_rangeOpacity[1]">
+						</slider>
+						<input type="text"
+							name="shadow"
+							readonly="true"
+							value="{{background_info.backgroundTiling.tilingOpacity}}">
+					</div>
+				</div>
+
+				<div [hidden]="imageAdjustItem.value != 'behind' || (activeTab.name!='Image' && activeTab.name!='Parallax')"
+						class="color-picker center-block rows">
+					<div class="color-picker-text">
+						<span>Color Behind Image</span>
+					</div>
+					<div class="colorPalette" #colorImagePalette></div>
+					<div class="color-picker-control">
+						<span class="text">
+							<a (click)="setNoneColor(1)">NONE</a>
+						</span>
+						<span class="text more">
+							<a (click)="openColorPicker(1)">MORE</a>
+						</span>
+					</div>
+				</div>
+
+				<div [hidden]="tilingAdjustItem.value!='behind' || activeTab.name!='Tiling'"
+						class="color-picker center-block rows">
+					<div class="color-picker-text">
+						<span>Color Behind Image</span>
+					</div>
+					<div class="colorPalette" #colorTilingPalette></div>
+					<div class="color-picker-control">
+						<span class="text">
+							<a (click)="setNoneColor(2)">NONE</a>
+						</span>
+						<span class="text more">
+							<a (click)="openColorPicker(2)">MORE</a>
+						</span>
+					</div>
+				</div>
+
+				<div *ngIf="imageAdjustItem.value == 'scroll' &&  activeTab.name == 'Image'" class="image-scrolling">
+					<radio-group class="ctrl-body" [formControl]="imageScrolling">
+						<ng-template radioGroupOption="move">Move background & forground together</ng-template>
+						<ng-template radioGroupOption="freeze">Freeze background, move foreground</ng-template>
+					</radio-group>
+				</div>
+
+				<div *ngIf="imageAdjustItem.value == 'position' && activeTab.name == 'Image'"
+						class="columns image-position">
+					<div class="text">
+						Positions of image on the page
+					</div>
+					<div class="rows arrow-panel">
+						<div class="columns arrows">
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='top left'"
+								(click)="setImagePosition('top left')">
+								<i class="bts bt-angle-up top-left"></i>
+							</div>
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='top center'"
+								(click)="setImagePosition('top center')">
+								<i class="bts bt-angle-up"></i>
+							</div>
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='top right'"
+								(click)="setImagePosition('top right')">
+								<i class="bts bt-angle-up top-right"></i>
+							</div>
+						</div>
+						<div class="columns arrows">
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='left'"
+								(click)="setImagePosition('left')">
+								<i class="bts bt-angle-left"></i>
+							</div>
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='center'"
+								(click)="setImagePosition('center')">
+								<i class="bts bt-radio-unchecked"></i>
+							</div>
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='right'"
+								(click)="setImagePosition('right')">
+								<i class="bts bt-angle-right"></i>
+							</div>
+						</div>
+						<div class="columns arrows">
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='bottom left'"
+								(click)="setImagePosition('bottom left')">
+								<i class="bts bt-angle-down bottom-left"></i>
+							</div>
+							<div
+							[class.active]="background_info.backgroundImage.imagePosition=='bottom center'"
+								(click)="setImagePosition('bottom center')">
+								<i class="bts bt-angle-down"></i>
+							</div>
+							<div
+								[class.active]="background_info.backgroundImage.imagePosition=='bottom right'"
+								(click)="setImagePosition('bottom right')">
+								<i class="bts bt-angle-down bottom-right"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div *ngIf="activeTab.name == 'Parallax'" class="columns" style="margin-top: 10px;">
+					<div class="parallax-content">
+						<div>Parallax is a multi-image background wih text, shapes or designs in the foreground.</div><br/>
+						<!-- <div class="images">
+							<img src="/assets/images/tooltip/parallax1.png"/>
+							<img src="/assets/images/tooltip/parallax2.png"/>
+							<img src="/assets/images/tooltip/parallax3.png"/>
+						</div> -->
+						<div>
+							When scrolling the backgro-und & foreground move at different speeds.
+						</div>
+						<br/>
+						<div>
+							For best results use images 1920 x 1280 pixels. Or, other sizes with a 1.5:1 ratio.
+						</div>
+					</div>
+					<div class="thumbnails rows thumbnails-change"
+						#thumbnails
+						draggableList
+						(draggableList-newIndexes)="_imageIndexChange.next($event)"
+						>
+						<div class="thumb columns"
+							*ngFor="let item of background_info.backgroundImage.multiImages; let i = index"
+							[class.active]="_activeImageIndex == i"
+							[style.backgroundImage]="backgroundImage(background_info.backgroundImage.multiImages[i])"
+							draggableListItem
+							(draggableListItem-dragStart)="_thumbDragStart.next(0)"
+							(draggableListItem-dragEnd)="_thumbDragEnd.next(0)"
+							(draggableListItem-drag)="_thumbDrag.next([0, $event])"
+							(click)="_gotoImage.next(i)"
+							>
+							<div class="grip"
+								draggableListItemGrip
+								></div>
+							<div class="remove"><a (click)="setBackGroundImage(null, i)">X</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="activeTab.name != 'Parallax'" class="columns image-category">
+				<drop-down
+					[selected]="_selectedCategory"
+					[defaultData]="'Categories'"
+					[elements]="_imageCategories"
+					[borderNone]="true"
+					[showValueFunc]="showCategoryValue"
+					(changeSelected)="_catchCategory.next($event)"
+					>
+				</drop-down>
+			</div>
+			<div *ngIf="activeTab.name != 'Parallax'" class="columns image-navigator" #imageNavigator>
+				<div class="images" #imagesContainer>
+					<div *ngFor="let img of _systemImages; let i=index" class="item">
+						<div class="frame">
+							<div class="image"
+								[style.backgroundImage]="backgroundImage(img)"
+								(click)="setBackGroundImage(img,i)"
+								></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="activeTab.name=='Video'"
+			class="video">
+
+		</div>
+		<div class="form-group">
+      <ng-container *ngIf="{ text: getSubmitButtonText() } as submit_button">
+          <input
+            type="button"
+            [value]="submit_button.text"
+            class="btn btn-block btn-main"
+            style="max-width: 150px;"
+            [class.active]="submit_button.text == 'ADD'"
+            [class.danger]="submit_button.text == 'REMOVE'"
+            (click)="onAdd()"
+            />
+      </ng-container>
+		</div>
+	</div>
+	</form>
+</div>

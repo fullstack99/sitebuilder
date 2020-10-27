@@ -1,0 +1,131 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.swiper-container {
+    width: 100%;
+}
+    .swiper-slide {		
+        text-align: center;
+        font-size: 16px;
+        background: #fff;
+    }
+
+    .btr{
+        cursor: pointer;
+    }
+    .btr.bt-3x{
+        height: 50px;
+        margin-top: 25px;
+    }
+drop-down{
+    width: 212px;
+    margin: auto;
+}
+drop-down >>> .btn-toggle > .filter-option,
+drop-down >>> .btn-item span{
+    word-wrap: break-word!important;
+    white-space: normal!important;
+}
+
+.content{
+    justify-content: center;
+}
+
+.service-container{
+    position: relative;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-container{
+    max-width: 300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    .contact-text{
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.providers-ctrl{
+    width: 250px;
+    margin: auto;
+}
+.months-ctrl {
+    align-items: center;
+    margin-left: 20px;
+}
+
+.dates-ctrl{
+    max-width: 646px;    
+    align-items: center;
+    margin: auto;
+}
+
+.providers-container{
+    width: calc(100% - 60px);
+    margin: auto;
+}
+
+.months-container{
+    width: 150px;    
+    text-align: center;
+}
+.dates-container{
+    width: 100%;
+    justify-content: space-around;
+}
+    .date-item{
+        width: 70px;
+        text-align: center;
+        cursor: pointer;
+    }        
+        .provider-image{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #8c8c8c;
+            border-radius: 5px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: 50%;
+            margin: auto;
+        }
+        .provider-details{
+            word-wrap: break-word;
+            text-align: left;                
+        }
+
+    .thumb{
+        border: 1px solid #464646;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+    .thumb.active{
+        border-color: #FFA500;
+    }
+
+.choose-time-container{
+    width: 120px;
+    height: 150px;
+    margin: auto;
+    overflow-y: auto;
+}   
+
+.submit input{
+    background:   #FFA500;
+    border-color: #FFA500;
+    color: white;
+    width: 150px;
+    font-size: 16px;    
+}

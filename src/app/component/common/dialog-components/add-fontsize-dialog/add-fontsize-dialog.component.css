@@ -1,0 +1,27 @@
+:host {
+    box-sizing: border-box;
+    height: 100%;
+    background: transparent;
+    padding: 10px;
+}
+    :host * {
+        box-sizing: border-box;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+.dialog-container {
+    position: relative;
+    margin: 10px;
+}
+    .submit input{
+        width: 100px;
+	}
+
+	.form-control {
+		width: 120px;
+    	margin: auto;
+	}

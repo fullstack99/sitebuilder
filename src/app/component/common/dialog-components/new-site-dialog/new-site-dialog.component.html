@@ -1,0 +1,45 @@
+<loading *ngIf="loading" [text]="'Saving...'"></loading>
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container columns">		
+		<span class="dialog-title"><h3>Setup Site</h3></span>
+	</div>	
+</div>
+
+<div class="dialog-container" [formGroup]="form">
+	<div class="form-group">
+		<label>Site Name</label>
+		<input class="form-control" 
+			formControlName="name"
+			name="name"
+			type="text"
+			required
+			placeholder="e.g dev"
+			[class.disable]="loading">
+	</div>
+	<!-- <div class="form-group">
+		<label>Host Name</label>
+		<input class="form-control" 
+			formControlName="hostname"
+			name="hostname"
+			type="text"
+			required
+			placeholder="e.g dev.com"
+			[class.disable]="loading"	>
+	</div> -->
+	<div class="form-group submit center-block">
+		<input
+			type="button"
+			value="Setup"
+			[disabled]="form.invalid || loading"
+			(click)="onSubmit()"
+			class="btn btn-block btn-main center-block">
+	</div>
+	<div *ngIf="errorMessage" class="form-group">
+		{{ errorMessage }}
+	</div>
+</div>

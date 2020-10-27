@@ -1,0 +1,102 @@
+<div class="toolbar">
+    <div class="button back" (click)="onBackClick()"><img src="/assets/images/canvas/back.png"/></div>
+    <div        
+        class="button import active" (click)="openImportDialog()">
+        <i class="btr bt-cloud-download bt-lg"></i>
+        IMPORT        
+    </div>
+    <div         
+        class="button export" (click)="exportFile()">
+        <i class="btr bt-cloud-upload bt-lg"></i>
+        EXPORT
+    </div>
+
+    <div *ngIf="enableFolderPlace"
+        class="button place"
+        [class.active]="selectedTree && selectedTree.value"
+        (click)="onPlaceFolderOnPage()">        
+        Place On Page
+    </div>
+</div>
+
+<div #imageNavigator
+    class="columns image-navigator"
+    (click)="onClickContainer($event)">
+    <div class="tree-container">
+        <tree *ngIf="tree" 
+            [tree] = "tree"
+            [type] = "tab.name"
+            [editable] = "editable"            
+            [expanded] = "true"
+            [showValueFunc] = "_showFolder"
+            [showField] = "'name'"            
+            [maxDeep] = "10"
+            [showIcon] = "systemUser"
+        ></tree>
+        <div *ngIf="editable" class="add-folder-group" [ngSwitch]="newFolderControlVisible">
+            <ng-template [ngSwitchCase]="false">
+                <a class="btn-add-folder" (click)="onMore($event)">ADD LISTING</a>
+            </ng-template>
+            <ng-template [ngSwitchCase]="true">
+                <input class="new-folder-name" #newFolderNameCtrl [formControl]="_newFolderName" (keydown)="onKeydown($event)" (click)="$event.stopPropagation()"/>
+                <div class="buttons">
+                    <a class="" (click)="onAddFolder($event)">OK</a>
+                    <a class="" (click)="onCancelFolder($event)">CANCEL</a>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="images"
+        #imagesContainer
+        (scroll)="_imagesContainerScroll.next()"
+        (dragover)="onDragOver($event)"
+        (dragenter)="onDragEnter($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        >
+        <loading *ngIf="_loading" [text]="_loadingText" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>        
+        <ng-container *ngIf="images">
+            <div *ngFor="let img of images; let i = index" class="item" [class.active]="i==selectedItemIndex">                
+                <ng-container *ngIf="{isImg: isImage(img)} as varImg">
+                    <div
+                        class="frame"
+                        (click)="onSelectItem(i, $event)">
+                        <a  class="btn-remove-image"
+                            (click)="onRemoveItem(img, i, $event)">x</a>
+    
+                        <div *ngIf="varImg.isImg"
+                            class="image"
+                            [style.backgroundImage]="backgroundImage(img)"
+                            ></div>
+
+                        <div *ngIf="!varImg.isImg"
+                            class="image"
+                            >
+                            <video class="video" [src]="backgroundImage(img, varImg.isImg)">
+                            </video>
+                        </div>
+                        
+                        <div class="image-name">
+                            <span *ngIf="!_edit || _edit && selectedItemIndex!=i" (dblclick)="onTextEdit($event, img)">{{img.name}}</span>
+                            <input *ngIf="_edit && selectedItemIndex==i"
+                                type = "text"
+                                class="form-control"
+                                [formControl] = "textControl"
+                                (click)="$event.stopPropagation()"
+                                (keyup)="onTextSubmit($event)"
+                                (blur) ="onTextSubmitBlur($event)"
+                                appAutofocus/>
+                        </div>
+    
+                    </div>
+                    <div ngVar class="links">
+                        <a (click)="onPlaceOnPage(img)">PLACE ON PAGE</a>
+                        <a *ngIf="varImg.isImg" (click)="onOpenInEditor(img)">EDITOR</a>
+                        <a *ngIf="varImg.isImg" (click)="onOpenInClipper(img)">CLIPPER</a>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+        
+    </div>
+</div>

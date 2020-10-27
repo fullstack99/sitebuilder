@@ -1,0 +1,80 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span class="dialog-title">Import GloGood Pages</span>
+    </div>
+</div>
+<div class="dialog-body">
+    <loading *ngIf="loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <form [formGroup]="form" class="center-block" style="margin-left: 10px;">
+        <div style="margin-left: 30px">
+            <radio-group formControlName="allPages">
+                <ng-template [radioGroupOption]="true">
+                    <div>
+                        <span>Import All Pages</span>
+                    </div>
+                </ng-template>
+                <ng-template [radioGroupOption]="false">
+                    <div>
+                        <span>Import Pages</span>
+                    </div>
+                </ng-template>
+            </radio-group>
+        </div>
+        <div style="margin-left: 80px">
+            <div style="margin-bottom: 5px">
+                <span style="padding-right: 2px;">From</span>
+                <input type="text" class="amount" placeholder="Enter Page#" formControlName="startPageNum" (keydown)="eventHandler($event)"/>
+            </div>
+            <div>
+                <span style="padding-right: 20px;">To</span>
+                <input type="text" class="amount" placeholder="Enter Page#" formControlName="endPageNum" (keydown)="eventHandler($event)"/>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label>
+                User Email
+            </label>
+            <input type="text" class="form-control"
+				[class.empty]="!form.controls.username" formControlName="username"/>
+			<div class="form-group">
+				<app-validation-message [control]="form.controls['username']"></app-validation-message>
+			</div>
+		</div>
+        <div class="form-group required">
+            <label>
+                Password
+            </label>
+            <input type="password" class="form-control"
+				[class.empty]="!form.controls.password" formControlName="password"/>
+			<div class="form-group">
+				<app-validation-message [control]="form.controls['password']"></app-validation-message>
+			</div>
+		</div>
+        <div class="form-group required">
+            <label>
+                Site
+            </label>
+            <input type="text" class="form-control"
+				[class.empty]="!form.controls.sitename" formControlName="sitename"/>
+			<div class="form-group">
+				<app-validation-message [control]="form.controls['sitename']"></app-validation-message>
+			</div>
+		</div>
+        <div class="form-group">
+            <input
+                type="button"
+                value="IMPORT"
+                class="btn btn-block btn-main"
+                style="max-width: 150px;"
+                [disabled]="!isValid() || loading"
+                [class.active]="isValid()"
+                (click)="onSubmit()"
+                />
+        </div>
+    </form>
+</div>

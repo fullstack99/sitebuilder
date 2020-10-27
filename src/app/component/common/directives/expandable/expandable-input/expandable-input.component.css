@@ -1,0 +1,44 @@
+.children {
+	display: block;
+	position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.child {
+    position: relative;
+}
+
+.child-input {
+    width: calc(100% - 30px);
+    margin: 5px auto;
+}
+
+a.listing-remove {
+	position: absolute;
+	color: #FF0000;
+    right: 0;
+    top: 10px;
+}
+
+.grip {    
+    width: 12px;
+    height: 5px;
+    background-image: url('/assets/images/canvas/grip.png');
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    cursor: grab;
+    color: #8c8c8c;
+}
+
+.grip.grip-vertical {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    margin: 18px 10px 0px 0px;
+}

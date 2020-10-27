@@ -1,0 +1,76 @@
+:host {
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;
+}
+
+ :host * {
+    box-sizing: border-box;
+}
+
+ :host>* {
+    margin-bottom: 15px;
+}
+
+.bottom input[type=button] {    
+    width: 110px;
+    height: 30px;    
+    color: white;
+    background: #ffa500;
+    border: none;
+    border-radius: 5px;
+}
+    .bottom input[type=button]:disabled{
+        background: #8c8c8c;
+        border: darkgray;
+    }
+
+h5 {
+    margin-top: 7px;
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+h4 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.contact-details {
+    width: 100%;
+    display: block;
+}
+
+.contact-details .contact-left {
+    float: left;
+    width: 48%;
+}
+
+.contact-details .contact-left .spilt-box {
+    margin-bottom: 10px;
+}
+
+.contact-details .contact-right {
+    float: left;
+    width: 46%;
+    margin-left: 20px;
+}
+
+.contact-details .contact-right .results {
+    width: 100%;
+    height: 40px;
+}
+
+.contact-details .contact-right .results>span {
+    float: left;
+    margin-left: 40px;
+}
+
+.contact-details .contact-right .results :nth-child(2) {
+    float: right;
+    margin-right: 10px;
+}
+
+.arrow-button-container{
+    margin-bottom: 10px;
+}

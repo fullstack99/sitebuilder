@@ -1,0 +1,113 @@
+:host {    
+    display: block;
+    position: relative;
+    height: 100%;
+    background: transparent;
+}
+:host *{
+    box-sizing: border-box;
+}
+
+.place{
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 8px 5px 0px 5px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.place.active {
+    background-color: #ffa500;
+    color: white;
+}
+
+.dialog-body{
+    height: calc(100% - 120px);
+    overflow: auto;
+}
+
+input.fund-raising-name {    
+    font-size: 18px!important;    
+}
+
+.from-to{
+    margin-left: 100px;
+}
+
+textarea {
+    height: 140px;
+}
+
+checkbox >>> .checkbox-indicator{
+    width: 20px;
+    height: 20px;    
+}
+
+.c-radio {
+    top: 10px;
+    left: -40px;
+}
+
+.section-title {    
+    margin: 0 auto;
+    padding-left: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 0;
+    border: 1px solid #d8d6d3;
+    border-bottom-color: transparent;
+}
+    .section-title legend {    
+        margin-bottom: 0px;
+        margin-top: 5px;
+        font-size: 14px;
+        font-weight: bold;       
+    }
+
+.box-3 {
+    border: 1px solid #d8d6d3;
+    padding: 10px 20px 0px 20px;    
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-color: transparent;    
+}
+
+.form-control-amount{
+    width: 65px;    
+    padding: 6px;
+    color: #8c8c8c;
+}
+
+.alone {
+    display: flex;    
+    justify-content: flex-end;   
+}
+    .alone .dollar{
+        padding: 6px;
+    }
+    .alone span {
+        font-size: 11px;
+        padding: 10px 5px;
+    }
+
+form {
+    max-width: 340px!important;
+}
+
+.form-group{
+    position: relative;
+}
+
+.required::before {
+    position: absolute;
+    top: -3px;
+    left: -10px;
+    content: "*";
+    color: red;
+}
+
+.m-b-0{
+    margin-bottom: 0px;
+}

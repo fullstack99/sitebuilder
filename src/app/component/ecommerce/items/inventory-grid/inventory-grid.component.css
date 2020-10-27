@@ -1,0 +1,17 @@
+:host {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.amount {
+	max-width: 80px;
+	text-align: right;
+}
+
+.sold-out-options {
+	position: absolute;
+	width: 150px;
+	padding-top: 10px;
+}

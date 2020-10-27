@@ -1,0 +1,174 @@
+:host {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    margin-top: 8px;
+}
+
+#__editor_container {
+    display: block;
+    position: relative;
+    flex-grow: 1;
+}
+
+#avpw_save_button {
+    display: none;
+}
+
+.hidden{
+    display: none;
+}
+
+.button.back{
+    position: absolute;
+    height: 70px;
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.button.back img{
+    height: 100%;
+}
+
+:host >>> .avpw_footer_text.avpw_powered_text {
+    height: 100%;
+    margin-top: 0;
+}
+    :host >>> .avpw_footer_text.avpw_powered_text > a {
+        display: inline-flex;
+        height: 100%;
+        align-items: center;
+        margin-top: 0;
+    }
+
+:host >>> #avpw_tool_content_header {
+    padding-top: 0;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+:host >>> #avpw_tool_main_container {
+    background: white;
+}
+
+:host >>> #avpw_control_main_scrolling_region {
+    background: white;
+}
+
+:host >>> #avpw_control_main_scroll_panel,
+:host >>> #avpw_rghtArrow {
+    border: none;
+}
+
+:host >>> .avpw_mode_action.avpw_mode_action_right::before {
+    background: white;
+}
+
+:host >>> #avpw_control_main_scroll_panel {
+    /*width: 480px;*/
+}
+
+:host >>> .avpw_canvas_background {
+    background: white;
+}
+
+:host >>> #avpw_controls {
+    border: none;
+    background: white;
+}
+
+:host >>> #avpw_tool_content_header {
+    display: none;
+}
+
+:host >>> #avpw_canvas_embed {
+    /* top: 85px; */
+    border: 1px solid #ddd;
+}
+
+:host >>> #avpw_footer {
+    border-style: solid;
+    border-color: #ddd;
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 10px 10px;
+}
+
+:host >>> #avpw_save_button {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;   
+    width: 40px;
+    height: 65px;
+    margin: 0px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    padding-top: 5px;    
+    background-color: cornflowerblue;
+    /* background-color: #ffa500; */
+    /* background-image: url(/assets/images/canvas/save.png); */   
+    /* background-repeat: no-repeat!important;
+    background-size: 100%;
+    background-position: 50% 10%; */
+    border: none;
+    border-radius: 5px;
+}
+:host >>> #avpw_save_button:hover {
+    opacity: 1;
+}
+
+:host >>> .avpw_mode_action.avpw_mode_action_right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:host >>> .avpw_tool_icon {
+    height: 60px;
+    width: 60px;    
+}
+
+:host >>> .avpw_tool_icon_image {
+    height:35px;
+    width:35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+:host >>> #avpw_tool_container,
+:host >>> #avpw_tool_content_wrapper, 
+:host >>> #avpw_tool_main_container, 
+:host >>> #avpw_tool_options_container, 
+:host >>> .avpw_bookend, 
+:host >>> .avpw_mode_action,
+:host >>> .avpw_scroll_strip,
+:host >>> .avpw_clip {
+    /* height: 80px!important; */
+}
+
+:host >>> .avpw_scroll_page_complete {
+    width: 670px;
+}
+
+:host >>> #avpw_tool_main_container, #avpw_tool_options_container {
+    width:93%;
+    margin-left: 70px;
+}
+
+:host >>> #avpw_save_button{
+    background-color: orange;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}

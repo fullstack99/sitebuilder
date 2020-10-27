@@ -1,0 +1,7 @@
+<item *ngFor="let item of items"
+    [class.selected] = "selected"
+    [item]="item"
+    [editable]="editable"
+    (outLink)="onOutLink($event)"   
+    >
+</item>

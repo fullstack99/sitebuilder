@@ -1,0 +1,25 @@
+<div class="single-text-container"
+	[class.animation]="animation">
+	<div
+		#endTitle
+		class="end-title">
+		End of Survey
+	</div>	
+	<div *ngIf="editable"
+		#singleTextLabel
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="single-text-label content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+		(contenteditableModelChange) = "setItemResize()"
+		>
+	</div>
+	<div *ngIf="!editable"
+		#singleTextLabel
+		spellcheck="true"
+		contenteditableModel
+		class="single-text-label content-editable label-border wrap"		
+		[contenteditableModel] = "info.label">
+	</div>	
+</div>

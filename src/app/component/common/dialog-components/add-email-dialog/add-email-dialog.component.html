@@ -1,0 +1,53 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <div class="dialog-title"><h3>Add Email</h3></div>
+    </div>
+</div>
+
+<div class="row dialog-body">
+    <div *ngIf="emails && emails.length" class="form-group col-xs-12" style="padding-bottom: 30px">
+		<div>
+			<label>Your Emails</label>
+		</div>
+		<div>
+			<drop-down
+				[selected]="selectedEmail"
+				[elements]="emails"
+				[defaultData]="'Choose Email'"
+				[showValueFunc]="showEmailValue"
+				(changeSelected)="onSelectEmail($event)">
+			</drop-down>
+		</div>
+    </div>
+    <form [formGroup]="form">
+		<div class="content col-xs-12">
+			<div style="max-width: 300px;">
+				<div class="form-group">
+					<label>New Email</label>
+					<input class="form-control"
+						name="email"
+						type="text"
+						placeholder="Email"
+						formControlName="email"
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<input
+					type="button"
+					value="Verify Email"
+					class="btn btn-block btn-main"
+					style="max-width: 200px;"
+					[class.active]="form.valid"
+					[disabled]="form.invalid || (authUpdatePending$ | async)"
+					(click)="onSubmit($event)"
+					/>
+			</div>
+		</div>
+    </form>
+</div>

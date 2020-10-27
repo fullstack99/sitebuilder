@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",    
+    "types": [
+      "jquery",
+      "kendo-ui",
+      "webfontloader",
+      "gapi",
+      "gapi.youtube",
+      "gapi.auth2",      
+      "youtube",
+      "jasmine",
+      "node"
+    ]
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

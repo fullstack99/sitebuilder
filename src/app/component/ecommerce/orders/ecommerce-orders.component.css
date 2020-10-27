@@ -1,0 +1,18 @@
+:host {
+	display: block;
+	box-sizing: border-box;
+	height: 100%;    
+	background: transparent;
+	color: #6e6e6e;
+}
+	:host * {
+		user-select: none;
+	}
+
+	a {
+		color: #6e6e6e;
+		text-decoration: none;
+	}
+	a:hover{
+		color: orange;
+	}

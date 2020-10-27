@@ -1,0 +1,42 @@
+:host {
+	box-sizing: border-box;    
+	height: 100%;    
+	background: transparent;
+}
+
+:host *{
+	user-select: none;
+}
+
+.dialog-content{
+	position: relative;
+	margin-top: 30px;
+}	
+	.sort-by{
+		margin: 0px 0px 0px 10px;
+	}
+
+	.clear-sort{
+		margin-left: 160px;		
+	}
+
+	.dialog-content > div:nth-of-type(2) {
+		margin-top: 10px;
+	}
+	.dialog-content > div:nth-of-type(3) {
+		margin-top: 50px;
+		cursor: pointer;
+	}
+
+	.options{
+		width: 100px;
+		margin: 0px 5px;
+	}
+
+	a{
+		text-decoration: none;		
+	}
+
+	.x-label{
+		color: red;
+	}

@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    position: relative;
+    height: 100%;
+    background: transparent;
+}
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.dialog-title{
+    text-align: center;
+    font-size: 24px;
+}
+
+.dialog-body{
+    position: relative;
+	padding: 0 5px 5px 5px;
+	font-size: 16px;
+    height: calc(100% - 85px);
+}
+	p {
+		margin: 0 0 10px 0;
+	}
+	textarea {
+		min-height: 120px;
+	}
+
+	checkbox {
+		font-size: 14px;
+	}

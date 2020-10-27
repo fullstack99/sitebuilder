@@ -1,0 +1,38 @@
+<loading *ngIf="_loading" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class="feedback-container" [class.disable]="_loading" (mousedown)="onMouseDownDialog($event)">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="onClose($event)" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns">
+            <span class="dialog-title"><h4>FEEDBACK</h4></span>
+        </div>
+    </div>
+    <div class="message">
+        <textarea
+            [formControl]="_comment"
+            class="form-control" placeholder="Your Comments" maxlength="200"
+            (blur)="_blur.next()"></textarea>
+        <div class="chars-left">
+            {{200 - _comment?.value?.length}} characters
+        </div>
+    </div>
+    <label>
+        Want a personal response?
+        <checkbox [formControl]="_response"></checkbox>
+        Yes
+    </label>
+    <input *ngIf="_response.value" [formControl]="_email"
+        type="text" class="form-control" placeholder="Email"
+        (blur)="_blur.next()"/>
+    <div class="bottom">
+        <button
+            class="submit"
+            [disabled]="isSubmit() || _loading"
+            (click)=onSubmit($event)>
+            SUBMIT
+        </button>
+    </div>
+    <div class="dialog-id">{{dialogId}}</div>
+</div>

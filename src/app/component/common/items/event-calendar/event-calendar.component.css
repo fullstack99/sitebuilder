@@ -1,0 +1,161 @@
+:host{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.event-calendar-container {
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(100px);
+}
+
+.review-container {
+    padding: 5px 5px;
+}
+
+.event-name{
+    font-size: 24px;
+    color:#8c8c8c;
+}
+
+.event-image {
+	height: 170px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-color: white;
+}
+
+.date-container{
+    font-size: 12px;
+    color: #8c8c8c;
+}
+
+.review-section-title {
+    font-size: 18px;
+    color: #3295e3;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+.review-section-description{
+    word-wrap: break-word;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+}
+.review-section-content {
+    color:#8c8c8c;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.review-contact-control {
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+.review-body{
+    font-family: Lato;
+    text-align: left;
+}
+
+
+.review-body-2{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    min-width: 200px;
+    max-width: 225px;
+}
+    .review-body-2>div{
+        border: 1px solid #8c8c8c;
+        border-radius: 0.375rem;
+        height: 300px;
+    }
+
+    .review-body-2 ul{
+        text-align: left;
+        margin-left: 20px;
+    }
+        .review-body-2 ul li{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 5px;
+            font-size: 18px;
+            word-wrap: break-word;
+            color: #8c8c8c;
+        }
+.under-line{
+    border-bottom: 1px solid #8c8c8c;
+    margin-bottom: 10px;
+}
+.free{
+    margin-bottom: 10px;
+    margin-top: auto;
+    text-align: right;
+}
+.required:before {
+    content: '*';
+    color: red;
+    position: absolute;
+    top: 8px;
+    left: -80px;
+    z-index: 1;
+}
+.activity-name{
+    word-wrap: break-word;
+}
+
+.message{
+    font-size: 12px;
+}
+.add-contact-info{
+    font-size: 14px;
+    padding-left: 5px;
+}
+input:read-only {
+    background-color: white;
+}
+drop-down {
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    width: 80px;
+    height: 35px;
+}
+
+split-text-box {
+  vertical-align: middle;
+  text-align: left;
+}
+
+input[type="submit"]{
+    width: 200px;
+}
+.p-right-0{
+    padding-right: 0px;
+}
+.text-right{
+    text-align: right;
+}
+.space-50{
+    margin-left: 50px;
+}
+.height-60{
+    height: 60px;
+}
+.m-l-40{
+    margin-left: 40px;
+}
+.m-l-20{
+    margin-left: 20px;
+}

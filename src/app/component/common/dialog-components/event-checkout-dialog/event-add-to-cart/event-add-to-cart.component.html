@@ -1,0 +1,204 @@
+<div class="event-add-to-cart"
+	(mousedown)="$event.stopPropagation()">
+	<div class="event-add-to-cart-content">
+		<div>
+			<h3>{{eventSetupInfo.title}}</h3>
+			<div class="from-to-date">
+				<div>
+					<div class="date-label">From</div>
+					<div class="date-value">{{showDate(eventSetupInfo.startDate)}}</div>
+				</div>
+				<div>
+					<div class="date-label">To</div>
+					<div class="date-value">{{showDate(eventSetupInfo.endDate)}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div style="padding: 15px 0;">
+				<ng-container *ngIf="eventSetupInfo.eventActivitiesInfo">
+					<!-- SimpleEvent ||  -->
+					<div *ngIf="eventSetupInfo.eventActivitiesInfo.eventType=='SimpleEvent' || eventSetupInfo.eventActivitiesInfo.eventType=='EventWithActivitiesSingleFee'"
+						class="columns form-group">
+						<div class="content-title-2">
+							<div>
+								Admission
+							</div>
+							<div class="columns">
+								<div>
+									&nbsp;&nbsp;&nbsp;
+									<ng-container
+										*ngIf="eventSetupInfo.eventActivitiesInfo.admission.fee.eventFeeType=='RegularEventFee'">
+										<ng-container
+											*ngIf="eventSetupInfo.eventActivitiesInfo.admission.fee.price">
+												Free ~ ${{eventSetupInfo.eventActivitiesInfo.admission.fee.price}}
+										</ng-container>
+
+										<ng-container *ngIf="signedUp">
+											<ng-container class="free"
+												*ngIf="!eventSetupInfo.eventActivitiesInfo.admission.fee.price">
+													Free
+											</ng-container>
+											<ng-container
+												*ngIf="eventSetupInfo.eventActivitiesInfo.admission.fee.price">
+													${{eventSetupInfo.eventActivitiesInfo.admission.fee.price}}
+											</ng-container>
+										</ng-container>
+									</ng-container>
+
+									<ng-container *ngIf="eventSetupInfo.eventActivitiesInfo.admission.fee.eventFeeType=='EarlyBirdEventFee'">
+										<div>
+											Early Bird Price
+											<ng-template
+												[ngIf]="eventSetupInfo.eventActivitiesInfo.admission.fee.earlyPrice">
+													${{eventSetupInfo.eventActivitiesInfo.admission.fee.earlyPrice}}
+											</ng-template>
+										</div>
+										<div>
+											Until Date &nbsp;{{showDate(eventSetupInfo.eventActivitiesInfo.admission.fee.earlyPriceEndDate)}}
+										</div>
+										<div>
+											Regular Price &nbsp; ${{eventSetupInfo.eventActivitiesInfo.admission.fee.price}}
+										</div>
+									</ng-container>
+								</div>
+								<div>
+									<drop-down
+										[elements]="tickets"
+										[selected]="admissionTicket"
+										(changeSelected)="onChangeTicket($event, 0)"
+										>
+									</drop-down>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- EventWithActivitiesSingleFee -->
+					<div *ngIf="eventSetupInfo.eventActivitiesInfo.eventType=='EventWithActivitiesSingleFee'">
+						<h4>Choose Activity</h4>
+
+						<ng-container *ngFor="let activity of eventSetupInfo.eventActivitiesInfo.activities; let i = index;">
+							<div>
+								<checkbox (change)="onSelectActivity($event, i)">{{activity.name}}</checkbox>
+								<div class="from-to-date" style="border-bottom: 1px solid;">
+									<div>
+										<span class="label-from">From</span>
+										<span>{{showDate(activity.startDate)}}</span>
+									</div>
+									<div class="form-group">
+										<span class="label-to">To</span>
+										<span>{{showDate(activity.endDate)}}</span>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+
+					<!-- EventWithActivitiesMultiFee -->
+					<div *ngIf="eventSetupInfo.eventActivitiesInfo.eventType=='EventWithActivitiesMultiFee'">
+						<!-- <checkbox [formControl]="_response"></checkbox> -->
+						<h4>Choose Activity</h4>
+
+						<ng-container *ngFor="let activity of eventSetupInfo.eventActivitiesInfo.activities; let i = index">
+							<div>
+								<checkbox>{{activity.name}}</checkbox>
+								<div class="from-to-date" style="border-bottom: 1px solid;">
+									<div>
+										<span class="label-from">From</span>
+										<span>{{showDate(activity.startDate)}}</span>
+									</div>
+									<div class="form-group">
+										<span class="label-to">To</span>
+										<span>{{showDate(activity.endDate)}}</span>
+									</div>
+									<div class="columns">
+										<div *ngIf="!activity.fee.price" style="padding: 12px 0 0 0;"> FREE </div>
+										<div *ngIf="activity.fee.price" style="padding: 12px 0 0 0;"> ${{activity.fee.price}} </div>
+										<div>
+											<drop-down
+												[elements]="activityTickets"
+												[selected]="ticketOrders[i].ticket"
+												(changeSelected)="onChangeTicket($event, i)"
+												>
+											</drop-down>
+										</div>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+
+					<!-- EventWithParticipantTypes -->
+					<div *ngIf="eventSetupInfo.eventActivitiesInfo.eventType=='EventWithParticipantTypes'">
+						<ng-container *ngFor="let activity of eventSetupInfo.eventActivitiesInfo.participantTypes; let i = index">
+							<h4>
+								{{activity.name}}
+							</h4>
+
+							<div class="participant-type">
+								<div class="participant-price">
+									<span *ngIf="!activity.admission.fee.price" style="padding: 12px 0 0 0;"> FREE </span>
+									<span *ngIf="activity.admission.fee.price" style="padding: 12px 0 0 0;"> ${{activity.admission.fee.price}} </span>
+								</div>
+								<div>
+									<drop-down
+										[elements]="activityTickets[i]"
+										[selected]="ticketOrders[i].ticket"
+										(changeSelected)="onChangeTicket($event, i)"
+										>
+									</drop-down>
+								</div>
+								<ng-container *ngIf="activity.admission.guests">
+									<div class="participant-guest">
+										<div>
+											<a>Guest</a>
+											<drop-down
+												[elements]="guestNum[i]"
+												[selected]="guestOrders[i].num"
+												(changeSelected)="onChangeGuestOrders($event, i)"
+												>
+											</drop-down>
+										</div>
+										<div *ngIf="guestOrders[i].names">
+											<input *ngFor="let name of guestOrders[i].names; let j = index"
+												type="text" class="form-control" placeholder="Guest Name" [(ngModel)]="guestOrders[i].names[j]"/>
+										</div>
+									</div>
+									<div class="participant-verify">
+										<a (click)="openQualifyParticipantDiag()">Verify</a>
+									</div>
+									<!-- <div [class.participant-verified]="">
+
+									</div> -->
+								</ng-container>
+							</div>
+						</ng-container>
+					</div>
+				</ng-container>
+			</div>
+
+			<div class="text-center">
+				<div class="form-group content-title-1">
+					Order Summary
+				</div>
+				<div class="form-group summary-content">
+					 <div *ngFor="let ticketOrder of dispTicketOrders; let i = index"
+					 	class="columns"
+					 	style="max-width: 250px; margin: auto;">
+						<div class="summary-content-ticket-amount">{{ticketOrder.ticket}}</div>
+						<div class="summary-content-ticket-name">X&nbsp;&nbsp;&nbsp;&nbsp;{{ticketOrder.name}}</div>
+						<div class="summary-content-ticket-price">{{ticketOrder.price ? '$' + ticketOrder.price : 'Free'}}</div>
+					</div>
+				</div>
+				<div class="form-group content-title-2">
+					Total &nbsp;&nbsp;&nbsp; {{totalPrice ? '$' + totalPrice : ''}}
+				</div>
+				<div class="add-cart-button" (click)="onAddCart($event)">
+					<span class="btb bt-shopping-cart bt-2x cart-icon"></span>
+					<span class="cart-text">Add to Cart</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

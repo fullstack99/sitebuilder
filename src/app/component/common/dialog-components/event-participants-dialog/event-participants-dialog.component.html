@@ -1,0 +1,19 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span class="dialog-title">Who Is Coming?</span>
+    </div>
+</div>
+
+<div class="dialog-body">
+    <loading *ngIf="loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <div>
+		<div>
+			
+		</div>
+	</div>
+</div>

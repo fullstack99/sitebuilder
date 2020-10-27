@@ -1,0 +1,333 @@
+{
+ "kind": "youtube#searchListResponse",
+ "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/eiDsJDBPos8xri2kAVHXg6O19qs\"",
+ "nextPageToken": "CAUQAA",
+ "regionCode": "US",
+ "pageInfo": {
+  "totalResults": 1000000,
+  "resultsPerPage": 5
+ },
+ "items": [
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/Eu4tRGlRM5DUHPqC6LT8ijvOsb8\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "rmg2N0JZYfg"
+   },
+   "snippet": {
+    "publishedAt": "2017-01-25T01:00:02.000Z",
+    "channelId": "UC1oPBUWifc0QOOY8DEKhLuQ",
+    "title": "AAA / 「MAGIC」Music Video",
+    "description": "2017.2.8発売 11月12日、13日に京セラドーム大阪で、11月15日、16日に東京ドームで初の単独ドーム公演（計4日間・18万人動員）「AAA Special Live 2016...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/rmg2N0JZYfg/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/rmg2N0JZYfg/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/rmg2N0JZYfg/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "avex",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/CUqI0-_W4QUowt_o9juDvq-gf2Y\"",
+   "id": {
+    "kind": "youtube#channel",
+    "channelId": "UCMA4MOXJ3L5K9jKEDyFX6LQ"
+   },
+   "snippet": {
+    "publishedAt": "2009-02-12T21:53:55.000Z",
+    "channelId": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+    "title": "Lucha Libre AAA",
+    "description": "El canal oficial de la mejor lucha libre del mundo: Lucha Libre AAA Worldwide Todos los derechos de autor, marcas y personajes se encuentran registrados ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://yt3.ggpht.com/-eXzeppuDviA/AAAAAAAAAAI/AAAAAAAAAAA/h_EXvDO8OKc/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+     },
+     "medium": {
+      "url": "https://yt3.ggpht.com/-eXzeppuDviA/AAAAAAAAAAI/AAAAAAAAAAA/h_EXvDO8OKc/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+     },
+     "high": {
+      "url": "https://yt3.ggpht.com/-eXzeppuDviA/AAAAAAAAAAI/AAAAAAAAAAA/h_EXvDO8OKc/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+     }
+    },
+    "channelTitle": "Lucha Libre AAA",
+    "liveBroadcastContent": "upcoming"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/HqpWb3D1cNFv25xVQYsJLp65jlM\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "A_1t2Dkd2Io"
+   },
+   "snippet": {
+    "publishedAt": "2013-08-07T02:47:07.000Z",
+    "channelId": "UC1oPBUWifc0QOOY8DEKhLuQ",
+    "title": "AAA / 「恋音と雨空」Music Video",
+    "description": "http://bit.ly/aaa-official 「好きだよ」と伝えればいいのに 願う先、怖くていえず\" 揺れる恋心を初秋の雨空に託した、せつなすぎるラブソング...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/A_1t2Dkd2Io/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/A_1t2Dkd2Io/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/A_1t2Dkd2Io/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "avex",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/375C9TOA9ZRsvp93RNTGDZPzbRM\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "0ls3T69eV2o"
+   },
+   "snippet": {
+    "publishedAt": "2016-09-14T09:00:01.000Z",
+    "channelId": "UC1oPBUWifc0QOOY8DEKhLuQ",
+    "title": "AAA / 「涙のない世界」Music Video",
+    "description": "初の単独ドーム公演目前！ニューシングル⭐   2016.10.5発売「涙のない世界」 日本テレビ系「スッキリ！！」10月テーマソング その愛に二度とめ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/0ls3T69eV2o/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/0ls3T69eV2o/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/0ls3T69eV2o/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "avex",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"m2yskBQFythfE4irbTIeOgYYfBU/N1BToKV4ozpTZvRQI3uKobp5n5o\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "oGjCbtlLu04"
+   },
+   "snippet": {
+    "publishedAt": "2015-08-17T02:00:01.000Z",
+    "channelId": "UC1oPBUWifc0QOOY8DEKhLuQ",
+    "title": "AAA / 「愛してるのに、愛せない」Music Video",
+    "description": "歌詞テロップあり【日本語・英語・繁体字・簡体字 対応】 (画面右下「設定⇒字幕」より選択) ※英語 Subtitles available in English, Japanese and Chinese....",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/oGjCbtlLu04/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/oGjCbtlLu04/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/oGjCbtlLu04/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "avex",
+    "liveBroadcastContent": "none"
+   }
+  }
+ ]
+}
+
+
+
+Content-Type: application/json
+Host: api.vimeo.com
+
+{
+    "access_token": "5f6e18e5343c94526cf580d393e8fa28",
+    "token_type": "bearer",
+    "scope": "public public purchased purchase create edit delete interact upload promo_codes video_files",
+    "app": {
+        "name": "API Playground",
+        "uri": "/apps/2221"
+    },
+    "user": {
+        "uri": "/users/65351593",
+        "name": "John",
+        "link": "https://vimeo.com/user65351593",
+        "location": null,
+        "bio": null,
+        "created_time": "2017-04-12T15:50:20+00:00",
+        "account": "basic",
+        "pictures": null,
+        "websites": [],
+        "metadata": {
+            "connections": {
+                "activities": {
+                    "uri": "/users/65351593/activities",
+                    "options": [
+                        "GET"
+                    ]
+                },
+                "albums": {
+                    "uri": "/users/65351593/albums",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "appearances": {
+                    "uri": "/users/65351593/appearances",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "categories": {
+                    "uri": "/users/65351593/categories",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "channels": {
+                    "uri": "/users/65351593/channels",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "feed": {
+                    "uri": "/users/65351593/feed",
+                    "options": [
+                        "GET"
+                    ]
+                },
+                "followers": {
+                    "uri": "/users/65351593/followers",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "following": {
+                    "uri": "/users/65351593/following",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "groups": {
+                    "uri": "/users/65351593/groups",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "likes": {
+                    "uri": "/users/65351593/likes",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "moderated_channels": {
+                    "uri": "/users/65351593/channels?filter=moderated",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "portfolios": {
+                    "uri": "/users/65351593/portfolios",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "videos": {
+                    "uri": "/users/65351593/videos",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "watchlater": {
+                    "uri": "/users/65351593/watchlater",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "shared": {
+                    "uri": "/users/65351593/shared/videos",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                },
+                "pictures": {
+                    "uri": "/users/65351593/pictures",
+                    "options": [
+                        "GET",
+                        "POST"
+                    ],
+                    "total": 0
+                },
+                "watched_videos": {
+                    "uri": "/me/watched/videos",
+                    "options": [
+                        "GET"
+                    ],
+                    "total": 0
+                }
+            }
+        },
+        "preferences": {
+            "videos": {
+                "privacy": "anybody"
+            }
+        },
+        "content_filter": [
+            "language",
+            "drugs",
+            "violence",
+            "nudity",
+            "safe",
+            "unrated"
+        ],
+        "resource_key": "e66d4af1cb949bc70a99c9926f192464841e0287"
+    }
+}

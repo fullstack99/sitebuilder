@@ -1,0 +1,86 @@
+<!-- <div class="single-text-container columns"
+  [class.required]="info.required">
+    <div
+      #singleTextLabel
+      class="single-text-label">
+        <div
+			class="text-editor"
+			#textEditorElem
+			text-editor-tinymce
+			[text-editor-enabled]="editing"
+			[text-editor-toolbar-width]="250"
+			[text-editor-hide-links]="false"
+			[text-editor-host]="singleTextLabel.nativeElement"
+			[text-editor-toolbar-type]="2"
+			[text-editor-fontsize-type] = "1"
+			(text-editor-input)="onEditorInput($event)"
+			(text-editor-input-text)="onEditorInput($event)"
+			(text-editor-destroyed)="onEditorDestroyed($event)"
+			></div>
+				<div *ngIf="!editing && isEmpty()"
+					class="placeholder">
+					Click to add Text
+          		</div>
+    </div>
+    <div
+        #resizableContainer
+        class="resizable-container"
+        [class.editing]="editing"
+        resizable
+        [resizable-enabled]="true"
+        [resizable-showResizeBox]="editing"
+        [resizable-keepInParent]="true"
+        [resizable-minWidth] ="30"
+        [resizable-minHeight]="20"
+        [resizable-snapEnabled]="true"
+        [disp-measure]="false"
+        [top]="false"
+        [left]="false"
+        [bottom]="false"
+        [top-left]="false"
+        [bottom-left]="false"
+        (resizable-resize)="onItemResize($event)"
+        (resizable-resizeEnd)="onItemResizeEnd($event)"
+      >
+    </div>
+</div> -->
+
+<div class="single-text-container"
+	[class.columns] = "info.type != 3"
+	[class.rows] = "info.type == 3"
+	[class.editable]="editable"
+	[class.single-text-type-1] = "info.type == 1"
+	[class.single-text-type-3] = "info.type == 3"
+  	[class.required]="info.required">
+	<div *ngIf="info.type != 1"
+		#singleTextLabel
+		class="single-text-label"
+		(mousedown)="onClickLabel($event)">
+        <div
+          class="text-editor"
+          #textEditorElem
+          text-editor-tinymce
+          [text-editor-enabled]="labelEditable"
+          [text-editor-toolbar-width]="250"
+          [text-editor-hide-links]="false"
+          [text-editor-host]="singleTextLabel.nativeElement"
+          [text-editor-toolbar-type]="2"
+          [text-editor-fontsize-type] = "1"
+          (text-editor-input)="onEditorInput($event)"
+          (text-editor-input-text)="onEditorInput($event)"
+          ></div>
+        <div *ngIf="!selected && isEmpty()"
+          class="placeholder">
+          Click to add Text
+        </div>
+    </div>
+	<div #singleTextContainer
+		*ngIf = "info.type != 3"
+        class="text-container">
+		<input *ngIf="editable" name="{{'form-control' + uid}}" type="text" class="form-control" [disabled]="readOnly" [(ngModel)]="info.placeHolder"/>
+		<input *ngIf="!editable" name="{{'form-control' + uid}}" type="text" class="form-control" [placeholder]="info.placeHolder" [disabled]="readOnly" [required]="info.required" (click)="onClick($event)"/>
+	</div>
+
+	<textarea *ngIf="editable && info.type == 3" class="result-text" [disabled]="readOnly" [(ngModel)]="info.placeHolder"></textarea>
+	<textarea *ngIf="!editable && info.type == 3" name="{{'form-control' + uid}}" class="result-text" [placeholder]="info.placeHolder" [disabled]="readOnly" [required]="info.required" (click)="onClick($event)"></textarea>
+</div>

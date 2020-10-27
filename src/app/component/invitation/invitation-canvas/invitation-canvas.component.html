@@ -1,0 +1,148 @@
+<canvas-tools
+    [isSaving] = "isSaving"
+    [serviceTool] = "'EventSetupItem'"
+    [serviceToolStr] = "['Setup', 'Invitation']"
+    [serviceToolActiveStr] = "['Edit', 'Invitation']"
+    [serviceToolActive] = "info.eventName != ''"
+    [serviceToolLarge] = "true"
+    [pageCanvas]="pageCanvas"
+    (command)="clickTool($event)"
+>
+</canvas-tools>
+
+<div
+    class="invitation-canvas"
+    [class.mobile]="pageLayout==2"
+    (click)="onCanvasClick($event,0)"
+    >
+    <div class="body-top columns"
+        draggableListInline
+        (draggableList-newIndexes)="drag($event)">
+        <div #canvasContainer
+            class="canvas-container"
+            draggableListItemInline
+            [class.selected]="_currentCanvas==1">
+            <page-canvas
+                [page]="page"
+                [pageLayout]="pageLayout"
+                [maxWidth]="700"
+                [minHeaderHeight]="0"
+                [minBodyHeight]="240"
+                [minFooterHeight]="0"
+                [placeholder]="[['#1 Choose Setup','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invitation'],['#2 Choose a tool above','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for more content']]"
+                (hasFocus)="onCanvasClick(null, 1)"
+                (canvasDbClickEmitter)="clickTool('EventSetupItem')"
+                >
+            </page-canvas>
+            <div
+                class="grip"
+                draggableListItemGripInline
+                (mousedown)="$event.stopPropagation()"
+            ></div>
+        </div>
+        <div class="setup-event"
+            draggableListItemInline
+            [class.selected]="_currentCanvas==2"
+            (click)="onCanvasClick($event,2)">
+            <div *ngIf="info.eventName == ''" class="setup-event-body">
+                <div class="event-name">
+                    <span>&lt;Event Name&gt;</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">Host</span>
+                    <span>&lt;Host Name&gt;</span>
+                    <span>&lt;Host Phone Number&gt;</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">When</span>
+                    <span>&lt;Event Date&gt;</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">Where</span>
+                    <span>&lt;Event Location&gt;</span>
+                </div>
+            </div>
+
+            <div *ngIf="info.eventName != ''" class="setup-event-body">
+                <div class="event-name">
+                    <span [style.color]="info.textColor">{{info.eventName}}</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">Host</span>
+                    <span [style.color]="info.textColor">{{info.host}}</span>
+                    <span [style.color]="info.textColor">{{info.phone}}</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">When</span>
+                    <span [style.color]="info.textColor">{{info.startDate |  date: "EEEE, MM/dd/yyyy"}}</span>
+                    <span [style.color]="info.textColor">{{info.endDate | date: 'shortTime'}} - {{info.endDate | date: 'shortTime'}}</span>
+                </div>
+                <div class="event-content" *ngIf="info.rsvpByDate">
+                    <span class="event-title">RSVP by</span>
+                    <span [style.color]="info.textColor">{{info.rsvpByDate |  date: "EEEE, MM/dd/yyyy"}}</span>
+                    <span [style.color]="info.textColor">{{info.rsvpByDate | date: 'shortTime'}}</span>
+                </div>
+                <div class="event-content">
+                    <span class="event-title">Where</span>
+                    <span [style.color]="info.textColor">
+                        {{info.location}}
+                    </span>
+                    <span [style.color]="info.textColor">
+                        {{info.address1}},&nbsp;
+                        {{info.city}},&nbsp;
+                        {{info.state}}&nbsp;
+                        {{info.postalCode}}
+                    </span>
+                    <span><a (click)="openGoogleMapsDialog()">MAP</a></span>
+                </div>
+            </div>
+            <div class="grip"
+                draggableListItemGripInline
+                (mousedown)="$event.stopPropagation()"
+                ></div>
+        </div>
+    </div>
+
+    <div class="body-bottom columns">
+        <div #eventOption
+            class="event-option">
+            <div class="reply columns">
+                <span class="reply-title">Will you attend?</span>
+                <radio-group #radioGroupEle [displayInline]="true" [ngModel]="attendOption">
+                    <ng-template radioGroupOption="1">Yes</ng-template>
+                    <ng-template radioGroupOption="0">No</ng-template>
+                    <ng-template radioGroupOption="2">Maybe</ng-template>
+                </radio-group>
+            </div>
+            <div #hostMessage [hidden]="!info.showMessage" class="host-message">
+                <div class="message-title">
+                    <span>Host's Message</span>
+                    <a class="show-hide" (click)="onShowClick(1, false)">HIDE</a>
+                </div>
+                <textarea #textArea class="message" [(ngModel)]="info.message" (ngModelChange) = "updatePage()" maxlength="500">
+                </textarea>
+                <div class="text-right">{{500 - info.message.length}} characters available</div>
+            </div>
+            <div *ngIf="!info.showMessage" class="host-message">
+                <a class="show-hide" (click)="onShowClick(1, true)">SHOW Host's Message</a>
+            </div>
+        </div>
+        <div #coming [hidden]="!info.showComing" class="coming">
+            <div class="message-title">
+                <span>Who's Coming?</span>
+                <a class="show-hide" (click)="onShowClick(2, false)">HIDE</a>
+            </div>
+            <div class="coming-as">
+                <span>As of &nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <div class="coming-body">
+                <div *ngFor="let item of comings; let i=index" class="coming-line">
+                    <div class="coming-title">{{item.reply}}</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!info.showComing" class="coming">
+            <a class="show-hide" (click)="onShowClick(2, true)">SHOW WHO'S COMING</a>
+        </div>
+    </div>
+</div>

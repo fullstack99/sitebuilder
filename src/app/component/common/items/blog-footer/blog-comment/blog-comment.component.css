@@ -1,0 +1,33 @@
+.comment-container{
+
+}
+.comment-header{
+    margin-top: 5px;
+}
+    .comment-header span{
+        padding: 5px;
+    }
+.comment-content{
+    padding: 5px;
+}
+.comment-footer{
+
+}
+.comment-reply{
+    margin-left: 10px;
+    margin-top: 5px;
+}
+    .comment-reply-name{
+        margin-left: 10px;
+    }
+    .comment-reply-content{
+        margin-left: 10px;
+    }
+
+.reply-arrow{
+    width: 120px;
+    cursor: pointer;
+}
+.reply{
+    text-align: right;
+}

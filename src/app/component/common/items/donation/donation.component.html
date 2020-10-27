@@ -1,0 +1,158 @@
+<div class="review-container" #reviewContainer>
+    <div class="review-body columns">
+        <div class="review-body-1">
+            <div class="form-group">
+                <label class="donation-campaign-name">
+                    {{ fundraisingInfo.name }}
+                </label>
+            </div>  
+            <div class="form-group"
+                *ngIf="fundraisingInfo.fundraisingFrequencyEnabled">
+                <div class="review-section-title"> Choose Donation Frequency </div>
+                <div class="review-section-content columns">
+                    <p *ngFor="let t of _frequencyTypes"  [class.active]="t==donationFrequency.value" (click)="onClickFrequency(t)">
+                        {{t}}
+                    </p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="fundraisingInfo.fundraisingLevelsEnabled">
+                <div class="review-section-title"> Choose Donation Level </div>
+                <div fxLayout="row" fxLayoutAlign="space-evenly center">                    
+                    <div class="review-donation-item-levels"
+                        *ngFor="let level of fundraisingLevels; let i = index; let last = last">
+                        <div *ngIf="!last && level.amount && level.isActive">
+                            <div>
+                                <input type="text"
+                                    class="form-control review-donationAmount"
+                                    value="${{level.amount}}"
+                                    readonly="readonly"
+                                    [class.active]="donationLevel.value==level.amount"
+                                    (click)="onClickDonationLevel(level.amount)"/>
+                            </div>
+                            <div>
+                                <input type="text" *ngIf="level.name"
+                                    class="review-donationName"
+                                    value="{{level.name}}"
+                                    readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="form-group"
+                *ngIf="fundraisingInfo.fundraisingLevelsEnabled && fundraisingInfo.optionalFundraisingAmountEnabled">
+                <div class="review-section-content">
+                    <div class="review-donation-item-levels">
+                        <div class="review-section-content form-inline">
+                            <input *ngIf="otherDonationLevel.value" currencyMask [options]="{ allowZero: false, precision: 0 }" [formControl]="otherDonationLevel" class="form-control review-donate" [class.active]="donationLevel.value==otherDonationLevel.value" (focus)="onFocusOtherDonationLevel()" placeholder="Enter Amount"/>
+                            <input *ngIf="!otherDonationLevel.value" [formControl]="otherDonationLevel" class="form-control review-donate" [class.active]="donationLevel.value==otherDonationLevel.value" (focus)="onFocusOtherDonationLevel()" placeholder="Enter Amount"/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group" *ngIf="!fundraisingInfo.fundraisingLevelsEnabled">
+                <div class="review-section-title"> I Want to Donate </div>
+                <div class="review-section-content form-inline">
+                    <input currencyMask [formControl]="otherDonationLevel" class="form-control review-donate" placeholder="$0"/>
+                </div>
+            </div> 
+            <div class="form-group"
+                *ngIf="fundraisingInfo.programDesignationsEnabled">
+                <div class="review-section-title"> Program Designation </div>
+                <div class="center-block">
+                    <drop-down
+                        [selected]="''"
+                        [elements]="fundraisingInfo.programDesignations"> 
+                    </drop-down>
+                </div>
+            </div> 
+            <div class="form-group" *ngIf="fundraisingInfo.dedicationEnabled">
+                <div class="review-dedication-title"> Dedication </div>
+                <div class="review-section-content review-dedication">
+                    <div class="review-dedication-radio-group">
+                        <div *ngFor="let t of _dedicationTypes" class="columns">
+                            <label class="c-input c-radio">
+                                <input 
+                                    type="radio"
+                                    value="{{t.type}}"
+                                    name="dedicationRadio"
+                                    [(ngModel)]="t.checked"
+                                    >
+                                <span class="c-indicator"></span>
+                            </label>
+                            <label class="review-dedication-label">
+                                {{t.disp}}
+                            </label>                      
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Enter Name Here">
+                    </div>
+                    <div *ngIf="fundraisingInfo.dedication.sendEmailAcknowledgment">
+                        <p class="text-xs-center">                    
+                            <label>Send Email Acknowledgment</label>
+                        </p>
+                    </div>
+                    <div *ngIf="fundraisingInfo.dedication.sendEmailAcknowledgment">
+                        <input type="text" class="form-control" placeholder="Enter Email">
+                    </div>        
+                </div>
+            </div> 
+            <div class="form-group" *ngIf="fundraisingInfo.contactInfoEnabled">
+                <div class="review-section-title"> Contact Information </div>
+                <div class="review-section-content">
+                    <div class="form-group review-contact-control" *ngFor="let field of fields">
+                        <split-text-box
+                            label="{{field.name}}"
+                            class="medium-control inline"></split-text-box>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input
+                    type="submit"                    
+                    value="Donate"
+                    class="btn btn-block btn-main center-block"
+                    (click)="onSubmit()"/>
+            </div>        
+        </div>
+        <div *ngIf="fundraisingInfo.thankYouBoxEnabled"
+            [formGroup]="commentForm"
+            class="review-body-2">
+            <div>
+                <div class="review-section-title"> Thank You For Donating</div>
+                <div class="review-comment-content">
+                    <ul class="list-unstyled">
+                        <li>
+                            {{commentForm.value.name}}
+                            <span *ngIf="commentForm.value.comment!='' && commentForm.value.name!=''">
+                                <img class="donor-comment-img"
+                                    src="/assets/images/BT-caption.png"
+                                    (click)="commentView()">
+                            </span>
+                            <p *ngIf="commentForm.value.disp && commentForm.value.comment!=''"
+                                class="commentView">
+                                {{commentForm.value.comment}}
+                            </p>                        
+                        </li>
+                    </ul>
+                    <div class="review-comment">
+                        <div class="form-group">
+                            <input 
+                                type="text"
+                                class="form-control review-comment-name"
+                                placeholder="Enter Display Name or Anonymous"
+                                formControlName="name"
+                                >                                                
+                        </div>
+                    </div>
+                    <div *ngIf="fundraisingInfo.thankYouBox.allowComment" class="review-comment-notice">
+                        <a (click)="showCommentWindow()"> COMMENT </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+    

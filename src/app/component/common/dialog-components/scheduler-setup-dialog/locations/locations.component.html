@@ -1,0 +1,84 @@
+<div class="location-container">
+    <div class="form-group company-name required">        
+        <split-text-box           
+            [formControl]="companyNameCtrl"            
+            label="Company Name"
+            [error]="companyNameCtrl.invalid && (companyNameCtrl.dirty || companyNameCtrl.touched || visited)"
+            ></split-text-box>
+    </div>
+    <div class="form-group location-type">
+        <radio-group [formControl] ="locationTypeCtrl">
+            <ng-template radioGroupOption="1">
+                We go to customer's location
+            </ng-template>
+            <ng-template radioGroupOption="0">
+                Customer comes to us
+            </ng-template>
+        </radio-group>
+    </div>
+    <div *ngIf="locationTypeCtrl.value == 0" class="form-group title"> Add Locations {{'#' + (activeIndex +1) }}</div>
+    <div *ngIf="locationTypeCtrl.value == 0" class="columns">
+        <div class="angle-button">
+            <span class="btr bt-angle-left bt-3x"
+                [class.active]="activeIndex > 0"
+                (click)="prev($event)"></span>
+        </div>
+        <div #formContainer 
+            class="form-container">
+            <div
+                [formGroup]="dispForms[activeIndex]"
+                class="center-block">
+                <a (click)="removeForm($event)" class="btn-close">×</a>
+                <div>
+                    <div class="form-group required">
+                        <split-text-box
+                            formControlName="address1"
+                            label="Where address 1"
+                            [error]="dispForms[activeIndex].controls.address1.invalid && (dispForms[activeIndex].controls.address1.dirty || dispForms[activeIndex].controls.address1.touched)"></split-text-box>
+                    </div>
+                    <div class="form-group">
+                        <split-text-box
+                            formControlName="address2"
+                            label="Where address 2"></split-text-box>
+                    </div>
+                    <div class="form-group required">
+                        <split-text-box
+                            formControlName="city"
+                            label="City"
+                            [error]="dispForms[activeIndex].controls.city.invalid && (dispForms[activeIndex].controls.city.dirty || dispForms[activeIndex].controls.city.touched)"></split-text-box>
+                    </div>
+                    <div class="form-group required">
+                        <split-text-box
+                            formControlName="province"
+                            label="State/Province"
+                            [error]="dispForms[activeIndex].controls.province.invalid && (dispForms[activeIndex].controls.province.dirty || dispForms[activeIndex].controls.province.touched)"></split-text-box>
+                    </div>
+                    <div class="form-group required">
+                        <split-text-box
+                            formControlName="postalCode"
+                            label="Postal Code"
+                            [error]="dispForms[activeIndex].controls.postalCode.invalid && (dispForms[activeIndex].controls.postalCode.dirty || dispForms[activeIndex].controls.postalCode.touched)"></split-text-box>
+                    </div>
+                    <div class="form-group required">
+                        <split-text-box
+                            formControlName="phone"
+                            label="Phone"
+                            [error]="dispForms[activeIndex].controls.phone.invalid && (dispForms[activeIndex].controls.phone.dirty || dispForms[activeIndex].controls.phone.touched)"></split-text-box>
+                    </div>
+                    <div class="form-group required">        
+                        <split-text-box
+                            formControlName="email"
+                            label="Email"
+                            [error]="dispForms[activeIndex].controls.email.invalid && (dispForms[activeIndex].controls.email.dirty || dispForms[activeIndex].controls.email.touched)"></split-text-box>
+                    </div>        
+                </div>        
+            </div>
+        </div>
+        <div class="angle-button">
+            <span class="more-button"> More </span>
+            <span class="btr bt-angle-right bt-3x"
+                [class.active]="activeIndex + 1 < dispForms.length"
+                (click) = "next($event)"></span>
+        </div>
+    </div>
+</div>   

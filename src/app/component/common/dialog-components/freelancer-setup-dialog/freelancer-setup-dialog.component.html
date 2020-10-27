@@ -1,0 +1,57 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <div class="columns">
+            <div class="btn-back" (click)="onClose($event)"></div>
+            <div class="place rows" [class.active]="isValid()" [class.disable]="!isValid()" (click)="onSubmit($event)">
+                <img src="/assets/images/canvas/save.png"/>
+                <div class="caption">Save</div>
+            </div>
+            <div class="dialog-title"><h3>Setup Freelancer</h3></div>
+        </div>
+        <div class="columns">
+            <div class="progress-container columns">
+                <div *ngFor="let step of steps; let i=index" class="progress-item">
+                    <span class="progress-item-name" [class.active]="step.valid" [class.visited]="step.visited" (click)="onStepChange(i)">
+                        <span>{{step.name}}</span>
+                        <hr [class.active]="i==activeStepIndex">
+                    </span>
+                    <span *ngIf="i<steps.length-1"
+                        class="btr bt-angle-right active"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row dialog-body">
+    <div class="content col-xs-12" [ngSwitch]="steps[activeStepIndex].name">
+        <ng-template [ngSwitchCase]="'Account'">
+            <freelancer-account
+                [info]="info"
+                [isNew]="isNew"
+                (goLogin)="goLogin($event)"
+                (validityChange)="onStepValidityChange($event,0)"
+            ></freelancer-account>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'About'">
+            <freelancer-about
+                [info]="info"
+                [isNew]="isNew"
+                [expertise]="expertise"
+                (validityChange)="onStepValidityChange($event,1)"></freelancer-about>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'Hire Me'">
+            <freelancer-hire-me
+                [info]="info"
+                (validityChange)="onStepValidityChange($event,2)"></freelancer-hire-me>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'Payment'">
+
+        </ng-template>
+    </div>
+</div>

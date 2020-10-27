@@ -1,0 +1,19 @@
+:host {
+    box-sizing: border-box;
+    background: transparent;
+    border-bottom-right-radius: 30px;
+    height: 100%;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.dialog-title-container{
+    margin-top: 10px;
+}
+
+.dialog-body {
+    padding: 15px;
+}

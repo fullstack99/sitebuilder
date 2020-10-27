@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="center-block">
+            <label>
+                You can Add or Edit Participant Information below. Name and Email are required.
+            </label>
+        </div>
+        <!-- <radio-group class="form-group center-block" formControlName="collectContactInfo">
+            <label>
+                Will you be collecting participant-contact-info information?
+            </label>
+            <ng-template [radioGroupOption]="false">No</ng-template>
+            <ng-template [radioGroupOption]="true">Yes</ng-template>
+        </radio-group> -->
+        <radio-group class="form-group center-block" formControlName="addWhoseComing">
+            <label>Add a Whose Coming list.</label>
+            <ng-template [radioGroupOption]="false">No</ng-template>
+            <ng-template [radioGroupOption]="true">Yes</ng-template>
+        </radio-group>
+        <radio-group class="form-group center-block" formControlName="collectGroupMembersAndLeader">
+            <label>
+                If Groups (teams, clubs, schools) are participating in your Event
+                do you want to collect different information from Group Members
+                and the Group Leader?
+            </label>
+            <ng-template [radioGroupOption]="false">No</ng-template>
+            <ng-template [radioGroupOption]="true">Yes</ng-template>
+        </radio-group>
+        <div class="participant-contact-info-list">
+            <participant-contact-info
+                [form]="form.controls.participantContactInfo"
+                name="Participant Info"
+                ></participant-contact-info>
+            <participant-contact-info
+                *ngIf="form.value.collectGroupMembersAndLeader"
+                [form]="form.controls.groupMemberContactInfo"
+                name="Group Member"
+                ></participant-contact-info>
+            <participant-contact-info
+                *ngIf="form.value.collectGroupMembersAndLeader"
+                [form]="form.controls.groupLeaderContactInfo"
+                name="Group Leader"
+                ></participant-contact-info>
+        </div>
+    </form>
+</div>

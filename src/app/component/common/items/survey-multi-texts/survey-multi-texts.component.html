@@ -1,0 +1,98 @@
+<div *ngIf="editable"
+    #multiChoiceContainer
+    class="multi-choice-container"
+    [class.animation]="animation"
+    (mousedown)="onContainerClick($event)">
+  <div
+		#questionTitle
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="question-title content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+		(contenteditableModelChange) = "setItemResize()">
+  </div>
+
+    <div #optionContainer
+        *ngIf="info.type!='dropdown' || editable"
+        class="rows option-container"
+        draggableList
+        (draggableList-newIndexes)="_linkIndexChange.next($event)">
+        <div class="columns"
+            *ngFor="let text of info.texts; let i=index"
+            draggableListItem
+            [draggableListItem-animate]="false"
+            (draggableListItem-dragStart)="_linkDragStart.next(i)"
+            (draggableListItem-dragEnd)="_linkDragEnd.next(i)"
+            (draggableListItem-drag)="_linkDrag.next([i, $event])">
+            <div class="single-text-container text-container columns">
+                <div
+                    #textLabel
+                    contenteditable
+                    spellcheck="true"
+                    contenteditableModel
+                    class="content-editable edit label-border"
+                    style="width: 100%;"
+                    [(contenteditableModel)] = "info.texts[i]"
+                    (contenteditableModelChange) = "setItemResize()"
+                    >
+                </div>
+                <div
+                    class="grip grip-vertical"
+                    draggableListItemGrip
+                    (mousedown)="$event.stopPropagation()"></div>
+                <div *ngIf="i>1" class="remove" (mousedown)="onRemove(i, $event)">x</div>
+            </div>
+            <div
+                class="input-text-label content-editable label-border"
+                >
+            </div>
+        </div>
+    </div>
+    <div class="btn-more">
+        <a (mousedown)="onAdd($event)"> MORE </a>
+    </div>
+</div>
+
+<div *ngIf="!editable"
+    #multiChoiceContainer
+    class="multi-choice-container"
+    [class.animation]="animation">
+    <div
+		#questionTitle
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label"
+		>
+	</div>
+    <div #optionContainer
+        *ngIf="info.type!='dropdown'"
+        class="rows option-container"
+        [class.option-dropdown]="info.type=='dropdown'">
+        <div class="columns flex-wrap"
+            *ngFor="let text of info.texts; let i=index">
+            <div
+                #textLabel
+                contenteditableModel
+                spellcheck="true"
+                class="single-text-container result wrap"
+                [contenteditableModel] = "info.texts[i]">
+            </div>
+            <div
+                contenteditable
+                spellcheck="true"
+                contenteditableModel
+                class="input-text-label content-editable label-border"
+                >
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #cloneTitle
+	class="clone-title result wrap">
+</div>
+<div #cloneText
+	class="clone-text result wrap">
+</div>

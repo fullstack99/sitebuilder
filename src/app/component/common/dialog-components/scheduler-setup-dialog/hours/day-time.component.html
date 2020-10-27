@@ -1,0 +1,31 @@
+<div class="day-time-container columns">
+    <div class="day">{{day | capitalize}}</div>
+    <div class="times">        
+        <ng-template [ngIf]="formArray.controls.length == 0">
+            <div class="columns">
+                <div class="time-container">{{defaultData}}</div>
+                <div class="open-close-button"><a (mousedown)="onOpen($event)">Open</a></div>
+            </div>            
+        </ng-template>
+        <ng-template [ngIf]="formArray.controls.length > 0">
+            <div *ngFor="let form of formArray.controls; let i = index;"
+                [formGroup]="form"
+                class="columns">
+                <div class="columns time-container" *ngIf="{min: getMin(i), max: getMax(i)} as r">
+                    <ng-template [ngIf]="form.value['open']">
+                        <div class="time"><datetime [timeOnly]="true" [defaultData]="defaultData" [min]="r.min" [max]="r.max" formControlName="startTime"></datetime></div>
+                        <div>&nbsp;to&nbsp;</div>
+                        <div class="time"><datetime [timeOnly]="true" [defaultData]="defaultData" [min]="r.min" [max]="r.max" formControlName="endTime"></datetime></div>  
+                    </ng-template>
+                    <ng-template [ngIf]="!form.value['open']">
+                        {{defaultData}}
+                    </ng-template>
+                </div>    
+                <div *ngIf="!form.value['open']" class="open-close-button"><a (mousedown)="onOpen($event, i)">Open</a></div>
+                <div *ngIf="form.value['open']" class="open-close-button"><a (mousedown)="onClosed($event, i)">{{defaultData}}</a> </div>
+                <div *ngIf="i==0 && isMore()"><a (mousedown)="onMore($event)" style="color: green;">+</a></div>
+                <div *ngIf="i>0"><a class="btn-close" (mousedown)="onRemove($event, i)">x</a></div>
+            </div>
+        </ng-template>
+    </div>    
+</div>

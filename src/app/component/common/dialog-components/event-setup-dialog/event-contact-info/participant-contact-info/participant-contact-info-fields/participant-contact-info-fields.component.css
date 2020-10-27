@@ -1,0 +1,55 @@
+:host, :host.k-window-content {
+    background: transparent;
+    color: #464646;
+}
+
+:host * {
+    box-sizing: border-box;
+}
+.scroll-y {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+    th, td {
+        height: 40px;
+        font-weight: normal;
+        vertical-align: middle;
+    }
+
+    .field-name{
+        width: 210px;
+        padding-right: 30px;
+        text-align: left;
+    }
+
+.required::after {
+    content: "*";
+    color: red;
+    position: relative;
+    left: 5px;
+}
+
+.btn-more {
+    font-size: 12px;
+}
+
+.tooltip-body .form-control{
+    height: 20px;
+    width: 250px;
+}
+
+.help-btn {
+    margin-top: 0px !important;
+}
+
+checkbox{
+    position: relative;
+    left: 20px;
+}
+

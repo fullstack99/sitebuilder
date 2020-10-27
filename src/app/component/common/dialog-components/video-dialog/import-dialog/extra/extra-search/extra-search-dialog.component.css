@@ -1,0 +1,106 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    padding: 20px 20px !important;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+div{
+    font-size: 14px;
+    color: #8c8c8c;
+    text-align: center;
+    line-height: 30px;
+}
+div.search-bar{
+    padding: 10px;    
+}
+    div.search-bar .extra-logo{
+        width: 15%;
+    }
+        div.search-bar .extra-logo img{
+            height: 30px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    div.search-bar .search-container{
+        width: 60%;
+    }
+    div.search-bar .fa-search-container{
+        width: 50px;
+        border: 1px solid #8c8c8c;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: whitesmoke;
+    }
+
+    div.search-bar .fa-search-container span.fa{
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+div.extra-navigator{    
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1000px;
+    height: 480px;
+}
+
+input[type="text"] {
+    display: block;
+    width: 90%!important;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.btn-desktop{
+    margin-left: 10px;
+    font-size: 12px;
+}
+.btn-close, .btn-close:hover, .btn-close:active, .btn-close:visited {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: block;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.btn-feedback {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    display: flex;
+    align-items: center;
+    color: #8c8c8c;
+    font-size: 10px;
+}
+    .btn-feedback:hover {
+        text-decoration: none;
+    }
+        .btn-feedback img {
+            width: 30px;
+            height: 30px;
+        }
+
+.submit input{
+    background:     #FFA500;
+    border-color:   #FFA500;
+    color: white;
+    width: 150px;
+    font-size: 120%;
+    margin-bottom: 10px;
+}

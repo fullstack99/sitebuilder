@@ -1,0 +1,74 @@
+<!-- <div class="single-text-container columns"
+    [class.disable]="!editable">    
+    <div class="option">                                        
+        <label class='c-input c-checkbox'>
+            <input type="checkbox"/>
+            <span class="c-indicator"></span>
+        </label>
+    </div>
+    <div
+      #singleTextLabel
+      class="single-text-label">
+        <div
+          class="text-editor"
+          #textEditorElem          
+          text-editor-tinymce
+          [text-editor-enabled]="editing"
+          [text-editor-toolbar-width]="250"
+          [text-editor-hide-links]="false"
+          [text-editor-host]="singleTextLabel.nativeElement"
+          [text-editor-toolbar-type]="2"
+          [text-editor-fontsize-type] = "1"
+          (text-editor-input)="onEditorInput($event)"
+          (text-editor-input-text)="onEditorInput($event)"          
+          ></div>
+          <div *ngIf="!editing && isEmpty()"
+            class="placeholder">
+              Click to add Text
+          </div>
+    </div>   
+</div>
+
+<div class="single-text-container columns"
+    [class.disable]="editable">    
+    <div class="option">                                        
+        <label class='c-input c-checkbox'>
+            <input type="checkbox"/>
+            <span class="c-indicator"></span>
+        </label>
+    </div>
+    <div
+        #resultLabel
+        class="result-label">        
+    </div>
+</div>
+ -->
+ <div class="single-text-container columns"
+    [class.editable]="editable">    
+    <div class="option">                                        
+        <label class='c-input c-checkbox'>
+            <input type="checkbox" name="{{'form-control' + uid}}"/>
+            <span class="c-indicator"></span>
+        </label>
+    </div>
+    <div #singleTextLabel class="single-text-label">
+        <div
+            class="text-editor"
+            #textEditorElem          
+            text-editor-tinymce
+            [text-editor-enabled]="editing"
+            [text-editor-toolbar-width]="250"
+            [text-editor-hide-links]="false"
+            [text-editor-host]="singleTextLabel.nativeElement"
+            [text-editor-toolbar-type]="2"
+            [text-editor-fontsize-type] = "1"
+            (text-editor-input)="onEditorInput($event)"
+            (text-editor-input-text)="onEditorInput($event)"          
+            ></div>
+        <div *ngIf="!editing && isEmpty()"
+            class="placeholder">
+            Click to add Text
+        </div>        
+    </div>
+</div>
+

@@ -1,0 +1,57 @@
+<div *ngIf="!info.slides[0]" class="placeholder">
+	<div>Click to Add Slideshow</div>
+	<img src="/assets/images/canvas/slideshow.png"/>
+</div>
+<div class="result-container" [hidden]="_slides.length == 0">
+	<div #result class="result" [class.result-thumbnails]="info.guideType=='thumbnails'" [class.result-dot]="info.guideType=='dots'" (mousedown)="onClick()" [hidden]="loading"></div>
+	<div *ngIf="info && loading" class="place-holder" [class.result-thumbnails]="info.guideType=='thumbnails'" [class.result-dot]="info.guideType=='dots'" [style.backgroundImage]="defaultBackgroundImage()"></div>
+	<div class="result-control rows">
+		<div class="thumbnails columns" *ngIf="info.guideType=='thumbnails'"
+			(mousedown)="$event.preventDefault()">			
+			<span *ngIf="_slides.length > 3"
+				class="btn-left btr bt-angle-left"
+				[class.active]="sildeDispIndex > 0"
+				[class.disable]="dispIndex==0"
+				(mousedown)="moveThumb(-1, $event)"
+				(click)="onArrowClick($event)"></span>
+
+			<div class="thumb"
+				[class.active]="dispIndex == sildeDispIndex"
+				[class.has-link]="_slides[sildeDispIndex] && _slides[sildeDispIndex]?.link"
+				[style.backgroundImage]="backgroundImage(_slides[sildeDispIndex]?.image)"
+				(mousedown)="gotoSlide(sildeDispIndex, $event)"
+				(click)="onSlideClick($event)"></div>
+
+			<div class="thumb" *ngIf="_slides.length > 1"
+				[class.active]="dispIndex == sildeDispIndex + 1"
+				[class.has-link]="_slides[sildeDispIndex + 1] && _slides[sildeDispIndex + 1]?.link"
+				[style.backgroundImage]="backgroundImage(_slides[sildeDispIndex+1]?.image)"
+				(mousedown)="gotoSlide(sildeDispIndex+1, $event)"
+				(click)="onSlideClick($event)"></div>
+
+			<div class="thumb" *ngIf="_slides.length > 2"
+				[class.active]="dispIndex == sildeDispIndex + 2"
+				[class.has-link]="_slides[sildeDispIndex + 2] && _slides[sildeDispIndex + 2]?.link"
+				[style.backgroundImage]="backgroundImage(_slides[sildeDispIndex+2]?.image)"
+				(mousedown)="gotoSlide(sildeDispIndex+2, $event)"
+				(click)="onSlideClick($event)"></div>
+
+			<span *ngIf="_slides.length > 3"
+				class="btn-right btr bt-angle-right"
+				[class.active]="sildeDispIndex < _slides.length - 3"
+				[class.disable]="dispIndex==_slides.length - 1"
+				(mousedown)="moveThumb(1, $event)"
+				(click)="onArrowClick($event)"></span>			
+		</div>
+		
+		<div class="dots-row columns" *ngIf="info.guideType=='dots'"
+			(mousedown)="$event.preventDefault()">		
+			<div *ngFor="let slide of _slides; let i=index"
+				class="dot"
+				[class.active]="i === dispIndex"				
+				(mousedown)="gotoSlide(i, $event)"
+				(click)="onSlideClick($event)"></div>
+		</div>
+	</div>	
+</div>
+	

@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'textico';
+  src:  url('/assets/styles/fonts/textico.eot?2c76mm');
+  src:  url('/assets/styles/fonts/textico.eot?2c76mm#iefix') format('embedded-opentype'),
+    url('/assets/styles/fonts/textico.ttf?2c76mm') format('truetype'),
+    url('/assets/styles/fonts/textico.woff?2c76mm') format('woff'),
+    url('/assets/styles/fonts/textico.svg?2c76mm#textico') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.mce-i-text-height {
+    font-family: 'textico' !important;
+}
+
+.mce-i-text-width {
+    font-family: 'textico' !important;
+}
+
+.mce-i-text-height:before {
+  content: "\ea5f";
+}
+.mce-i-text-width:before {
+  content: "\ea60";
+}
+

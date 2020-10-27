@@ -1,0 +1,415 @@
+<div [ngSwitch]="item.itemType"
+    class="item-container"
+    [class.selected]="getSeletedItemStyle()"
+    [class.editing]="editing && item.itemType != 'SurveyItem'"
+    id="{{item.uid}}"
+    >
+    <ng-template ngSwitchCase="SitemapItem">
+        <sitemap-item
+            [item]="item"
+            [containerWidth]="containerWidth"
+            [editable]="editable"
+            [selected]="selected"
+            (itemResize)="onItemResize($event)"
+            (outLink)="onOutLink($event)"
+            >
+        </sitemap-item>
+    </ng-template>
+    <ng-template ngSwitchCase="TextItem">
+        <text-item
+            [item]="item"
+            (hasLink)="onHasLink($event)"
+            (outLink)="onOutLink($event)"
+            [editable]="editable"
+            [editing]="editing"
+            [selected]="selected"
+			(itemChange)="onItemChange($event)"
+			(itemChanged)="onItemChanged($event)"
+            (itemResize)="onItemResize($event)"
+            (itemRemove)="onItemRemove($event)"
+
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </text-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ImageItem">
+        <image-item
+            [item]="item"
+            (itemResize)="onItemResize($event)"
+            (outLink)="onOutLink($event)"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            >
+        </image-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ItemGroup">
+        <item-group
+            [item]="item"
+            [editable]="editable"
+            [selected]="selected"
+            (itemChange)="onItemChange($event)"
+            (outLink)="onOutLink($event)">
+        </item-group>
+    </ng-template>
+    <ng-template ngSwitchCase="SlideShowItem">
+        <slideshow-item
+            [item]="item"
+			[loading]="loading"
+			(changeActiveSlideIndex)="onChangeActiveSlideIndex($event)"
+            (outLink)="onOutLink($event)">
+        </slideshow-item>
+    </ng-template>
+    <ng-template ngSwitchCase="NavItem">
+        <nav-item
+            [item]="item"
+            [mobilePageView]="mobilePageView"
+            [containerWidth]="containerWidth"
+            [editable]="editable"
+            [selected]="selected"
+            [editing]="editing"
+            (outLink)="onOutLink($event)"
+            (itemResize)="onItemResize($event)"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </nav-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ShapeItem">
+        <shape-item
+            [item]="item"
+            (outLink)="onOutLink($event)">
+        </shape-item>
+    </ng-template>
+    <ng-template ngSwitchCase="VideoItem">
+        <video-item
+            [item]="item"
+            [loading]="loading"
+            [editable]="editable"
+            [selected]="selected"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </video-item>
+    </ng-template>
+    <ng-template ngSwitchCase="ButtonItem">
+        <button-item
+            [item]="item"
+            [selected]="selected"
+            (outLink)="onOutLink($event)">
+        </button-item>
+    </ng-template>
+    <ng-template ngSwitchCase="GalleryItem">
+        <gallery-item
+            [item]="item"
+            [zoomImg]="zoomImg"
+            [containerWidth]="containerWidth"
+            [canvasScrollElem]="canvasScrollElem"
+            (outLink)="onOutLink($event)">
+        </gallery-item>
+    </ng-template>
+    <ng-template ngSwitchCase="FormItem">
+        <form-group
+            [item]="item"
+            [readOnly]="readOnly"
+            [selected]="selected"
+            [containerWidth]="containerWidth"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </form-group>
+    </ng-template>
+    <ng-template ngSwitchCase="SurveyItem">
+        <survey-item
+            [item]="item"
+            [editable]="editable"
+            [readOnly]="readOnly"
+            [containerWidth]="containerWidth"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value"
+            (itemChange)="onItemChange($event)">
+        </survey-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SingleTextItem">
+        <single-text-item
+            [item]="item"
+            [selected]="selected"
+            [editing]="editing"
+            [editable]="editable"
+            [readOnly]="readOnly"
+            [containerWidth]="containerWidth"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </single-text-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SingleCheckItem">
+        <single-check-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </single-check-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SingleDateItem">
+      <single-date-item
+          [item]="item"
+          [editable]="editable"
+          (itemChange)="onItemChange($event)"
+          (itemResize)="onItemResize($event)">
+      </single-date-item>
+    </ng-template>
+    <ng-template ngSwitchCase="MultiChoiceItem">
+        <multiple-choice
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [selected]="selected"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </multiple-choice>
+    </ng-template>
+    <ng-template ngSwitchCase="DropdownItem">
+        <dropdown-item
+            *ngIf="editable"
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [selected]="selected">
+        </dropdown-item>
+    </ng-template>
+    <ng-template ngSwitchCase="RatingItem">
+        <rating-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </rating-item>
+    </ng-template>
+    <ng-template ngSwitchCase="EndSurveyItem">
+        <end-survey-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </end-survey-item>
+    </ng-template>
+    <ng-template ngSwitchCase="MatrixChoiceItem">
+        <matrix-choice-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </matrix-choice-item>
+    </ng-template>
+    <ng-template ngSwitchCase="RankItem">
+        <rank-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </rank-item>
+    </ng-template>
+    <ng-template ngSwitchCase="DateItem">
+        <date-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </date-item>
+    </ng-template>
+    <ng-template ngSwitchCase="TimeItem">
+        <time-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </time-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SurveyCommentItem">
+        <survey-comment-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </survey-comment-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SurveyMultiChoiceItem">
+        <survey-multi-choice
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </survey-multi-choice>
+    </ng-template>
+    <ng-template ngSwitchCase="SurveySingleTextItem">
+        <survey-single-text-item
+            [item]="item"
+            [selected]="selected"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </survey-single-text-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SurveyMultiTextsItem">
+        <survey-multi-texts-item
+            [item]="item"
+            [editing]="editing"
+            [editable]="editable"
+            [containerWidth]="containerWidth"
+            [readOnly]="readOnly"
+            [animation]="animation"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)">
+        </survey-multi-texts-item>
+    </ng-template>
+    <ng-template ngSwitchCase="SocialItem">
+        <social-item
+			[item]="item"
+			[editable]="editable">
+        </social-item>
+    </ng-template>
+    <ng-template ngSwitchCase="DonationItem">
+        <donation-item
+            [item]="item"
+            [editable]="editable"
+            (itemChange)="onItemChange($event)"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </donation-item>
+    </ng-template>
+    <ng-template ngSwitchCase="EventSetupItem">
+        <event-setup-item
+            [item]="item"
+            [editable]="editable"
+            (itemChange)="onItemChange($event)"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value"
+            >
+        </event-setup-item>
+	</ng-template>
+	<ng-template ngSwitchCase="EventCalendarItem">
+		<event-calendar-item
+			[item]="item"
+			[editable]="editable"
+			(itemChange)="onItemChange($event)"
+			(outLink)="onOutLink($event)"
+			background
+			[backgroundInfo]="item.content.backInfo.value"
+			[backgroundborderInfo]="item.content.borderInfo.value"
+			[zIndex]="-97"
+			border
+			[borderInfo]="item.content.borderInfo.value"
+			>
+		</event-calendar-item>
+	</ng-template>
+    <ng-template ngSwitchCase="PhotoItem">
+        <photo-item
+            [item]="item"
+			[editable]="editable"
+			[processingItem]="processingItem"
+            [mobilePageView]="mobilePageView"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)"
+            (itemRemove)="onItemRemove($event)">
+        </photo-item>
+    </ng-template>
+    <ng-template ngSwitchCase="EcommerceItem">
+        <ecommerce-item
+            [item]="item"
+            [editable]="editable"
+            [selected]="selected"
+            [parent]="parent"
+            [loading]="loading"
+            [containerWidth]="containerWidth"
+            (itemChange)="onItemChange($event)"
+            (itemResize)="onItemResize($event)"
+            (undo)="onUndo()"
+            (scrollTop)="onScrollTop($event)"
+            (canvasTool)="canvasTool.emit($event)">
+        </ecommerce-item>
+    </ng-template>
+    <ng-template  ngSwitchCase="AppointmentItem">
+        <appointment-item
+            [item]="item"
+            (itemResize)="onItemResize($event)"
+            (itemChange)="onItemChange($event)"
+            (itemRemove)="onItemRemove($event)"
+            background
+            [backgroundInfo]="item.content.backInfo.value"
+            [backgroundborderInfo]="item.content.borderInfo.value"
+            [zIndex]="-97"
+            border
+            [borderInfo]="item.content.borderInfo.value">
+        </appointment-item>
+    </ng-template>
+    <div *ngIf="isVisibleSetting()" class="setting-button" [class.ecommerce-setting]="isGridEcommerceItem()">
+        <span *ngIf="isHoverItem" class="btn-link" (mousedown)="$event.preventDefault(); $event.stopPropagation();" (click)="onSetHover($event)">
+          {{hasHover ? 'Hover' : 'No Hover'}}
+        </span>
+        <span *ngIf="hasItemLink" class="btn-link" (mousedown)="$event.preventDefault(); $event.stopPropagation();" (click)="onLink($event)">L</span>
+        <span *ngIf="item.locked" class="btl bt-lock bt-lg"></span>
+        <span *ngIf="item.global" class="btn-global">G</span>
+        <span *ngIf="isGripItem()" class="glogood-grip item-grip" (mousedown)="$event.preventDefault()">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span *ngIf="!isQuestion(item.itemType)" class="font-icon btl bt-gear bt-lg" (mousedown)="$event.preventDefault(); $event.stopPropagation();" (click)="onSetting($event)"></span>
+        <span *ngIf="isVisibleClose()" class="btn-close" (mousedown)="$event.preventDefault(); $event.stopPropagation();" (click)="onClose($event)">x</span>
+    </div>
+</div>

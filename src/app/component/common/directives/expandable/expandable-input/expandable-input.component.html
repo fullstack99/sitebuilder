@@ -1,0 +1,63 @@
+<div [formGroup]="form">
+	<div *ngIf="hasRoot">
+		<split-text-box
+			formControlName="root"
+			*ngIf="useSplitBoxForRoot"
+			[error] = "error"
+			label="{{ rootName }}"
+			(focused)="focused.emit(true)">
+		</split-text-box>		
+		<input *ngIf="!useSplitBoxForRoot"
+			formControlName="root"
+			class="form-control" 
+			placeholder="{{ rootName }}" />
+	</div>
+	<div 
+		class="children"
+		formArrayName="children"
+		draggableList
+		(draggableList-newIndexes)="_indexChange.next($event)">		
+		<ng-container *ngFor="let child of childControls.controls; let i=index">
+			<div
+				class="child columns"
+				[formGroupName]="i"
+				draggableListItem
+				[draggableListItem-animate]="false"
+				(draggableListItem-dragStart)="_dragStart.next(i)"
+				(draggableListItem-dragEnd)="_dragEnd.next(i)"
+				(draggableListItem-drag)="_drag.next([i, $event])">				
+				<div class="child-input">
+					<clearable-input
+						formControlName="value"						
+						placeholder="{{ itemTitle }}"
+						[isFocused]="focusNum == i"
+						[error]="childControls.controls[i].controls.value.invalid"
+						(clear)="childChange.emit(i)"
+						(paste)="onChildKeyUp(i, null)"
+						(keyup)="onChildKeyUp(i, $event)"
+						(focus)="focused.emit(true)"
+						>
+					</clearable-input>
+				</div>
+				<div class="grip grip-vertical" draggableListItemGrip (mousedown)="$event.stopPropagation()"></div>
+				<a *ngIf="i >= numberOfDefaultChildren"
+					(click)="onChildDelete($event, i)"
+					class="listing-remove">
+					&times;
+				</a>
+				<a *ngIf="hasSubChildren"
+					[class.has-children-link]="hasChildren(i)"
+					(click)="openChildExpandableRadioGroupWindowFor(i)"
+					class="inline sub-children-link">
+					{{ subChildrenTitle | uppercase }}
+				</a>
+			</div>
+		</ng-container>
+		<div class="add-child">
+			<a (click)="addEmptyChild($event)">
+				MORE
+			</a>
+		</div>		
+	</div>
+</div>
+	

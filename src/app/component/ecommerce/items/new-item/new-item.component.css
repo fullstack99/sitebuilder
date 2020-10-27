@@ -1,0 +1,323 @@
+:host {
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;    
+}
+:host * {
+    user-select: none;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+:host.k-window-content {
+    border-radius: 15px;
+    box-shadow: 1px 1px 7px 1px rgba(0,0,0,.2)
+}
+
+.form-group {
+	position: relative;
+    max-width: 530px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-control {
+    width: 340px;
+}
+
+.title-control {
+	font-size: 18px;
+	font-family: lato;
+	font-weight: bold;
+}   
+
+.title {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.content {
+    height: 90%;
+    overflow-y: auto;
+    margin-top: 20px;
+    text-align: left;
+}
+
+label {
+    text-align: left;
+}
+
+label.sub-title {
+    margin-left: 6px;
+}
+
+label.caption {
+    font-size: 10;
+    font-weight: normal;
+    margin-left: 3px;
+}
+
+form {
+    margin-top: 30px;
+    margin: 0px auto;
+}
+
+a.action-link {
+    display: inline-block;
+}
+
+.schedule-time-control {
+    width: 210px;
+    margin-left: 10px;
+}
+
+.left-shift {
+    margin-left: 20px;
+}
+
+.barcode-upc-control,
+.price-comparison-control {    
+    width: 135px;
+}
+
+.price-item-block {
+    margin-right: 55px;
+}
+
+label.required {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #FF0000;
+    font-size: 16px;    
+}
+
+.vertical-align {
+    vertical-align: middle;
+}
+
+a.action-link {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+a.generate-code-link {}
+
+.item-code-block {
+    position: relative;
+    margin-top: 13px;
+    margin-right: 16px;
+}
+
+a.generate-link {
+    width: 40px;
+}
+
+.link-container {
+    width: auto;
+    text-align: center;
+}
+
+tooltip {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+p {
+    margin-left: 15px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.large-control {
+    position: relative;
+    width: 352px;
+}
+
+.vendor-name-control {
+    width: 200px;
+}
+
+.medium-control {
+    position: relative;
+    width: 110px;
+}
+
+.small-control {
+    position: relative;
+    width: 70px;
+}
+
+.quantity-control {
+    width: 80px;
+}
+
+.radio-inline-label {
+    margin-right: 15px;
+    min-width: 70px;
+}
+
+[contentEditable=true]:empty:before {
+    content: attr(placeholder)
+}
+
+.text-editor {
+	height: auto;
+	word-break: break-all;
+	min-height: 100px;
+}
+
+.text-editor-disabled {
+    cursor: text;
+}
+
+.text-editor-block {
+    position: relative;
+}
+
+.text-editor-block > * {
+    margin: auto;
+}
+
+.text-editor {
+    position: relative;
+    word-wrap: break-word;
+}
+
+    .text-editor-placeholder {
+        cursor: text;
+        width: 345px;
+        color: #8c8c8c;
+        font-size: 15px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+.caption {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #8C8C8C;
+}
+
+label.pricing-label {
+    font-size: 14px;
+}
+
+.pricing-text-box-wrapper {
+    width: 45px;
+}
+
+.center {
+    margin: auto;
+}
+
+.item-title>input {
+    margin-right: 4px;
+}
+
+.display-show {}
+
+.keyword-comma {
+    width: 100%;
+    margin-top: -10px;
+    text-align: center;
+    position: relative;
+    display: block;
+}
+
+.keyword-comma>a {
+    position: absolute;
+    margin-left: 50px;
+}
+
+.slideshow {
+    width: 320px;
+    height: 270px;
+    position: relative;
+    display: flex;
+    margin: auto;
+}
+
+.slideshow>slideshow-gallery {
+    width: 315px;
+    float: left;
+}
+
+.slideshow>label {
+    margin-top: 20px;
+}
+
+.item-price {
+    position: relative;
+    margin: auto;
+    width: 320px;
+}
+
+.item-code {
+    margin-right: 40px;
+}
+
+.save {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    display: flex;    
+    flex-direction: column;    
+    align-items: center;
+    font-size: 12px;
+    color: white;
+    background-color: #ffa500;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 100;
+}
+	.save.disable {
+		background-color: #CCC;
+		opacity: 0.8;
+    }
+    .save .btn-caption {
+        cursor: pointer;
+    }
+
+a>.img-responsive {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+.catalogue-page {
+    margin-bottom: 20px;
+}
+
+.group-collection {
+    margin-bottom: 20px;
+}
+
+.vendors {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+drop-down {
+    position: relative;
+    width: 60px;
+}
+
+drop-down>>>.dropdown-menu {
+    position: absolute!important;
+}
+
+.setup-item{
+    margin-left: 40px;
+}

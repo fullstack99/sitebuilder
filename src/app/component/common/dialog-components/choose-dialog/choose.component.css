@@ -1,0 +1,21 @@
+:host {
+    box-sizing: border-box;    
+    height: 100%;    
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+.dialog-title-container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.dialog-container{
+    padding-left: 50px;
+}
+    .open .text{
+        color: orange;
+    }
+    .block .text{
+        color: grey
+    }

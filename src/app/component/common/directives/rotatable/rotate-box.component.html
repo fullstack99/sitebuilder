@@ -1,0 +1,11 @@
+<div class="rotate-box"
+  [class.enabled]="enabled"
+  [class.active]="active"
+  (mousedown)="startRotate($event)"
+  (mouseup)="stopRotate($event)"
+  (touchstart)="startRotate($event)"
+  (touchend)="stopRotate($event)"
+  (click)="onClick($event)">
+  <span class="grip"></span>
+  <span class="angle">{{getDegree}}<sup>&nbsp;o</sup></span>
+</div>

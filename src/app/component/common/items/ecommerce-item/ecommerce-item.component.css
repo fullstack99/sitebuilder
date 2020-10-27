@@ -1,0 +1,424 @@
+:host {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(100px);
+}
+
+a{
+    text-decoration: none;
+}
+
+.padding-none {
+    padding: 0px!important;
+}
+
+.ecommerce-item-nav {
+    width: 160px;
+    float: left;
+    font-size: 16px;
+}
+
+.title-1 {
+    font-size: 18px;
+}
+
+.title-2 {
+    text-align: center;
+    color: grey;
+    font-size: 12px;
+}
+
+.group-items {
+    margin-left: 10px;
+}
+
+.group-item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.ecommerce-item-nav .item-nav-list {
+    width: 80%;
+    height: auto;
+    margin-left: 15%;
+    float: left;
+    color: grey;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+    .group-item a {
+        text-decoration: none;
+        color: gray;
+    }
+    .group-item a:not(.isTitle):hover,
+    .group-item a.active {
+        color: #ffa500;
+    }
+
+.item-nav-sublist {
+    width: 80%;
+    margin-left: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ecomm-item-body {
+	width: 100%;
+}
+
+.ecomm-item-body.ecomm-item-body-nav {
+    width: calc(100% - 160px);
+}
+
+.ecomm-grid{
+    position: relative;
+    display: block;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-right: 8px;
+	width: 100%;
+	max-height: 727px;
+    overflow-y: auto;
+}
+.ecomm-grid-single-item {
+	border: 1px solid gray;
+	position: relative;
+	display: block;
+	margin: 5px;
+	padding: 10px;
+	width: 100%;
+	max-height: 727px;
+}
+
+.ecomm-grid-item {
+	position: relative;
+    display: block;
+    min-width: 140px;
+    /* max-width: 190px; */
+    height: 350px;
+    border: 1px solid gray;
+	margin: 10px 10px;
+    padding: 10px;
+    z-index: 100;
+}
+
+.ecomm-grid-item.only-image-show {
+    height: 250px;
+}
+
+.ecomm-grid-item.list-view {
+    max-width: 100%;
+    width: calc(100% - 20px);
+    height: 180px;
+}
+	.ecomm-grid-item-top{
+		background: transparent;
+		position: absolute;
+		left: 0;
+		top: -10px;
+		height: 20px;
+		padding: 0 5px;
+		width: 100%;
+		z-index: 1;
+	}
+		.ecomm-grid-item-top a {
+			color: #ffa500;
+		}
+		.glogood-grip {
+			margin-top: 5px;
+		}
+		.grip.vertical{
+			/* width: 10px;
+			height: 5px;
+			margin-top: 0px;
+			margin-left: -10px;
+			transform: rotate(90deg); */
+		}
+		.setup-link {
+			padding: 0px 5px;
+			margin-left: 5px;
+			min-width: 40px;
+			text-align: center;
+			background: white;
+			font-size: 11px;
+		}
+		.details-link,
+		.add-item {
+			width: 55px;
+			margin-left: 10px;
+			text-align: center;
+			background: white;
+			font-size: 11px;
+		}
+		.add-item {
+			width: 40px;
+			margin-left: auto;
+			margin-right: 10px;
+		}
+			.add-item a{
+				color: #337ab7;
+			}
+		.remove-link {
+			width: 15px;
+			text-align: center;
+			background: white;
+			margin-left: auto;
+			margin-right: 0px;
+		}
+			.remove-link a {
+				color: red;
+			}
+
+	.ecomm-grid-item-content{
+		position: relative;
+		height: calc(100% - 20px);
+	}
+	.ecomm-grid-item.list-view .ecomm-grid-item-content{
+		justify-content: flex-start;
+	}
+	.ecomm-grid-single-item .ecomm-grid-item-content{
+		height: 100%;
+	}
+		.grid-item-image{
+			width: 90%;
+			height: 170px;
+			text-align: center;
+			font-size: 25px;
+			color: gray;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: 50%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.ecomm-grid-item.list-view .grid-item-image {
+			max-width: 240px;
+			height: 95%;
+		}
+		.single-item .grid-item-image{
+			width: 100%;
+			height: calc(100% - 100px);
+		}
+		.grid-item-details {
+			position: relative;
+			max-width: 100%;
+			font-size: 18px;
+			color: gray;
+		}
+		.grid-item-details > div {
+			position: relative;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-size: 18px;
+			padding: 5px 0px;
+		}
+			.grid-item-details .product-title-container {
+				padding: 5px 10px;
+			}
+			.grid-item-details.columns .product-title-container {
+				min-width: 240px;
+				padding: 5px 10px;
+			}
+				.grid-item-details .product-price {
+					font-size: 16px;
+				}
+			.grid-item-details .grid-item-description{
+				max-height: 154px;
+				background: white;
+				font-size: 16px;
+				padding: 0 15px;
+			}
+
+			.grid-item-details .grid-item-description >>> p {
+				/* white-space: nowrap;*/
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+		.blank-text{
+			font-size: 42px;
+			color: gray;
+			margin: auto;
+		}
+
+.ecomm-item-more {
+    display: block;
+    padding: 10px 20px;
+}
+
+.ecomm-pagination {
+	display: flex;
+	justify-content: center;    
+}
+	.ecomm-pagination .all-page-view {
+		padding-top: 2px;
+	}
+	.ecomm-pagination .all-page-view.active {
+		color: #ffa500;
+	}
+
+	.ecomm-pagination .all-page-view.disable {
+		color: #cacaca;
+		pointer-events: none;
+	}
+
+kendo-sortable{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+kendo-sortable>>>div:focus {
+    outline-color: #ffffff;
+}
+
+kendo-sortable>>>.item-row {
+	width: 100%;
+}
+
+.ecommerce-details {
+    overflow-y: auto;
+    background-color: white;
+}
+    .ecommerce-details-body {
+        height: 600px;
+        justify-content: space-around;
+        border-top: 2px solid #8c8c8c;
+        padding: 10px 0;
+    }
+        .ecommerce-details-image {
+            min-width: 260px;
+            max-width: 260px;
+            height: 300px;
+        }
+        .ecommerce-details-content {
+            font-size: 18px;
+            max-width: 510px;
+            padding: 10px;
+        }
+            .item-description {
+                height: 350px;
+                font-size: 14px;
+                overflow: auto;
+            }
+            .ecommerce-details-options{
+
+            }
+            .ecommerce-details-option-container{
+                max-width: 175px;
+            }
+            .price-details {
+                margin-bottom: 15px;
+                align-items: center;
+            }
+                .comparision-price {
+                    padding: 0px 5px;
+                    text-decoration: line-through;
+                }
+                .sale {
+                    width: 60px;
+                    text-align: center;
+                    line-height: 1.2;
+                    border: 1px solid gray;
+                    border-radius: 3px;
+                    background-color: yellow;
+                    color: red;
+                    margin: auto;
+                }
+
+            .add-cart {
+                width: 100%;
+                padding: 15px;
+                font-size: 14px;
+                align-items: center;
+            }
+                .qty{
+                    width: 70px;
+                    margin-right: 15px;
+                }
+
+                .add-cart-button {
+                    width: 150px;
+                    height: 40px;
+                    border-radius: 5px;
+                    padding: 5px;
+                    background-color: #ffa500;
+                    text-align: center;
+                    cursor: pointer;
+                }
+                .cart-icon {
+                    color: white;
+                    margin-right: 10px;
+                }
+
+.header-line {
+    height: 30px;
+    display: inline-flex;
+}
+
+.item-category {
+    width: 200px;
+}
+
+.header-line>* {
+    margin-left: 20px;
+}
+
+.item-options {
+    display: flex;
+    align-items: center;
+}
+
+.item-options>* {
+    width: 33.33%;
+    text-align: center;
+}
+
+
+
+image-zoom-container {
+    margin-left: 50px;
+}
+
+drop-down {
+    width: 100%;
+    height: 40px;
+    margin-top: 4px;
+}
+
+drop-down>>>.dropdown-menu {
+    position: absolute;
+}
+
+.m-b-1 {
+    margin-bottom: 2rem;
+    display: grid;
+}
+
+.ellipsis:after {
+   content: '...';
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   padding: 0 0.3em;
+   background: inherit;
+}
+    .ellipsis .ellipsis-content:after {
+        content: '\0000a0';
+        position: absolute;
+        width: 1000px;
+        z-index: 1;
+        background: white;
+    }

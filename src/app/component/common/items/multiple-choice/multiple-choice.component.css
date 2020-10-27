@@ -1,0 +1,196 @@
+/* :host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+.columns {
+    display: flex;
+}
+
+.disable{
+    display: none;
+}
+
+.placeholder{
+    position: absolute;
+    top: 6px;
+    left: 5px;
+}
+
+.multi-choice-container{
+    padding: 5px;
+}
+
+.option-container{
+    margin-top: 5px;
+}
+
+.single-text-container{
+    position: relative;
+    margin: 5px;
+}
+    .single-text-label{
+        display: inline-block;
+        position: relative;
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+        min-width: 110px;
+        min-height: 36px;
+    }
+        .wrap{
+            word-wrap: break-word;
+        }
+    .dropdown {
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 25px;
+    }
+        .bt-angle-down{
+            position: absolute;
+            right: 5px;
+            top: calc(50% - 8px);
+        }
+        .text-editor{
+            min-width: 110px;
+            min-height: 36px;
+            padding: 5px;
+            cursor: text;
+        }
+        .grip {
+            margin-top: 15px;
+            width: 12px;
+            height: 5px;
+            background-image: url('/assets/images/canvas/grip.png');
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            cursor: pointer;
+            cursor: move;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            cursor: grab;
+        }
+
+        .single-text-container .remove{
+            color: red;
+            font-size: 18px;
+            margin-top: 4px;
+            margin-left: 5px;
+        }
+
+        .btn-more{
+            margin-left: 20px;
+        }
+
+.option{
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+ */
+
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.disable{
+    display: none;
+}
+
+.placeholder{
+    position: absolute;
+    top: 6px;
+    left: 5px;
+}
+
+.multi-choice-container{
+    padding: 5px;
+}
+
+.option-container{
+  padding-left: 20px;
+}
+
+.single-text-container{
+    position: relative;
+    margin: 5px;
+    width: 130px;
+    max-width: 130px;
+}
+    .single-text-label{
+        display: inline-block;
+        position: relative;
+		margin-bottom: 5px;
+		z-index: 100;
+    }
+    .multi-choice-container.editable .single-text-label{
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+    }
+        .wrap{
+            word-wrap: break-word;
+        }
+        .text-editor{
+			word-break: break-all;
+            padding: 5px;
+            cursor: text;
+        }
+        .multi-choice-container.editable .text-editor{
+            min-width: 110px;
+            min-height: 36px;
+        }
+        .grip {
+            margin-top: 15px;
+            width: 12px;
+            height: 5px;
+            background-image: url('/assets/images/canvas/grip.png');
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            cursor: grab;
+        }
+
+        .remove{
+            color: red;
+            font-size: 18px;
+            margin-top: 4px;
+            margin-left: 5px;
+            z-index: 100;
+        }
+
+        .btn-more{
+            margin-left: 20px;
+            height: 44px;
+        }
+
+.option{
+    margin-top: auto;
+    margin-bottom: auto;
+}

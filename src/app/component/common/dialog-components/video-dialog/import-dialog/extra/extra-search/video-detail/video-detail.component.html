@@ -1,0 +1,27 @@
+<a (mousedown)="onClose($event)" class="btn-close">×</a>
+<div *ngIf="source==2 && video" class="title">
+	{{video.title}}
+</div>
+<div *ngIf="source==2" class="embed-container" #result>	
+	<ng-template [ngIf]="video && video.videoId">
+		<iframe
+		      frameborder="0"
+		      allowfullscreen
+		      [src]="video.videoId | youtubeSafeUrl">
+		</iframe>
+	</ng-template>	
+</div>
+
+<div *ngIf="source==3 && video" class="title">
+	{{video.name}}
+</div>
+<div *ngIf="source==3" class="embed-container">
+	<ng-template [ngIf]="video && video.uri">
+		<iframe
+		      frameborder="0"
+		      allowfullscreen
+		      [src]="video.uri | vimeoSafeUrl">
+		</iframe>
+	</ng-template>
+	{{video.embed}}	
+</div>

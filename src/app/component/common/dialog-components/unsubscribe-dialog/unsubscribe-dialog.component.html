@@ -1,0 +1,49 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+</div>
+<div class="content" [formGroup]="form">
+    <div class="item">
+        <div class="form-group item-title text-center">
+			Unsubscribe from this list
+		</div>
+		<div class="item-content form-group">
+			<div *ngFor="let name of namelist" class="text-center">
+				{{name}}
+			</div>
+		</div>
+    </div>
+    <div class="item">
+		<div class="form-group item-title text-center">Your feedback is always helpful</div>
+		<div class="form-group radio-group-container">
+			<radio-group [displayInline]="false" formControlName="response">
+				<ng-template radioGroupOption="0">
+					I don't need these emails
+				</ng-template>
+				<ng-template radioGroupOption="1">
+					I never signed up for these emails
+				</ng-template>
+				<ng-template radioGroupOption="2">
+					The emails are spam
+				</ng-template>
+			</radio-group>
+		</div>
+		<div class="form-group">
+			<textarea
+				formControlName="comments"
+				class="form-control"
+				placeholder="Comments"
+				rows="4"
+				maxlength="100"></textarea>
+			<div class="chars-right">
+				{{100 - form.controls.comments?.value?.length}} characters
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="bottom text-center">
+    <input [disabled]="form.invalid" class="btn submit" (click)="onSubmit()" type="button" value="Unsubscribe" />
+</div>

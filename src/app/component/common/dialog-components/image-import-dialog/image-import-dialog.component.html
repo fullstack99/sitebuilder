@@ -1,0 +1,56 @@
+<loading *ngIf="_loading" [text]="_loadingText" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+
+<div class="image-import-container"
+    [class.disable-black]="_loading"
+    >
+    <div class="dialog-header">    
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container rows">		
+            <span class="dialog-title"><h3>Import Image</h3></span>            
+        </div>
+        <div class="text-center">.jpg &nbsp; .gif  &nbsp; .png</div>
+    </div>   
+
+    <div class="dialog-body">
+        <div class="form-group import-button text-center">
+            <a (click)="_importFile.nativeElement.click()">
+                Desktop            
+                <input *ngIf="directory" #importFile type="file" accept="image/*" (change)="onSelect($event)" directory mozDirectory webkitdirectory multiple>
+                <input *ngIf="!directory" #importFile type="file" accept="image/*" (change)="onSelect($event)">
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a (click)="openImageDialog()">My Images</a>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter URL of image on the web"/>
+        </div>        
+        <div class="ribbon columns">
+            <div class="btn-left btr bt-angle-left" (click)="_ribbonPrev.next()"></div>
+            <div class="ribbon-body columns">
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex].imageUrl)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex].name}}
+                </div>
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex + 1].imageUrl)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex + 1].name}}
+                </div>
+                <div class="ribbon-item rows">
+                    <div class="img"
+                        [style.backgroundImage]="backgroundImage(_importSources[_ribbonItemIndex + 2].imageUrl)"
+                        ></div>
+                    {{_importSources[_ribbonItemIndex + 2].name}}
+                </div>
+            </div>
+            <div class="btn-right btr bt-angle-right" (click)="_ribbonNext.next()"></div>
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,13 @@
+<div *ngFor="let guide of smartguides"
+    class="smart-guide"
+    [style.left]  ="guide.left + 'px'"
+    [style.top]   ="guide.top + 'px'"
+    [style.width] ="guide.width + 'px'"
+    [style.height]="guide.height + 'px'"
+    ></div>
+<ng-template [ngIf]="showCoords">
+    <div class="left"  >{{box?.left}}</div>
+    <div class="right" >{{box?.right}}</div>
+    <div class="top"   >{{box?.top}}</div>
+    <div class="bottom">{{box?.bottom}}</div>
+</ng-template>

@@ -1,0 +1,81 @@
+.help-btn {
+	float: right;
+	cursor: pointer;
+	color: #3295e3;
+	margin-right: 10px;
+	width: 10px;
+	font-size: 15px;
+	margin-top: -20px;
+}
+
+drop-down{
+    display: block;    
+    width: 285px;
+    height: 40px;
+}	
+
+checkbox {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+}
+
+expandable-input>>> .form-control{
+    position: relative;
+    height: auto;    
+}
+
+expandable-input>>> table {
+  width: 100%;
+}
+expandable-input>>> .child td {
+  padding-top: 1px;
+}
+
+expandable-input>>> .child {
+  width: 100%;
+}
+expandable-input>>> tr td:first-child {
+  width: 280px;
+}
+expandable-input>>> tr td:last-child {
+  width: 17px;
+}
+
+expandable-input>>> .child .child-input {
+    width: 285px !important;
+}
+
+expandable-input>>> .child a.delete-link{    
+    margin-right: -20px;
+}
+expandable-input>>>.clearable-input input{
+  color: #8C8C8C !important;
+  font-size: 14px !important;
+}
+
+expandable-input>>>.add-child-link{
+    font-size: 12px !important;
+    float: left !important;
+    margin-left: 10px !important;
+}
+
+expandable-input>>>.filter-option{
+    font-size: 14px !important;
+}
+
+/* drop-down>>> .filter-option{  
+  font-size: 18px;  
+}
+
+drop-down>>> .dropdown-item{
+    font-size: 18px !important;
+    padding: 3px 12px !important;
+}
+
+.text-select{
+  width: 270px !important;
+  margin-bottom: 0px !important;
+  font-size: 18px;
+  color: #8C8C8C;
+}*/

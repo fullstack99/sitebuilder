@@ -1,0 +1,50 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span *ngIf="selected=='one'" class="dialog-title"><h3>Importing {{showIndex}} of {{files.length}} photos</h3><h3 *ngIf="latest.value" class="subtitle">Done</h3></span>
+        <span *ngIf="selected!='one'" class="dialog-title"><h3>Importing {{files.length}} of {{files.length}} photos</h3></span>
+    </div>
+</div>
+<div class="content">
+    <div class="item">
+        <label class='c-input c-radio'>
+            <input type="radio"
+                name="importControl"
+                (change)="onSelect($event)"
+                checked
+                value="one">
+            <span class="c-indicator"></span>
+        </label>
+        <span>Import 1 at a time</span>
+        <span (click) = "nextImg()">NEXT</span>
+        <span (click) = "nextImg(true)">SKIP IT</span>
+    </div>
+    <div class="item">
+        <label class='c-input c-radio'>
+            <input type="radio"
+                name="importControl"
+                (change)="onSelect($event)"
+                value="all">
+            <span class="c-indicator"></span>
+        </label>
+        <span>Just import all</span>
+    </div>
+    <div *ngIf="loading" class="progress-ele">
+        <div #progressText class="text-center" style="margin-bottom: 5px">Uploading Images</div>
+        <div #progressEle class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            {{ progress }}%
+        </div>
+    </div>
+</div>
+
+<div class="image-preview">
+      <img #image  alt=""/>
+</div>
+
+<div class="bottom">
+    <input [disabled]="!isValid.value" class="btn submit" (click)="onSubmit()" type="button" value="IMPORT" />
+</div>

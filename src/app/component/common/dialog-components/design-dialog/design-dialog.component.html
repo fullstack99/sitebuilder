@@ -1,0 +1,119 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">		
+        <span class="dialog-title"><h3>COLOR</h3></span>
+    </div>	
+</div>
+<div [formGroup]="designInfoForm">
+    <div class="result center-block"
+        [style.background-color]="designInfoForm.value.backColor"
+        [style.border]="getBorder()"        
+        [style.border-top-left-radius]="getBorderRadius('lTop')+'px'"
+        [style.border-top-right-radius]="getBorderRadius('rTop')+'px'"
+        [style.border-bottom-left-radius]="getBorderRadius('lBottom')+'px'"
+        [style.border-bottom-right-radius]="getBorderRadius('rBottom')+'px'"
+        (mouseenter)="onHoverButton($event)"
+        (mouseleave)="onLeaveButton($event)"
+        >
+    </div>
+    <div class="canvas-container">
+        <div class="canvas">
+            <div class="rows new-color">
+                <div class="columns">
+                    <div class="rows">
+                        <div class="columns colors">
+                            <label class='c-input c-radio'>
+                                <input type="radio" [formControl]="whichColor" value="1">
+                                <span class="c-indicator"></span>
+                            </label>
+                            <div class="text">Color</div>
+                            <div class="color-box"
+                                [style.background-color]="designInfoForm.value.backColor">
+                            </div>
+                            <a class="btn-close" (click)="clearColor(1)"
+                                [hidden]="whichColor.value != '1'">×</a>
+                        </div>
+                        <div class="columns colors">
+                            <label class='c-input c-radio'>
+                                <input type="radio" [formControl]="whichColor" value="2">
+                                <span class="c-indicator"></span>
+                            </label>
+                            <div class="text">Hover</div>
+                            <div class="color-box"
+                                [style.background-color]="designInfoForm.value.hoverColor">
+                            </div>
+                            <a class="btn-close" (click)="clearColor(2)"
+                                [hidden]="whichColor.value != '2'">×</a>
+                        </div>                                               
+                    </div>                    
+                    <div class="color-picker rows">
+                        <div>                            
+                            <span class="text more">
+                                <a (click)="openColorPicker()">More</a>
+                            </span>
+                        </div>
+                        <div class="colorPalette" #colorPalette></div>
+                    </div>                
+                </div>
+                <div class="columns colors">
+                    <label class='c-input c-radio'>
+                        <input type="radio" [formControl]="whichColor" value="3">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Border</div>
+                    <div class="color-box"
+                        [style.background-color]="designInfoForm.value.borderColor">
+                    </div>
+                    <a class="btn-close" (click)="clearColor(3)"
+                        [hidden]="whichColor.value != '3'">×</a>
+                    <div class="columns border-width-control">
+                        <slider formControlName="borderWidth"
+                            [min]="_borderWidth[0]" [max]="_borderWidth[1]"></slider>
+                        <input type="text"
+                            readonly="true"
+                            value="{{designInfo.borderWidth}}">
+                    </div>
+                </div>
+                <div class="columns colors">
+                    <label class='c-input c-radio'>
+                        <input type="radio" [formControl]="whichColor" value="4">
+                        <span class="c-indicator"></span>
+                    </label>
+                    <div class="text">Curve</div>
+                    <div class="columns border-width-control">
+                        <slider formControlName="amount" 
+                            [min]="_radius[0]" [max]="_radius[1]"></slider>
+                        <input type="text"
+                            readonly="true"
+                            value="{{designInfo.amount}}">
+                    </div>
+                </div>                
+                <div class="corner">
+                    <div>
+                        <checkbox formControlName="lTop" class='check-l-top'></checkbox>
+                        <checkbox formControlName="rTop" class='check-r-top'></checkbox>
+                    </div>
+                    <div class="choose-corner">
+                        <p> CHOOSE </p>
+                        <p> CORNERS </p>
+                    </div>
+                    <div>
+                        <checkbox formControlName="lBottom" class='check-l-bottom'></checkbox>
+                        <checkbox formControlName="rBottom" class='check-r-bottom'></checkbox>                        
+                    </div>
+                </div>
+            </div>            
+            <div class="form-group submit center-block">
+                <input
+                    type="submit"
+                    value="ADD"
+                    (click)="onAdd()"
+                    class="btn btn-block btn-main center-block"/>
+            </div>            
+        </div>
+    </div>
+</div>

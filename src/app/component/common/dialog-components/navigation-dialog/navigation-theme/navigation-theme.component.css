@@ -1,0 +1,20 @@
+.c-radio input ~ .c-indicator {
+    margin-top: -5px;
+}
+
+.canvas .links-container .navlink .placeholder {
+    position: absolute;
+    top: 5px;
+    left: calc(50% - 50px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+loading {
+  position: absolute;
+  opacity: 1;
+  z-index: 1000;
+  left: calc(50% - 100px);
+  top: calc(50% - 50px);
+}

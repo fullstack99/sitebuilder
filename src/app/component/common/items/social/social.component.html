@@ -1,0 +1,15 @@
+<div *ngIf="!editable" class="ribbons">
+	<a *ngFor="let item of ribbons" [href]="item.url" target="_blank">
+		<div class="img"
+			[style.backgroundImage]="backgroundRibbon(item)">
+		</div>
+	</a>
+</div>
+
+<div *ngIf="editable" class="ribbons">
+	<a *ngFor="let item of ribbons">
+		<div class="img"
+			[style.backgroundImage]="backgroundRibbon(item)">
+		</div>
+	</a>
+</div>

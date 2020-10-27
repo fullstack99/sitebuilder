@@ -1,0 +1,87 @@
+<form [formGroup]="form">
+	<div class="form-group row">
+		<div class="col-md-12">
+			<label for="glogood-email">User email</label>
+			<input #emailText
+				id="glogood-email"
+				class="form-control"
+				[class.disable]="pending"
+				name="name"
+				type="email"
+				formControlName="email"
+				placeholder="e.g janstevens@gmail.com"
+				required
+				(keypress)="onKeyPress($event, 1)"
+				>
+		</div>
+		<div class="col-md-12">
+			<app-validation-message [control]="form.controls['email']"></app-validation-message>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-md-12">
+			<label for="glogood-password" [class.disable]="pending">Password</label>
+			<a class="forgot-pwd" (click)="onForgot()">Forgot your password?</a><br>
+			<div class="pwd-container">
+				<input #passwordText
+					id="glogood-password"
+					class="form-control"
+					[class.disable]="pending"
+					formControlName="password"
+					name="password"
+					type="password"
+					required
+					(keypress)="onKeyPress($event, 2)">
+				<span class="help-label" [class.disable]="pending">Case sensitive</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<app-validation-message [control]="form.controls['password']"></app-validation-message>
+		</div>
+	</div>
+	<!-- <div *ngIf="isFreelancer" class="form-group" style="margin-left: 50px;">
+		<radio-group formControlName="accountType">
+			<ng-template radioGroupOption="2">
+				<span>Freelancer account</span>
+			</ng-template>
+			<ng-template radioGroupOption="1">
+				<span>Regular account</span>
+			</ng-template>
+		</radio-group>
+	</div> -->
+	<div class="form-group row">
+		<div class="col-md-12">
+			<input
+				type="button"
+				id="glogood-login-button"
+				value="LOGIN"
+				class="btn btn-block btn-main"
+				style="margin-left: 50px; max-width: 120px;"
+				(click)="onSubmit()"
+				[class.active]="form.valid"
+				[class.disable]="form.invalid || pending"/>
+		</div>
+	</div>
+	<div *ngIf="viewInited && errorMessage" class="form-group row">
+		<div class="col-md-12" style="color: red">
+      		Email & Password are not on file. Try again
+			<!-- {{ errorMessage }} -->
+		</div>
+	</div>
+	<br>
+
+	<label [class.disable]="pending">or Sign in with</label><br>
+	<div class="social-btn-container">
+		<div class="social-btn">
+			<a id="googleSignInBtn" (click)="onSocialSignIn()">
+				<img src="assets/images/canvas/google-plus.png" [class.disable]="pending">
+			</a>
+		</div>
+		<div class="social-btn">
+			<a id="fbSignInBtn">
+				<img src="assets/images/canvas/facebook.png" [class.disable]="pending">
+			</a>
+		</div>
+	</div>
+</form>

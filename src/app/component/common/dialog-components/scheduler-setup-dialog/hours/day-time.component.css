@@ -1,0 +1,44 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+    color: #464646;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.day-time-container{
+    margin-bottom: 15px;
+}
+    .day{        
+        min-width: 85px;
+    }
+
+    .times .columns{
+        align-items: center;
+    }
+
+    .time-container{
+        width: 250px;
+        margin-left: 5px;        
+    }
+    .open-close-button{
+        width: 65px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+        a.btn-close{        
+            color: red;
+        }
+
+    datetime >>> .k-timepicker{
+        width: 110px !important;
+    }
+
+    .center-items{
+        align-items: center;
+    }

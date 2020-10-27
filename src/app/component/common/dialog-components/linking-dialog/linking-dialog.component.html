@@ -1,0 +1,241 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">x</a>
+	</div>
+</div>
+<form [formGroup]="form">
+<div class="rows linking-body">
+	<div class="linking-title-container columns">
+		<div class="linking-title-background">
+		</div>
+		<div class="linking-title-target">Link this…</div>
+
+		<div *ngIf="linkMode == 0" class="linking-title-options">…to one of these</div>
+		<div *ngIf="linkMode == 1" class="linking-title-options rows">
+			<div style="white-space: nowrap; letter-spacing: -1px; font-size: 15px; margin-left: -14px; padding-top: 3px;">
+					…To your Downloadable file
+			</div>
+			<div class="file-import-export columns">
+				<a (click)="_importFile.nativeElement.click()">
+					IMPORT FILE
+					<input #importFile type="file" (change)="onUploadFile($event)">
+				</a>
+				<a (click)="exportFile()">
+					EXPORT FILE
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="linking-container columns">
+		<div class="linking-target">
+			<div class="linking-preview">
+				<div class="linking-preview-content">
+					<ng-template [ngIf]="!form.value.source || !form.value.source.source">
+						<div class="head">START</div>
+						<div style="font-size: 16px; color: red;">
+							<div>
+								You need to highlight some text, image, button, navigation...
+							</div>
+							<div>
+								Then return to Link.
+							</div>
+						</div>
+					</ng-template>
+					<div *ngIf="form.value.source && form.value.source.linkSourceType == 'LinkSourceImage'"
+						class="img"
+						[style.backgroundImage]="backgroundImage(form.value.source.source)">
+					</div>
+					<div [hidden]="!form.value.source || form.value.source.linkSourceType != 'LinkSourceText'"
+						#linkSourceText
+						class="link-text">
+					</div>
+					<div [hidden]="!form.value.source || form.value.source.linkSourceType != 'LinkSourceComponent'"
+						#componentView
+						class="component">
+						<div class="item-container">
+							<button-item
+								*ngIf = "form.value.source && form.value.source.source.itemType == 'ButtonItem'"
+								[item]="form.value.source.source">
+							</button-item>
+							<shape-item
+								*ngIf = "form.value.source && form.value.source.source.itemType == 'ShapeItem'"
+								[item]="form.value.source.source">
+							</shape-item>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			#linkingOptionContainer
+			class="linking-options"
+			(scroll)="_linkingOptionContainerScroll.next()"
+			>
+
+			<ul *ngIf="linkMode == 0"
+        		class="list-unstyled linking-options-list rows">
+				<li [class.selected]="form.value.type === 'page'">
+					<label class="c-input c-radio" #linkTarget>
+						<input type="radio" formControlName="type" value="page">
+						<span class="c-indicator"></span>
+						Enter Page Number
+					</label>
+					<div class="linking-details-block text-center">
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Enter #"
+							style="max-width: 70px; margin: auto;"
+							formControlName="pageNo"
+							/>
+						<a class="view-page"
+							[class.disable]="form.value.pageNo < 0 || !form.value.pageNo || originPageNo == form.value.pageNo"
+							[class.active]="form.value.pageNo > 0 && originPageNo != form.value.pageNo"
+							(click)="onViewPage()">View Page</a>
+					</div>
+					<div class="linking-option-preview">
+						<div class="preview-thumb">
+							<div *ngIf="!enableCall && !_thumb" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></div>
+							<img *ngIf="_thumb" [src]="_thumb" class="img-fluid">
+							<!-- <img *ngIf="enableCall && !_thumb" src="/assets/images/linking-dialog/placeholder_640x480.png" class="img-fluid"> -->
+						</div>
+					</div>
+				</li>
+				<li [class.selected]="form.value.type === 'lookup'">
+					<label class="c-input c-radio">
+						<input type="radio" formControlName="type" value="lookup" (click)="openSitemapDialog($event)">
+						<span class="c-indicator"></span>
+						Look up Page
+					</label>
+					<!-- <span class="linking-details">
+						<button type="button" class="btn btn-link">GO TO MY PAGES</button>
+					</span> -->
+					<div class="linking-option-preview">
+						<div class="preview-edit columns">
+							<a (click)="openSitemapDialog($event)">Edit</a>
+						</div>
+						<div class="preview-thumb">
+							<div *ngIf="!enableCall && !_thumb" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></div>
+							<img *ngIf="_thumb" [src]="_thumb" class="img-fluid">
+							<img *ngIf="enableCall && !_thumb" src="/assets/images/linking-dialog/placeholder_640x480.png" class="img-fluid">
+						</div>
+					</div>
+				</li>
+				<li *ngIf="serviceId != 13" [class.selected]="form.value.type === 'anchor'">
+					<label class="c-input c-radio">
+						<input type="radio" formControlName="type" value="anchor"
+							(click)="showPickItemDialog()">
+						<span class="c-indicator"></span>
+						To Text or Image on this Page
+					</label>
+				</li>
+				<li [class.selected]="form.value.type === 'website'">
+					<label class="c-input c-radio">
+						<input type="radio" formControlName="type" value="website">
+						<span class="c-indicator"></span>
+						To another Website
+					</label>
+					<span class="linking-details">
+						<a [href]="getWebSite" target="_blank">VERIFY</a>
+					</span>
+					<div class="linking-details-block">
+						<input type="text" class="form-control input-block" placeholder="Enter website"
+							formControlName="website"/>
+					</div>
+				</li>
+				<li *ngIf="serviceId != 13" [class.selected]="form.value.type === 'sitemap'">
+					<label class="c-input c-radio">
+						<input type="radio"
+							formControlName="type"
+							value="sitemap">
+						<span class="c-indicator"></span>
+						To the Site Map
+					</label>
+					<span class="linking-details">
+						<a class="margin-left-20" (click)="openSitemapDialog($event, true)">View</a>
+					</span>
+				</li>
+				<li *ngIf="serviceId != 13" [class.selected]="form.value.type === 'email'">
+					<label class="c-input c-radio">
+						<input type="radio" formControlName="type" value="email">
+						<span class="c-indicator"></span>
+						To an Email Address
+					</label>
+					<span class="linking-details">
+						<a href="{{'mailto:' + form.controls.email.value}}" target="_blank">VERIFY</a>
+					</span>
+					<div class="linking-details-block">
+						<div *ngIf="!form.controls.email.valid" class="error text-danger text-xs-right">
+							Not a valid email
+						</div>
+						<input type="text" class="form-control input-block email" placeholder="Enter email"
+							formControlName="email"/>
+					</div>
+				</li>
+				<li [class.selected]="form.value.type === 'maps'">
+					<label class="c-input c-radio">
+						<input type="radio" formControlName="type" value="maps">
+						<span class="c-indicator"></span>
+						To Google Maps
+					</label>
+					<span class="linking-details">
+						<a (click)="openGoogleMapsDialog()">View</a>
+					</span>
+					<div class="linking-details-block">
+						<input type="text" class="form-control input-block email" placeholder="Enter address"
+							formControlName="address"/>
+					</div>
+				</li>
+			</ul>
+			<ul *ngIf="linkMode == 1"
+				class="list-unstyled linking-options-list">
+				<li class="columns" *ngFor="let file of _files; let i = index">
+					<label class="c-input c-radio">
+						<input type="radio"
+							name="linkFile"
+							[checked]="form.value.linkFile && file.location == form.value.linkFile.location && file.name == form.value.linkFile.name"
+							[value]="file"
+							(change)="onLinkFileOptionChange($event, file)">
+						<span class="c-indicator"></span>
+					</label>
+					<i class="{{getFileClass(file.name)}}"></i>
+					<span
+						class="file-name"
+						[ngStyle]="{
+							'color': form.value.linkFile && file.location == form.value.linkFile.location && file.name == form.value.linkFile.name ? 'orange' : null
+						}"
+						>
+						{{file.name}}
+					</span>
+					<!-- <span class="file-date">
+						10/09/2017 12:31 PM
+					</span> -->
+					<span class="file-delete">
+						<a (click)="onDeleteFile(file, i)" class="btn-close">x</a>
+					</span>
+				</li>
+			</ul>
+			<div *ngIf="_uploading" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></div>
+		</div>
+	</div>
+</div>
+<div class="columns bottom">
+	<button
+		type="button"
+		class="btn btn-danger"
+    	[disabled]="!isValid"
+		(click)="onSubmit(0)">{{linkMode == 0 ? 'Remove Link' : 'Remove Download'}}</button>
+	<button *ngIf="linkMode == 0"
+		type="button"
+		class="btn btn-warning"
+		[disabled]="!isValid"
+		(click)="onSubmit(1)">Create Link</button>
+	<button *ngIf="linkMode == 1"
+		type="button"
+		class="btn btn-warning"
+		[disabled]="!isDownloadValid"
+		(click)="onSubmit(1)">Create Download</button>
+</div>
+</form>

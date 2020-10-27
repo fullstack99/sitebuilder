@@ -1,0 +1,74 @@
+:host {
+  box-sizing: border-box;
+  background: transparent;
+}
+
+  :host * {
+    box-sizing: border-box;
+  }
+
+  :host > * {
+    margin-bottom: 15px;
+  }
+
+h5 {
+  margin-top: 7px;
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+h4 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.check-box {
+  height: 34px;
+  margin-left: 20px;
+}
+
+.cards-details {
+  width: 80%;
+  display: block;
+}
+
+.card-detail-item {
+  height: 60px;
+}
+
+  .card-detail-item > span {
+    margin-left: 10px;
+  }
+
+.expiration-date {
+  display: flex;
+}
+
+  .expiration-date > drop-down {
+    width: 80px;
+    margin-right: 20px;
+  }
+
+    .expiration-date > input {
+      width: 100px;
+    }
+
+.cvv-code {
+  display: flex;
+}
+
+  .cvv-code > input {
+    width: 90px;
+    margin-right: 20px;
+  }
+
+
+drop-down {
+  width: 100%;
+  height: 40px;
+  margin-top: 4px;
+}
+
+drop-down>>>.dropdown-menu {
+  position: absolute;
+}

@@ -1,0 +1,69 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <div class="columns">
+            <div class="btn-back" (click)="onClose($event)"></div>
+            <div class="place rows" [class.active]="isValid()" [class.disable]="!isValid()" (click)="onSubmit($event)">
+            <!-- <div class="place rows active" (click)="onSubmit($event)"> -->
+                <span>Place</span>
+                <span>on Page</span>
+            </div> 
+            <div class="dialog-title"><h3>Setup Scheduler</h3></div>
+        </div>
+        <div class="columns">                       
+            <div class="progress-container columns">
+                <div *ngFor="let step of steps; let i=index" class="progress-item">
+                    <span class="progress-item-name" [class.active]="step.valid" [class.visited]="step.visited" (click)="onStepChange(i)">{{step.name}}</span>
+                    <span *ngIf="i<steps.length-1"
+                        class="btr bt-angle-right" [class.active]="step.valid"></span>
+                </div>
+            </div>
+        </div>
+    </div>        	
+</div>
+
+<div class="row dialog-body">
+    <div class="content col-xs-12" [ngSwitch]="activeStepIndex">
+        <ng-template [ngSwitchCase]="0">               
+            <locations
+                [info]="info"
+                [isNew]="isNew"
+                [visited]="steps[0].touched"
+                (infoChange)="onStepValueChange($event,0)"
+                (validityChange)="onStepValidityChange($event,0)"
+                (locationTypeChange)="onLocationTypeChange()"
+                ></locations>
+        </ng-template>
+        <ng-template [ngSwitchCase]="1">
+            <services         
+                [info]="info"
+                [isNew]="isNew"
+                [visited]="steps[1].touched"
+                (infoChange)="onStepValueChange($event,1)"
+                (validityChange)="onStepValidityChange($event,1)"                
+                ></services>
+        </ng-template>
+        <ng-template [ngSwitchCase]="2">
+            <providers
+                [info]="info"
+                [isNew]="isNew"
+                [visited]="steps[2].touched"
+                (infoChange)="onStepValueChange($event,2)"
+                (validityChange)="onStepValidityChange($event,2)"
+                ></providers>
+        </ng-template>
+        <ng-template [ngSwitchCase]="3">
+            <hours
+                [info]="info"
+                [isNew]="isNew"
+                [visited]="steps[3].touched"
+                (infoChange)="onStepValueChange($event,3)"
+                (validityChange)="onStepValidityChange($event,3)"
+                ></hours>
+        </ng-template>
+    </div>
+</div>

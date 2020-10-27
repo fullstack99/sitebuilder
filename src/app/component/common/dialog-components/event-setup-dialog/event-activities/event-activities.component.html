@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="event-title text-center">Choose Type of Signup</div>
+    <div>
+        <form
+            [formGroup]="form"
+            class="center-block">
+            <div class="form-group event-type">
+                <ul class="list-unstyled rows">
+                    <li>
+                        <label class="c-input c-radio">
+                            <input
+                                type="radio"
+                                formControlName="eventType"
+                                value="SimpleEvent">
+                            <span class="c-indicator"></span>
+                            Simple Signup
+                        </label>
+                    </li>
+                    <li>
+                        <label class="c-input c-radio">
+                            <input
+                                type="radio"
+                                formControlName="eventType"
+                                value="EventWithActivities">
+                            <span class="c-indicator"></span>
+                            Signup for different Event Activities
+                        </label>
+                        <ul *ngIf="form.controls.eventType.value == 'EventWithActivities'"
+                            class="list-unstyled">
+                            <li>
+                                <label class="c-input c-radio">
+                                    <input
+                                        #elem
+                                        type="radio"
+                                        formControlName="eventWithActivitiesType"
+                                        value="EventWithActivitiesSingleFee">
+                                    <span class="c-indicator"></span>
+                                    One Admission price for All activities
+                                </label>
+                            </li>
+                            <li>
+                                <label class="c-input c-radio">
+                                    <input
+                                        #elem
+                                        type="radio"
+                                        formControlName="eventWithActivitiesType"
+                                        value="EventWithActivitiesMultiFee">
+                                    <span class="c-indicator"></span>
+                                    Different prices for Different Activities
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label class="c-input c-radio">
+                            <input
+                                type="radio"
+                                formControlName="eventType"
+                                value="EventWithParticipantTypes">
+                            <span class="c-indicator"></span>
+                            Signup by type like Student, Alumnae or Seniors
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <event-admission
+                *ngIf="hasSingleAdmission()"
+                [form]="form.controls.admission">
+            </event-admission>
+            <div
+                *ngIf="form.controls.eventType.value == 'EventWithActivities'"
+                class="attachments">
+                <h4>Event Activity</h4>
+                <div draggableList (draggableList-newIndexes)="onEventActivitiesDragEnd($event)">
+                    <event-activity
+                        *ngFor="let activity of form.controls.activities.controls, let i=index"
+                        draggableListItem
+                        [form]="activity"
+                        [hasFee]="form.controls.eventWithActivitiesType.value == 'EventWithActivitiesMultiFee'"
+                        [canBeRemoved]="form.controls.activities.controls.length > 1"
+                        (removeCommand)="removeActivity(i)"></event-activity>
+                </div>
+                <a (click)="addActivity()">MORE</a>
+            </div>
+            <div
+                *ngIf="form.controls.eventType.value == 'EventWithParticipantTypes'"
+                class="attachments">
+                <h4>Participant Type</h4>
+                <div draggableList (draggableList-newIndexes)="onParticipantTypesDragEnd($event)">
+                    <participant-type
+                        *ngFor="let type of form.controls.participantTypes.controls, let i=index"
+                        draggableListItem
+                        [form]="type"
+                        [canBeRemoved]="form.controls.participantTypes.controls.length > 1"
+                        (removeCommand)="removeParticipantType(i)"></participant-type>
+                </div>
+                <a (click)="addParticipantType()">MORE</a>
+            </div>
+        </form>
+    </div>
+</div>

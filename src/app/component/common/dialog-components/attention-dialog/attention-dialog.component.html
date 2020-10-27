@@ -1,0 +1,37 @@
+<div class="dialog-header" (mousedown)="onMouseDownDialog($event)">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (mousedown)="openFeedbackDialog($event)">FEEDBACK</a>
+        <a (mousedown)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">		
+        <span class="dialog-title" #title>{{attention_info.title.value}}</span>
+    </div>	
+</div>
+
+<div class="content" #resultContent (mousedown)="onMouseDownDialog($event)">
+</div>
+<div class="columns" *ngIf="!attention_info.button" (mousedown)="onMouseDownDialog($event)">
+	<div class="proceed-button">
+		<a (mousedown)="onProceed($event)">{{attention_info.button_values[0]}}</a>
+	</div>
+	<div class="proceed-button" *ngIf="attention_info.button_values.length > 1">
+		<a (mousedown)="onStop($event)">{{attention_info.button_values[1]}}</a>
+	</div>
+</div>
+<div class="columns" *ngIf="attention_info.button" (mousedown)="onMouseDownDialog($event)">
+	<div class="proceed-button">
+        <input
+            type="submit"
+            value="{{attention_info.button_values[0]}}"
+            (mousedown)="onProceed($event)"
+            class="btn btn-block btn-main center-block">
+    </div>
+    <div class="proceed-button" *ngIf="attention_info.button_values.length > 1">
+        <input
+            type="submit"
+            value="{{attention_info.button_values[1]}}"
+            (mousedown)="onStop($event)"
+            class="btn btn-block btn-main center-block">
+    </div>
+</div>

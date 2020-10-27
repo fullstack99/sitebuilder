@@ -1,0 +1,65 @@
+<div
+	class="drag-grip"
+	draggableListItemGrip
+></div>
+<div [formGroup]="form" class="columns">
+	<div class="admission-message">
+		<div>
+			<input
+				type="text"
+				class="form-control"
+				formControlName="name"
+				placeholder="Student, Alumnae, Seniors"/>
+			<div class="caption">
+				<a (click)="showMessage()">MESSAGE</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a (click)="openQualifyParticipantDiag()">Verify</a>
+			</div>
+		</div>
+		<div formGroupName="admission" class="columns" style="margin-top: 10px;">
+			<div style="max-width: 100px; margin-right: 30px;">
+				<input
+					type="text"
+					class="form-control"
+					formControlName="participantsLimit"
+					placeholder="No Limit"/>
+				<div class="caption">Participants</div>
+			</div>
+			<div style="max-width: 100px;">
+				<input
+					type="text"
+					class="form-control"
+					formControlName="guests"
+					placeholder="0"/>
+				<div class="caption">Guest</div>
+			</div>
+		</div>
+	</div>
+	<div class="rows admission-fee" formGroupName="admission">
+		<div class="fee" formGroupName="fee" *ngIf="form.value.admission.fee.eventFeeType=='RegularEventFee'">
+			<input
+				type="text"
+				class="form-control"
+				formControlName="price"
+				placeholder="Free"/>
+			<a class="caption" (click)="showPrice()">EARLY BIRD</a>
+		</div>
+		<div class="fee-early" *ngIf="form.value.admission.fee.eventFeeType=='EarlyBirdEventFee'">
+			<div>
+				Early Bird Price &nbsp; ${{form.value.admission.fee.earlyPrice}}
+			</div>
+			<div class="rows" *ngIf="form.value.admission.fee.earlyPriceEndDate">
+				<span>Until Date : </span>
+				<span class="fee-early-date">{{showDate(form.value.admission.fee.earlyPriceEndDate)}}</span>
+			</div>
+			<div *ngIf="form.value.admission.fee.price">
+				Regular Price &nbsp; ${{form.value.admission.fee.price}}
+			</div>
+			<div class="fee-early-remove text-center"><a (click)="removeEarlyBird()"> REMOVE EARLY BIRD </a></div>
+		</div>
+	</div>
+</div>
+<a  *ngIf="canBeRemoved"
+	(click)="remove()"
+	class="btn-remove">×</a>

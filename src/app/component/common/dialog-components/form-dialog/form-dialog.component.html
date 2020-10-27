@@ -1,0 +1,104 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (mousedown)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span class="dialog-title"><h3>Form</h3></span>
+    </div>
+</div>
+<nav class="navbar">
+    <div class="container-fluid canvas-toolbar" [class.mobile]="viewMode == 2">
+        <div class="tool-persist">
+            <ul class="canvas-nav">
+                <li>
+                    <div class="btn-back" (mousedown)="onClose($event)"></div>
+                </li>
+                <li [class.active]="isSaving">
+                    <a class="text-center font-12"
+                        (click)="onSubmit($event)">
+                        <div class="caption rows">
+                            <span>PLACE</span>
+                            <span>ON</span>
+                            <span>PAGE</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="place">
+                    <input type="text"
+                        #textEle
+                        class="form-name form-control"
+                        placeholder="Name Your Form"
+                        spellcheck="true"
+                        required
+                        [(ngModel)]="formName"
+                        (keydown)="refresh()"/>
+                </li>
+                <li [class.active]="canActiveTool('Undo')">
+                    <a (mousedown)="clickCanvasTool('Undo')">
+                        <!-- <span class="font-icon btb bt-reply"></span> -->
+                        <div class="caption">Undo</div>
+                    </a>
+                </li>
+                <li [class.active]="canActiveTool('Redo')">
+                    <a (mousedown)="clickCanvasTool('Redo')">
+                        <!-- <span class="font-icon btb bt-forward"></span> -->
+                        <div class="caption">Redo</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="tool-container">
+            <span class="btr bt-angle-left bt-2x"
+                    [class.active]="!isBeginning"
+                    (click)="onPrev()"></span>
+            <div class="tools">
+                <div class="swiper-container" [swiper]="swiperConfig" (indexChange)="indexChanged($event)" #usefulSwiper>
+                    <div class="swiper-wrapper">
+                        <div *ngFor="let tool of _tools" class="swiper-slide">
+                            <div class="tool" [class.active]="canActiveTool(tool.name)">
+                                <a  (click)="clickCanvasTool(tool.name)">
+                                    <!-- <span *ngIf="!tool.hasImage"
+                                        class="{{ tool.item_class }}">
+                                    </span>
+                                    <img *ngIf="tool.hasImage"
+                                        class="{{tool.item_class}}"
+                                        src="{{ tool.url }}"/> -->
+                                    <div class="caption">
+                                        {{ tool.caption }}
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="tool-space" *ngIf="!last"> &nbsp; </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="btr bt-angle-right bt-2x"
+                [class.active]="!isEnd"
+                (click)="onNext()"></span>
+        </div>
+    </div>
+</nav>
+
+<div class="common-canvas-container" [class.mobile]="viewMode == 2">
+	<common-canvas
+		[page]="document"
+		[width]="viewMode == 2 ? 320 : 850"
+		[minHeight]="1700"
+		[height]="1700"
+		[extraLeft]="dialogLeft"
+		[extraTop]="dialogTop"
+		[zoomable]="false"
+		[showGrid]="true">
+	</common-canvas>
+	<div class="common-canvas-container-bottom">
+	</div>
+</div>
+
+<form-tools
+    [viewMode]="viewMode"
+    (selectedTool)="clickCanvasTool($event)"
+    >
+</form-tools>

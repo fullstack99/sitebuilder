@@ -1,0 +1,189 @@
+<div  *ngIf="editable"
+    #matrixChoiceContainer
+    class="matrix-choice-container"
+    [class.animation]="animation"
+    (mousedown)="onContainerClick($event)">
+  <div
+		#questionTitle
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="question-title content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+    (contenteditableModelChange) = "setItemResize()"
+    >
+  </div>
+
+    <div #hTextContainer
+        class="columns h-container"
+        draggableListInline
+        (draggableList-newIndexes)="_hLinkIndexChange.next($event)">
+        <div class="single-text-container">
+            <div class="first-text-label">&nbsp;</div>
+        </div>
+        <div *ngFor="let text of info.htexts; let i=index"
+            class="single-text-container rows"
+            draggableListItemInline
+            [draggableListItem-animate]="false"
+            (draggableListItem-dragStart)="_hLinkDragStart.next(i)"
+            (draggableListItem-dragEnd)="_hLinkDragEnd.next(i)"
+            (draggableListItem-drag)="_hLinkDrag.next([i, $event])">
+
+            <div
+                #hTextLabel
+                contenteditable
+                spellcheck="true"
+                contenteditableModel
+                class="matrix-text-label content-editable label-border wrap"
+                [(contenteditableModel)] = "info.htexts[i]"
+                (contenteditableModelChange) = "setItemResize()"
+                >
+            </div>
+            <div class="columns grip-control">
+                <!-- <div
+                    class="glogood-grip"
+                    draggableListItemGripInline
+                    (mousedown)="$event.stopPropagation()"></div> -->
+                <div *ngIf="i>1" class="remove" (mousedown)="onRemove($event,i,0)">x</div>
+            </div>
+        </div>
+        <div *ngIf="info.htexts && info.htexts.length < 5" class="btn-more">
+            <a (mousedown)="onAdd($event,0)">MORE</a>
+        </div>
+    </div>
+
+    <div #vTextContainer
+        class="rows v-container"
+        draggableList
+        (draggableList-newIndexes)="_vLinkIndexChange.next($event)">
+        <div *ngFor="let text of info.vtexts; let i=index"
+            class="columns"
+            draggableListItem
+            [draggableListItem-animate]="false"
+            (draggableListItem-dragStart)="_vLinkDragStart.next(i)"
+            (draggableListItem-dragEnd)="_vLinkDragEnd.next(i)"
+            (draggableListItem-drag)="_vLinkDrag.next([i, $event])">
+            <div class="single-text-container columns">
+                <div
+                    #vTextLabel
+                    contenteditable
+                    spellcheck="true"
+                    contenteditableModel
+                    class="matrix-text-label content-editable label-border wrap"
+                    [(contenteditableModel)] = "info.vtexts[i]"
+                    (contenteditableModelChange) = "setItemResize()"
+                    >
+                </div>
+                <!-- <div
+                    class="glogood-grip vertical"
+                    draggableListItemGrip
+                    (mousedown)="$event.stopPropagation()"></div> -->
+                <div *ngIf="i>1" class="remove" (mousedown)="onRemove($event,i,1)">x</div>
+            </div>
+
+            <div *ngFor="let hText of info.htexts; let j=index" style="margin: 5px">
+                <div class="matrix-text-label" style="display: flex; align-items: center; height: 100%; min-width: 100px; max-width: 100px;">
+                    <div class="option" *ngIf="info.type=='check'">
+                        <label class='c-input c-checkbox'>
+                            <input type="checkbox" name="check"/>
+                            <span class="c-indicator"></span>
+                        </label>
+                    </div>
+                    <div class="option" *ngIf="info.type=='option'">
+                        <label class="c-input c-radio">
+                            <input type="radio" name="radio">
+                            <span class="c-indicator"></span>
+                        </label>
+                    </div>
+                    <div class="drop" *ngIf="info.type=='dropdown'">
+                        <drop-down
+                            [selected]="info.selectedValues[info.htexts.length*i+j]"
+                            [elements]="info.values[info.htexts.length*i+j]"
+                            [defaultData]="'Rank'"
+                            [editable]="true"
+                            (changeElements)="changeElements($event,i,j)">
+                        </drop-down>
+                        <!-- <div class="remove" (mousedown)="onRemoveDropdown($event,i,j)">x</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-more">
+            <a (mousedown)="onAdd($event,1)">MORE</a>
+        </div>
+    </div>
+</div>
+
+<div  *ngIf="!editable"
+    #matrixChoiceContainer
+    class="matrix-choice-container"
+    [class.animation]="animation">
+
+    <div #questionTitle
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label">
+	</div>
+
+    <div #hTextContainer
+        class="columns h-container">
+        <div class="single-text-container">
+            <div class="first-text-label">&nbsp;</div>
+        </div>
+        <div *ngFor="let text of info.htexts; let i=index"
+            class="single-text-container rows">
+            <div
+                #hTextLabel
+                spellcheck="true"
+                contenteditableModel
+                class="matrix-text-label result wrap"
+                [contenteditableModel] = "info.htexts[i]">
+            </div>
+        </div>
+    </div>
+
+    <div #vTextContainer
+        class="rows v-container">
+        <div *ngFor="let text of info.vtexts; let i=index"
+            class="v-row columns">
+            <div class="single-text-container">
+                <div
+                    #vTextLabel
+                    spellcheck="true"
+                    contenteditableModel
+                    class="matrix-text-label result wrap"
+                    [contenteditableModel] = "info.vtexts[i]">
+                </div>
+            </div>
+
+            <div *ngFor="let hText of info.htexts; let j=index" style="margin: 5px">
+                <div class="matrix-text-label" style="display: flex; align-items: center; height: 100%; min-width: 100px; max-width: 100px;">
+                    <div class="option" *ngIf="info.type=='check'">
+                        <label class='c-input c-checkbox'>
+                            <input type="checkbox" name="check"/>
+                            <span class="c-indicator"></span>
+                        </label>
+                    </div>
+                    <div class="option" *ngIf="info.type=='option'">
+                        <label class="c-input c-radio">
+                            <input type="radio" name="{{ 'radio' + j }}">
+                            <span class="c-indicator"></span>
+                        </label>
+                    </div>
+                    <div class="drop" *ngIf="info.type=='dropdown'">
+                        <drop-down
+                            [selected]="info.selectedValues[info.htexts.length*i+j]"
+                            [elements]="info.values[info.htexts.length*i+j]"
+                            [defaultData]="'Choose'"
+                            (changeSelected)="selectValue($event, i, j)">
+                        </drop-down>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div #cloneTitle
+	class="clone-title result wrap">
+</div>

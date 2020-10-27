@@ -1,0 +1,123 @@
+<loading *ngIf="_loading"></loading>
+<div class="add-contact">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns margin-top-10">
+            <span class="dialog-title"><h3>{{title}}</h3></span>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <ul class="nav nav-tabs">
+            <li *ngFor="let tab of tabs" [class.active]="tab === activeTab">
+                <a aria-controls="samples" (click)="selectTab.next(tab)">
+                    {{tab.name}}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <form>
+        <div class="top" *ngIf="activeTab.name == 'Type'">
+            <div class="top-body">
+                <div class="text-box" *ngFor="let typeForm of typeForms.controls; let i = index;">
+                    <split-text-box [formControl]="typeForm.controls['email']" label="Email"></split-text-box>
+                    <split-text-box [formControl]="typeForm.controls['firstName']" label="First Name"></split-text-box>
+                    <split-text-box [formControl]="typeForm.controls['lastName']" label="Last Name"></split-text-box>
+                    <span *ngIf="i != 0" class="remove-btn" (click)="removeTypeForm(i)">x</span>
+                </div>
+                <div class="more-contact"><a (click)="addTypeForm()">MORE</a></div>
+            </div>
+        </div>
+
+        <div class="top" *ngIf="activeTab.name == 'Paste'">
+            <div class="space">
+                <a (click)="onCancelPaste()" class="cancel-item" *ngIf="pastEmails.value.length > 0">CANCEL</a>
+            </div>
+            <div class="center-block  content-pastelist">
+                <span>Paste Emails Here</span>
+                <div class="emails-list">
+                    <textarea [formControl]="pastEmails" class="form-control" autofocus>
+                    </textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="top" *ngIf="activeTab.name == 'Import File'">
+            <div class="content-importfile">
+                <div class="importfile">
+                    <input class="form-control" [formControl]="filePath" />
+                    <div class="button" (click)="onImportClick()">
+                        <span>BROWSE</span>
+                        <input #importFile type="file" accept="text/*, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv" (change)="filesSelected.next($event)" />
+                    </div>
+                </div>
+
+                <div class="cancel">
+                    <span> File Types  .xls,  .xlsx, .csv, .txt </span>
+                    <span *ngIf="filePath.value.length > 0" (click)="onCancelImport()"> CANCEL </span>
+                </div>
+            </div>
+
+            <div class="content-importlist">
+                <div class="email-select">
+                    <span *ngIf="importContacts.length > 0"> EMAIL </span>
+                    <div class="drop-down-container" *ngFor="let item of importContacts[0]; let i = index">
+                        <drop-down *ngIf="i!=0" [selected]="'Choose Tiltle'" [elements]="titles" (changeSelected)="selectDropDown($event, i)">
+                        </drop-down>
+                    </div>
+                </div>
+                <div class="email-content">
+                    <div *ngFor="let contact of importContacts; let i = index">
+                        <div class="text-input" *ngIf="selectedRow.value == i">
+                            <a (click)="onRemoveImportContact(i)" class="remove-item">X</a>
+                            <input #items *ngFor="let item of contact; let j = index" value="{{item}}" class="form-control" (blur)="deselectImportContact(i, j,  $event)" />
+                        </div>
+                        <div class="text-input" *ngIf="selectedRow.value != i">
+                            <a (click)="onRemoveImportContact(i)" class="remove-item">X</a>
+                            <span *ngFor="let item of contact; let j = index" (click)="selectImportContact(i, j, $event)" title="{{item}}">{{item}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="required">
+                <span>*</span>
+            </div>
+            <div class="avoid-spam">
+                <div class="split-ressure">
+                    <div class="spam-label"><span>Avoid SPAM</span></div>
+                    <split-text-box [formControl]="avoidSpam" label="Reassure your contacts why you send them emails.">
+                    </split-text-box>
+                </div>
+                <tooltip text="?" code="em.s.111" height=300>
+                    <p>
+                        Keep your contacts trust by reminding them how you got their email.
+                    </p>
+                    <p>
+                        Here are some examples.
+                    </p>
+                    <p>
+                        You received this email because<br/> &emsp;&emsp;&emsp;&emsp;&emsp;you are a member of...<br/> &emsp;&emsp;&emsp;&emsp;&emsp;you signed up for salea alets...<br/> &emsp;&emsp;&emsp;&emsp;&emsp;you purchased from...<br/> &emsp;&emsp;&emsp;&emsp;&emsp;you
+                        requested updates from...<br/>
+                    </p>
+                </tooltip>
+            </div>
+            <div class="add-lists">
+                <span>All contacts are automatically added to a Master List
+                </span>
+                <a *ngIf="title == 'Add Contacts'" (click)="onAddList()">Also, add to Other Lists</a>
+            </div>
+
+            <div class="text-center">
+                <input [disabled]="!isValid.value" class="btn addcontact-btn" (click)="onSubmit()" type="button" value="{{title}}">
+            </div>
+        </div>
+    </form>
+</div>

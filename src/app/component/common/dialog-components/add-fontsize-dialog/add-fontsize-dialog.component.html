@@ -1,0 +1,28 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<a (mousedown)="onClose($event)" class="btn-close">×</a>
+	</div>
+	<!-- <div class="dialog-title-container columns">
+		<span class="dialog-title"><h4>Add Fontsize</h4></span>
+	</div> -->
+</div>
+
+<div class="dialog-container" [formGroup]="form">
+	<div class="form-group">
+		<input class="form-control"
+			formControlName="fontsize"
+			name="fontsize"
+			type="text"
+			required
+			placeholder="Add Fontsize"
+			(keydown)="onKeydwon($event)">
+	</div>
+	<div class="form-group submit center-block">
+		<input
+			type="button"
+			value="Add"
+			[disabled]="form.invalid"
+			(mousedown)="onSubmit($event)"
+			class="btn btn-block btn-main center-block">
+	</div>
+</div>

@@ -1,0 +1,69 @@
+.rows{
+    display: flex;
+    flex-direction: column;
+}
+.columns {
+    display: flex;
+}
+
+.margin-top-10{
+    margin-top: 10px;
+}
+
+.margin-top-min-10{
+    margin-top: -10px;
+}
+
+.dialog-header{
+    position: relative;
+    min-height: 20px;
+    margin-top: -5px;    
+    width: 100%;
+    color: #8c8c8c;
+}
+    .dialog-header .dialog-title-container{
+        margin-bottom: 10px;
+        text-align: center;
+    }
+        .dialog-header .dialog-title{
+            margin: auto;
+        }
+            .dialog-header .dialog-title h3,
+            .dialog-header .dialog-title h4 {
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+
+    .dialog-header .btn-feedback {
+        display: flex;
+        align-items: center;        
+        font-size: 10px;
+        min-height: 20px;
+    }
+        .dialog-header .btn-feedback:hover {
+            text-decoration: none;
+        }
+        .dialog-header  .btn-feedback img {
+            width: 30px;
+            height: 30px;
+        }
+        .dialog-header  .btn-feedback a {
+            margin-left: 5px;
+            text-decoration: none;
+        }
+
+        .dialog-header .btn-close,
+        .dialog-header .btn-close:hover,
+        .dialog-header .btn-close:active,
+        .dialog-header .btn-close:visited {
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            display: block;
+            color: red;
+            font-size: 20px;    
+            line-height: 1;            
+        }
+.dialog-body{
+    margin-top: 20px;
+}

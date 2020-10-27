@@ -1,0 +1,192 @@
+<loading [hidden]="!loading" [text]="'Saving...'"></loading>
+<div class="setup-container" [class.disable-black]="loading">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container text-center">
+            <span class="dialog-title"><h3>Make Appointment</h3></span>
+        </div>
+    </div>
+    <div class="dialog-container" [formGroup]="form">
+		<div class="form-group text-center">{{scheduleInfo.companyName}}</div>
+		<div class="form-group service-container text-center" *ngIf="scheduleInfo.locationType=='CustomerComesToUs'">
+			<div *ngIf="locations.length==1">
+				<span>{{location}}</span> &nbsp;&nbsp;
+				<span><a (click)="openGoogleMapsDialog()">Map</a></span>
+			</div>
+			<div *ngIf="locations.length>1">
+				<div><a>Choice Location</a> &nbsp;&nbsp; <a (click)="openGoogleMapsDialog()">Map</a></div>
+				<div>
+					<drop-down
+						[selected]="location"
+						[elements]="scheduleInfo.locations"
+						[showValueFunc]="showLocationValue"
+						[defaultData]="'Choose Location'"
+						(changeSelected)="onLocationsChange($event)">
+					</drop-down>
+				</div>
+			</div>
+
+		</div>
+		<div class="form-group service-container text-center">
+			<div>
+				<a>Choice Service</a>
+			</div>
+			<div>
+				<drop-down
+					[selected]="service"
+					[defaultData]="'Choose Service'"
+					[elements]="scheduleInfo.services"
+					[showValueFunc]="showServiceValue"
+					(changeSelected)="onServicesChange($event)">
+				</drop-down>
+			</div>
+		</div>
+		<div class="form-group" *ngIf="scheduleInfo.providerType != 'SingleProviderHidden'">
+			<div class="text-center">
+				<a>Providers</a>
+			</div>
+			<div class="providers-ctrl columns">
+				<span *ngIf="enableProviders && providers.length>1"
+					class="btn-left btr bt-angle-left bt-3x"
+					[class.active]="!isProviderBeginning"
+					(click)="providerSwiper.swiper.slidePrev()"></span>
+				<div class="providers-container">
+					<div  class="swiper-container" [swiper]="swiperProviderConfig" (indexChange)="indexProviderChanged($event)" #providerSwiper>
+						<div class="swiper-wrapper">
+							<div *ngFor="let item of providers; let i = index" class="swiper-slide provider-item">
+								<div class="provider-image"
+									[style.backgroundImage]="backgroundImage(item.image)">
+								</div>
+								<div>
+									{{item.name}}
+								</div>
+								<div class="provider-details">
+									{{item.details}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<span *ngIf="providers.length>1"
+					class="btn-right btr bt-angle-right bt-3x"
+					[class.active]="!isProviderEnd"
+					(click)="providerSwiper.swiper.slideNext()"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-group text-center">
+				<a>Choose Day</a>
+			</div>
+
+			<div class="months-ctrl columns">
+				<span class="btn-left btr bt-angle-left"
+					[class.active]="!isMonthBeginning"
+					(click)="monthSwiper.swiper.slidePrev()"></span>
+				<div class="months-container">
+					<div  class="swiper-container" [swiper]="swiperMonthConfig" (indexChange)="indexMonthChanged($event)" #monthSwiper>
+						<div class="swiper-wrapper">
+							<div *ngFor="let item of months; let i = index" class="swiper-slide month-item">
+								{{item | date: 'MMMM y'}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<span class="btn-right btr bt-angle-right"
+					[class.active]="!isMonthEnd"
+					(click) = "monthSwiper.swiper.slideNext()"></span>
+			</div>
+
+			<div class="dates-ctrl columns">
+				<span class="btn-left btr bt-angle-left bt-3x"
+						[class.active]="!isDateBeginning"
+						(click)="dateSwiper.swiper.slidePrev()"></span>
+				<div class="dates-container">
+					<div  class="swiper-container" [swiper]="swiperDateConfig" (indexChange)="indexDateChanged($event)" #dateSwiper>
+						<div class="swiper-wrapper">
+							<div *ngFor="let item of dates; let i = index" class="swiper-slide date-item">
+								<div class="text-center"> {{i+1}} </div>
+								<div class="thumb" [class.active]="i==activeDateIndex" (click)="onDateClick($event, i)">
+									<div>
+										{{days[i % 7]}}
+									</div>
+									<div>
+										<span *ngIf="startTimes[i % 7] == null && endTimes[i % 7] == null">Closed</span>
+										<!-- <span>None</span> -->
+										<span *ngIf="startTimes[i % 7] == false || endTimes[i % 7] == false">AM</span>
+										<span *ngIf="startTimes[i % 7] != endTimes[i % 7]"> - </span>
+										<span *ngIf="startTimes[i % 7] == true|| endTimes[i % 7] == true">PM</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<span class="btn-right btr bt-angle-right bt-3x"
+					[class.active]="!isDateEnd"
+					(click) = "dateSwiper.swiper.slideNext()"></span>
+			</div>
+		</div>
+		<div *ngIf="serviceTimes[activeDateIndex % 7] && serviceTimes[activeDateIndex % 7].length > 0" class="form-group">
+			<div class="form-group text-center">
+				<a>Choose Time</a>
+			</div>
+			<div class="choose-time-container">
+				<app-choose-time [inputTimes]="serviceTimes[activeDateIndex % 7]" (outputTime)="onSelectTime($event)">
+				</app-choose-time>
+
+			</div>
+		</div>
+		<div class="form-group contact-container" [formGroup]="form">
+			<div class="form-group text-center">
+				<a>Contact Information</a> &nbsp;
+				<a>Sign In</a>
+			</div>
+			<div class="form-group contact-text">
+				<split-text-box
+					formControlName="name"
+					label="Name"
+					[error]="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)"></split-text-box>
+			</div>
+			<div class="form-group contact-text">
+				<split-text-box
+					formControlName="email"
+					label="Email for confirmation"
+					[error]="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"></split-text-box>
+			</div>
+			<div class="form-group contact-text">
+				<split-text-box
+					formControlName="phone"
+					label="Phone"
+					[error]="form.controls.phone.invalid && (form.controls.phone.dirty || form.controls.phone.touched)"></split-text-box>
+			</div>
+			<div class="form-group contact-text">
+				<split-text-box
+					formControlName="notes"
+					label="Note"></split-text-box>
+			</div>
+			<div *ngIf="form.valid" class="form-group text-center">
+				<div>
+					Appointment for:
+				</div>
+				<div>
+					{{showServiceValue(service)}}
+				</div>
+				<div>
+					{{form.value['startTime'] | date: 'fullDate'}}
+				</div>
+			</div>
+			<div class="form-group submit center-block">
+				<input
+					type="button"
+					value="Schdule"
+					[disabled]="form.invalid"
+					(click)="onSubmit()"
+					class="btn btn-block btn-main center-block">
+			</div>
+		</div>
+	</div>
+</div>

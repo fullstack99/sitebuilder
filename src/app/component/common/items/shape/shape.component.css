@@ -1,0 +1,28 @@
+:host {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.result-shape-container {
+	line-height: 0;
+	width: 100%;
+	height: 100%;
+}
+	.result-shape{
+		position: relative;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		line-height: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.clone-shape {
+		position: absolute;
+		line-height: 0;
+		width: 100%;
+		height: 100%;
+	}

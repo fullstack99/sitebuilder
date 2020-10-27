@@ -1,0 +1,39 @@
+<div #blogFooterContainer class="blog-footer-container">
+	<div class="columns">
+		<div class="posted-by">
+			<div>
+				Posted by <span>{{info.userName}}</span> &nbsp;&nbsp;
+				<!-- <div class="time-button"><span>{{ | date:'shortTime'}}</span></div> -->
+			</div>
+			<div *ngIf="editable"><a (click)="openAddComment($event, true)">Edit</a></div>
+		</div>		
+		<div class="comment-button">
+			<span *ngIf="editable"><a (click)="onToggleShowComments($event)">Comments</a></span>
+			<span *ngIf="!editable && comments.length==0"><a (click)="onToggleShowComments($event)">Comments</a></span>
+			<app-arrow-button *ngIf="!editable && comments.length > 0" [on]="showComments">
+				<a (click)="onToggleShowComments($event)">Comments</a>
+			</app-arrow-button>
+		</div>
+		<div class="blog-social rows">
+			<div *ngIf="editable" class="menu">
+				<a (click) = "showSocialBar($event)">{{ info.showSocialbar ? 'HIDE' : 'SHOW SOCIAL'}}</a> &nbsp;
+				<a *ngIf="info.showSocialbar" (click) = "openSocialBar($event)">EDIT</a>
+			</div>
+			<div class="ribbons" *ngIf="info.showSocialbar">
+				<div class="img"
+					*ngFor="let item of info.socialbar.ribbons"
+					[style.backgroundImage]="backgroundRibbon(item)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!editable && showComments" class="comments">
+		<app-blog-comment *ngFor="let item of comments"
+			[comment]="item"
+			(viewChanged)="onViewChanged()">			
+		</app-blog-comment>
+	</div>
+	<div *ngIf="showComments" class="add-comment">
+		<a (click)="openAddComment($event)">ADD COMMENT</a>
+	</div>	
+</div>

@@ -1,0 +1,24 @@
+<loading *ngIf="loading" [dispProgress]="false"></loading>
+<div id="glogood-login" class="login-container ">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png" [class.disable]="loading"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container columns">
+            <span class="dialog-title"><h3>Login</h3></span>
+        </div>
+    </div>
+
+    <div class="dialog-body">
+        <app-login-form
+            [isFreelancer]="isFreelancer"
+            [email]="email"
+            [pending]="loading"
+            [errorMessage]="errorMessage"
+            (submitted)="onSubmit($event)"
+            (forgotten)="close.emit('forgot')">
+        </app-login-form>
+    </div>
+</div>

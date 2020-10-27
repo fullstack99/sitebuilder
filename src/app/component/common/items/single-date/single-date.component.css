@@ -1,0 +1,28 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.option-container{
+    position: relative;
+}
+
+.single-text-label {
+  margin-right: 15px;
+}
+
+.date-control {
+  max-height: 34px;
+}
+
+.date-control:focus {
+  outline: none;
+  border-color: #ffa500;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}

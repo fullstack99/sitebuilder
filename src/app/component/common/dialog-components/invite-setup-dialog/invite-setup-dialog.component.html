@@ -1,0 +1,118 @@
+<div class="invite-setup-container" (click)="onContainerClick($event)">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container rows">
+            <span class="dialog-title"><h3>Setup Event</h3></span>
+        </div>
+    </div>
+    <div class="select-fontcolor">
+        <div class="select-fontcolor-label">Font Color</div>
+        <textarea id="selectTextColor"></textarea>
+    </div>
+    <div class="data-container">
+        <form [formGroup]="setupEventForm" autocomplete="off">
+            <div class="setup-event">
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName="eventName"
+                        label="Event Name"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName="host"
+                        label="Host"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="event-date columns">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <label>From</label>
+                    <datetime formControlName="startDate"></datetime>
+                </div>
+
+                <div class="event-date columns">
+                    <label>To</label>
+                    <datetime formControlName="endDate"></datetime>
+                </div>
+
+
+                <div class="event-date columns">
+                    <label>RSVP by</label>
+                    <datetime formControlName="rsvpByDate"></datetime>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName="location"
+                        label="Location like My Home, a Restaurant, Hotel"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName = "address1"
+                        label="Where address 1"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName = "city"
+                        label="City"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName = "province"
+                        label="State"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    <split-text-box
+                        formControlName = "postalCode"
+                        label="Postal Code"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+
+                <div class="spilt-box">
+                    <split-text-box
+                        formControlName = "phone"
+                        label="Phone:(000-000-0000)"
+                        [color]="setupEventForm.value['textColor']"></split-text-box>
+                </div>
+                <div class="limit columns">
+                    <span> Limit number of guests </span>
+                    <input  class="form-control"
+                            type="number"
+                            min = "0"
+                            max = "10000"
+                            formControlName = "guestLimit"
+                            placeholder="Limit" />
+                </div>
+
+                <div class="allow-guests">
+                    <checkbox formControlName="allowGuests"></checkbox>
+                    <span>Allow guests to bring friends.</span>
+                </div>
+            </div>
+            <div class="bottom">
+                <input  [disabled]="!setupEventForm.valid" class="btn submit" (click)="onSubmit()" type="button" value="Continue">
+            </div>
+        </form>
+    </div>
+</div>

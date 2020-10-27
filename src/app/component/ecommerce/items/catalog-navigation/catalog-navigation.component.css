@@ -1,0 +1,29 @@
+:host {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}		
+	.no-content{
+		line-height: 2;
+		font-size: 22px;
+		margin-top: 50px;
+	}	
+	.item-row {
+		cursor: pointer;
+	}
+		.listing-container{
+			font-size: 18px;
+		}
+
+.glogood-table-body .table > tbody > tr.item-row > td{
+	border-top: 1px solid #DDD;
+}
+	.glogood-table-body .table > tbody > tr.item-row:first-child > td{
+		border-top: none;
+	}
+
+	.item-thumb {
+		width: 65px;
+	}

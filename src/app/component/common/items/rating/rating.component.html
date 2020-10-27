@@ -1,0 +1,65 @@
+<div *ngIf="editable"
+	[class.animation]="animation">
+	<div
+		#questionTitle
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="question-title content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+		(contenteditableModelChange) = "setItemResize()"
+		>
+	</div>
+
+	<div #ratingContainer
+		class="rating-container"
+		[class.rating-star]="info.type=='star'"
+		[class.rating-slider]="info.type=='slider'">
+		<div *ngIf="info.type=='slider'"
+			class="columns">
+			<slider [formControl]="_rating"
+				[min]="_rangeRating[0]" [max]="_rangeRating[1]">
+			</slider>
+			<div class="text">{{_ratingValue}}</div>
+		</div>
+		<div *ngIf="info.type=='star'"
+			class="columns">
+			<span *ngFor="let item of _ratingStarRange; let i=index"
+				class="bts bt-star"></span>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="!editable"
+	[class.animation]="animation">
+	<div
+		#questionTitle
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label">
+	</div>
+	<div
+		#ratingContainer
+		class="rating-container"
+		[class.rating-star]="info.type=='star'"
+		[class.rating-slider]="info.type=='slider'">
+		<div *ngIf="info.type=='slider'"
+			class="columns">
+			<slider [formControl]="_rating"
+				[min]="_rangeRating[0]" [max]="_rangeRating[1]">
+			</slider>
+			<div class="text">{{_ratingValue}}</div>
+		</div>
+		<div *ngIf="info.type=='star'"
+			class="columns">
+			<span *ngFor="let item of _ratingStarRange; let i=index"
+				class="bts bt-star"
+				[class.active]="i <= _ratingValue - 1"
+				(click)="setRate($event, i+1)"></span>
+		</div>
+	</div>
+</div>
+<div #cloneTitle
+	class="clone-title result wrap">
+</div>

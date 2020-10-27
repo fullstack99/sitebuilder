@@ -1,0 +1,100 @@
+.pagination-centered {
+    text-align: center;
+}
+
+li {
+    border: none;
+}
+
+[hidden] { display: none !important;}
+.disable {
+    pointer-events: none;
+    opacity: 0.3;
+    background: #CCC;
+}
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.playing {
+    background-color: #ffdada;
+}
+
+.search-list {
+    border: 1px solid #ddd;
+    margin: 10px;
+    overflow: hidden;
+    height: 460px;
+}        
+    .search-list .videos {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            align-content: flex-start;
+            overflow-y: auto;
+        }        
+        .search-list .videos::-webkit-scrollbar{
+            background-color: #F5F5F5;
+            width: 15px;
+        }
+        .search-list .videos::-webkit-scrollbar-track{            
+            background-color: #F5F5F5;            
+        }
+        .search-list .videos::-webkit-scrollbar-button:vertical{
+            background-color: #ffffff;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 80% 40%;
+            border: 1px solid rgba(0,0,0,0.3);
+            height: 15px;            
+        }        
+        .search-list .videos::-webkit-scrollbar-button:vertical:start:decrement{
+            background-image: url(/assets/images/arrow-up.png);
+        }
+        .search-list .videos::-webkit-scrollbar-button:vertical:end:increment{
+            background-image: url(/assets/images/arrow-down.png);
+        }
+        .search-list .videos::-webkit-scrollbar-button:vertical:start:increment,
+        .search-list .videos::-webkit-scrollbar-button:vertical:end:decrement{
+            display: none;
+        }
+        .search-list .videos::-webkit-scrollbar-thumb{
+            background-color: #ffffff;            
+            border: 1px solid rgba(0,0,0,0.3);            
+        }        
+            .search-list .videos .item {
+                display: flex;
+                flex-direction: column;
+                width: 200px;
+                height: 240px;
+                margin: 10px;
+                padding: 2px;
+            }
+            .search-list .videos .item:hover {
+                background-color: #ffa500;
+            }
+            .search-list .videos .item.active {
+                background-color: #ffa500;
+            }
+                .search-list .videos .item .frame {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 197px;
+                    height: 237px;                    
+                    background-color: white;
+                    border: 1px solid #ffa500;
+                    box-shadow: 3px 3px 10px 0px rgba(140, 140, 140, 0.5);
+                }
+
+video-list-item {
+    width: 100%;
+    height: 100%;
+}
+

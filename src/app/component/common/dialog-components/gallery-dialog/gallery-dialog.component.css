@@ -1,0 +1,208 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;    
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+        user-select: none;
+    }
+
+[hidden] { display: none!important;}
+
+a {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.toolbar {
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    margin: 0 20px;
+    border-color: #d3d3d3;
+    border-style: solid;
+    border-width: 1px 0;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    min-height: 75px;
+    -moz-user-select: none; 
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0px 20px;
+    padding: 0px 20px;
+    border-color: #d3d3d3;
+    border-style: solid;
+    border-width: 1px 0;
+}     
+    .nav > li{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        margin-top: 5px;        
+    }        
+    .nav > li > a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 5px;
+    }
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        text-decoration: none;
+        background-color: #ffa500;
+        color: white;
+    }
+    .nav > li > a.active {
+        background-color: #ffa500;
+        color: white;
+    }
+    .nav > li > a > .font-icon {
+        display: flex;
+        width: 34px;
+        height: 34px;
+        justify-content: center;
+        align-items: center;
+        color: #9b9b9b;
+        font-size: 20px;
+    }
+    .nav slider{
+        min-width: 100px;
+    }
+    .nav .animation-ctrl {
+        width: 150px;
+        margin-left: 10px;
+    }
+
+.canvas-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    flex: 0 0 auto;
+    margin: 0px;
+    overflow: none;
+}
+    .canvas-container .canvas {
+        position: relative;
+        cursor: default;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .result.slide{
+        position: relative;
+        animation-timing-function: linear;
+        flex-direction: column;
+    }
+    .current-slide {
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+        .current-slide .slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 320px;
+            height: 180px;
+            border: 1px solid #8c8c8c;
+            border-radius: 5px;
+            color: #8c8c8c;
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+        }
+		.title {
+			margin-top: 5px;
+		}
+			.title input[type='text'] {
+				font-weight: bold;
+			}
+        .description{
+			margin-top: 5px;
+			padding: 5px;
+			width: 320px;
+			min-height: 50px;
+			outline: 1px solid #8c8c8c;
+			cursor: text;
+			text-align: center;
+		}
+			.description:not(:has(p))::after{
+  				content: 'Optional Image Description';
+			}
+    .thumbnail-container{
+        margin-top: 30px;
+        margin-left: 30px;
+        width: 500px;
+        height: 250px;
+        overflow: auto;
+    }
+        .thumbnail-container .thumbnails {
+            width: 500px;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .thumbnail-container .thumbnails .thumb {
+                position: relative;
+                width: 100px;
+                height: 60px;
+                margin: 10px;
+                border: 1px solid #8c8c8c;
+                border-radius: 5px;            
+                cursor: pointer;
+                background-color: white;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 50%;
+            }
+                .thumbnail-container .thumbnails .thumb:hover, .thumbnail-container .thumbnails .thumb.active {
+                    border: 1px solid #ffa500;                    
+                }
+    
+                .thumbnails .thumb.dragging {
+                    top: 3px;
+                    box-shadow: 2px 2px 4px 1px rgba(140, 140, 140, 0.35);
+                    z-index: 100;
+                }
+                    .thumbnails .thumb .grip {
+                        position: absolute;
+                        top: calc(100% + 5px);
+                        left: calc(50% - 6px);
+                        width: 12px;
+                        height: 5px;
+                        background-image: url('/assets/images/canvas/grip.png');
+                        background-size: contain;
+                        background-position: 50%;
+                        background-repeat: no-repeat;
+                        cursor: -moz-grab;
+                        cursor: -webkit-grab;
+                        cursor: grab;
+                    }
+
+loading{
+    position: absolute;
+    top: 50px;
+}

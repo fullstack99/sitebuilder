@@ -1,0 +1,55 @@
+<div class="canvas themes">
+    <loading *ngIf="loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <div *ngFor="let theme of _themes; let t=index" class="theme">
+        <div class="option">
+            <label class='c-input c-radio'>
+                <input type="radio" value="t" (click)="selectTheme($event, theme)">
+                <span class="c-indicator"></span>
+            </label>
+        </div>
+
+        <div class="links-container top columns">
+            <ng-template ngFor let-link [ngForOf]="theme.info.value.links" let-i="index" let-last="last">
+                <div
+                    class="navlink"
+                    [style.min-width]="linkWidth + 'px'"
+                    [style.min-height]="linkHeight + 'px'"
+                    [class.empty]="!link.text"
+                    >
+                    <div class="navtext"
+                        [style.background-color]="theme.info.value.design.backColor"
+                        [style.border-color]="theme.info.value.design.borderColor"
+                        [style.border-style]="theme.info.value.design.borderStyle"
+                        [style.border-width]="theme.info.value.design.borderWidth + 'px'"
+
+                        [style.border-top-left-radius]="getBorderRadius('lTop',t)+'px'"
+                        [style.border-top-right-radius]="getBorderRadius('rTop',t)+'px'"
+                        [style.border-bottom-left-radius]="getBorderRadius('lBottom',t)+'px'"
+                        [style.border-bottom-right-radius]="getBorderRadius('rBottom',t)+'px'">
+                        <div class="text-editor">
+                          <a  class="columns"
+                              (mouseenter)="onHoverButton(theme, i,$event)"
+                              (mouseleave)="onLeaveButton(theme, i,$event)"
+                              (click)="onNavClick(i)">
+                              <span
+                                  [style.color]="theme.info.value.fontStyle.color"
+                                  [style.font-weight]="theme.info.value.fontStyle.bold ? 'bold' : 'normal'"
+                                  [style.font-style]="theme.info.value.fontStyle.italic ? 'italic' : 'normal'"
+                                  [style.text-decoration]="theme.info.value.fontStyle.underline ? 'underline' : 'unset'">{{link.text}}</span>
+                              <span *ngIf="hasSubLink(theme, i)" class="caret" [style.color]="theme.info.value.fontStyle.color"></span>
+                          </a>
+                        </div>
+                        <div class="placeholder">Blank</div>
+                    </div>
+                </div>
+                <div *ngIf="!last"
+                    class="btn-between"
+                    [style.backgroundImage]="getImageURL(theme)"
+                    [style.width]="getSpacing('width', theme)"
+                    [style.height]="theme.info.value.imageInfo.size+'px'"
+                    (click)="_viewSubNavList = -1">
+              </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

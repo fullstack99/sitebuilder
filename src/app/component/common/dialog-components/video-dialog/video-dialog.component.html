@@ -1,0 +1,120 @@
+<div class="dialog-header">
+  <div class="btn-feedback columns">
+    <img src="/assets/images/logo-0.png" />
+    <a (click)="openFeedbackDialog()">FEEDBACK</a>
+    <a (click)="onClose()" class="btn-close">×</a>
+  </div>
+  <div class="dialog-title-container columns">
+    <span class="dialog-title">
+      <h3>VIDEO</h3>
+    </span>
+  </div>
+</div>
+
+<app-sub-menubar [tabs]="tabs" [tabId]="activeTab.id" [mobileMaxWidth]="300" (selectedTab)="_selectTab.next($event)">
+</app-sub-menubar>
+
+<div class="canvas-container">
+  <form [formGroup]="form">
+    <div class='video_editor_container' id="_video_editor_container"></div>
+    <div class="canvas">
+      <div>
+        <div class="columns video-adjusts">
+          <div class="rows">
+            <div class="adjust-item">
+              <ul class="list-unstyled center-block adjust-ul">
+                <li>
+                  <a (click)="selectAdjustItem('showControls')" [class.active]="adjustItem=='showControls'">
+                    Show Controls
+                  </a>
+                </li>
+                <li>
+                  <a (click)="selectAdjustItem('playMode')" [class.active]="adjustItem=='playMode'">
+                    Play Mode
+                  </a>
+                </li>
+                <li>
+                  <a (click)="selectAdjustItem('opacity')" [class.active]="adjustItem=='opacity'">
+                    Opacity
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <ng-template [ngIf]="adjustItem=='showControls'">
+              <radio-group class="ctrl-body" formControlName="showControls">
+                <ng-template radioGroupOption="always">Always</ng-template>
+                <ng-template radioGroupOption="never">Never</ng-template>
+                <ng-template radioGroupOption="hover">Hover</ng-template>
+              </radio-group>
+            </ng-template>
+            <ng-template [ngIf]="adjustItem=='playMode'">
+              <radio-group class="ctrl-body" formControlName="playMode">
+                <ng-template radioGroupOption="looping">Looping</ng-template>
+                <ng-template radioGroupOption="auto">Auto</ng-template>
+                <ng-template radioGroupOption="manual">Manual</ng-template>
+              </radio-group>
+            </ng-template>
+          </div>
+
+          <div class="rows adjust-result">
+            <div class="image-result-controls">
+              <div class="left">
+                <a (click)="openImportDialog()">IMPORT</a>
+              </div>
+            </div>
+            <div #videoEle class="result-video-container" (click)="openImportDialog()" (dragover)="onDragOver($event)"
+              (dragenter)="onDragEnter($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+              <video class="result-video" #resultVideo>
+              </video>
+              <iframe class="result-video" #resultFrame></iframe>
+              <loading *ngIf="_loading" [text]="'Uploading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+              <span *ngIf="!_loading" #resultSpan>Click to Add Video</span>
+            </div>
+            <div class="disp-remove center-block">
+              <span>Remove</span> &nbsp;&nbsp; <a (click)="setDefaultVideo()">X</a>
+            </div>
+
+            <div *ngIf="adjustItem=='opacity'" class="image-opacity">
+              <div class="text">Opacity</div>
+              <div class="columns">
+                <slider formControlName="opacity" [min]="0" [max]="100">
+                </slider>
+                <input type="text" readonly="true" value="{{info.opacity}}">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="activeTab.name == 'Videos'" class="columns video-category">
+          <drop-down [selected]="_selectedCategory" [defaultData]="'Categories'" [elements]="_videoCategories"
+            [borderNone]="true" [showValueFunc]="showCategoryValue" (changeSelected)="_catchCategory.next($event)">
+          </drop-down>
+        </div>
+        <div *ngIf="activeTab.name == 'Videos'" class="columns video-navigator" #videoNavigator>
+          <div class="videos" #videosContainer (scroll)="_videosContainerScroll.next()">
+            <div *ngFor="let video of _videos; let i=index" class="item">
+              <div class="frame" (click)="setVideoResult(video.url)">
+                <video src="{{video.url}}">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group submit center-block">
+		<input
+			type="submit"
+			class="btn btn-block btn-main center-block"
+			[class.active]="true"
+			[class.active]="form.value && form.value.url == 'ADD'"
+            [class.danger]="info && info.url && form.value && !form.value.url"
+			[value]="info && info.url && form.value && !form.value.url ? 'REMOVE' : 'ADD'"
+			(click)="onAdd()"			
+			style="width: 150px;">			
+      </div>
+    </div>
+  </form>
+</div>

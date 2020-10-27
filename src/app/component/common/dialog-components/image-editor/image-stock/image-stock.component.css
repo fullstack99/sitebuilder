@@ -1,0 +1,15 @@
+:host {    
+    width: 100%;
+    margin-top: 5px;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.toolbar {
+    height: 64px;    
+}
+
+.urls-container{
+    padding-left: 30px;
+    line-height: 2;
+}

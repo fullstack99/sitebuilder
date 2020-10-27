@@ -1,0 +1,28 @@
+checkbox {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+}
+  
+.contact-fields-container {
+    padding: 10px;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+ul {
+    margin: 0;
+}
+    ul li {
+        margin-bottom: 10px;
+        padding-left: 0px;
+    }
+        ul li.required::after {
+            content: "*";
+            color: red;
+        }

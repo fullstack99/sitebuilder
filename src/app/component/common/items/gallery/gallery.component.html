@@ -1,0 +1,36 @@
+<div #thumbnails class="gallery-thumbnails rows" (mouseleave)="imageMouseOut($event)">
+  <div class="gallery-thumb-row columns"
+    *ngFor="let row of rows; let i=index"
+    [style.height]="100 / rows.length + 'px'">
+	<div class="gallery-item-thumb" *ngFor="let col of cols; let j=index"
+		[style.paddingLeft]="galleryItemPaddingLR"
+		[style.paddingRight]="galleryItemPaddingLR"
+		[style.paddingBottom]="galleryItemPaddingBottom"
+      	(mouseover)="playAnimateThumb($event)" (click)="onClick(info.cols * row + col)">
+      <ng-container *ngIf="info.gImages[info.cols * row + col]">
+		<img [src]="backgroundSrcUrl(info.gImages[info.cols * row + col])" (mouseenter)="imageZoom($event, info.cols * row + col)">
+		<div class="gallery-item-description"
+			[class.link]="!!info.gImages[info.cols * row + col].link"
+			[style.top]="descriptionTop"
+			[innerHTML]="info.gImages[info.cols * row + col].desc">
+		</div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="thumbnails rows"
+    #thumbnails>
+    <div class="tumb-row columns" *ngFor="let row of rows; let i=index">
+        <div class="thumb" *ngFor="let col of cols; let j=index"
+            [style.margin]="info.spac + 'px'"
+            [style.marginBottom]="(info.spac > 15 ? info.spac : 15) + 'px'"
+            (mouseover)="playAnimateThumb($event)"
+            (click)="onClick(info.cols * row + col)">
+            <img [src]="backgroundUrl(info.gImages[info.cols * row + col])" (mouseenter)="imageZoom($event, info.cols * row + col)">
+            <div class="img-zoom-lens" [class.active]="activeImageNum==info.cols * row + col"></div>
+            <div class="description">{{info.gImages[info.cols * row + col].desc}}</div>
+        </div>
+    </div>
+    <div #zoomResult class="zoomResult" style="width: 300px; height: 300px; position: absolute; background-size: contain; background-repeat: no-repeat"></div>
+</div> -->

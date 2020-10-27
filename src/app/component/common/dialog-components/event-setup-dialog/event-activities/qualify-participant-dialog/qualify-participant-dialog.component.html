@@ -1,0 +1,47 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png" />
+        <a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span class="dialog-title">
+            Verify Participant
+        </span>
+    </div>
+</div>
+<div class="dialog-body" [formGroup]="form">
+	<div class="form-group">
+		<p>
+			You may need to verify that event participants qualify. &nbsp; Participant types could be memebers, a member category, alumni, or age, or skill, or professional skill.
+		</p>
+		<p>
+			Their status will be verified during signup.
+		</p>
+	</div>
+	<div class="form-group">
+		<checkbox formControlName="willbeAddedInMyAccount">
+			I'll add a list of qualified participant in MY ACCOUNT > Members & Participants
+		</checkbox>
+	</div>
+	<div class="form-group">
+		<checkbox formControlName="hasEmails">
+			Qualified Participants have the following type emails: &nbsp; No names just @...
+		</checkbox>
+		<br/>
+		<div class="emails-container">
+			<textarea
+				#textArea
+				class="form-control"
+				formControlName="emails"
+				placeholder="Examples:\n@college.edu\n@university.edu\n@organization.org\n@company.com\n@xxxx.hbs.edu"
+				maxlength="200"
+			></textarea>
+			<div style="font-size: 14px;">
+				<span>One email per line</span>
+				<span style="float: right;">{{200 - form.value?.emails?.length}} characters available</span>
+			</div>
+		</div>
+	</div>
+</div>
+

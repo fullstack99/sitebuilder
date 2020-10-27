@@ -1,0 +1,49 @@
+checkbox {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+}
+
+.frequency-types-container{
+    display: flex;
+}
+    .frequency-text {    
+        font-size: 16px;
+        color: #8c8c8c;
+        cursor: pointer;
+        margin-right: 6px;
+        margin-left: 6px;
+    }
+
+.font12{
+    padding-top: 20;
+    font-size: 12px;
+    color: #464646;
+}
+
+.help-btn {
+    float: right;
+    cursor: pointer;
+    color: #3295e3;
+    margin-right: 10px;
+    width: 10px;
+    font-size: 15px;
+    margin-top: -30px;
+}
+
+.tooltip-body {
+    padding-top: 30px;
+    padding-left: 20px;
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 15px;
+
+}
+.tooltip-body .content2 {
+    padding: 20 0 0 0px;
+}
+.tooltip-id {
+    padding: 20 0 0 0px;
+    text-align: right;
+}
+

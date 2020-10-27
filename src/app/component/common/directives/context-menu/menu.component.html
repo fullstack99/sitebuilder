@@ -1,0 +1,57 @@
+<div class="dialog-header" *ngIf="main">    
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>		
+		<a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+		<a (click)="onClose($event)" class="btn-close">×</a>
+	</div>	
+</div>
+<div *ngFor="let item of menu; let i = index"
+    class="menu-item"
+    [class.active] = "item.name==active_menu"
+    (click)="onItemClick(item, i, $event)"
+    (mouseenter)="onItemMouseEnter(item, i, $event)"
+    (mouseleave)="onItemMouseLeave(item, i, $event)"
+    >
+    <span class="icon-wrap">
+        <span *ngIf="item.icon && item.icon.type === 'MenuItemFontIcon'"
+            [class]="item.icon.className"></span>
+        <img  *ngIf="item.icon && item.icon.type === 'MenuItemImageIcon'"
+            [src]="item.icon.url"/>
+    </span>
+    <span [ngSwitch]="item.type">
+        <ng-template ngSwitchCase="SimpleMenuItem">
+            <span class="item-name">{{item.name}}</span>
+        </ng-template>
+        <ng-template ngSwitchCase="DoubleMenuItem">
+            <span class="item-name">{{item.nameLeft}}</span>
+            <span class="item-name" (click)="onRightCommandClick(item, $event)">
+                {{item.nameRight}}
+            </span>
+        </ng-template>
+        <ng-template ngSwitchCase="InputMenuItem">
+            <span class="item-name">{{item.name}}</span>
+            <span class="item-input">
+                <label 
+                    (mousedown)="$event.stopPropagation()"
+                    (mouseup)="$event.stopPropagation()"
+                    (click)="$event.stopPropagation()"
+                    >
+                    {{item.inputLabel}}
+                    <input type="text"
+                        [formControl]="item.control"
+                        class="form-control"
+                        spellcheck="true"
+                        (keydown)="onInputKeyDown(item, i, $event)"/>
+                </label>
+            </span>
+        </ng-template>
+        <ng-template ngSwitchCase="SubMenuItem">
+            <span class="item-name">{{item.name}}</span>
+            <span class="stick-right bts bt-caret-right"></span>
+            <menu *ngIf="_activeSubMenuItem.value === item"
+                [menu]="item.submenu"
+                (command)="onSubMenuCommand($event)"
+                ></menu>
+        </ng-template>
+    </span>
+</div>

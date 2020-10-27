@@ -1,0 +1,33 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+</div>
+<div class="reply-container">
+    <div *ngIf="_dispMode==0" class="columns item">
+        <span>Replying as:</span>
+    </div>
+    <div *ngIf="_dispMode==0" class="columns item">
+        <span>Not You <a (click)="onNotYou()">?</a></span>
+    </div>
+    <div *ngIf="_dispMode==1" class="columns item">
+        <input class="form-control" type="text" placeholder="Name"/>
+    </div>
+    <div *ngIf="_dispMode==1" class="columns item">
+        <input class="form-control" type="email" placeholder="Email"/>
+    </div>
+    <div [hidden]="!info.allowGuests" class="columns item">
+        <span>Bringing friends?:</span>
+        <input  class="form-control limit"
+            type="number"
+            min = "0"
+            max = "100000"/>
+    </div>
+    <div [hidden]="!info.showComing" class="rows item">
+        <span>Add a guest list comment</span>
+        <textarea></textarea>
+    </div>
+    <div class="columns">
+        <button type="button" class="btn btn-default" (click)="onReply()">REPLY</button>
+    </div>
+</div>

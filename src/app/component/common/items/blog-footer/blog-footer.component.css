@@ -1,0 +1,41 @@
+.blog-footer-container{
+    font-size: 14px;
+}
+    .comment-button{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90px;
+    }
+
+    .blog-social {
+        margin-right: 0px;        
+    }
+
+    .blog-social .menu{
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    .ribbons {
+        width: 100%;
+        margin: 0 10px;
+        cursor: pointer;
+        display: block;
+    }
+        .ribbons .img {
+            width: 24px;
+            height: 24px;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            float: left;
+            margin-left: 4px;
+        }
+
+    .align-center{
+        align-items: center;
+    }
+
+.add-comment{
+    margin-top: 10px;
+}

@@ -1,0 +1,202 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (mousedown)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <span class="dialog-title"><h3>Survey</h3></span>
+    </div>
+</div>
+
+<div class="canvas-toolbar" [class.mobile]="viewMode == 2">
+	<div class="tool-persist">
+		<ul class="canvas-nav">
+			<li>
+				<div class="btn-back" (mousedown)="onClose($event)"></div>
+			</li>
+			<li [class.active]="isSaving">
+				<a class="text-center"
+					(click)="onSubmit($event)">
+					<div class="caption rows">
+						<span class="font-12">PLACE</span>
+						<span class="font-12">ON</span>
+						<span class="font-12">PAGE</span>
+					</div>
+				</a>
+			</li>
+			<li [class.active]="canActiveTool('Undo')">
+				<a (mousedown)="clickTool('Undo')">
+					<!-- <span class="font-icon btb bt-reply"></span> -->
+					<div class="caption">Undo</div>
+				</a>
+			</li>
+			<li [class.active]="canActiveTool('Redo')">
+				<a (mousedown)="clickTool('Redo')">
+					<!-- <span class="font-icon btb bt-forward"></span> -->
+					<div class="caption">Redo</div>
+				</a>
+			</li>
+			<li class="survey-name">
+			  <input type="text"
+				  #textEle
+				  class="form-name form-control"
+				  placeholder="Name Your Survey"
+				  spellcheck="true"
+				  required
+				  [(ngModel)]="survey_info.surveyName"
+				  (keydown)="refresh($event)"/>
+		  </li>
+		</ul>
+	</div>
+
+	<div class="tool-container">
+		<span class="btr bt-angle-left bt-2x"
+				[class.active]="!isBeginning"
+				(click)="usefulSwiper.swiper.slidePrev()"></span>
+		<div class="tools">
+			<div  class="swiper-container" [swiper]="swiperConfig" (indexChange)="indexChanged($event)" #usefulSwiper>
+				<div class="swiper-wrapper">
+					<div *ngFor="let tool of _tools" class="swiper-slide">
+						<div class="tool" [class.active]="canActiveTool(tool.name)">
+							<a  (click)="clickTool(tool.name)">
+								<!-- <span *ngIf="!tool.hasImage"
+									class="{{ tool.item_class }}">
+								</span>
+								<img *ngIf="tool.hasImage"
+									class="{{tool.item_class}}"
+									src="{{ tool.url }}"/> -->
+								<div class="caption">
+									{{ tool.caption }}
+								</div>
+							</a>
+						</div>
+						<div class="tool-space"> &nbsp; </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="btr bt-angle-right bt-2x"
+			[class.active]="!isEnd"
+			(click) = "usefulSwiper.swiper.slideNext()"></span>
+	</div>
+</div>
+<div class="branches" [class.mobile]="viewMode == 2">
+    <div style="min-width: 220px;">
+        #{{questionNo}} - {{countQuestions}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a (click)="onAddQuestion()">Add Question</a>
+    </div>
+    <ng-container *ngIf="survey_info.branches.length > 1">
+        <!-- <a class="active" *ngIf="survey_info.branches[activeQuestionIndex[0]].name!='Main'">Branch&nbsp;{{survey_info.branches[activeQuestionIndex[0]].name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
+        <div *ngFor="let item of survey_info.branches; let i=index; let last=last"
+          class="branch-name"
+          [class.active] = "item.name == survey_info.branches[activeQuestionIndex[0]].name"
+          >
+            <a
+                (click)="selectBranch(i)">
+                {{item.name == 'Main' ? 'Main Survey' : item.name}}
+            </a>
+            <a *ngIf="item.name != 'Main'" class="remove-branch" (click)="onRemoveBranch($event, item)">x</a>
+            <span [ngStyle]="{'position': 'absolute', 'right': '-5px', 'top': '0px'}">|</span>
+        </div>
+        <div class="branch-name">
+            <a (click)="openBranchDialog()" [ngStyle]="{'color': '#337ab7'}"> MORE </a>
+        </div>
+    </ng-container>
+
+    <!-- &nbsp;&nbsp;&nbsp;
+    <a (click)="openBranchDialog()"> Add Branch </a>
+    &nbsp;&nbsp;&nbsp;
+    <a *ngIf="survey_info.branches.length>1 && survey_info.branches[activeQuestionIndex[0]].name!='Main'" class="remove-branch" (click)="onRemoveBranch($event)">x</a> -->
+</div>
+<div class="workspace" [class.mobile]="viewMode == 2">
+    <div *ngIf="!visibleQALibrary"
+        class="arrow left btr bt-angle-left bt-4x"
+        [class.active]="activeQuestionIndex[0][0] > 0 || activeQuestionIndex[1] > 0"
+        (click)="_prevQuestion.next()">
+    </div>
+
+    <div class="common-canvas-container">
+      <common-canvas
+          [page]="_page"
+          [width]="850"
+          [minHeight] = "300"
+          [height] = "300"
+          [placeholder]="placeHolder"
+          [animation]="true"
+          [extraLeft]="dialogLeft"
+          [extraTop]="dialogTop"
+          [zoomable]="false"
+          (itemRemove)="onItemRemove($event)">
+      </common-canvas>
+
+      <div *ngIf="visibleQALibrary" class="q-a-library" [class.mobile]="viewMode == 2">
+        <div class="q-a-categories">
+          <div *ngFor="let item of themeCategories">
+            <span [class.active]="item==activeThemeCategory" (click)="onClickCategory(item)">{{item.description}}</span>
+          </div>
+        </div>
+        <div class="q-a-content">
+          <div *ngIf="activeThemeCategory" class="text-center">
+            <h4> {{activeThemeCategory.description}} </h4>
+          </div>
+          <!-- <div class="question-label" *ngFor="let item of selectedThemeQuestions; let j=index">
+              <label class='c-input c-checkbox'>
+                  <input type="checkbox" [checked]="true" (click)="onCheckQuestion($event, item)"/>
+                  <span class="c-indicator"></span>
+              </label>
+              <span>{{item.content.info.value.label}}</span>
+          </div> -->
+          <div *ngFor="let sc of subThemeCategories; let i=index">
+              <h4>{{sc.description}}</h4>
+              <ng-container *ngFor="let item of themeQuestions[sc.uid]; let j=index">
+                  <div class="question-label">
+                      <label class='c-input c-checkbox'>
+                          <input type="checkbox" [checked]="isCheckedQuestion(item)" (click)="onCheckQuestion($event, item)"/>
+                          <span class="c-indicator"></span>
+                      </label>
+                      <span>{{item.content.info.value.label}}</span>
+                  </div>
+              </ng-container>
+          </div>
+
+        </div>
+        <div class="choose-button">
+          <input
+            type="button"
+            value="CHOOSE"
+            class="btn btn-block btn-main"
+            style="max-width: 150px;"
+            [class.active]="true"
+            (click)="onChooseThemeQuestions($event)"
+            />
+        </div>
+        <span (mousedown)="onCloseChooseThemeQuestions($event)" class="btn-close">×</span>
+      </div>
+      <!-- <div class="common-canvas-container-bottom">
+      </div> -->
+    </div>
+
+    <!-- <div class="place-holder-container text-center" style="font-size: 24px">
+      <div>
+        Choose Below
+      </div>
+      <div>
+        Your Question Will Go Here
+      </div>
+    </div> -->
+    <div
+        *ngIf="!visibleQALibrary"
+        class="arrow btr bt-angle-right bt-4x"
+        [class.active]="activeQuestionIndex[0][0] < survey_info.branches.length || activeQuestionIndex[1] < survey_info.branches[activeQuestionIndex[0]].questions.length - 1"
+        (click)="_nextQuestion.next()">
+    </div>
+</div>
+
+<survey-tools
+    [selectedTools]="selectedTools()"
+    [viewMode]="viewMode"
+    (clickTool)="clickTool($event)"
+    >
+</survey-tools>

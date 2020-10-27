@@ -1,0 +1,21 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+</div>
+<div class="dialog-body" [formGroup]="form">
+    <div class="row">
+        <div class="col-xs-12">
+            <textarea
+                class="form-control"
+                formControlName="comment"
+                placeholder="Please Enter Comment"
+                maxlength="200"
+                ></textarea>
+            <div class="chars-left">
+                {{200 - form.value?.comment?.length}}
+                characters available
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">
+        <div class="dialog-title"><h3>Hire Me</h3></div>
+    </div>
+</div>
+
+<div class="dialog-body" [formGroup]="form">
+    <div class="form-group" style="margin-left: 80px; margin-right: auto; line-height: 1.8;">
+        <div>
+            <span>My hourly rate is {{info.hourlyRate | currency:'USD':'symbol':'1.2-2'}}</span>
+        </div>
+        <div>
+            <span>My minimum is {{info.minimum | currency:'USD':'symbol':'1.2-2'}}</span>
+        </div>
+    </div>
+
+    <div class="columns" style="justify-content: space-between;">
+        <div style="font-size: 18px;">Request for Proposal</div>
+        <div style="width: 60px;">
+            <app-arrow-button>
+                <a>reuse</a>
+            </app-arrow-button>
+        </div>
+    </div>
+    <div>
+        <textarea
+            formControlName="request"
+            class="form-control"
+            placeholder="Provide specific project details.&#10;What results are you looking for?"
+            rows="8"
+            maxlength="5000"></textarea>
+    </div>
+
+    <div class="form-group columns" style="font-size: 12px; justify-content: space-between;">
+        <span style="float: left;">
+            Add project files
+        </span>
+        <span>
+            {{5000-form.value.request.length}} characters
+        </span>
+    </div>
+
+    <div class="form-group columns" style="position: relative; padding-left: 50px;">
+        <div style="line-height: 1.8;">
+            <radio-group formControlName="priceType">
+                <ng-template [radioGroupOption]="1">
+                    <span>Hourly Rate</span>
+                </ng-template>
+                <ng-template [radioGroupOption]="2">
+                    <span>Fixed Price</span>
+                </ng-template>
+            </radio-group>
+            <radio-group formControlName="projectType">
+                <ng-template [radioGroupOption]="1">
+                    <span>One-time project</span>
+                </ng-template>
+                <ng-template [radioGroupOption]="2">
+                    <span>On going</span>
+                </ng-template>
+            </radio-group>
+            <div class="columns">
+                <span>Start</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <datetime [dateOnly]="true" formControlName="startDate"></datetime>
+            </div>
+        </div>
+        <div style="position: relative;">
+            <input *ngIf="form.value.priceType=='1'" formControlName="price" type="text" name="price" class="form-control" style="position: absolute; width: 80px; top: 0px;"/>
+            <input *ngIf="form.value.priceType=='2'" formControlName="price" type="text" name="price" class="form-control" style="position: absolute; width: 80px; top: 25px;"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input
+            type="button"
+            value="Send to Freelancer"
+            [disabled]="form.invalid"
+            (click)="onSubmit($event)"
+            class="btn btn-block btn-main"/>
+    </div>
+</div>

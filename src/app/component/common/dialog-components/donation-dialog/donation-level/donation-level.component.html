@@ -1,0 +1,30 @@
+<div [formGroup]="form">    
+    <div class="level" *ngIf="last == false">        
+        <tooltip class="help-btn" text='?' *ngIf="num == 0">
+            <content>                
+                <div>
+                    Some fundraisers like to name different levels for donations suchs as:
+                </div>
+                <div class="content2">
+                    <div class="content2-level">
+                        <div>Gold&nbsp;or&nbsp;Leadership</div>
+                        <div>Silver&nbsp;&nbsp;&nbsp;&nbsp;Sustaining</div>
+                        <div>Bronze&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Member</div>
+                    </div>                    
+                </div>                
+            </content>
+        </tooltip>
+        <checkbox formControlName="isActive"></checkbox>        
+        <label class='dollar'>$</label>
+        <input type="text" formControlName="amount" class="form-control form-control-amount" placeholder="Amount" (blur)="valueChange($event)" (keypress)="eventHandler($event)" currencyFormatter>
+        <input type="text" formControlName="name" class="form-control form-control-half" placeholder="Name of Donation Level">
+    </div>
+    <div *ngIf="last==true" class="level last">
+        <checkbox [formControl]="optionalFundraisingAmountEnabled"></checkbox>
+        <label class='other'>Other</label>
+        <label class='dollar'>$</label>
+        <input type="text" class="form-control form-control-amount" placeholder="Amount" (blur)="valueChange($event)" (keypress)="eventHandler($event)" currencyFormatter>
+        <span>Donor enters amount.</span>
+    </div>
+    <p *ngIf="last==true" class="text-xs-center">$5 minimum</p>
+</div>

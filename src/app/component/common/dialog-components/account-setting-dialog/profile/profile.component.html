@@ -1,0 +1,33 @@
+<div class="service-container" [formGroup]="form">
+    <div class="rows result-image-container">        
+        <div class="columns right">
+            <a (click)="openImportDialog()">IMPORT</a>
+            <a (click)="openImageEditor()">EDIT</a>
+            <a class="remove" (click)="removeImage()">X</a>
+        </div>
+        <div
+            #photoEle
+            class="photo rows"
+            [style.backgroundImage]="backgroundImage()"
+            (click)="openImportDialog()"
+            (dragover)="onDragOver($event)"
+            (dragenter)="onDragEnter($event)"
+            (dragleave)="onDragLeave($event)"
+            (drop)="onDrop($event)">            
+            <span *ngIf="loading" class="spinner"><i class="bts bt-spinner bt-pulse bt-3x"></i></span>
+            <span *ngIf="!loading && !form.value.photo">Click to Add Image</span>
+            <span *ngIf="!loading && !form.value.photo">or Drag and Drop Here</span>
+        </div>
+    </div>        
+    <div class="form-group">        
+        <textarea
+            formControlName="description"
+            class="form-control"
+            placeholder="Why should the customer hire you?&#10;&#10;Provide details about you and your experience."
+            rows="5"
+            maxlength="500"></textarea>
+        <div class="chars-right">
+            {{500 - form.value.description.length}} characters
+        </div>
+    </div>
+</div>

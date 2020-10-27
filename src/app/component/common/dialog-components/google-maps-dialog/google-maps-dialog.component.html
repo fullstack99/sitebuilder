@@ -1,0 +1,17 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>        
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">		
+        <span class="dialog-title"><h3>Google Maps</h3></span>
+    </div>	
+</div>
+<div class="google-maps-container">    
+    <div class="form-group address">
+        <input #searchText placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" [formControl]="searchControl">
+    </div>
+    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+</div>

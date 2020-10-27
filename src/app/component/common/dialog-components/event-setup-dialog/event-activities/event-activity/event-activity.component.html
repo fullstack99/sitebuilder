@@ -1,0 +1,56 @@
+<div
+    class="drag-grip"
+    draggableListItemGrip
+    ></div>
+<div [formGroup]="form" class="columns">
+    <div class="activity-message">
+        <div [class.rows]="hasFee" [class.columns]="!hasFee">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+				placeholder="Name of Activity"/>
+		</div>
+		<div class="columns">
+			<div class="message caption">
+				<a (click)="showMessage()" style="padding-left: 5px;">MESSAGE</a>
+				<div style="margin-top: 6px;;">
+					<input
+						type="text"
+						class="form-control"
+						formControlName="participantsLimit"
+						placeholder="No Limit"/>
+					<div style="padding-left: 5px; padding-top: 5px;">Participants</div>
+				</div>
+			</div>
+			<div class="activity-date">
+				<div class="form-group columns">
+					<label class="date-for">From</label>
+					<div>
+						<datetime formControlName="startDate"></datetime>
+					</div>
+				</div>
+				<div class="form-group columns">
+					<label class="date-for">To</label>
+					<div>
+						<datetime formControlName="endDate"></datetime>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <div class="rows activity-fee">
+        <div class="fee" formGroupName="fee" *ngIf="hasFee">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                placeholder="Free"/>
+        </div>
+    </div>
+</div>
+<a  *ngIf="canBeRemoved"
+    (click)="remove()"
+    class="btn-remove"
+    >×</a>

@@ -1,0 +1,35 @@
+:host {
+    background: transparent;
+    color: darkgray;
+    min-height: 400px;
+}
+.k-window{
+    padding: 0px!important;
+}
+
+[hidden] { display: none !important;}
+.disable {
+    pointer-events: none;
+    opacity: 0.2;
+    background-color: #CCC;
+}
+
+.dialog-title-container{
+    margin-top: 10px;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+.go-login{
+    position: absolute;
+    top: 5px;
+    right: 70px;
+    font-size: 12px;
+    text-decoration: none;
+}

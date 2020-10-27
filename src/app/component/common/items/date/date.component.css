@@ -1,0 +1,40 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.option-container{
+    position: relative;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.text-container{
+    position: relative;
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+datetime {
+    width: 120px;
+    height: 34px;
+    margin-left: 10px;
+}
+
+    .empty-text{
+        left: 3px!important;
+        top: 3px!important;
+    }
+
+.text-container .remove{
+    position: absolute;
+    color: red;
+    font-size: 18px;
+    right: 5px;
+    top: 5px;
+}

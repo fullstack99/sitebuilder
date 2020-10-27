@@ -1,0 +1,41 @@
+
+:host {    
+    box-sizing: border-box;    
+    background: transparent;
+    height: 100%;
+    color: #555;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.dialog-body {
+    font-size: 16px;
+}
+
+.disable {
+    pointer-events: none;
+    opacity: 0.3;
+    background: #CCC;
+}
+
+input[type="text"] {
+    display: block;
+    max-width: 100px;    
+    width: 100%;
+}
+
+radio-group >>> li{
+    line-height: 1.8;
+}
+
+datetime{
+    max-width: 120px;
+}
+
+input[type="submit"] {
+    width: 180px;
+    height: 40px;    
+}

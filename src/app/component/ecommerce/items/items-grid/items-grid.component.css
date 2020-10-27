@@ -1,0 +1,128 @@
+:host {
+	display: block;
+	position: relative;
+	width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+
+a {
+    text-decoration: none;
+}
+
+.image-picture {    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 24px;
+    color: #8c8c8c;
+    height: 50px;
+    width: 50px;
+}
+
+.remove-btn {
+    color: red;
+}
+
+.item-title {
+	width: 25%;
+    min-width: 120px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.btr{
+    font-size: 14px;
+} 
+
+.glogood-table-header{
+    width: calc(100% - 10px);
+}
+    .item-field-x{
+        width: 25px;
+    }
+
+    .item-field-1{
+        width: 70px;
+    }
+
+    .item-field-2{
+        width: 100px;
+    }
+
+    .item-field-3{
+        width: 120px;
+    }
+
+.plus-button{
+    font-size: 10px;    
+}
+
+.listings{
+    position: absolute;
+    left: 140px;
+    top: 60px;
+    height: 250px;
+    width: 220px;
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    overflow: auto;
+}
+
+.listings .group-item {
+    margin: 10px;
+    color: grey;
+}
+    .listings .group-item a {
+        text-decoration: none;
+        color: gray;
+    }
+    .listings .group-item a:hover,
+    .listings .group-item a.active {
+        color: #ffa500;
+    }
+    .listings .group-item-title {
+        font-weight: bold;
+    }
+    .listings .item-nav-list {        
+        margin-left: 10px;        
+        font-size: 14px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;        
+	}
+	
+tr {
+	display: flex;
+	border-bottom: 1px solid #DDD;
+}
+
+tr.active,
+tr:hover {
+	border-bottom-color: orange;
+}
+
+tr td {
+	border-bottom: none;
+}
+
+thead tr {
+	border-bottom: 2px solid #ddd;
+}
+
+thead th {
+	border-bottom: none;
+	position: relative;
+}
+
+

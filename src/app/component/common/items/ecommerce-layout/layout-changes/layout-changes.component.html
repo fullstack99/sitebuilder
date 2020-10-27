@@ -1,0 +1,35 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>		
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">		
+        <span class="dialog-title"><h3>Layout Change</h3></span>
+    </div>	
+</div>
+<div class="layout-changes">    
+    <div class="content">
+		<div class="form-group">
+			<radio-group [displayInline]="false" [formControl] ="selectOption">
+				<ng-template [radioGroupOption]="true">
+					Keep Items in new layout
+				</ng-template>
+				<ng-template [radioGroupOption]="false">
+					No Items in new layout
+				</ng-template>
+			</radio-group>
+		</div>
+		<div class="form-group">
+			<input
+				type="button"
+				value="CHANGE"
+				class="btn btn-block btn-main"
+				style="max-width: 150px;"
+				[class.active]="selectOption.valid"
+				[disabled]="selectOption.invalid"
+				(click)="onSubmit(selectOption.value)"
+				/>
+		</div>
+    </div>
+</div>

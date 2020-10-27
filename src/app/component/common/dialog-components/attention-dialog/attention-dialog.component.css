@@ -1,0 +1,35 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;    
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+
+.dialog-header .dialog-title-container{
+    margin: 15px 0px 15px 0px;
+}
+
+.content{
+    font-size: 14px;    
+}
+.proceed-button{
+    margin: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.proceed-button input{
+    background:     #FFA500;
+    border-color:   #FFA500;
+    font-size: 110%;
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

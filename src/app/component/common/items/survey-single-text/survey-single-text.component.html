@@ -1,0 +1,55 @@
+<div *ngIf="editable"
+  [class.animation]="animation">
+
+	<div *ngIf="editable"
+		#singleTextLabel
+		contenteditable
+		spellcheck="true"
+		contenteditableModel
+		class="question-title content-editable label-border wrap"
+		[(contenteditableModel)] = "info.label"
+		(contenteditableModelChange) = "setItemResize()"
+		>
+	</div>
+
+	<div
+		#resizableContainer
+		class="resizable-container"
+		[class.editing]="editing"
+		resizable
+		[resizable-enabled]="true"
+		[resizable-showResizeBox]="editing"
+		[resizable-keepInParent]="false"
+		[resizable-minWidth] ="50"
+		[resizable-minHeight]="34"
+		[resizable-maxHeight]="40"
+		[resizable-snapEnabled]="false"
+		[disp-measure]="true"
+		[top]="false"
+		[left]="false"
+		[bottom]="false"
+		[top-left]="false"
+		[bottom-left]="false"
+		(resizable-resize)="onItemResize($event)"
+		(resizable-resizeEnd)="onItemResizeEnd($event)"
+		>
+	</div>
+</div>
+
+<div *ngIf="!editable"
+	[class.animation]="animation">
+	<div
+		#singleTextLabel
+		spellcheck="true"
+		contenteditableModel
+		class="question-title result wrap"
+		[contenteditableModel] = "info.label">
+	</div>
+    <input
+        #resultText
+        type="text"
+        class="result-text form-control">
+</div>
+<div #cloneTitle
+	class="clone-title result wrap">
+</div>

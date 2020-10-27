@@ -1,0 +1,92 @@
+.expandable-wrapper {  
+}
+
+.settings {
+	margin-left: auto;
+	margin-right: auto;
+	width: 72px;
+	background: url('/assets/images/settings.png');
+	background-repeat: no-repeat;
+    background-position: 50%;
+	background-size: 30px 30px;
+	height: 30px;
+	width: 30px;
+}
+
+table {  
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input.item-option {  
+	width: 100px;
+	margin-top: 10px;
+}
+
+input.small-control-a {
+	width: 85px;
+	margin-top: 10px;
+}
+
+input.small-control-b {
+	width: 40px;
+	margin-top: 10px;
+}
+
+input.small-control-c {
+	width: 60px;	
+}
+
+input.small-control-d {
+	width: 120px;
+	margin-top: 10px;
+}
+
+input.item-option,
+input.small-control-a,
+input.small-control-b,
+input.small-control-c,
+input.small-control-d {
+	height: 30px;
+	padding: 3px 5px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+	vertical-align: middle;
+	padding: 4px;
+}
+
+.inline {
+  	display: inline-block !important;
+}
+
+.image-picture {
+	width: 72px;
+	height: 72px;
+	background-size: 72px 72px;
+	background-repeat: no-repeat;
+	background-position: center;
+	font-size: 24px;
+	color: #8c8c8c;
+	padding-top: 22px;
+	cursor: pointer;
+}
+
+.show-form {
+	margin-left: 10%;
+	color: #5dde28;
+}
+
+.plus-button{
+	font-size: 12px;	
+	text-decoration: none;
+}
+
+tr.item-invisible td:not(:last-child) {
+	opacity: 0.5;
+}
+
+td .columns {
+	align-items: center
+}

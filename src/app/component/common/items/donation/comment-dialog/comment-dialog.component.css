@@ -1,0 +1,29 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+    color: #464646;
+}
+:host * {
+    box-sizing: border-box;       
+}
+
+.dialog-body{
+    margin-top: 10px;
+}
+
+label {
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: #464646; 
+}
+
+textarea {
+    height: 120px;
+    color: #464646; 
+}
+
+.chars-left {
+    color: #464646;
+    padding-left: 10px;    
+}

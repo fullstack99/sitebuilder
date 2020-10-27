@@ -1,0 +1,6 @@
+:host * {
+    box-sizing: border-box;
+}
+.chat-container{
+    height: 100%;
+}

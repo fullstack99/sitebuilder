@@ -1,0 +1,48 @@
+.c-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 65%;
+  line-height: 1rem;
+  color: #eee;
+  text-align: center;
+  user-select: none;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%; }
+
+.c-checkbox .c-indicator {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cpath%20fill%3D%27%23fff%27%20d%3D%27M1%206h24v24h-24z%27%2F%3E%3Cpath%20d%3D%27M23%208v20h-20v-20h20m2-2h-24v24h24v-24z%27%20fill%3D%27%238c8c8c%27%2F%3E%3C%2Fsvg%3E");
+  background-size: 20px 20px;
+  font-size: 21px;
+  min-width: 14px;
+  height: 1em;
+  width: 1em;
+  margin-top: -4px;
+}
+
+.c-checkbox input:focus ~ .c-indicator {
+  box-shadow: none; }
+
+.c-indicator.active {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cstyle%3E.st0%7Bfill%3A%23fff%7D.st1%7Bfill%3A%238c8c8c%7D.st2%7Bfill%3A%2382ff1e%7D%3C%2Fstyle%3E%3Ctitle%3Echeckbox-checked%3C%2Ftitle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M1%206h24v24H1V6z%22%2F%3E%3Cpath%20class%3D%22st1%22%20d%3D%22M23%208v20H3V8h20m2-2H1v24h24V6z%22%2F%3E%3Cpath%20class%3D%22st2%22%20d%3D%22M9.6%2029.3L4.8%2018.9c-.4-.9-.1-2.1.8-2.6s2-.1%202.4.9l2.4%205L25.8%201.7c.6-.8%201.8-1%202.6-.3s.9%201.9.3%202.7L9.6%2029.3z%22%2F%3E%3C%2Fsvg%3E")!important;
+  background-size: 20px 20px;
+}
+
+.c-input {
+  position: relative;
+  display: inline;
+  padding-left: 1.5rem;
+  color: #555;
+  cursor: pointer; }
+
+.c-input > input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0; }

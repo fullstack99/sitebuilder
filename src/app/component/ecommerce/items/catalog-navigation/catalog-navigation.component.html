@@ -1,0 +1,89 @@
+<loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class="glogood-table-container" (clickOutside)="onClickedOutside($event)">
+    <div class="glogood-table-header">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="item-thumb"></th>
+                    <th class="item-title text-center">
+                        <span class="sortable" (click)="onSort(3)">Title</span>&nbsp;                        
+                        <span *ngIf="activeOrderKey == 3" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[3].order" [class.bt-long-arrow-up]="!orderKeys[3].order"></span>
+                    </th>
+                    <th class="text-center" width="25%" >
+                        <span class="sortable" (click)="onSort(0)">Department</span>&nbsp;                        
+                        <span *ngIf="activeOrderKey == 0" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[0].order" [class.bt-long-arrow-up]="!orderKeys[0].order"></span>
+                    </th>
+                    <th class="text-center" width="25%" >
+                        <span class="sortable" (click)="onSort(1)">Collection</span>&nbsp;                         
+                        <span *ngIf="activeOrderKey == 1" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[1].order" [class.bt-long-arrow-up]="!orderKeys[1].order"></span>
+                    </th>
+                    <th class="text-center" width="25%" >
+                        <span class="sortable" (click)="onSort(2)">Brand/Vendor</span>&nbsp;
+                        <span *ngIf="activeOrderKey == 2" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[2].order" [class.bt-long-arrow-up]="!orderKeys[2].order"></span>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+	</div>
+	
+    <div class="glogood-table-body">
+        <table *ngIf="!_loading" class="table">        
+            <tbody>
+                <ng-container *ngIf="productListingTree.length == 3">
+                    <tr class="item-row" *ngFor="let item of items; let i = index"
+                        [class.active] = "activeItem == item">
+						<td class="item-thumb">
+                            <div class="image-picture" [style.backgroundImage]="backgroundImage(item.images[0])"></div>
+                        </td>
+                        <td class="item-title">
+                            <p class="title">
+                                <a (click)="onEditItem(item)">
+                                    {{ item.title }}
+                                </a>
+                            </p>
+                        </td>
+                        <td width="25%">
+                            <div class="listing-container" >
+                                <drop-down-editor
+                                    [title]="item[orderKeys[0].orderKey] ? item[orderKeys[0].orderKey] : ''"
+                                    [listingTree]="productListingTree[0]"
+                                    [selectedUids]="selectedUids"
+                                    [treeType]="'productListing'"
+                                    [placeholder]="'Enter Listing'"
+                                    [expanded]="editingIndex == i"
+                                    (editing)="onEditing(i, $event)"></drop-down-editor>
+                            </div>
+                        </td>
+                        <td width="25%">
+                            <div class="listing-container">
+                                <drop-down-editor
+                                    [title]="item[orderKeys[1].orderKey] ? item[orderKeys[1].orderKey] : ''"
+                                    [listingTree]="productListingTree[1]"
+                                    [selectedUids]="selectedUids"
+                                    [treeType]="'productListing'"
+                                    [placeholder]="'Enter Listing'"
+                                    [expanded] = "editingIndex == i"
+                                    (editing)="onEditing(i, $event)"></drop-down-editor>
+                            </div>
+                        </td>
+                        <td width="25%">
+                            <div class="listing-container">
+                                <drop-down-editor
+                                    [title]="item[orderKeys[2].orderKey] ? item[orderKeys[2].orderKey] : ''"
+                                    [listingTree]="productListingTree[2]"
+                                    [selectedUids]="selectedUids"
+                                    [treeType]="'productListing'"
+                                    [placeholder]="'Enter Listing'"
+                                    [expanded] = "editingIndex == i"
+                                    (editing)="onEditing(i, $event)"></drop-down-editor>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>    
+        </table>
+    </div>
+    <div *ngIf="items.length == 0" class="no-content text-center">        
+        <div>No Products</div>
+    </div>
+</div>

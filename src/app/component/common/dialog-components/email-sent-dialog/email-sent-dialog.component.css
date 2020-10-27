@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  position: relative;
+  height: 100%;
+  background: transparent;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.dialog-title-container{
+  margin-top: 10px;
+}

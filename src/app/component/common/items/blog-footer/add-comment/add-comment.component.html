@@ -1,0 +1,36 @@
+<div class="comment-setup">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+	</div>
+	<div class="dialog-body">
+		<form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()" novalidate>
+			<div *ngIf="!editName" class="form-group">
+				<textarea
+					class="form-control"
+					name = "comment"
+					formControlName="comment"
+					rows="5"
+					[placeholder]="placeHolder"
+					maxlength="200"
+					></textarea>
+				<div class="chars-right">
+					{{200 - form.controls.comment.value.length}} characters available.
+				</div>
+			</div>
+			<div class="form-group">
+				<input name="commentFirstName" type="text" class="form-control" formControlName="firstName" placeholder="First Name"/>
+			</div>
+			<div class="form-group">
+				<input name="commentLastName" type="text" class="form-control" formControlName="lastName" placeholder="Last Name"/>
+			</div>
+			<div *ngIf="!editName" class="form-group">
+				<input name="commentEmail" type="text" class="form-control" formControlName="email" placeholder="Email It will not be published"/>
+			</div>
+			<div class="form-group">
+				<button type="submit" [disabled]="!form.valid">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>

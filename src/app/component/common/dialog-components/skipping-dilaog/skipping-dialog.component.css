@@ -1,0 +1,120 @@
+:host {
+    box-sizing: border-box;    
+    background: transparent;    
+    padding: 10px 15px !important;    
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {       
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+h4 {    
+    font-size: 24px;    
+    margin-bottom: 10px!important;
+    color: #8c8c8c;    
+}
+
+.btn-close, .btn-close:hover, .btn-close:active, .btn-close:visited {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    display: block;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.btn-feedback {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    display: flex;
+    align-items: center;
+    color: #8c8c8c;
+    font-size: 10px;
+}
+    .btn-feedback:hover {
+        text-decoration: none;
+    }
+    .btn-feedback img {
+        width: 30px;
+        height: 30px;
+    }
+    .btn-feedback a {
+        margin-left: 10px;
+    }
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 20px;    
+    font-weight: bold;
+}
+.font-18{
+    font-size: 18px;
+}
+.font-16{
+    font-size: 16px;
+}
+p {
+    margin: 5px 0px 10px 0px;
+}
+
+    button{
+        background:     #FFA500;
+        border-color:   #FFA500;
+        color: white;        
+        font-size: 100%;
+        margin: 20 0 10 0px;        
+    }
+
+.skip-left {
+    padding: 0px 0px 0px 50px;
+}
+.skip-right {
+    padding: 0px 0px 0px 30px;
+}
+    .skip-body-title{
+        font-weight: bold;
+        color: #8c8c8c;
+    }
+    .skip-body-content{
+        margin-top: 20px;
+    }
+
+.line {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201%2032%27><path%20fill%3D%27%23939598%27%20d%3D%27M0%200h1v32h-1z%27%2F><%2Fsvg>");
+    background-size: 32px 32px;    
+    background-position: 40% center;
+    background-repeat: repeat-y;
+}
+    .line-1{
+        height: 50px;
+    }
+    .line-2{
+        height: 100px;
+    }
+.bt-sign-in{
+    color: #8c8c8c;
+}
+
+
+input[type="text"]{
+    border-radius: 2px;
+    border: 1px solid #ccc; 
+}
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ffa500;
+}
+
+radio-group >>> span.c-indicator{
+    margin-top: 3px;
+}

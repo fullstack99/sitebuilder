@@ -1,0 +1,86 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;    
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+    }
+
+.message {
+    width: 100%;
+    margin-bottom: 10px;
+}
+    .message .chars-left {
+        font-size: 11px;
+        margin-left: 10px;
+    }
+
+label {
+    width: 100%;
+    font-weight: normal;
+    display: flex;
+}
+    label checkbox {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+input[type="text"] {
+    display: block;
+    width: 100%;
+}
+
+input.ng-invalid.ng-touched {
+    background-color: #ffa4a4;
+    border-color: #ffa4a4;
+}
+
+.bottom {
+    margin-top: 15px;    
+}
+
+.bottom .submit {
+    display: block;
+    margin: auto;
+    background: #ffa500;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 110px;
+    height: 30px;
+}
+
+.bottom .submit:disabled {
+    background: #8c8c8c;
+    color: white;    
+}
+
+.dialog-id {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: #8c8c8c;
+    margin: 0;
+}
+
+[hidden] { display: none !important;}
+.disable {
+    pointer-events: none;
+    opacity: 0.3;
+    background: #CCC;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}

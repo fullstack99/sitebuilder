@@ -1,0 +1,263 @@
+:host {
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+}
+
+loading{
+    position: absolute;
+    opacity: 1;
+    z-index: 1000;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+}
+canvas-tools{
+    width: 100%;
+}
+    page-canvas >>> .canvas-scroll{
+        overflow-y: hidden!important;
+        height: 100%!important;
+    }
+        page-canvas >>> .canvas-scroll .canvas{
+            margin-top: 0px!important;
+            margin-bottom: 0px!important;
+            min-height: 250px!important;
+            border: 1px solid #464646!important;
+            border-radius: 5px;
+            z-index: 1;
+        }
+    page-canvas >>> .canvas-placeholder {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 15px;
+    }
+
+    page-canvas >>> .canvas-placeholder .canvas-placeholder-item:nth-of-type(2) {
+      margin-left: calc(100% - 550px);
+    }
+
+    @media screen and (max-width: 995px) {
+        page-canvas >>> .canvas-placeholder {
+          flex-direction: column;
+          align-items: center;
+          padding-right: 0;
+        }
+        page-canvas >>> .canvas-placeholder .canvas-placeholder-item:nth-of-type(2) {
+          margin-left: 0;
+        }
+    }
+
+.invitation-canvas {
+    display: block;
+    width: 100%;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+    border: 1px solid #8c8c8c;
+    margin: auto;
+}
+.invitation-canvas.mobile {
+    width: 376px;
+    overflow-y: auto;
+}
+    .invitation-canvas .body-top {
+        position: relative;
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: center;
+    }
+    .invitation-canvas.mobile .body-top{
+        padding: 0px;
+    }
+        .invitation-canvas .body-top .canvas-container{
+            position: relative;
+            width: calc(100% - 320px);
+            min-width: 300px;
+            max-width: 742px;
+            background: white;
+            /* border: 1px solid #8c8c8c;
+            border-radius: 5px; */
+            margin: 5px 0;
+        }
+        .invitation-canvas.mobile .body-top .canvas-container{
+            width: 100%;
+            min-height: 50px;
+        }
+            .invitation-canvas .body-top .canvas-container.selected page-canvas >>> .canvas-scroll .canvas{
+                border: 1px solid orange!important;
+            }
+
+        .invitation-canvas .body-top .setup-event {
+            position: relative;
+            width: 300px;
+            float: left;
+            border: 1px solid #8c8c8c;
+            border-radius: 5px;
+            margin: 5px;
+            padding-top: 5px;
+            text-align: center;
+        }
+        .invitation-canvas.mobile .body-top .setup-event {
+            margin-top: 15px;
+        }
+        .invitation-canvas .body-top .setup-event.selected {
+            border: 1px solid rgb(255, 165, 0);
+        }
+            .invitation-canvas .body-top .setup-event .setup-event-body {
+                margin-top: 10px;
+            }
+                .event-name {
+                    font-size: 20px;
+                    font-style: italic;
+                    font-weight: bold;
+                }
+                .event-content {
+                    display: grid;
+                    margin-top: 3px;
+                }   .event-content > span {
+                        font-style: italic;
+                        font-size: 12px;
+                    }
+                    .event-content .event-title {
+                        font-size: 14px;
+                        font-weight: bold;
+                        font-style: normal;
+                    }
+
+    .invitation-canvas .body-bottom {
+        position: relative;
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: center;
+    }
+        .invitation-canvas .body-bottom .event-option {
+            position: relative;
+            flex-wrap: wrap;
+            width: calc(100% - 320px);
+            min-width: 300px;
+            max-width: 700px;
+            font-size: 18px;
+            color: #464646;
+            margin: 5px;
+        }
+        .invitation-canvas.mobile .body-bottom .event-option{
+            width: 100%;
+        }
+            .invitation-canvas .body-bottom .event-option .reply{
+                padding: 0px 10px;
+                flex-wrap: wrap;
+            }
+            .invitation-canvas .body-bottom .event-option .reply .reply-title{
+                margin-right: 10px;
+            }
+            .invitation-canvas .body-bottom .message-title {
+                font-size: 18px;
+                padding: 5px 5px;
+            }
+            .show-hide{
+                font-size: 16px;
+                text-decoration: none;
+                margin-left: 10px;
+            }
+
+            .invitation-canvas .body-bottom .event-option .host-message {
+                font-size: 14px;
+                margin: 5px;
+            }
+                .invitation-canvas .body-bottom .event-option .host-message .message {
+                    width: calc(100% - 10px);
+                    height: 180px;
+                    max-width: 500px;
+                    margin-left: 10px;
+                    color: #646464;
+                    font-family: 'Lato regular';
+                    border: 1px solid #8c8c8c;
+                    border-radius: 5px;
+                    outline: none;
+                }
+                .invitation-canvas .body-bottom .event-option .host-message .message.selected {
+                    border: 2px solid rgb(255, 165, 0);
+                    outline: rgb(255, 165, 0);
+                }
+                .text-right{
+                    max-width: 500px;
+                }
+
+        .invitation-canvas .body-bottom .coming {
+            width: 300px;
+            margin: 5px;
+        }
+            .invitation-canvas .body-bottom .coming .coming-as {
+                margin: 5px;
+                font-size: 16px;
+            }
+            .invitation-canvas .body-bottom .coming .coming-body {
+                color: #8c8c8c;
+                display: grid;
+                padding: 5px;
+            }
+                .invitation-canvas .body-bottom .coming .coming-body .coming-line {
+                    margin-bottom: 10px;
+                }
+                .invitation-canvas .body-bottom .coming .coming-body .coming-line .coming-title {
+                    color: #646464;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                }
+                .invitation-canvas .body-bottom .coming .coming-body .coming-line .guests-container {
+                    max-height: 150px;
+                    padding-left: 10px;
+                    overflow-y: auto;
+                }
+                    .invitation-canvas .body-bottom .coming .coming-body .coming-line .guests-container .guest{
+                        position: relative;
+                        height: 25px;
+                    }
+                    .invitation-canvas .body-bottom .coming .coming-body .coming-line .guests-container .guest .guest-name{
+                        width: 200px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    .guest-comment-content{
+                        position: absolute;
+                        z-index: 1;
+                        width: 200px;
+                        left: 10px;
+                        top: 100%;
+                        padding: 5px;
+                        max-height: 50px;
+                        overflow-y: auto;
+                        border: 1px solid grey;
+                        border-radius: 2px;
+                        background-color: white;
+                        user-select: none;
+                    }
+
+.grip {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: calc(50% - 6px);
+    width: 12px;
+    height: 5px;
+    background-image: url('/assets/images/canvas/grip.png');
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.right {
+    flex-direction: row-reverse;
+}
+
+.opacity-0{
+    opacity: 0;
+}
+
+.reply-container{
+    position: absolute;
+    top: 30px;
+}
+

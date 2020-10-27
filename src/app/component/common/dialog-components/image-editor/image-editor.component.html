@@ -1,0 +1,67 @@
+<a (click)="onClose()" class="btn-close">x</a>
+<header class="page-title">
+    <h2>{{title}}</h2>
+        <h4 class="text-muted">
+        <span class="instruction-step">
+            1. Import Your Images
+        </span>
+        <span class="instruction-step">
+            2. Choose Stock Images, Clip Art or More
+        </span>
+        <span class="instruction-step">
+            3. Crop or Resize Images
+        </span>
+        <span class="instruction-step">
+            4. Place Images on Page
+        </span>
+    </h4>
+</header>
+<app-sub-menubar [tabs]="tabs" [tabId]="activeTabIndex" [mobileMaxWidth]="200" (selectedTab)="_selectTab.next($event)">
+</app-sub-menubar>
+<image-browser
+    *ngIf="activeTabIndex==0"
+    [tab]="tabs[0]"
+    [tree]="_tree"
+    [enableFolderPlace]="enableFolderPlace"
+    (placeOnPage)="onPlaceOnPage($event)"
+    (placeFolderOnPage)="onPlaceFolderOnPage($event)"
+    (openInEditor)="openImageInEditor($event)"
+    (openInClipper)="_openImageInClipper.next($event)"
+    (close)="onClose()"
+    ></image-browser>
+<editor
+    *ngIf="activeTabIndex==1"
+    [image]="_image"
+    [visibleSave]="visibleSave"
+    (imageSaved)="onImageSaved($event)"
+    (close)="onClose()"
+    ></editor>
+<image-stock
+    *ngIf="activeTabIndex==2"></image-stock>
+<image-clip
+    *ngIf=" activeTabIndex==3"
+    [image]="_image"
+    (placeOnPage)="onPlaceOnPage($event)"
+    (close)="onClose()"
+    ></image-clip>
+<image-sitemap
+    *ngIf="activeTabIndex==4"
+    (placeOnPage)="onPlaceOnPage($event)"
+    (openInEditor)="openImageInEditor($event)"
+    (close)="onClose()">
+</image-sitemap>
+
+<!-- <div *ngIf="activeTabIndex==1 && !_imageElem"
+    class="blank_image rows">
+    <h1>
+        Edit Your Images Here
+    </h1>
+    <h4>
+        Choose My Images, Stock Images, Clip Art or Site's Images
+    </h4>
+    <div class="images">
+        <img class="apple" src="/assets/images/apple.png"/>
+        <img class="peach" src="/assets/images/peach.png"/>
+        <img class="grape" src="/assets/images/grape.png"/>
+    </div>
+</div> -->

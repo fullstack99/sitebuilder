@@ -1,0 +1,93 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container rows">
+        <div class="dialog-title"><h4>Add Individual to Access Your Account </h4></div>
+    </div>
+</div>
+
+<div class="row dialog-body">
+    <form [formGroup]="form">
+    <div class="content col-xs-12">
+        <div style="max-width: 300px;">
+          <div class="form-group">
+            <drop-down
+              [selected]="site"
+              [elements]="sites"
+              [showValueFunc]="showSiteValue"
+              [defaultData]="'Choose Site'"
+              (changeSelected)="onSitesChange($event)">
+            </drop-down>
+          </div>
+          <div class="form-group">
+            <input class="form-control"
+              name="name"
+              type="text"
+              placeholder="Name"
+              formControlName="name"
+              >
+          </div>
+          <div class="form-group">
+            <input class="form-control"
+              name="email"
+              type="text"
+              placeholder="Email"
+              formControlName="email"
+              >
+          </div>
+        </div>
+        <div class="form-group">
+          <checkbox formControlName="allAccessControl">All Access</checkbox>
+        </div>
+        <div *ngIf="!form.value.allAccessControl" class="form-group">
+          <div>
+            <checkbox formControlName="analyticsControl">Analytics & Response</checkbox>
+          </div>
+          <div *ngIf="form.value.analyticsControl" class="columns" style="justify-content: space-between; margin: 15px;">
+              <div *ngFor="let item of services; let i=index">
+                  <div class="columns" style="align-items: center;" *ngFor="let subItem of item; let j=index">
+                      <label class='c-input c-checkbox'>
+                          <input type="checkbox" [name]="'serviceCheck' + i" [value]="subItem" (change)="onItemCheckChange($event, 'analytic', subItem, i)" [checked]="isItemChecked(item, 'analytic')"/>
+                          <span class="c-indicator"></span>
+                      </label>
+                      <span class="btn-item-content-data">{{subItem.description}}</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="!form.value.allAccessControl" class="form-group">
+          <div>
+            <checkbox formControlName="editControl">Create, Edit & Save</checkbox>
+          </div>
+          <div *ngIf="form.value.editControl" class="columns" style="justify-content: space-between; margin: 15px;">
+              <div *ngFor="let item of services; let i=index">
+                  <div class="columns" style="align-items: center;" *ngFor="let subItem of item; let j=index">
+                      <label class='c-input c-checkbox'>
+                          <input type="checkbox" [name]="'serviceCheck' + i" [value]="subItem" (change)="onItemCheckChange($event, 'createEdit', subItem, i)" [checked]="isItemChecked(item, 'createEdit')"/>
+                          <span class="c-indicator"></span>
+                      </label>
+                      <span class="btn-item-content-data">{{subItem.description}}</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="form-group" style="font-size: 14px">
+          	Now send an email for verification. Individual will have access when they login. At any time you can edit access or delete individual.
+        </div>
+        <div class="form-group">
+          <input
+            type="button"
+            value="SEND VERIFICATION"
+            class="btn btn-block btn-main"
+            style="max-width: 200px;"
+            [class.active]="form.valid"
+            [disabled]="form.invalid || !site || !form.value['allAccessControl'] && selectedServices.length == 0"
+            (click)="onAccessUserSite($event)"
+            />
+        </div>
+    </div>
+    </form>
+</div>

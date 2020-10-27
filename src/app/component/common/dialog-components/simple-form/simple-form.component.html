@@ -1,0 +1,43 @@
+<div class="invite-setup-container">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a (click)="onClose()" class="btn-close">×</a>
+        </div>
+        <div class="dialog-title-container text-center">
+            <span class="dialog-title"><h3>Simple Form</h3></span>
+        </div>
+    </div>
+    <div class="data-container rows">
+		<div class="form-group" style="margin-left: 30px; margin-right: 30px;">
+			<input
+				type="text"
+				class="form-control"
+				placeholder="Form Name"
+				[formControl]="formName"/>
+		</div>
+
+		<div *ngFor="let formContent of formContents; let i = index" class="form-group columns">
+			<div class="left">
+				<label class='c-input c-radio'>
+					<input type="radio" name="check" [value]="i+1" [formControl]="selectedForm"/>
+					<span class="c-indicator"></span>
+				</label>
+			</div>
+			<div class="right">
+				<div *ngFor="let textItem of formContent.items" class="form-group">
+					<input *ngIf="textItem.content.info.value.type == 1"
+						type="text"
+						class="form-control"
+						[placeholder]="textItem.content.info.value.placeHolder"/>
+					<textarea *ngIf="textItem.content.info.value.type == 3" rows="3" cols="50" [placeholder]="textItem.content.info.value.placeHolder"></textarea>
+				</div>
+			</div>
+
+		</div>
+		<div class="bottom text-center">
+			<button class="submit" [disabled]="!selectedForm.value || !formName.value" (click)="onSubmit($event)">Place on Page</button>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+.editable-dropdown-menu {
+   min-width: 300px !important;
+   padding: 5px 20px 20px 0px !important;			
+}
+
+.editable-dropdown-item {
+   display: inline-block !important;			
+}
+
+.dropdown-item-delete {
+   display: inline-block !important;
+   color: #f00;
+   appearance: none;
+   box-shadow: none;
+   outline: none;
+   border: none;
+   background: none;
+   font-weight: bold;
+   line-height: 1;
+   color: #f00;
+   text-shadow: 0 1px 0 #fff;
+}

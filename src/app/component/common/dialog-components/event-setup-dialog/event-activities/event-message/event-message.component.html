@@ -1,0 +1,85 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img *ngIf="dispFeedback" src="/assets/images/logo-0.png"/>
+        <a *ngIf="dispFeedback" (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+</div>
+<div [formGroup]="messageform">
+    <ng-template [ngIf]="dispFeedback">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <label>Participants</label>
+                <textarea
+                    class="form-control"
+                    formControlName="participantsMessage"
+                    placeholder="Provide an optional message for your Participants"
+                    maxlength="250"
+                ></textarea>
+                <div class="chars-left">
+                    {{250 - messageform.value?.participantsMessage?.length}}
+                    characters available
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template
+        [ngIf]="!dispFeedback && messageform.value.participantsMessage">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <label>Participants</label>
+                <textarea
+                    class="form-control"
+                    formControlName="participantsMessage"
+                    placeholder="Provide an optional message for your Participants"
+                    maxlength="250"
+                    readonly
+                    ></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template [ngIf]="dispFeedback">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <label>Groups</label>
+                <textarea
+                    class="form-control"
+                    formControlName="groupsMessage"
+                    placeholder="Provide an optional message for your Groups"
+                    maxlength="250"
+                    ></textarea>
+                <div class="chars-left">
+                    {{250 - messageform.value?.groupsMessage?.length}}
+                    characters available
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template [ngIf]="!dispFeedback && messageform.value.groupsMessage">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <label>Groups</label>
+                <textarea
+                    class="form-control"
+                    formControlName="groupsMessage"
+                    placeholder="Provide an optional message for your Groups"
+                    maxlength="250"
+                    readonly
+                    ></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template [ngIf]="dispFeedback">
+        <div class="row form-group">
+            <div class="col-xs-12" *ngIf="messageform.dirty">
+                <input
+                    type="submit"
+                    value="Save"
+                    class="btn btn-block btn-main center-block"
+                    (click)="onSave()"
+                    />
+            </div>
+        </div>
+    </ng-template>
+
+</div>

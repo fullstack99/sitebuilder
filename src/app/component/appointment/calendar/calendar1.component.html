@@ -1,0 +1,37 @@
+<loading *ngIf="loading" [text]="'Loading...'"></loading>
+<app-sub-menubar [tabs]="wsDetails" (selectedTab)="gotoTab($event)">
+</app-sub-menubar>
+<div class="calendar-container">
+    <div class="calendar-control-bar columns">
+        <div class="drop-down-container" *ngIf="scheduleInfo.locationType != 'WeGoToCustomerLocation'">
+            <drop-down
+                [selected]="activeLocation"
+                [elements]="getLocations()"
+                [showValueFunc]="showLocationValue"
+                [defaultData]="'Choose Location'"
+                (changeSelected)="onLocationsChange($event)">
+            </drop-down>
+        </div>
+        <div class="drop-down-container" *ngIf="['SingleProviderHidden', 'SingleProviderDisplay'].indexOf(scheduleInfo.providerType)<0">
+            <drop-down
+                [selected]="activeProvider"
+                [elements]="getProviders()"
+                [showValueFunc]="showProviderValue"
+                [defaultData]="'Choose Provider'"
+                (changeSelected)="onProvidersChange($event)">
+            </drop-down>
+        </div>
+        <div *ngIf="scheduleInfo.providerType == 'SingleProviderDisplay'">
+            {{scheduleInfo.providers && scheduleInfo.providers.length>0 ? scheduleInfo.providers[0].name : ''}}
+        </div>
+    </div>
+    <div class="calendar-content" *ngIf="!loading">
+        <app-scheduler
+            [scheduleInfo]="scheduleInfo"
+            [appointmentInfo]="dispAppointmentInfo"
+            [location]="activeLocation"
+            [provider]="activeProvider"
+            (dateChange)="onDateChange($event)"
+            ></app-scheduler>
+    </div>
+</div>

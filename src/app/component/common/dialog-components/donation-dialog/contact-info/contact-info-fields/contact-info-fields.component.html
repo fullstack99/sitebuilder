@@ -1,0 +1,69 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    
+</div> 
+<div class="scroll-y">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Choose</th>
+                <th class="required">Required</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let fieldForm of form.controls.defaultFields.controls; let i=index">
+                <td class="field-name">{{fieldForm.value.name}}</td>
+                <td>
+                    <checkbox [formControl]="fieldForm.controls.isSelected"></checkbox>
+                </td>
+                <td>
+                    <checkbox [formControl]="fieldForm.controls.isRequired"></checkbox>
+                </td>
+                <td>
+                    <tooltip-form
+                        *ngIf="fieldForm.controls.fields.controls.length>0"
+                        class="help-btn"
+                        text='?'                    
+                        [form]="fieldForm.controls.fields.controls">
+                        <content>
+                            <div class="tooltip-body">
+                                <div class="form-group" 
+                                    *ngFor="let secondaryFieldForm of fieldForm.controls.fields.controls; let i=index">
+                                    <div class="row">
+                                        <label class="col-xs-12">
+                                            {{ secondaryFieldForm.value.name }} 
+                                        </label>                                        
+                                    </div>
+                                    <input type="text" class="form-control" name="{{i}}">                                    
+                                </div>
+                                <div class="tooltip-id">
+                                    {{fieldForm.value.tooltipCode}} 
+                                </div>
+                            </div>
+                        </content>
+                    </tooltip-form>
+                </td>
+            </tr>            
+            <tr *ngFor="let fieldForm of form.controls.customFields.controls">
+                <td class="field-name">
+                    <input
+                        class="form-control"
+                        type="text"
+                        [formControl]="fieldForm.controls.name"
+                        placeholder="Custom info"/>
+                </td>
+                <td>
+                    <checkbox [formControl]="fieldForm.controls.isSelected"></checkbox>
+                </td>
+                <td>
+                    <checkbox [formControl]="fieldForm.controls.isRequired"></checkbox>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn-more" (click)="addField()">MORE</a>
+</div>

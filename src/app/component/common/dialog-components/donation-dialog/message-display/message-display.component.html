@@ -1,0 +1,20 @@
+<div [formGroup]="form" class="form-group">
+	<checkbox [formControl]="thankYouBoxEnabled"></checkbox>
+	<div class="section-title">
+		<legend class="text">Thank You for Donating</legend>
+	</div>
+    <div class="box-3" #box style="display: none;">
+		<div class="form-group">
+			<div class="row">
+				<span class="col-xs-12">Your Display Name</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Donor can enter Name or be Anonymous" spellcheck="true">
+			<div class="columns allow-comment text-xs-center">
+				<checkbox formControlName="allowComment"></checkbox>			
+				<span>
+					Allow Donor Comments
+				</span>
+			</div>
+		</div>
+    </div>  
+</div>

@@ -1,0 +1,8 @@
+<div #resultContainer
+	class="result-shape-container">
+	<div class="clone-shape" #cloneShape></div>
+	<div class="result-shape" #resultShape
+		(mouseenter)="onHoverShape($event)"
+		(mouseleave)="onLeaveShape($event)">
+	</div>
+</div>

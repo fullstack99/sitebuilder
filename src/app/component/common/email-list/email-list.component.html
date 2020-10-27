@@ -1,0 +1,228 @@
+<div class="email-list-container" [class.disable]="_loading">
+    <ul class="nav nav-pills nav-categories">
+        <li role="presentation" class="add-contact active">
+            <a [class.disable]="category!='Master Active'"(click)="onAddContact()">
+                <div>ADD</div>
+                <div>CONTACTS</div>
+            </a>
+        </li>
+        <li role="presentation">
+            <a>                
+                <span class="font-icon btr">{{total}}</span>
+                <div class="caption">CONTACTS</div>
+            </a>
+        </li>
+        <li role="presentation" [class.active]="(allCheck.value || selectedContactUids.length > 0)">
+            <a (click)="export()">
+                <span class="font-icon btr bt-cloud-upload"></span>
+                <div class="caption">EXPORT</div>
+            </a>
+        </li>
+        <li role="presentation" [class.active]="emailList.value == 'master' && (allCheck.value || selectedContactUids.length > 0)">
+            <a  (click)="addInList()">
+                <span class="font-icon btr bt-olist"></span>
+                <div class="caption">ADD TO LIST</div>
+            </a>
+        </li>
+        <li role="presentation"
+            *ngIf="emailList.value != 'master' && emailList.value != '' && menuSelect.value == 1"
+            [class.active]="(allCheck.value || selectedContactUids.length > 0)">
+            <a                 
+                (click)="removeInList()">
+                <span class="font-icon btr bt-times"></span>
+                <div class="caption">REMOVE</div>
+            </a>
+        </li>
+        <li role="presentation"
+            *ngIf="emailList.value != 'master' && menuSelect.value == 1"
+            [class.active]="true">
+            <a                 
+                (click)="onMerge()">
+                <span class="font-icon btr bt-repeat"></span>
+                <div class="caption">MERGE</div>
+            </a>
+        </li>
+        <!-- <li role="presentation">
+            <a [class.active]="isSaving.value">
+                <span class="font-icon btr bt-envelope"></span>
+                <div class="caption">SEND</div>
+            </a>
+        </li> -->
+    </ul>
+    <div class="content-details" *ngIf="menuSelect.value == 0">        
+        <kendo-grid #grid [data]="gridView" [skip]="skip" [pageSize]="pageSize" [scrollable]="'virtual'" [rowHeight]="30" [height]="600" [sort]="sort" [sortable]="{ mode: 'multiple', allowUnsort: true, showIndexes: true }" (sortChange)="sortChange($event)" (pageChange)="pageChange($event)" style="border: none;">
+            <kendo-grid-column title="CheckBox" [width]="30" [style]="{'background-color': 'white', 'border': '0px', 'padding-left': '0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '0px 0px'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem let-i="rowIndex">
+                    <checkbox [formControl]="allCheck" (change)="onChecked($event, -1, '', 0)"></checkbox>
+                </ng-template>
+
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                    <label class='c-input c-checkbox'>
+                        <input type="checkbox" name="check" [value]="dataItem.uid" (change)="onChecked($event, i, dataItem.uid)" [checked]="isChecked(dataItem.uid)"/>
+                        <span class="c-indicator"></span>
+                    </label>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem let-i="rowIndex">
+                    <drop-down
+                        [selected]="'Master Active'"
+                        [elements]="allEmails"
+                        [borderNone]="true"
+                        (changeSelected)="onSelectMasterView($event)"> 
+                    </drop-down>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                    <a class="email-item" (click)="onContactDetails(dataItem.uid)" title="{{dataItem.email}}">{{dataItem.email}}</a>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="firstName" title="First Name" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}">
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                    
+                    <span class="show-contact" title="{{dataItem.firstName}}" >{{dataItem.firstName}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="lastName" title="Last Name" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}">
+
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                    
+                    <span class="show-contact" title="{{dataItem.lastName}}" >{{dataItem.lastName}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="company" title="Company" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}">
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                    
+                    <span class="show-contact" title="{{dataItem.company}}" >{{dataItem.company}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column title="Date" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding': '4px'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem let-i="rowIndex">                    
+                    <div class="addDate">
+                        <app-arrow-button class="all-check" [on]="dateFilter.value">
+                            <a (click)="onShowDateFilter()">Date Added</a>
+                        </app-arrow-button>
+                        <div *ngIf="dateFilter.value" class="dateFromTo" (blur)="onShowDateFilter(false)">
+                            <label>From</label>
+                            <datetime [formControl]="startDate"></datetime>
+                            <label>To</label>
+                            <datetime [formControl]="endDate"></datetime>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                    <span>{{dataItem.createDate | date: 'dd/MM/yyyy'}}</span>
+                </ng-template>
+            </kendo-grid-column>
+
+            <ng-template kendoGridNoRecordsTemplate>                
+                <div class="empty-text">
+                    <span>Contact Details Go Here</span>
+                </div>                
+            </ng-template>
+        </kendo-grid>
+        <loading *ngIf="_loading"></loading>
+    </div>
+    <div class="content-details" *ngIf="menuSelect.value == 1">
+        <div class="email-list">
+            <div class="list-title">
+                <span>Email Lists</span>                
+            </div>
+
+            <div class="list-item columns">
+                <label class='c-input c-radio'>
+                    <input type="radio"
+                        name="list"
+                        value="master"
+                        [formControl]="emailList"
+                        >
+                    <span class="c-indicator"></span>
+                </label>
+                <span>Master Active</span>
+            </div>
+
+            <div class="list-item columns" *ngFor="let item of loadList; let i = index;">
+                <label class='c-input c-radio'>
+                    <input type="radio"
+                        name="list"
+                        value="{{item.description}}"
+                        [formControl]="emailList"
+                        >
+                    <span class="c-indicator"></span>
+                </label>
+                <span *ngIf="item.description != ''" title="{{item.description}}">{{item.description}}</span>
+                <input *ngIf="item.description == ''" class="form-control" (keypress)="onKeypress($event, i)"/>
+                <a (click)="removeList(i)" class="remove-item">X</a>
+            </div>
+
+            <a class="more" (click)="moreList()">MORE</a>
+        </div>
+        
+        <div class="content-lists">
+            <kendo-grid [data]="gridView" [skip]="skip" [pageSize]="pageSize" [scrollable]="'virtual'" [rowHeight]="30" [height]="600" [sort]="sort" [sortable]="{ mode: 'multiple', allowUnsort: true, showIndexes: true }" (sortChange)="sortChange($event)" (pageChange)="pageChange($event)" style="border: none;">
+                <kendo-grid-column title="CheckBox" width="30" [style]="{'background-color': 'white', 'border': '0px', 'padding-left': '4px'}" [headerStyle]="{'background-color': 'white', 'border': '0px', 'padding-left': '4px'}">
+                    <ng-template kendoGridHeaderTemplate let-dataItem let-i="rowIndex">
+                        <checkbox [formControl]="allCheck" (change)="onChecked($event, -1, '', 1)"></checkbox>
+                    </ng-template>
+
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                        <label class='c-input c-checkbox'>
+                            <input type="checkbox" name="check" [value]="dataItem.uid" (change)="onChecked($event, i, dataItem.uid)" [checked]="isChecked(dataItem.uid)"/>
+                            <span class="c-indicator"></span>
+                        </label>                        
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column field="email" title="Email" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px 0px 4px 0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px'}">                    
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                        <a class="email-item" (click)="onContactDetails(dataItem.uid)" title="{{dataItem.email}}">{{dataItem.email}}</a>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column field="firstName" title="First Name" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px 0px 4px 0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px'}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                        
+                        <span class="show-contact" title="{{dataItem.firstName}}">{{dataItem.firstName}}</span>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column field="lastName" title="Last Name" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px 0px 4px 0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px'}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                        
+                        <span class="show-contact" title="{{dataItem.lastName}}">{{dataItem.lastName}}</span>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column field="company" title="Company" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px 0px 4px 0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px'}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">                        
+                        <span class="show-contact" title="{{dataItem.company}}">{{dataItem.company}}</span>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column title="Date" [minResizableWidth]="50" [style]="{'background-color': 'white', 'border': '0px', 'padding': '4px 0px 4px 0px'}" [headerStyle]="{'background-color': 'white', 'border': '0px'}">
+
+                    <ng-template kendoGridHeaderTemplate let-dataItem let-i="rowIndex">                        
+                        <div class="addDate">
+                            <app-arrow-button class="all-check" [on]="dateFilter.value">
+                                <a (click)="onShowDateFilter()">Date Added</a>
+                            </app-arrow-button>
+                            <div *ngIf="dateFilter.value" class="dateFromTo" (blur)="onShowDateFilter(false)">
+                                <label>From</label>
+                                <datetime [formControl]="startDate"></datetime>
+                                <label>To</label>
+                                <datetime [formControl]="endDate"></datetime>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <ng-template kendoGridCellTemplate let-dataItem let-i="rowIndex">
+                        <span>{{dataItem.createDate | date: 'dd/MM/yyyy'}}</span>
+                    </ng-template>
+                </kendo-grid-column>
+                <ng-template kendoGridNoRecordsTemplate>
+                    <span class="empty-text">Email Lists Go Here</span>                    
+                </ng-template>
+            </kendo-grid>
+            <loading *ngIf="_loading"></loading>
+        </div>
+    </div>
+</div>

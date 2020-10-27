@@ -1,0 +1,175 @@
+<loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+<div class="glogood-table-container" (clickOutside)="onClickedOutside($event)">
+    <div #tableHeader class="glogood-table-header">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="item-field-1"></th>
+                    <th class="item-title">
+                        <span class="sortable" (click)="onSort(0)">Title</span>&nbsp;
+                        <span *ngIf="activeOrderKey == 0" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[0].order" [class.bt-long-arrow-up]="!orderKeys[0].order"></span>
+						<span class="sortable" (click)="viewListings = !viewListings">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Catalog Sort</span>
+						<span *ngIf="activeListingUid" class="btr order-angle bt-long-arrow-down"></span>
+                    </th>
+                    <th class="item-field-2">
+                        <span class="sortable" (click)="onSort(1)">Price</span>&nbsp;
+                        <span *ngIf="activeOrderKey == 1" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[1].order" [class.bt-long-arrow-up]="!orderKeys[1].order"></span>
+                    </th>
+                    <th class="item-field-3">
+                        <span class="sortable" (click)="onSort(2)">
+                            Price<br />Comparison
+                        </span>&nbsp;
+                        <span *ngIf="activeOrderKey == 2" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[2].order" [class.bt-long-arrow-up]="!orderKeys[1].order"></span>
+                    </th>
+                    <th class="item-field-2">
+                        <span class="sortable" (click)="onSort(3)">
+                            Online<br />Date
+                        </span>&nbsp;
+                        <!-- <span *ngIf="activeOrderKey == 3" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[3].order" [class.bt-long-arrow-up]="!orderKeys[2].order"></span> -->
+                    </th>
+                    <!-- <th class="item-field-2">
+                        Inventory &nbsp;
+                        <span *ngIf="activeOrderKey == 4" class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[4].order" [class.bt-long-arrow-up]="!orderKeys[4].order"></span>
+                    </th> -->
+                    <th class="item-field-2">
+                        <a (click)="openItemOptions($event, null)">
+                            Options<br/>Details                         
+                            <!-- <span class="btr" [class.bt-angle-down]="!viewOptionDetail" [class.bt-angle-up]="viewOptionDetail"></span> -->
+                        </a>                        
+                    </th>
+                    <th class="item-field-2">
+                        <a (click)="openSalesRange($event)">
+                            Sales
+                            <!-- <span class="btr" [class.bt-angle-down]="!viewSales" [class.bt-angle-up]="viewSales"></span>     -->
+                        </a>
+                        
+                    </th>
+                    <th class="item-field-2">
+                        On<br />Promotion
+                        <!-- <span class="btr order-angle" [class.bt-long-arrow-down]="orderKeys[4].order" [class.bt-long-arrow-up]="!orderKeys[4].order"></span> -->
+                    </th>
+                    <th class="item-field-x"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div *ngIf="productListings[0].length>0 || productListings[1].length>0 || productListings[2].length>0" class="listings" [hidden]="!viewListings">
+        <div class="group-item">
+            <a [class.active]="!activeListingUid" (click)="onActiveListing($event, null)">All</a>
+        </div>
+        <ng-container *ngFor="let listing of productListings; let l=index">
+            <div *ngIf="productListings[l].length>0" class="group-item">
+                <div class="group-item-title">
+                    {{ l==0 ? "Departments" : l==1 ? "Collections" : "Brands"}}
+                </div>
+                <div class="item-nav-list" *ngFor="let listing of productListings[0]; let i = index">
+					<a 
+						[class.active]="activeListingUid == listing.uid"
+						[class.disable]="listing.isTitle"
+						(click)="onActiveListing($event, listing.uid)">{{listing.description}}</a>
+                    <div class="item-nav-list" *ngFor="let subListing of listing['subListing']; let j = index">
+						<a [class.active]="activeListingUid == subListing.uid"
+							[class.disable]="subListing.isTitle"
+							(click)="onActiveListing($event, subListing.uid)">{{subListing.description}}</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div #tableBody class="glogood-table-body" (click)="viewListings = false">
+        <table class="table">
+            <ng-container *ngFor="let item of viewItems; let i = index">
+                <tr class="border-bottom"
+                    tabindex="-1"
+                    [class.active]="activeItem == item"
+                    (focusout)="onFocusOut($event, item)">
+                    <td class="item-field-1">
+                        <div class="image-picture" [style.backgroundImage]="backgroundImage(item.images[0])">
+                            <span *ngIf="!item.images || !item.images[0] || item.images[0].location == '' || item.images[0].name == ''" class="font-icon btr bt-camera"></span>
+                        </div>
+                    </td>
+                    <td class="item-title">
+                        <a (click)="editItem(item)">
+                            {{ item.title }}
+                        </a>
+                    </td>
+                    <td class="item-field-2">
+                        <!-- {{ item.viewPrice == 'options' ? 'options' : item.viewPrice | currency:'USD':'symbol':'1.2-2' }} -->
+                        <ng-template [ngIf]="item.viewPrice == 'options'">
+							multi &nbsp;
+							<a *ngIf="item.productInventories && item.productInventories.length > 0" (click)="openItemOptions($event, item.uid)">                               
+								<span *ngIf="isVisibleItemOption(item.uid); else plus" class="btr bt-minus plus-button"></span>
+								<ng-template #plus><span class="btr bt-plus plus-button"></span></ng-template>
+							</a>
+                        </ng-template>
+                        <input *ngIf="item.viewPrice != 'options'" type="text" class="form-control" currencyMask [(ngModel)]="item.price" (ngModelChange)="onPriceChange($event, i, true)" (focus)="onActivePriceChange($event, i)"/>
+                    </td>
+                    <td class="item-field-3">
+                        {{ item.priceComparison ? item.priceComparison : 0 }}
+                    </td>
+                    <td class="item-field-2">                            
+                        {{ item.activeDate | date:'MM.dd.yyyy'}}                        
+                    </td>
+                    <!-- <td class="item-field-2">
+                        {{ item.pieces ? item.pieces : 0 + ' pieces'}}
+                    </td> -->
+                    <td class="item-field-2">
+						{{ item.productInventories.length > 0 ? 'multi ' : '' }} &nbsp;
+						<a *ngIf="item.productInventories && item.productInventories.length > 0" (click)="openItemOptions($event, item.uid)">                               
+							<span *ngIf="isVisibleItemOption(item.uid); else plus" class="btr bt-minus plus-button"></span>
+							<ng-template #plus><span class="btr bt-plus plus-button"></span></ng-template>
+						</a>
+                    </td>
+                    <td class="item-field-2">
+                        {{ item.sales | currency:'USD':'symbol':'1.2-2' }}
+                    </td>
+                    <td class="item-field-2">
+                        <a>
+                            {{ item.onPromotion | yesNo }}
+                        </a>
+                    </td>
+                    <td class="item-field-x">
+                        <a (click)="removeItem(item.uid, i)" class="remove-btn">
+                            &times;
+                        </a>                        
+                    </td>
+                </tr>
+                <ng-template [ngIf]="isVisibleItemOption(item.uid)">                
+                    <tr *ngFor="let inventory of item.productInventories; let j = index"
+                        class="border-bottom"
+                        tabindex="-1"
+                        (focusout)="onFocusOut($event, item)">
+                        <td class="item-field-1">                            
+                            <div [style.backgroundImage]="backgroundImage(inventory.image)" class="image-picture text-center">
+                                <span *ngIf="!inventory.image || inventory.image.location == '' || inventory.image.name == ''" class="font-icon btr bt-camera"></span>
+                            </div>
+                        </td>
+                        <td class="item-title">
+                            <div *ngIf="inventory.optionValue1">
+                                {{ item.productOptions[0] ? item.productOptions[0].name + ' : ' : '' }} {{ inventory.optionValue1 }}
+                            </div>
+                            <div *ngIf="inventory.optionValue2">
+                                {{ item.productOptions[1] ? item.productOptions[1].name + ' : ' : '' }} {{ inventory.optionValue2 }}
+                            </div>
+                            <div *ngIf="inventory.optionValue3">
+                                {{ item.productOptions[2] ? item.productOptions[2].name + ' : ' : '' }} {{ inventory.optionValue3 }}
+                            </div>
+                        </td>
+                        <td class="item-field-2">
+                            <!-- {{ inventory.price | currency:'USD':'symbol':'1.2-2' }} -->
+                            <input type="text" class="form-control" currencyMask [(ngModel)]="inventory.price" (ngModelChange)="onPriceChange($event, i)"/>
+                        </td>
+                        <td class="item-field-3">
+							<input type="text" class="form-control" placeholder="0"/>
+						</td>
+                        <td class="item-field-2"></td>
+                        <td class="item-field-2"> </td>
+                        <td class="item-field-2"></td>
+                        <td class="item-field-2"></td>
+                        <td class="item-field-x"></td>
+                    </tr>
+                </ng-template>
+            </ng-container>
+        </table>
+    </div>
+</div>

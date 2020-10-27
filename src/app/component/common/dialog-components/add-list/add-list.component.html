@@ -1,0 +1,19 @@
+<div class="dialog-header" *ngIf="isDialog">    
+    <div class="btn-feedback columns">        
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container">		
+        <span class="dialog-title"><h3>Add to List</h3></span>
+    </div>
+</div>
+<div class="list-item" *ngFor="let item of newEmailList; let i = index">    
+    <label class='c-input c-checkbox'>
+        <input type="checkbox" name="check" (change)="onCheck($event, i)" [checked]="isSelected(item)"/>
+        <span class="c-indicator"></span>
+    </label>
+    <span *ngIf="item != ''">{{item}}</span>
+    <input *ngIf="item == ''" (keyup)="onInput($event, i)" type="text" [value]="" class="form-control" placeholder="Name of New List" />
+</div>
+<div class="text-right">
+    <a class="more" (click)="onMore()">MORE</a>
+</div>

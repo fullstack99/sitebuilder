@@ -1,0 +1,15 @@
+<div #sitemapItemContainer 
+    class="sitemap-item-container"
+    (mousedown)="onMouseDown($event)">
+  	<tree *ngIf="tree"
+        [tree]="tree"
+        [type]="'sitemap'"
+        [editable]="false"
+        [expanded]="true"
+        [showValueFunc]="_showSitemap"
+        [showField]="'description'"
+        [maxDeep]="100"
+        [roleId]="0"
+		[showIcon]="false"
+		[dispFlex]="true"></tree>
+</div>

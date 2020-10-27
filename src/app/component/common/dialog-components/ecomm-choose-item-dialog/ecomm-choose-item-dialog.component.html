@@ -1,0 +1,53 @@
+<div class="dialog-header">
+	<div class="btn-feedback columns">
+		<img src="/assets/images/logo-0.png"/>		
+		<a (click)="openFeedbackDialog()">FEEDBACK</a>
+		<a (click)="onClose()" class="btn-close">×</a>
+	</div>
+	<div class="dialog-title-container columns">		
+		<span class="dialog-title">
+            <h3>
+                {{ diagMode == 'multiple' ? 'Choose Items' : 'Catalogue Page Items' }}                
+            </h3>
+        </span>
+	</div>	
+</div>
+<div class="catalogue-page-items">    
+    <div class="content">
+        <div class="form-group">    
+            <radio-group [displayInline]="false" class="radio-group" [formControl] ="selectOption">				
+                <ng-template radioGroupOption="existItem">                    
+                     {{ diagMode == 'multiple' ? 'Choose Existing Items' : 'Choose Existing Item' }}
+                </ng-template>                
+                <ng-template radioGroupOption="edit" [visible]="!isNew && diagMode == 'single'">
+                    Edit Item
+                </ng-template>
+                <ng-template radioGroupOption="new" [visible]="isNew && diagMode == 'single'">
+                    Add new Item
+                </ng-template>               
+                <ng-template radioGroupOption="allExistItem" [visible]="!isSingle">
+                    Choose All Existing Items
+                </ng-template>
+                <ng-template radioGroupOption="byDepartment" [visible]="!isSingle">
+                    Choose Items by Department
+                </ng-template>
+                <ng-template radioGroupOption="byCollections" [visible]="!isSingle">
+                    Choose Items by Collections
+                </ng-template>
+                <ng-template radioGroupOption="byVendor" [visible]="!isSingle">
+                    Choose Items by Vendor/Brand
+                </ng-template>
+            </radio-group>
+        </div>        
+        <div class="form-group">
+            <input
+                type="button"
+                value="CONTINUE"
+                class="btn btn-block btn-main"
+                style="max-width: 150px;"
+                [class.active]="true"
+                (click)="onSubmit(selectOption.value)"
+                />
+        </div>
+    </div>
+</div>

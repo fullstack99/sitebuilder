@@ -1,0 +1,67 @@
+:host {
+    box-sizing: border-box;
+    background: transparent;
+}
+
+:host >>> *:not(a) {
+    color: #464646;
+}
+
+:host *{
+    box-sizing: border-box;
+}
+
+form {
+    max-width: 600px;
+}
+
+input[type="text"] {
+    display: block;
+    width: 100%;
+}
+
+textarea {
+    height: 140px;
+}
+
+    .chars-left {
+        padding-right: 10px;
+        display: inline-block;
+        text-align: right;
+    }
+
+    textarea.empty ~ .chars-left{
+        color: #d8d6d3;
+    }
+
+.event-name:not(.empty) {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div {
+	width: 250px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-group {
+	position: relative;
+}
+
+	label.required {
+		position: absolute;
+		right: -10px;
+		top: -4px;
+		color: #FF0000;
+		font-size: 16px;
+	}
+
+.slideshow {
+	position: relative;
+    height: 180px;
+}
+	.form-group .slideshow label.required {
+		right: -15px;
+		top: 15px;
+	}

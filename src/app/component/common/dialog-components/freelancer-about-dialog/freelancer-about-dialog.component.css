@@ -1,0 +1,21 @@
+
+:host {
+    box-sizing: border-box;    
+    background: transparent;
+    height: 100%;
+    color: #555;
+}
+
+:host *{
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.content {
+    padding: 10px;
+    font-size: 15px;
+    color: #8c8c8c;
+    text-align:justify;
+    overflow-y: auto;
+    height: 200px;
+}

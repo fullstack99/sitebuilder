@@ -1,0 +1,39 @@
+:host {
+    position: relative!important;
+    display: block!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+    background-size: contain!important;
+}
+
+.rating-container{
+    display: block;
+    margin: 10px 0px 0px 10px;
+}
+    .rating-container.rating-star{
+        width: 170px;
+    }
+    .rating-container.rating-slider{
+        width: 300px;
+    }
+    slider {
+        width: 250px;
+        height: 30px;
+    }
+    .text{
+        margin: auto;
+        font-size: 22px;
+    }
+    .rating-container .bt-star{
+        font-size: 24px;
+        margin: 0px 5px 0px 5px;
+    }
+    .bt-star.active{
+        color: #ffa500;
+    }
+
+.content-editable{
+    font-size: 22px!important;
+}

@@ -1,0 +1,466 @@
+:host {
+    box-sizing: border-box;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+
+app-sub-menubar{
+    margin: auto;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+}
+
+loading {
+    position: absolute;
+    top: 20px;
+}
+
+.canvas-container {
+    position: relative;
+    width: 100%;
+    flex: 0 0 auto;
+    margin: 0px 0px 0px 0px;
+    overflow: hidden;
+}
+    .canvas-container .canvas {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        cursor: default;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+        .canvas-container .canvas * {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .canvas-container .canvas > div{
+            margin-top: 10px;
+        }
+
+.result-background{
+    min-height: 120px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: 0px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.disp-remove{
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+    .disp-remove a{
+        color: red;
+    }
+
+.colorPalette{
+    width: 200px;
+    height: 40px;
+}
+
+.color-box{
+    width:25px;
+    height: 25px;
+    border: 1px solid;
+}
+
+    .color-picker{
+        position: relative;
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .color-picker .color-picker-text{
+        margin-bottom: 10px;
+    }
+
+    .color-picker .text{
+        width: 60px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .color-picker .color-picker-control{
+        margin-top: 5px;
+    }
+
+    .color-picker .more{
+        position: absolute;
+        right: 0px;
+        text-align: right;
+    }
+
+.adjusts{
+    width: 210px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+    .adjust{
+        height: 38px;
+    }
+        .adjust > .text{
+            display: inline-block;
+            width: 80px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .adjust slider{
+            margin-top: 0px;
+            width: 120px;
+            min-width: 100px;
+        }
+        .adjust > input{
+            width: 25px;
+            height: 20px;
+            margin-left: 5px;
+            margin-top: auto;
+            margin-bottom: auto;
+            border:none;
+        }
+
+.image-tools {
+    margin: 0 10 20 10px;
+}
+    .image-tools .image-opacity{
+        margin-left: 160px;
+    }
+    .image-tools .image-opacity .text{
+        font-size: 14px;
+        margin-left: 5px;
+        margin-bottom: 5px;
+    }
+    .image-tools .image-opacity slider{
+            margin-top: 0px;
+            width: 120px;
+            min-width: 100px;
+        }
+        .image-tools .image-opacity > div > input{
+            width: 28px;
+            height: 20px;
+            margin-left: 5px;
+            margin-top: auto;
+            margin-bottom: auto;
+            border:none;
+        }
+
+    .image-tools .image-scrolling{
+        margin-left: 130px;
+    }
+
+        .image-tools .image-scrolling >>> li{
+            margin-top: 5px;
+        }
+    .image-tools .image-position{
+        margin-left: 100px;
+    }
+        .image-tools .image-position > .text{
+            width: 100px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .image-tools .image-position .arrow-panel{
+
+        }
+        .image-tools .image-position .arrow-panel .arrows div{
+            width: 25px;
+            height: 25px;
+            padding-top: 5px;
+            display: inline-block;
+            text-align: center;
+            border: 1px solid #8c8c8c;
+            border-radius: 2px;
+            margin: 1px;
+        }
+        .image-tools .image-position .arrow-panel .arrows div.active{
+            background-color: #FFA500;
+        }
+        .image-tools .image-position .arrow-panel .arrows div:hover{
+            background-color: #FFA500;
+        }
+            .image-tools .image-position .arrow-panel .arrows .top-left{
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+            .image-tools .image-position .arrow-panel .arrows .top-right{
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+            .image-tools .image-position .arrow-panel .arrows .bottom-left{
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+            .image-tools .image-position .arrow-panel .arrows .bottom-right{
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+
+.small-image-title{
+    font-size: 16px;
+    text-align: center;
+}
+
+[contentEditable=true]:empty:before {
+	content:attr(placeholder)
+}
+
+.image-adjusts{
+    margin: 20px 0;
+}
+    .image-adjusts .adjust-item{
+        width: 165px;
+        margin-top: 10px;
+    }
+        .image-adjust-ul li{
+            line-height: 1.8;
+            cursor: pointer;
+        }
+            .image-adjust-ul li.active{
+                color: orange;
+            }
+
+        .image-adjusts .adjust-item > div{
+            margin-left: 40px;
+            width: 130px;
+        }
+
+    .image-adjusts .adjust-result .result-image-container{
+        position: relative;
+        width: 155px;
+        height: 90px;
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+    }
+        .image-adjusts .adjust-result .result-image-container .result-image-behindColor{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+        .image-adjusts .adjust-result .result-image-container .result-image{
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            color: #8c8c8c;
+            cursor: pointer;
+            /*background-size: contain;*/
+            background-repeat: no-repeat;
+            background-position: 50%;
+        }
+
+.image-navigator {
+    border: 1px solid white;
+    margin: 10px;
+    overflow: hidden;
+    height: 200px;
+}
+    .image-navigator .images {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        overflow-y: auto;
+    }
+        /* .image-navigator .images::-webkit-scrollbar{
+            background-color: #F5F5F5;
+            width: 15px;
+        }
+        .image-navigator .images::-webkit-scrollbar-track{
+            background-color: #F5F5F5;
+        }
+        .image-navigator .images::-webkit-scrollbar-button:vertical{
+            background-color: #ffffff;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 80% 40%;
+            border: 1px solid rgba(0,0,0,0.3);
+            height: 15px;
+        }
+        .image-navigator .images::-webkit-scrollbar-button:vertical:start:decrement{
+            display: block;
+            background-image: url(/assets/images/arrow-up.png);
+        }
+        .image-navigator .images::-webkit-scrollbar-button:vertical:end:increment{
+            display: block;
+            background-image: url(/assets/images/arrow-down.png);
+        }
+        .image-navigator .images::-webkit-scrollbar-button:vertical:start:increment,
+        .image-navigator .images::-webkit-scrollbar-button:vertical:end:decrement{
+            display: none;
+        }
+        .image-navigator .images::-webkit-scrollbar-thumb{
+            background-color: #ffffff;
+            border: 1px solid rgba(0,0,0,0.3);
+        }         */
+            .image-navigator .images .item {
+                display: flex;
+                flex-direction: column;
+                width: 100px;
+                height: 80px;
+                margin: 10px;
+                padding: 3px;
+            }
+            .image-navigator .images .item:hover {
+                background-color: #3295e3;
+            }
+                .image-navigator .images .item .frame {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    background-color: white;
+                    border: 1px solid #ddd;
+                    box-shadow: 3px 3px 10px 0px rgba(140, 140, 140, 0.5);
+                }
+                    .image-navigator .images .item .frame .image {
+                        width: 100%;
+                        height: 100%;
+                        background-size: contain;
+                        background-position: 50%;
+                        background-repeat: no-repeat;
+                        /*background-size: cover;*/
+                    }
+
+.image-category{
+    width: 155px;
+    position: relative;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+drop-down{
+    width: 130px;
+}
+
+drop-down>>> .dropdown-toggle{
+    border-color:transparent;
+    box-shadow: none;
+}
+
+.video{
+    height: 200px;
+}
+
+.help-btn {
+  cursor: pointer;
+  color: #3295e3;
+  margin-left: 5px;
+  width: 10px;
+  font-size: 15px;
+}
+
+.tooltip-body.parallax {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+    .tooltip-body.parallax .images{
+      align-items: center;
+      margin: 0px -30px 0px 0px;
+
+    }
+        .tooltip-body.parallax .images img{
+          margin: 0px 12px 0px 12px;
+        }
+    .tooltip-body.parallax .content1{
+        font-size: 18px;
+        margin: 10px -30px 10px -10px;
+    }
+    .tooltip-body.parallax .content2{
+        font-size: 14px;
+        margin: 10px -10px 0px 20px;
+    }
+
+    .tooltip-body.parallax .tooltip-id{
+      font-size: 11px;
+      color: #8c8c8c !important;
+      padding: 0px 0px 0px 0px;
+      margin: 0px -20px 0px 0px;
+      text-align: right;
+    }
+
+.parallax-content{
+    width: 175px;
+}
+    .thumbnails {
+        position: relative;
+        padding-left: 20px;
+    }
+    .thumbnails .thumb {
+        position: relative;
+        width: 67px;
+        height: 40px;
+        border: 1px solid #8c8c8c;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        background-color: white;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+    .thumbnails .thumb.active {
+        border-color: #FFA500;
+    }
+    .thumbnails .thumb.dragging {
+        top: 3px;
+        box-shadow: 2px 2px 4px 1px rgba(140, 140, 140, 0.35);
+        z-index: 100;
+    }
+        .thumbnails .thumb .thumb-image{
+
+        }
+        .thumbnails .thumb .grip {
+            position: absolute;
+            margin-top: 15px;
+            width: 12px;
+            height: 5px;
+            left: calc(100% + 5px);
+            background-image: url('/assets/images/canvas/grip.png');
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            cursor: grab;
+        }
+        .thumbnails .thumb .remove{
+            position: absolute;
+            left: calc(100% + 20px);
+            top: 8px;
+        }
+            .thumbnails .thumb .remove a{
+                color: red;
+                text-decoration: none;
+                font-size: 12px;
+            }

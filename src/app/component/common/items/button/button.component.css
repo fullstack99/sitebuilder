@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;    
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    background-color: rgb(50, 149, 227);
+    border: 1px solid rgb(18, 95, 154);
+    color: white;
+}
+.result-button{      
+    height: 100%;
+    width: 100%;    
+}
+    .result-button .text-center{
+        border: 1px solid transparent;
+        margin: auto;
+        width: 100%;
+        letter-spacing: 1px;
+        word-wrap: nowrap;        
+    }
+    .result-button:not(.selected):hover{
+        cursor: pointer;
+    }

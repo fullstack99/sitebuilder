@@ -1,0 +1,57 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>
+</div>
+<div [formGroup]="feeform">
+    <div class="row form-group">
+        <div class="col-xs-5">
+            <label>
+                Early Bird Price
+            </label>
+        </div>
+        <div class="col-xs-7 fee-control">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="earlyPrice"
+                placeholder="optional"/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-xs-5">
+            <label>
+                End Early Bird
+            </label>
+        </div>
+        <div class="col-xs-7">
+            <datetime formControlName="earlyPriceEndDate"></datetime>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-xs-5">
+            <label>
+                Regular Price
+            </label>
+        </div>
+        <div class="col-xs-7 fee-control">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                placeholder="optional"/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-xs-12" *ngIf="feeform.valid">
+            <input
+                type="submit"
+                value="Save"
+                class="btn btn-block btn-main center-block"
+                (click)="onSave()"
+                />
+        </div>
+    </div>
+</div>

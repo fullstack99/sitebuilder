@@ -1,0 +1,95 @@
+<div class="expandable-wrapper">
+    <expandable-input-group 
+        #optionsExpandableGroup 
+        [displayInline]="true" 
+        [numberOfExpandables]="numberOfExpandables" 
+        [listings]="productOptions" 
+        (rootChange)="onRootChange($event)" 
+        (childChange)="onDetailChange($event)" 
+        (childDelete)="onDetailDelete($event)" 
+        (changeExpandableSequence)="onChangeExpandableSequence($event)" 
+        (changeChildrenSequence)="onChangeChildrenSequence($event)" 
+        (clearListing)="onClearListing($event)"
+        (columnChanged)="onColumnChanged($event)">
+    </expandable-input-group>
+</div>
+<a class="show-form" (click)="showForm()">
+    <ng-container *ngIf="!showDetailGrid; else elseTemplate">
+        SHOW DETAILS
+    </ng-container>
+    <ng-template #elseTemplate>
+        HIDE DETAILS
+    </ng-template>
+</a>
+
+<div [hidden]="!showDetailGrid" class="glogood-table-body" style="margin-left: -30px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a (click)="onSettingsClick()">
+                        <div class="settings"></div>
+                    </a>
+                </th>
+                <th>Options - {{ productInventories.length }}</th>
+                <th>Price</th>
+                <th style="max-width: 40px;">
+					<div style="margin-left: -15px">
+						Inventory
+					</div>
+				</th>
+				<th style="padding-left: 15px;">Code</th>
+                <th>Barcode-UPC</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-inventory [ngForOf]="productInventories" let-i="index" let-last="last">            
+                <tr *ngIf="displayOptionDetails(inventory) && inventory.code != ''" class="border-bottom" [class.item-invisible]="inventory.visible == false">
+                    <td>                        
+                        <div [style.backgroundImage]="backgroundImage(inventory.image)"  class="image-picture text-center" (click)="openImportDialog(inventory)">
+                            <span *ngIf="!inventory.image || inventory.image.location == '' || inventory.image.name == ''" class="font-icon btr bt-camera"></span>
+                        </div>                        
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="inventory.optionValue1" (ngModelChange)="onModelChange($event, 0)" class="form-control item-option" />
+                        </div>
+                        <div>
+                            <input [(ngModel)]="inventory.optionValue2" (ngModelChange)="onModelChange($event, 1)" class="form-control item-option" />
+                        </div>
+                        <div>
+                            <input [(ngModel)]="inventory.optionValue3" (ngModelChange)="onModelChange($event, 2)" class="form-control item-option" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="columns">                            
+                            <input currencyMask [(ngModel)]="inventory.price" (ngModelChange)="onModelChange($event)" class="form-control small-control-a" />
+                        </div>                        
+                    </td>
+                    <td>
+                        <input [(ngModel)]="inventory.amount" (ngModelChange)="onModelChange($event)" class="form-control small-control-b"/>
+                    </td>
+                    <td>
+                        <div class="columns" style="padding-top: 10px;">
+                            <input [(ngModel)]="inventory.code" (ngModelChange)="onModelChange($event)" class="form-control small-control-c"/>
+                            &nbsp;
+                            <span *ngIf="subCode == inventory.code">{{getNumber(inventory.sequence)}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <input [(ngModel)]="inventory.barCodeUpc" (ngModelChange)="onModelChange($event)"  placeholder="Barcode-UPC etc." class="form-control small-control-d" />
+                    </td>
+                    <td>                        
+                        <a *ngIf="inventory.visible != false" class="plus-button" (click)="onVisibleInventory(inventory, false)">
+                            <span class="btr bt-minus"></span>
+                        </a>
+                        <a *ngIf="inventory.visible == false" class="plus-button" (click)="onVisibleInventory(inventory, true)">
+                            <span class="btr bt-plus"></span>
+                        </a>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>

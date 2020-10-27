@@ -1,0 +1,41 @@
+<div class="dialog-header">
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png" />
+        <a (click)="openFeedbackDialog($event)">FEEDBACK</a>
+        <a (click)="onClose($event)" class="btn-close">×</a>
+    </div>
+    <div class="dialog-title-container columns">
+        <span (click)="onClose($event)">
+            <img src="/assets/images/canvas/back.png" style="height: 50px;" />
+        </span>
+        <span class="dialog-title">
+            Just Link the Page
+        </span>
+    </div>
+</div>
+<div class="dialog-body">
+    <loading *ngIf="_loading" [text]="'Loading...'" [visibleCloseButton]="true" (cancelled)="onCancelled()"></loading>
+    <div class="text-center" style="font-size: 18px;">        
+        <span>Choose a Catalog</span><br/>
+        <span>Listing to link to</span>
+    </div>
+    <div class="listing-container">
+        <ng-container *ngFor="let listing of productListings; let l=index">
+            <div *ngIf="productListings[l].length>0" class="group-item">
+                <div class="group-item-title">
+                    {{ l==0 ? "Departments" : l==1 ? "Collections" : "Brands"}}
+                </div>
+                <div class="item-nav-list" *ngFor="let listing of productListings[0]; let i = index">
+					<a [class.active]="selectedListingUid == listing.uid && !listing.isTitle"
+						[class.isTitle]="listing.isTitle"
+						(click)="onActiveListing($event, listing)">{{listing.description}}</a>
+                    <div class="item-nav-list" *ngFor="let subListing of listing['subListing']; let j = index">
+						<a [class.active]="selectedListingUid == subListing.uid && !subListing.isTitle"
+							(click)="onActiveListing($event, subListing)">{{subListing.description}}</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>       
+    </div>
+</div>
+

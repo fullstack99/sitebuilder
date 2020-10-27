@@ -1,0 +1,65 @@
+<loading *ngIf="loading"></loading>
+<div class="account-box">
+    <div class="dialog-header">
+        <div class="btn-feedback columns">
+            <img src="/assets/images/logo-0.png" [class.disable]="loading"/>
+            <a (click)="openFeedbackDialog()">FEEDBACK</a>
+            <a class="go-login" (click)="login()">LOGIN</a>
+            <a class="btn-close" (click)="onClose()">x</a>
+        </div>
+        <div class="dialog-title-container">
+            <span class="dialog-title">
+              <h3 *ngIf="!emailSent; else verification_title" class="glogood-title">
+                  {{fromPageCanvas ? 'Setup Account to SAVE' : 'Setup Account'}}
+              </h3>
+              <ng-template #verification_title>
+                  <h3 class="glogood-title">Email Verification</h3>
+              </ng-template>
+            </span>
+        </div>
+    </div>
+
+    <div class="dialog-body margin-top-10">
+        <app-register-form
+            *ngIf="viewInited && !callRegister && !emailSent"
+            [info]="info"
+            [isNew]="isNew"
+            [pending]="pending$"
+            [errorMessage]="errorMessage"
+            (submitted)="onSubmit($event)">
+        </app-register-form>
+
+        <div *ngIf="emailSent" class="text-center" style="color: #666; padding: 15px;">
+          <ng-container *ngIf="expired">
+            <div class="form-group" style="font-size: 18px; color: red;">
+              Verification Expired !
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="!expired">
+            <div class="form-group" style="font-size: 18px;">Check your inbox to verify your email</div>
+            <div class="form-group" style="font-size: 16px;">We have sent an email to</div>
+            <div class="form-group" style="font-size: 16px;">{{email}}</div>
+          </ng-container>
+
+          <div class="form-group" style="padding: 15px">
+            <a (click)="verifyEmail()">
+              <img src="assets/images/envelope.png" style="width: 100px;"/>
+            </a>
+          </div>
+          <div class="form-group">
+            <ng-container *ngIf="resendingEmail; else resend_email">
+              Resending Email
+            </ng-container>
+            <ng-template #resend_email>
+              <a (click)="resendEmail()">
+                Resend Email
+              </a>
+            </ng-template>
+          </div>
+          <div class="form-groupr" style="padding-top: 15px;">
+            Verification is good for 30 minutes
+          </div>
+        </div>
+    </div>
+</div>

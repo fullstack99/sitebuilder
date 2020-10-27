@@ -1,0 +1,107 @@
+<div class="dialog-header">    
+    <div class="btn-feedback columns">
+        <img src="/assets/images/logo-0.png"/>
+        <a (click)="openFeedbackDialog()">FEEDBACK</a>
+        <a (click)="onClose()" class="btn-close">×</a>
+    </div>    	
+</div>
+<div class="rows body">
+	<div #canvasScroll
+		class="canvas-scroll"    
+		(scroll)="canvasScrollTop = $event"
+		>
+		<div #canvas        
+			class="canvas"        
+			>
+			<div #zoomImg class="zoom-img animated fadeIn" style="animation-duration: 0.5s"></div>        
+			<div #canvasBody
+				class="canvas-body">
+				<link-item  *ngFor="let item of resultItems[1]; let i=index"
+					[class.selected]="selectedItem==item"
+					[item]="item"
+					[containerWidth]="containerWidth"
+					[maxWidth] = "maxWidth"
+					(click)="onItemClick(item)"
+	
+					rotatable
+					[rotatable-enabled]="false"
+					[rotatable-showRotateBox]="false"
+					[rotatable-degree]="getRotation(item)"									
+				></link-item>
+			</div>
+			<div
+				#canvasHeader
+				*ngIf = "resultHF1Items[0]"
+				class="canvas-header"
+				[hidden]="!resultHF1Items[0].content['visible']"
+				background
+				[backgroundInfo]="getHFBackground(0)"
+				[backgroundborderInfo]="getHFBorder(0)"
+				[zIndex]="-98"
+				border
+				[borderInfo]="getHFBorder(0)"
+				>
+				<link-item
+					*ngFor="let item of resultItems[2]; let i=index"
+					[class.selected]="selectedItem==item"
+					[containerWidth]="containerWidth"
+					[maxWidth] = "maxWidth"
+					[item]="item"					
+					(click)="onItemClick(item)"
+	
+					rotatable
+					[rotatable-enabled]="false"
+					[rotatable-showRotateBox]="false"
+					[rotatable-degree]="getRotation(item)"
+				></link-item>
+			</div>
+			<div
+				#canvasFooter
+				*ngIf="resultHF1Items[1]"
+				class="canvas-footer"
+				[hidden] = "!resultHF1Items[1].content['visible']"
+				background
+				[backgroundInfo]="getHFBackground(1)"
+				[backgroundborderInfo]="getHFBorder(1)"
+				[zIndex]="-99"
+				border
+				[borderInfo]="getHFBorder(1)"
+				>
+				<link-item
+					*ngFor="let item of resultItems[3]; let i=index"
+					[class.selected]="selectedItem==item"
+					[item]="item"
+					[containerWidth]="containerWidth"					
+					(click)="onItemClick(item)"
+	
+					rotatable
+					[rotatable-enabled]="false"
+					[rotatable-showRotateBox]="false"
+					[rotatable-degree]="getRotation(item)"					
+				></link-item>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+    <input
+        type="button"
+        value="Create Link"
+        class="btn btn-block btn-main"
+        style="max-width: 150px;"
+        [disabled]="!selectedItem"
+        [class.active]="selectedItem"
+        (click)="onSubmit()"
+        />
+</div>
+
+<!-- <link-item
+        *ngFor="let item of page.items; let i=index"
+        [class.selected]="selectedItem==item"
+        (click)="onItemClick(item)"
+        [item]="item"
+        rotatable
+        [rotatable-enabled]="rotatable(item)"        
+        [rotatable-degree]="getRotation(item)"
+    ></link-item>     -->
+

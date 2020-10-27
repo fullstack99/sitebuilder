@@ -1,0 +1,100 @@
+:host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+    :host * {
+        box-sizing: border-box;
+    }
+    :host > * {
+        margin-bottom: 15px;
+        user-select: none;
+    }
+
+a {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:host .tools {
+  max-width: 350px;
+}
+
+:host .tool a {
+  font-size: 16px;
+}
+
+.common-canvas-container {
+  width: 880px;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.common-canvas-container-bottom {
+  width: 838px;
+  height: 1px;
+  border-top: 1px dotted;
+  position: absolute;
+  left: 32px;
+  bottom: 0px;
+}
+
+common-canvas{
+  height: 100%;
+  width: 100%;
+}
+    .blank{
+        display: inline-block;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 42px;
+        color: #8c8c8c;
+    }
+
+.tool-container {
+    display: flex;
+    width: calc(100% - 500px);
+}
+
+form-tools{
+    width: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 14px;
+    background: #fff;
+    width: auto!important;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.tool-space{
+    width: 6px;
+    height: 55px;
+}
+
+.common-canvas-container.mobile {
+  width: 320px;  
+}
+
+.common-canvas-container.mobile .common-canvas-container-bottom {
+  width: 278px;  
+}
